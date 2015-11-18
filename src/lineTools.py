@@ -7,7 +7,7 @@ Class to anlayze the lines DB
    
 2015.11.16:
     - return the list of sources
-    - add a flagLine method
+    - add a flagLines method
     
     
 RUN:
