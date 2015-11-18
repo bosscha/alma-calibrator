@@ -88,12 +88,15 @@ class analysisLines:
                 maxChannel = li[1]
                 chan1      = li[2]
                 chan2      = li[3]
-            
                 
             
                 if chan1 < EDGE_TOL or (maxChannel-chan2) < EDGE_TOL:
                     nFlag += 1
-                    print("## Flagged line %d"%(lineid))            
+                    print("## Flagged line %d"%(lineid))  
+                    
+        
+        if  telluricFlag:
+            "Check if the same line was in another calibrator"         
             
         
         conn.commit()
