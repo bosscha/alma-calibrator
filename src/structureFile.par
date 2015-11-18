@@ -1,0 +1,9 @@
+## Example of structureFile to store the split file for the calibrators
+## v0.1 @ 2015.11.17
+
+ROOTDIR       =      /mnt/sciops/data/sleon/RGs/DeepField/a    ## root directory where to put the tree-structure for the calibrators
+DBNAME	      =      test.db								   ## SQLITE DB to store the information
+MSRM		  =      False									   ## (True|False) remove (or not) the original MS once it has been split
+
+
+
