@@ -91,7 +91,8 @@ HISTORY:
         - add column in lines about the molecular specie  and status of the line (likely real ?, edge, etc..). Default is Null
         - add the maxChannel column to eliminate the edges.
         
-         
+     
+     
 RUN:
 
 """
