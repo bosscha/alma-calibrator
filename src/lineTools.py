@@ -9,6 +9,9 @@ Class to anlayze the lines DB
     - return the list of sources
     - add a flagLines method
     
+2015.11.21: 
+    - update  flagLines with Telluric flagging (to be tested, e.g. if same source with different name ...)
+    
     
 RUN:
  
@@ -16,7 +19,7 @@ RUN:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.1@2015.11.16"
+__version__="0.1.2@2015.11.21"
 
 
 import numpy as np
@@ -71,6 +74,7 @@ class analysisLines:
         
         
         EDGE_TOL = 10           ## Flag the line if within EDGE_TOL from the edge
+        TELLURIC_TOL = 2.0      ## tolerance for the lines in different calibrators to be considered telluric (in MHz)
         
         
         conn = sql.connect(self.dbname)
@@ -92,11 +96,41 @@ class analysisLines:
             
                 if chan1 < EDGE_TOL or (maxChannel-chan2) < EDGE_TOL:
                     nFlag += 1
-                    print("## Flagged line %d"%(lineid))  
+                    print("## EDGE - Flagged line %d"%(lineid))  
+                    c.execute('INSERT INTO lines(status) VALUES("EDGE" WHERE lineid =?',(lineid,))
                     
         
         if  telluricFlag:
-            "Check if the same line was in another calibrator"         
+            "Check if the same line was in another calibrator"
+            
+            c.execute('SELECT lineid, source, freq1, freq2, status FROM lines')
+            lines = c.fetchall()
+            for li in lines:
+                
+                id     = li[0]
+                sou    = li[1]
+                f1      = li[2]
+                f2      = li[3]
+                stat     = li[4]
+                
+                if stat != "EDGE":
+                    c.execute('SELECT lineid, source, freq1, freq2, status FROM lines  WHERE lineid != ? AND  \
+                        ABS(freq1 - ?) < ? AND ABS(freq1 - ?) < ? AND source != ? AND status != ?', (id, f1, f2, sou,"EDGE" ))
+                    
+                    linesTell =  c.fetchall()
+                    
+                    if len(linesTell) > 0:
+                        print("## TELLURIC - Flagged line %d"%(id))
+                        print("## TELLURIC - other sources (frequencies) :")
+                        for item in linesTell:
+                            idtell  = item[0]
+                            soutell = item[1]
+                            f1tell  = item[2]
+                            f2tell  = item[3]
+                            
+                            print("#### %s (%f,%f"%(soutel, f1tell, f2tell))
+                                         
+                
             
         
         conn.commit()
