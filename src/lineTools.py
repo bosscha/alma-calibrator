@@ -11,6 +11,7 @@ Class to anlayze the lines DB
     
 2015.11.21: 
     - update  flagLines with Telluric flagging (to be tested, e.g. if same source with different name ...)
+    - set the findSpeciesSource method using the splatalogue DB
     
     
 RUN:
@@ -19,7 +20,7 @@ RUN:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.2@2015.11.21"
+__version__="0.1.3@2015.11.21"
 
 
 import numpy as np
@@ -129,13 +130,26 @@ class analysisLines:
                             f2tell  = item[3]
                             
                             print("#### %s (%f,%f"%(soutel, f1tell, f2tell))
-                                         
-                
-            
+                                                    
         
         conn.commit()
         conn.close()
         
         return(nFlag)             
         
+        
+    def findSpeciesSource(self, sourceName, redshift, flag = False):
+        """
+        Try to identify the lines for a given source with redshift using the splatalogue DB. 
+        If flag = True search only for lines w/o flagging (EDGE, TELURIC, ...)
+        """
+        
+        lines = self.findSources(sourceName)
+        
+        if len(lines) == 0:
+            print("## Species - No lines found for source %s"%(sourceName))
+            return(0)
+        
+        for li in lines:
+            pass
         
