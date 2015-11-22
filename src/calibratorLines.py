@@ -91,6 +91,9 @@ HISTORY:
         - add column in lines about the molecular specie  and status of the line (likely real ?, edge, etc..). Default is Null
         - add the maxChannel column to eliminate the edges.
         
+    2015.11.21:
+        - check if the calibrator name has two or more names separated by ; and take the first one for the source
+        
      
     test
 
@@ -100,7 +103,7 @@ RUN:
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.5.2@2015.11.16"
+__version__="0.5.3@2015.11.21"
 
 
 import sys
@@ -328,7 +331,9 @@ class extractSpwField:
                 
                     msNameWithoutSlash = msName.split('/')[-1]
                     msNameDat = self.workingDirectory+msNameWithoutSlash
-                    fileName = "%s-%s-%s-spw%s.dat"%(msNameDat,intent,calNameJ,spwj)
+                    calNameJwithoutmultiplename = calNameJ.split(";")[0]
+                    
+                    fileName = "%s-%s-%s-spw%s.dat"%(msNameDat,intent,calNameJwithoutmultiplename,spwj)
                     print fileName
             
                     successSpw = plotms(vis = msName ,xaxis="frequency",xdatacolumn = "",yaxis="amp",ydatacolumn = dataCol ,selectdata=True,field = calNameJ,
@@ -339,7 +344,7 @@ class extractSpwField:
                                 highres=False, overwrite=False,showgui=False)
             
                     listFile.append(fileName)
-                    listCalFile.append(calNameJ)
+                    listCalFile.append(calNameJwithoutmultiplename)
                     listSuccess.append(successSpw)
         
                     if not successSpw :
