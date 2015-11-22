@@ -77,6 +77,7 @@ class analysisLines:
         EDGE_TOL = 10           ## Flag the line if within EDGE_TOL from the edge
         TELLURIC_TOL = 2.0      ## tolerance for the lines in different calibrators to be considered telluric (in MHz)
         
+        edgestr = "EDGE"
         
         conn = sql.connect(self.dbname)
         c = conn.cursor()
@@ -89,7 +90,7 @@ class analysisLines:
             lines = c.fetchall()
             for li in lines:
                 
-                lineid     = li[0]
+                id         = li[0]
                 maxChannel = li[1]
                 chan1      = li[2]
                 chan2      = li[3]
@@ -97,8 +98,9 @@ class analysisLines:
             
                 if chan1 < EDGE_TOL or (maxChannel-chan2) < EDGE_TOL:
                     nFlag += 1
-                    print("## EDGE - Flagged line %d"%(lineid))  
-                    c.execute('INSERT INTO lines(status) VALUES("EDGE" WHERE lineid =?',(lineid,))
+                    print("## EDGE - Flagged line %d"%(id))  
+                    cmd = "UPDATE lines SET  status = '%s' WHERE lineid = %d"%(edgestr, id)
+                    c.execute(cmd)
                     
         
         if  telluricFlag:
