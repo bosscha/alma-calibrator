@@ -96,8 +96,9 @@ HISTORY:
         
     2015.11.23:
         - change some column of lines table (flag instead of status)
+        - exception if line fitting fails.
      
-    test
+    
 
 RUN:
 
@@ -716,8 +717,14 @@ class analysisSpw:
         sigma = abs((freq2 - freq1)  / 2.) 
         p0 = [A, mu, sigma]
         
-        fitParams, fitCovariances = curve_fit(self.gauss , freq , amp , p0 = p0)
+        try:
+            fitParams, fitCovariances = curve_fit(self.gauss , freq , amp , p0 = p0)
         
+        except:
+            print("### Fit Line error.")
+            fitParams = [0.,0.,0.]
+            fitCovariances = [0., 0., 0.]
+            
         return(fitParams , fitCovariances)
         
     
