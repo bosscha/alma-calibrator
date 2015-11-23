@@ -94,6 +94,8 @@ HISTORY:
     2015.11.21:
         - check if the calibrator name has two or more names separated by ; and take the first one for the source
         
+    2015.11.23:
+        - change some column of lines table (flag instead of status)
      
     test
 
@@ -103,7 +105,7 @@ RUN:
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.5.3@2015.11.21"
+__version__="0.5.4@2015.11.23"
 
 
 import sys
@@ -159,7 +161,7 @@ class dbstore:
         c.execute('''CREATE TABLE lines
              (lineid INTEGER PRIMARY KEY,dataset_id INTEGER, source text, channelnumber int, \
             freq1  REAL, freq2  REAL, amplitude real, sn real, maxChannel int, chan1 int, chan2 int, noise real,noiseFiltered real,\
-            contrast real, A_fit real, mu_fit real, sigma_fit real , molecule text, status text, FOREIGN KEY(dataset_id) REFERENCES dataset(dataid) )''')
+            contrast real, A_fit real, mu_fit real, sigma_fit real , molecule text, flag text, comment text, FOREIGN KEY(dataset_id) REFERENCES dataset(dataid) )''')
              
 
         conn.commit()
