@@ -14,16 +14,13 @@ Class to anlayze the lines DB
     - set the findSpeciesSource method using the splatalogue DB
     
     
-2015.11.23:
-    - update flagLines 
-    
 RUN:
  
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.4@2015.11.23"
+__version__="0.1.3@2015.11.21"
 
 
 import numpy as np
@@ -77,9 +74,8 @@ class analysisLines:
         "Flag the line with differnt keyword"
         
         
-        EDGE_TOL          = 10           ## Flag the line if within EDGE_TOL from the edge
-        TELLURIC_TOL      = 2.0          ## tolerance for the lines in different calibrators to be considered telluric (in MHz)
-        TELLURIC_MIN_LINES = 3            ## minimum of line matching on the same frequencies and different calibrator to consider a telluric line.
+        EDGE_TOL = 10           ## Flag the line if within EDGE_TOL from the edge
+        TELLURIC_TOL = 2.0      ## tolerance for the lines in different calibrators to be considered telluric (in MHz)
         
         edgestr = "EDGE"
         
@@ -124,11 +120,9 @@ class analysisLines:
                     c.execute('SELECT lineid, source, freq1, freq2, status FROM lines  WHERE lineid != ? AND  \
                         ABS(freq1 - ?) < ? AND ABS(freq1 - ?) < ? AND source != ? AND status != ?', (id, f1, f2, sou,"EDGE" ))
                     
-                    ## Note : this sql command does not ensure that we won t cget twice the same different sources,
-                    
                     linesTell =  c.fetchall()
-                             
-                    if len(linesTell) > TELLURIC_MIN_LINES - 1:
+                    
+                    if len(linesTell) > 0:
                         print("## TELLURIC - Flagged line %d"%(id))
                         print("## TELLURIC - other sources (frequencies) :")
                         for item in linesTell:
@@ -137,8 +131,7 @@ class analysisLines:
                             f1tell  = item[2]
                             f2tell  = item[3]
                             
-                            print("#### %s (%f,%f)"%(soutel, f1tell, f2tell))
-                            
+                            print("#### %s (%f,%f"%(soutel, f1tell, f2tell))
                                                     
         
         conn.commit()
