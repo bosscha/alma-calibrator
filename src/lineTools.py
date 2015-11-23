@@ -13,6 +13,9 @@ Class to anlayze the lines DB
     - update  flagLines with Telluric flagging (to be tested, e.g. if same source with different name ...)
     - set the findSpeciesSource method using the splatalogue DB
     
+2015.11.23:
+    - update telluric line flagging
+    
     
 RUN:
  
@@ -20,7 +23,7 @@ RUN:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.3@2015.11.21"
+__version__="0.1.4@2015.11.23"
 
 
 import numpy as np
@@ -74,10 +77,12 @@ class analysisLines:
         "Flag the line with differnt keyword"
         
         
-        EDGE_TOL = 10           ## Flag the line if within EDGE_TOL from the edge
-        TELLURIC_TOL = 2.0      ## tolerance for the lines in different calibrators to be considered telluric (in MHz)
+        EDGE_TOL          = 10           ## Flag the line if within EDGE_TOL from the edge
+        TELLURIC_TOL      = 2.0          ## tolerance for the lines in different calibrators to be considered telluric (in MHz)
+        TELLURIC_MIN_LINE = 3            ## minimum line with same frequencies to consider a telluric line.
         
-        edgestr = "EDGE"
+        edgestr     = "EDGE"
+        telluricstr = "TELLURIC"
         
         conn = sql.connect(self.dbname)
         c = conn.cursor()
@@ -112,17 +117,19 @@ class analysisLines:
                 
                 id     = li[0]
                 sou    = li[1]
-                f1      = li[2]
-                f2      = li[3]
-                stat     = li[4]
+                f1     = li[2]
+                f2     = li[3]
+                stat   = li[4]
                 
                 if stat != "EDGE":
                     c.execute('SELECT lineid, source, freq1, freq2, status FROM lines  WHERE lineid != ? AND  \
                         ABS(freq1 - ?) < ? AND ABS(freq1 - ?) < ? AND source != ? AND status != ?', (id, f1, f2, sou,"EDGE" ))
                     
+                    ## note that we do not check yet if the same source is repeated...
+                    
                     linesTell =  c.fetchall()
                     
-                    if len(linesTell) > 0:
+                    if len(linesTell) > TELLURIC_MIN_LINE -1:
                         print("## TELLURIC - Flagged line %d"%(id))
                         print("## TELLURIC - other sources (frequencies) :")
                         for item in linesTell:
@@ -132,6 +139,11 @@ class analysisLines:
                             f2tell  = item[3]
                             
                             print("#### %s (%f,%f"%(soutel, f1tell, f2tell))
+                        
+                        nFlag += 1
+                        cmd = "UPDATE lines SET  status = '%s' WHERE lineid = %d"%(telluricstr, id)
+                        c.execute(cmd)
+                    
                                                     
         
         conn.commit()
