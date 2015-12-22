@@ -16,14 +16,21 @@ Class to anlayze the lines DB
 2015.11.23:
     - update telluric line flagging
     
+2015.12.07:
+    - add flagging for duplicated lines
+    - add method clearFlags to clear all flags
     
+    
+2015.12.10:
+    - add astroquery.splatalogue
+
 RUN:
  
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.4@2015.11.23"
+__version__="0.1.6@2015.12.11"
 
 
 import numpy as np
@@ -32,6 +39,9 @@ from scipy import signal
 from scipy.optimize import curve_fit
 import math 
 
+from astroquery.splatalogue import Splatalogue as spla
+from astropy import units as u
+from astropy import constants as const
 
 import sqlite3 as sql
 
@@ -43,13 +53,16 @@ class analysisLines:
         self.dbname = dbname
         
         
-    def findSource(self,source):
+    def findSource(self,source, flag = False):
         "Find information on a specific source"
                 
         conn = sql.connect(self.dbname)
         c = conn.cursor()
         
-        c.execute('SELECT * FROM lines WHERE source=?', (source,))
+        if not flag:
+            c.execute('SELECT * FROM lines WHERE source=?', (source,))
+        else:
+            c.execute('SELECT * FROM lines WHERE source=? AND flag IS NULL', (source,))
         lines = c.fetchall()
         
         conn.commit()
@@ -73,16 +86,18 @@ class analysisLines:
         return(sources)       
         
         
-    def flagLines(self,edgeFlag = False, telluricFlag = False):
+    def flagLines(self,edgeFlag = False, telluricFlag = False, duplicateFlag = False):
         "Flag the line with differnt keyword"
         
         
-        EDGE_TOL          = 10           ## Flag the line if within EDGE_TOL from the edge
+        EDGE_TOL          = 10              ## Flag the line if within EDGE_TOL from the edge
         TELLURIC_TOL      = 2.0e-3          ## tolerance for the lines in different calibrators to be considered telluric (in MHz)
-        TELLURIC_MIN_LINE = 2           ## minimum line with same frequencies to consider a telluric line.
+        TELLURIC_MIN_LINE = 2               ## minimum line with same frequencies to consider a telluric line.
+        DUPLICATE_TOL     = 2.0e-3         ## tolerance in frequency to consider a duplication
         
-        edgestr     = "EDGE"
-        telluricstr = "TELLURIC"
+        edgestr      = "EDGE"
+        telluricstr  = "TELLURIC"
+        duplicatestr = "DUPLICATE"
         
         conn = sql.connect(self.dbname)
         c = conn.cursor()
@@ -109,6 +124,7 @@ class analysisLines:
                     
             print("\n")
                 
+
         if  telluricFlag:
             "Check if the same line was in another calibrator"
             
@@ -148,26 +164,96 @@ class analysisLines:
                         cmd = "UPDATE lines SET  flag = '%s' WHERE lineid = %d"%(telluricstr, id)
                         c.execute(cmd)
                     
-                                                    
         
+        if duplicateFlag:
+            "Check for duplicated lines"
+            
+            c.execute('SELECT lineid, source, sn,  freq1, freq2, flag FROM lines WHERE flag IS  NULL')
+            lines = c.fetchall()
+            for li in lines:
+                
+                id     = li[0]
+                sou    = li[1]
+                sn     = li[2]
+                f1     = li[3]
+                f2     = li[4]
+                flag   = li[5]
+                
+                cmd = "SELECT lineid, source, sn, freq1, freq2, flag FROM lines  WHERE source = '%s' AND ABS(freq1 - %f) < %f AND ABS(freq2 - %f) < %f AND flag IS NULL AND lineid != %d"%(sou,f1,DUPLICATE_TOL, f2,DUPLICATE_TOL,id)                                   
+                c.execute(cmd)
+        
+                linesdupli = c.fetchall()
+                
+                
+                if len(linesdupli) > 0:
+                    
+                    for item in linesdupli:
+                        iddupli = item[0]
+                        sndupli = item[2]
+                        
+                        if sn > sndupli:
+                            idflag = iddupli
+                        else:
+                            idflag = id
+                        
+                           
+                        print("## DUPLICATE - Flagged line %d"%(idflag))
+                        print("## DUPLICATE - Source : %s"%(sou))
+                        print("\n")
+                        nFlag += 1 
+                        cmd = "UPDATE lines SET  flag = '%s' WHERE lineid = %d"%(duplicatestr, idflag)
+                        c.execute(cmd)
+                        
+                        
         conn.commit()
         conn.close()
         
         return(nFlag)             
         
         
-    def findSpeciesSource(self, sourceName, redshift, flag = False):
+    def clearFlags(self):
+        "Clear all flags"
+        
+        
+        conn = sql.connect(self.dbname)
+        c = conn.cursor()
+        
+        c.execute("UPDATE lines SET flag = NULL")
+        
+        conn.commit()
+        conn.close()
+        
+        return(0)
+        
+    def findSpeciesSource(self, sourceName, redshift, DV, flag = False):
         """
         Try to identify the lines for a given source with redshift using the splatalogue DB. 
         If flag = True search only for lines w/o flagging (EDGE, TELURIC, ...)
+        DV : uncertainty on the velocity in km/s
         """
         
-        lines = self.findSources(sourceName)
+        lines = self.findSource(sourceName, flag)
         
         if len(lines) == 0:
             print("## Species - No lines found for source %s"%(sourceName))
             return(0)
         
         for li in lines:
-            pass
+            freq1 = li[4] * (1. + redshift)
+            freq2 = li[5] * (1. + redshift)
+            
+            df = freq1 * u.GHz * DV * 1e3 * u.m / u.s /  const.c
+            print df
+            
+            columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
+            
+            transitions = spla.query_lines(freq1*u.GHz-df,freq2*u.GHz+df)[columns]
+            
+            transitions.rename_column('Log<sub>10</sub> (A<sub>ij</sub>)','log10(Aij)')
+            transitions.rename_column('E_U (K)','EU_K')
+            transitions.rename_column('Resolved QNs','QNs')
+            transitions.sort('EU_K')
+            
         
+            transitions.pprint(100)
+            
