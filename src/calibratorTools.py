@@ -155,7 +155,7 @@ class dbstore:
  
 class calStructure:
     """
-    Class to organize the claibrator MS from the split files. Use a sqlite DB to keep the information.
+    Class to organize the calibrator MS from the split files. Use a sqlite DB to keep the information.
     INPUT:
         stuctureFile: parametre files with the different direcoties and the DB
         listMSFile : list of MS to be split and organized
@@ -200,6 +200,18 @@ class calStructure:
         
         ## check and create the DB if needed
         db = dbstore(self.dbname)
+        
+        ## go thru the list of MS..
+        
+        
+        ## extract the calibrator MS from each MS
+        
+        
+        ## move the calibrator MS to the corresponding place
+        
+        
+        ## remove the original MS if it proceeds.
+        
     
      
     
