@@ -27,6 +27,9 @@ HISTORY:
     2015.12.28:
         - adding a class imagingCalibrator to provide some imaging function (continuum or line)
         
+        
+    2015.12.29:
+        - go through the MS list and move the split MS to the corresponding directory
 
 RUN:
 
@@ -34,13 +37,17 @@ RUN:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.1@2015.12.28"
+__version__="0.1.2@2015.12.29"
 
 
 
 import sys
 sys.path.insert(0,'/home/stephane/git/signalanalysis/SignalAnalysis/Wavelet/')
 sys.path.insert(0,'/home/stephane/workspace/AIV/science/analysis_scripts/')
+
+import os
+import os.path
+import shutil
 
 import numpy as np
 import pylab as pl
@@ -85,8 +92,7 @@ class calibrator:
         intentSources = es.getIntentsAndSourceNames(msName)
         
         for intentkey in self.listIntent:
-            
-        
+                   
             calIds   = intentSources[intentkey]['sourceid']
             calName  = intentSources[intentkey]['name']
             calIds   = sorted(dict.fromkeys(calIds).keys())
@@ -114,11 +120,14 @@ class calibrator:
             nameMSCal = "%s-%s-%s.ms"%(msName, cal['intent'], cal['name'])
             
             print("## splitting %s \n"%(nameMSCal))
+            if os.path.exists(nameMSCal):
+                shutil.rmtree(nameMSCal)
+            
             split(vis=msName, outputvis= nameMSCal,datacolumn= dataCol,field= cal['name'],spw="",width=1,antenna="",
                 timebin="0s",timerange="",scan="",intent="",array="",uvrange="",correlation="",observation="",combine="",
                 keepflags=True,keepmms=False)
             
-            listCalibratorMS.append([msName,cal['name']])           
+            listCalibratorMS.append([nameMSCal,cal['name']])           
         
         
         return(listCalibratorMS)
@@ -137,6 +146,7 @@ class dbstore:
         
         if not os.path.isfile(self.db):
             self.createDBTables() 
+
             
     def createDBTables(self):
         "Create the Tables (in sqlite3) if DB does not exist"
@@ -146,12 +156,9 @@ class dbstore:
         
         ## Create the tables
         c.execute('''CREATE TABLE dataset
-             (dataid INTEGER PRIMARY KEY , msfile text, filedata text, calibrator text, lines int)''')
+             (dataid INTEGER PRIMARY KEY , msfile text, calibrator text, band int)''')
         
-    
-        c.execute('''CREATE TABLE calibrator
-             (calid INTEGER PRIMARY KEY,dataset_id INTEGER, source text ,FOREIGN KEY(dataset_id) REFERENCES dataset(dataid) )''')
-             
+                
 
         conn.commit()
         conn.close()          
@@ -173,7 +180,7 @@ class calStructure:
         self.ROOTDIR  = "./"
         self.DBNAME   = "test.db"
         self.MSRM     = False
-        self.__readStuctureFile()
+        self.__readStructureFile()
         
     
     def __readStructureFile(self):
@@ -198,23 +205,65 @@ class calStructure:
                         
         f.close()
         
+    def moveMSdirectory(self,listCalMS):
+        "Move the split  MS with the Cal name. If the directory does not exist it will create it"
         
+        print("moving..............")
+        
+        for calms in listCalMS:
+            destdir = self.ROOTDIR + calms[1] + '/'
+            print destdir
+            
+            if not os.path.exists(destdir):
+                print("### Create a new directory %s"%(destdir))
+                os.makedirs(destdir)
+                
+            msdest = destdir + calms[0].split('/')[-1]
+            print msdest
+            
+            shutil.move(calms[0],msdest)
+ 
+           
     def run(self):
         "run the extraction and tree-organization"
         
+        cal = calibrator()
+        
         ## check and create the DB if needed
-        db = dbstore(self.dbname)
+        db = dbstore(self.DBNAME)
         
         ## go thru the list of MS..
         
+        for msfile in self.listMSfile:
+            
+            try:
+                tb.open(msfile)
+                dataColNames = tb.colnames()
+                tb.close()
+            
+            ## extract the calibrator MS from each MS
         
-        ## extract the calibrator MS from each MS
+                print("## splitting calibrators in %s"%(msfile))
+                listCalMS = cal.splitCalibrator(msfile)
+                
+                print listCalMS
+                
+                self.moveMSdirectory(listCalMS)
         
         
-        ## move the calibrator MS to the corresponding place
+            ## move the calibrator MS to the corresponding place
+                print listCalMS
+        
+            ## remove the original MS if it proceeds.
+            
+            
+            except:
+                print("##")
+                print("## Error to move split file from  MS: %s"%(msfile))
+                print('## \n\n')
         
         
-        ## remove the original MS if it proceeds.
+
         
 
 class imagingCalibrator:

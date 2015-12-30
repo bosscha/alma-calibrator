@@ -273,8 +273,7 @@ class extractSpwField:
         es = aU.stuffForScienceDataReduction()
         # vm = aU.ValueMapping(msName)
 
-        try:
-        
+        try:        
             tb.open(msName)
             dataColNames = tb.colnames()
             tb.close()
