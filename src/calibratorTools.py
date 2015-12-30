@@ -30,6 +30,8 @@ HISTORY:
         
     2015.12.29:
         - go through the MS list and move the split MS to the corresponding directory
+        - adding the band structure
+        - !! bug, it seems that the size double if a second run....!!!!!!!!!
 
 RUN:
 
@@ -37,7 +39,7 @@ RUN:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.2@2015.12.29"
+__version__="0.1.3@2015.12.29"
 
 
 
@@ -127,9 +129,16 @@ class calibrator:
                 timebin="0s",timerange="",scan="",intent="",array="",uvrange="",correlation="",observation="",combine="",
                 keepflags=True,keepmms=False)
             
-            listCalibratorMS.append([nameMSCal,cal['name']])           
-        
-        
+          
+            
+            spwInfo = es.getSpwInfo(nameMSCal)
+            spwIds = sorted(spwInfo.keys())
+                       
+            ff =  aU.getFrequencies(nameMSCal,spwIds[0]) 
+            band = aU.freqToBand(ff[0][0])
+            
+            listCalibratorMS.append([nameMSCal,cal['name'], band])  
+                   
         return(listCalibratorMS)
     
 
@@ -211,7 +220,8 @@ class calStructure:
         print("moving..............")
         
         for calms in listCalMS:
-            destdir = self.ROOTDIR + calms[1] + '/'
+            band = calms[2][0]
+            destdir = self.ROOTDIR + calms[1] + '/' + "Band%d"%(band) + '/'
             print destdir
             
             if not os.path.exists(destdir):
