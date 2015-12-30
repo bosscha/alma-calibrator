@@ -24,13 +24,17 @@ HISTORY:
         - return the list of MS and calibrator in calibrator
         
         
+    2015.12.28:
+        - adding a class imagingCalibrator to provide some imaging function (continuum or line)
+        
+
 RUN:
 
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.0@2015.11.17"
+__version__="0.1.1@2015.12.28"
 
 
 
@@ -212,8 +216,28 @@ class calStructure:
         
         ## remove the original MS if it proceeds.
         
+
+class imagingCalibrator:
+    """
+    class providing methods to image calibrators.
+    """
     
-     
+    def __init__(self):
+        
+        pass
+    
+    
+    def continuum(self):
+        "imaging the continuum"
+
+        pass
+    
+        
+    def line(self):
+        "imaging a line after continuum subtraction"
+        
+        pass
+
     
 ##############################################
 ############### Main program #################

@@ -98,15 +98,17 @@ HISTORY:
         - change some column of lines table (flag instead of status)
         - exception if line fitting fails.
      
-    
+    2015.12.27:
+        - adding spw column in dataset table and updating the ingestion.
 
 RUN:
 
 """
+
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.5.4@2015.11.23"
+__version__="0.5.5@2015.12.29"
 
 
 import sys
@@ -156,7 +158,7 @@ class dbstore:
         
         ## Create the tables
         c.execute('''CREATE TABLE dataset
-             (dataid INTEGER PRIMARY KEY , msfile text, filedata text, calibrator text, lines int)''')
+             (dataid INTEGER PRIMARY KEY , msfile text, filedata text, calibrator text, spw int, lines int)''')
         
     
         c.execute('''CREATE TABLE lines
@@ -178,8 +180,9 @@ class dbstore:
         msName     = arg[0]
         calibrator = arg[1]
         fileData   = arg[2]
-        lines      = arg[3]
-        maxChannel = arg[4]
+        spwindow   = arg[3]
+        lines      = arg[4]
+        maxChannel = arg[5]
         
         ############
         ## check if the dataset exists, if yes remove the old ones...
@@ -206,7 +209,7 @@ class dbstore:
                 
         #############      
         
-        c.execute("INSERT INTO dataset(msfile,filedata,calibrator,lines) VALUES('%s','%s','%s',%d)"%(msName , fileData, calibrator, len(lines)))
+        c.execute("INSERT INTO dataset(msfile,filedata,calibrator,spw,lines) VALUES('%s','%s','%s',%d,%d)"%(msName , fileData, calibrator, spwindow, len(lines)))
         
         datasetid = c.lastrowid
         
@@ -280,7 +283,7 @@ class extractSpwField:
             print("##")
             print("## Error to open : %s"%(msName))
             print('## \n\n')
-            return(False,[], [])
+            return(False,[], [],[])
             
 
         if 'CORRECTED_DATA' in dataColNames:
@@ -297,7 +300,7 @@ class extractSpwField:
         
         
         if  intentSources[intent]['name'][0] == '':
-            return(False, [], [])
+            return(False, [], [], [])
         
         calIds   = intentSources[intent]['sourceid']
         calName  = intentSources[intent]['name']
@@ -315,6 +318,7 @@ class extractSpwField:
         listFile    = []
         listCalFile = []
         listSuccess = []
+        listSpw     = []
         
         for calNameJ in calName:
             
@@ -348,13 +352,19 @@ class extractSpwField:
             
                     listFile.append(fileName)
                     listCalFile.append(calNameJwithoutmultiplename)
+                    listSpw.append(spwj)
                     listSuccess.append(successSpw)
+                    
         
                     if not successSpw :
                         print("## Problem with the extraction of %s ..."%(fileName))
         
-
-        return(listSuccess, listFile, listCalFile)
+        
+        print("vvvvvvvvvvvvvvvvvvvvvvvv")
+        print listFile
+        print("vvvvvvvvvvvvvvvvvvvvvvv")
+        
+        return(listSuccess, listFile, listCalFile, listSpw)
     
         
     def extractListMS(self):
@@ -387,14 +397,18 @@ class extractSpwField:
                 listCal = []
                 successList = []
                 fileList = []
+                listSpw  = []
                 
-                successList , fileList , listCal  = self.extractSpw(ms, intent, listCal)
+                
+                successList , fileList , listCal , listSpw = self.extractSpw(ms, intent, listCal)
+                
+                print("dddddddddddddddddddddddddd")
+                print fileList
+                print("dddddddddddddddddddddddddddddddddddddddddddddddddddd")
+
                 
                 print("##start ..")
-                print intent
-                print listCal
-                print fileList
-                print successList
+                
                 
                 if len(fileList) > 0:
                     print("# %s - %s : ok"%(ms, intent))
@@ -403,8 +417,13 @@ class extractSpwField:
                     index = 0
                     for filename in fileList:
                         calibrator = listCal[index]
+                        spw        = listSpw[index]
+                        
+                        
                         if successList[index]:
-                            self.listSpwSuccess.append([filename,ms, calibrator])
+                            self.listSpwSuccess.append([filename,ms, calibrator, spw])
+
+
                         index += 1
                     
                 else :
@@ -425,6 +444,7 @@ class extractSpwField:
         self.extractSpwIntent()
         self.createReport()
         
+
         return(self.listSpwSuccess)
 
 #######################
@@ -941,6 +961,8 @@ class extractLines:
     
         print("## Starting the analysis")
         
+        print listFileData 
+        
         ## check the parameters to connect if necessary to a DB
         storeondb = False
         aSpwparam = analysisSpw('dummy')
@@ -954,13 +976,15 @@ class extractLines:
                 fileData   = fileDataMS[0]
                 msName     = fileDataMS[1]
                 calibrator = fileDataMS[2]
+                spwindow   = fileDataMS[3]
+                
                 
                 aSpw = analysisSpw(fileData)
                 reportFileData , linesDetected , maxChannel  = aSpw.run(casa = True)
             
                 if storeondb:
                     
-                    db.storeMSCalSpwLines([msName,calibrator,fileData,linesDetected, maxChannel])
+                    db.storeMSCalSpwLines([msName,calibrator,fileData, spwindow, linesDetected, maxChannel])
                                        
                 
                 finalReport += "\n################# \n"
