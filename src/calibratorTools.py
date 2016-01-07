@@ -32,6 +32,10 @@ HISTORY:
         - go through the MS list and move the split MS to the corresponding directory
         - adding the band structure
         - !! bug, it seems that the size double if a second run....!!!!!!!!!
+        
+    2016.01.07:
+        - fix of  the previous bug to skip the mv if a ms file exists already.
+        - store the information of the dataset in the DB
 
 RUN:
 
@@ -39,7 +43,7 @@ RUN:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.3@2015.12.29"
+__version__="0.1.4@2016.01.07"
 
 
 
@@ -166,12 +170,30 @@ class dbstore:
         ## Create the tables
         c.execute('''CREATE TABLE dataset
              (dataid INTEGER PRIMARY KEY , msfile text, calibrator text, band int)''')
-        
-                
+                      
 
         conn.commit()
         conn.close()          
     
+    
+    def storeMScalibrator(self,item):
+        "Store the dataset in the DB"
+        
+        msName     = item[0]
+        calibrator = item[1]
+        band       = item[2]
+        
+        
+        #############      
+        conn = sql.connect(self.db)
+        c = conn.cursor()
+        
+        c.execute("INSERT INTO dataset(msfile,calibrator,band) VALUES('%s','%s',%d)"%(msName, calibrator, band))
+        
+        conn.commit()
+        conn.close()
+        return(0)
+        
  
 class calStructure:
     """
@@ -219,8 +241,14 @@ class calStructure:
         
         print("moving..............")
         
+        ## open the DB
+        db = dbstore(self.DBNAME)
+        
+        
+        
         for calms in listCalMS:
-            band = calms[2][0]
+            band           = calms[2][0]
+            calibratorName = calms[1]
             destdir = self.ROOTDIR + calms[1] + '/' + "Band%d"%(band) + '/'
             print destdir
             
@@ -231,7 +259,16 @@ class calStructure:
             msdest = destdir + calms[0].split('/')[-1]
             print msdest
             
-            shutil.move(calms[0],msdest)
+            if os.path.exists(msdest):
+                print("### %s exists already. We skip it."%(msdest))
+                shutil.rmtree(calms[0])
+                
+            else:
+                shutil.move(calms[0],msdest)
+                
+                itemDB = [msdest, calibratorName, band]
+                db.storeMScalibrator(itemDB)
+                
  
            
     def run(self):
@@ -241,6 +278,7 @@ class calStructure:
         
         ## check and create the DB if needed
         db = dbstore(self.DBNAME)
+        db.checkifDB()
         
         ## go thru the list of MS..
         
@@ -264,6 +302,7 @@ class calStructure:
             ## move the calibrator MS to the corresponding place
                 print listCalMS
         
+            
             ## remove the original MS if it proceeds.
             
             
