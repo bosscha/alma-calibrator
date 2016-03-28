@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 """
-See of tools (function, class) to analyze CASA images/spectra. The package should be used with CASA.
+Set of tools (function, class) to analyze CASA images/spectra. The package should be used with CASA.
 
 
 
