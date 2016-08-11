@@ -36,6 +36,9 @@ HISTORY:
     2016.01.07:
         - fix of  the previous bug to skip the mv if a ms file exists already.
         - store the information of the dataset in the DB
+        
+    2016.08.01:
+        - add an exception with a problem from splitting
 
 RUN:
 
@@ -46,7 +49,7 @@ $> casa -c scriptToOrganize.py
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.4@2016.01.07"
+__version__="0.2.0@2016.08.01"
 
 
 
@@ -132,19 +135,22 @@ class calibrator:
             if os.path.exists(nameMSCal):
                 shutil.rmtree(nameMSCal)
             
-            split(vis=msName, outputvis= nameMSCal,datacolumn= dataCol,field= cal['name'],spw="",width=1,antenna="",
-                timebin="0s",timerange="",scan="",intent="",array="",uvrange="",correlation="",observation="",combine="",
-                keepflags=True,keepmms=False)
+            try :
+                split(vis=msName, outputvis= nameMSCal,datacolumn= dataCol,field= cal['name'],spw="",width=1,antenna="",
+                      timebin="0s",timerange="",scan="",intent="",array="",uvrange="",correlation="",observation="",combine="",
+                      keepflags=True,keepmms=False)
             
           
             
-            spwInfo = es.getSpwInfo(nameMSCal)
-            spwIds = sorted(spwInfo.keys())
+                spwInfo = es.getSpwInfo(nameMSCal)
+                spwIds = sorted(spwInfo.keys())
                        
-            ff =  aU.getFrequencies(nameMSCal,spwIds[0]) 
-            band = aU.freqToBand(ff[0][0])
+                ff =  aU.getFrequencies(nameMSCal,spwIds[0]) 
+                band = aU.freqToBand(ff[0][0])
             
-            listCalibratorMS.append([nameMSCal,cal['name'], band])  
+                listCalibratorMS.append([nameMSCal,cal['name'], band])  
+            exept:
+                print("### Splitting : Error with %s"%(nameMSCal))
                    
         return(listCalibratorMS)
     
