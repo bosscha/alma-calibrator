@@ -39,6 +39,13 @@ HISTORY:
         
     2016.08.01:
         - add an exception with a problem from splitting
+        
+    2016.08.11:
+        - bug fixes
+        
+    2016.08.12:
+        - add check for split
+        
 
 RUN:
 
@@ -49,7 +56,7 @@ $> casa -c scriptToOrganize.py
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.2.0@2016.08.01"
+__version__="0.2.2@2016.08.12"
 
 
 
@@ -75,6 +82,7 @@ import sqlite3 as sql
 
 
 tb = casac.table()
+msmd = casac.msmetadata()
 
 class calibrator:
     
@@ -90,9 +98,29 @@ class calibrator:
         
         es = aU.stuffForScienceDataReduction()
         
-        tb.open(msName)
-        dataColNames = tb.colnames()
-        tb.close()
+        try :
+            tb.open(msName)
+            dataColNames = tb.colnames()
+            tb.close()
+            
+        except:
+            print("###")
+            print("### Error to open MS : %s \n"%(msName))
+            return(-1)
+
+        ## Band
+        
+        msmd.open(msName)
+        chan_freq = msmd.chanfreqs(1) 
+            
+        band =  aU.freqToBand(chan_freq[0])
+                
+        print("## band %s"%(band))
+        msmd.close()
+        
+        ####
+
+
 
         if 'CORRECTED_DATA' in dataColNames:
             dataCol = 'corrected'
@@ -135,21 +163,17 @@ class calibrator:
             if os.path.exists(nameMSCal):
                 shutil.rmtree(nameMSCal)
             
-            try :
-                split(vis=msName, outputvis= nameMSCal,datacolumn= dataCol,field= cal['name'],spw="",width=1,antenna="",
+
+            success = split(vis=msName, outputvis= nameMSCal,datacolumn= dataCol,field= cal['name'],spw="",width=1,antenna="",
                       timebin="0s",timerange="",scan="",intent="",array="",uvrange="",correlation="",observation="",combine="",
                       keepflags=True,keepmms=False)
             
-          
+
             
-                spwInfo = es.getSpwInfo(nameMSCal)
-                spwIds = sorted(spwInfo.keys())
-                       
-                ff =  aU.getFrequencies(nameMSCal,spwIds[0]) 
-                band = aU.freqToBand(ff[0][0])
-            
-                listCalibratorMS.append([nameMSCal,cal['name'], band])  
-            exept:
+            if succss :
+                   listCalibratorMS.append([nameMSCal,cal['name'], band])  
+                
+            else:
                 print("### Splitting : Error with %s"%(nameMSCal))
                    
         return(listCalibratorMS)
@@ -233,6 +257,8 @@ class calStructure:
             if len(dataSpl) > 1:
                 if dataSpl[0] == 'ROOTDIR':
                     self.ROOTDIR = dataSpl[2]
+                    if self.ROOTDIR[-1] != "/" :
+                        self.ROOTDIR += "/"
                     
                 if dataSpl[0] == 'DBNAME':
                     self.DBNAME = dataSpl[2]
@@ -256,9 +282,13 @@ class calStructure:
         
         
         for calms in listCalMS:
+            
+            print calms
+            
             band           = calms[2][0]
             calibratorName = calms[1]
             destdir = self.ROOTDIR + calms[1] + '/' + "Band%d"%(band) + '/'
+            print("destdir")
             print destdir
             
             if not os.path.exists(destdir):
@@ -266,6 +296,7 @@ class calStructure:
                 os.makedirs(destdir)
                 
             msdest = destdir + calms[0].split('/')[-1]
+            print"msdest"
             print msdest
             
             if os.path.exists(msdest):
@@ -294,33 +325,30 @@ class calStructure:
 
         
         for msfile in self.listMSfile:
+
             
-            try:
-                tb.open(msfile)
-                dataColNames = tb.colnames()
-                tb.close()
-            
+            #try :
             ## extract the calibrator MS from each MS
         
-                print("## splitting calibrators in %s"%(msfile))
-                listCalMS = cal.splitCalibrator(msfile)
+            print("## splitting calibrators in %s"%(msfile))
+            listCalMS = cal.splitCalibrator(msfile)
                 
-                print listCalMS
                 
+            ## move the calibrator MS to the corresponding place
+
+            if listCalMS != -1:
                 self.moveMSdirectory(listCalMS)
         
         
-            ## move the calibrator MS to the corresponding place
-                print listCalMS
         
             
             ## remove the original MS if it proceeds.
             
             
-            except:
-                print("##")
-                print("## Error to move split file from  MS: %s"%(msfile))
-                print('## \n\n')
+            #except:
+            #    print("##")
+            #    print("## Error to move split file from  MS: %s"%(msfile))
+            #    print('## \n\n')
         
         
 
