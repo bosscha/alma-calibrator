@@ -46,6 +46,11 @@ HISTORY:
     2016.08.12:
         - add check for split
         
+    2016.08.16:
+        - add the reference position of the field
+        - add an id for the calibrator to identify them uniquely (DB)
+        - add reference position refer, m0, m1 for the calibrator (DB)
+        
 
 RUN:
 
@@ -56,7 +61,7 @@ $> casa -c scriptToOrganize.py
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.2.2@2016.08.12"
+__version__="0.3.0@2016.08.16"
 
 
 
@@ -116,9 +121,8 @@ class calibrator:
         band =  aU.freqToBand(chan_freq[0])
                 
         print("## band %s"%(band))
-        msmd.close()
         
-        ####
+        
 
 
 
@@ -135,10 +139,17 @@ class calibrator:
                    
             calIds   = intentSources[intentkey]['sourceid']
             calName  = intentSources[intentkey]['name']
-            calIds   = sorted(dict.fromkeys(calIds).keys())
-            calName  = sorted(dict.fromkeys(calName).keys())
+            # calIds   = sorted(dict.fromkeys(calIds).keys())
+            # calName  = sorted(dict.fromkeys(calName).keys())
+            
+            # print calName
+            # print calIds
+            
+            iterCalid = iter(calIds)
 
-            for name in calName:
+            for name  in calName:
+                
+                sourceid =  iterCalid.next()
                 
                 if name != '':
                     found = False
@@ -149,7 +160,7 @@ class calibrator:
                         found = True
                 
                 if not found :
-                    calNameList.append({'name' : name, 'intent': intentkey})
+                    calNameList.append({'name' : name, 'intent': intentkey, 'sourceId': sourceid})
                     
         
         print calNameList
@@ -168,13 +179,20 @@ class calibrator:
                       timebin="0s",timerange="",scan="",intent="",array="",uvrange="",correlation="",observation="",combine="",
                       keepflags=True,keepmms=False)
             
-
+            print success
             
-            if succss :
-                   listCalibratorMS.append([nameMSCal,cal['name'], band])  
+            if success :
+                   refdir = msmd.refdir(cal['sourceId'])
+                   listCalibratorMS.append([nameMSCal,cal['name'], band, refdir])
+                   print("## direction:")
+                   print(refdir)
+                   print("#")
+                   
                 
             else:
                 print("### Splitting : Error with %s"%(nameMSCal))
+                
+        msmd.close()
                    
         return(listCalibratorMS)
     
@@ -202,7 +220,7 @@ class dbstore:
         
         ## Create the tables
         c.execute('''CREATE TABLE dataset
-             (dataid INTEGER PRIMARY KEY , msfile text, calibrator text, band int)''')
+             (dataid INTEGER PRIMARY KEY , calid int, msfile text, calibrator text, band int, refer text, m0 float, m1 float)''')
                       
 
         conn.commit()
@@ -215,13 +233,15 @@ class dbstore:
         msName     = item[0]
         calibrator = item[1]
         band       = item[2]
+        refdir     = item[3]
         
         
         #############      
         conn = sql.connect(self.db)
         c = conn.cursor()
         
-        c.execute("INSERT INTO dataset(msfile,calibrator,band) VALUES('%s','%s',%d)"%(msName, calibrator, band))
+        c.execute("INSERT INTO dataset(msfile,calibrator,band, refer, m0, m1 ) VALUES('%s','%s',%d, '%s', %f, %f)"%(msName, \
+                 calibrator, band, refdir['refer'], refdir['m0']['value'],refdir['m1']['value'] ))
         
         conn.commit()
         conn.close()
@@ -287,6 +307,7 @@ class calStructure:
             
             band           = calms[2][0]
             calibratorName = calms[1]
+            refdir         = calms[3]
             destdir = self.ROOTDIR + calms[1] + '/' + "Band%d"%(band) + '/'
             print("destdir")
             print destdir
@@ -303,10 +324,11 @@ class calStructure:
                 print("### %s exists already. We skip it."%(msdest))
                 shutil.rmtree(calms[0])
                 
+                
             else:
                 shutil.move(calms[0],msdest)
                 
-                itemDB = [msdest, calibratorName, band]
+                itemDB = [msdest, calibratorName, band, refdir]
                 db.storeMScalibrator(itemDB)
                 
  
