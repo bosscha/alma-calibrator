@@ -4,6 +4,6 @@
 ROOTDIR       =      /mnt/sciops/data/sleon/RGs/DeepField/a    ## root directory where to put the tree-structure for the calibrators
 DBNAME	      =      Cal.db								       ## SQLITE DB to store the information
 MSRM		  =      False									   ## (True|False) remove (or not) the original MS once it has been split
-
+TOLDISTCAL    =      10.0                                      ## Distanve maximum in arcsec to match one source with a calibrator ID
 
 

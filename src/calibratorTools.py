@@ -51,6 +51,10 @@ HISTORY:
         - add an id for the calibrator to identify them uniquely (DB)
         - add reference position refer, m0, m1 for the calibrator (DB)
         
+    2016.08.18
+        - add TOLDISTCAL tolerance distance keyword for calibrator ID
+        - check if calibrator id exists in DB otherwise create a new one.
+        
 
 RUN:
 
@@ -61,7 +65,7 @@ $> casa -c scriptToOrganize.py
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.3.0@2016.08.16"
+__version__="0.3.1@2016.08.18"
 
 
 
@@ -85,6 +89,7 @@ from casa import split
 
 import sqlite3 as sql
 
+ARCSECTORAD = 4.84813681109536e-06
 
 tb = casac.table()
 msmd = casac.msmetadata()
@@ -235,14 +240,40 @@ class dbstore:
         band       = item[2]
         refdir     = item[3]
         
+        m0 = refdir['m0']['value']
+        m1 = refdir['m1']['value']
+        
+        toldistcalrad = self.TOLDISTCAL / ARCSECTORAD
+        
         
         #############      
         conn = sql.connect(self.db)
         c = conn.cursor()
         
-        c.execute("INSERT INTO dataset(msfile,calibrator,band, refer, m0, m1 ) VALUES('%s','%s',%d, '%s', %f, %f)"%(msName, \
-                 calibrator, band, refdir['refer'], refdir['m0']['value'],refdir['m1']['value'] ))
+        ### search for the id calibrator using the position. If not found add a new calibrator id.
+        ###
+        cmd1= "'SELECT d.calid  FROM dataset t WHERE ABS(t.m0 - %f) < %f  AND ABS(t.m0 - %f) < %f ' "%(m0 , toldistcalrad, m1 , toldistcalrad)
         
+        c.execute(cmd1)
+        rows = c.fetchall()
+        
+        if len(rows) == 0. :
+            cmd2 = "'SELECT MAX(calid) FROM dataset ' "
+            c.execute(cmd2)
+            maxId = c.fetchone()
+            idCal = maxId + 1
+            print("## Insert new Calibrator in the DB, ID = %d"%(idCal))
+        else :
+            idCal = rows[0]
+            
+        else :
+            
+        
+        
+        c.execute("INSERT INTO dataset(msfile,calid , calibrator,band, refer, m0, m1 ) VALUES('%s',%d, '%s',%d, '%s', %f, %f)"%(msName, \
+                 idCal, calibrator, band, refdir['refer'], m0 , m1))
+        
+
         conn.commit()
         conn.close()
         return(0)
@@ -264,6 +295,7 @@ class calStructure:
         self.ROOTDIR  = "./"
         self.DBNAME   = "test.db"
         self.MSRM     = False
+        self.TOLDISTCAL = 10.0         /* maximum distance in arcsec to match one calibrator ID (default)
         self.__readStructureFile()
         
     
@@ -288,6 +320,10 @@ class calStructure:
                         self.MSRM     = False  
                     elif dataSpl[2] == "True":
                         self.MSRM     = True
+                        
+                if dataSpl[0] == 'TOLDISTCAL':
+                    self.TOLDISTCAL = float(dataSpl[2])        
+                    
                         
         f.close()
         
