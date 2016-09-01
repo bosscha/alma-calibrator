@@ -51,9 +51,17 @@ HISTORY:
         - add an id for the calibrator to identify them uniquely (DB)
         - add reference position refer, m0, m1 for the calibrator (DB)
         
-    2016.08.18
+    2016.08.18:
         - add TOLDISTCAL tolerance distance keyword for calibrator ID
         - check if calibrator id exists in DB otherwise create a new one.
+        
+    
+    2016.08.30:
+        - fixes for the position check for the calibrator
+        
+    2016.09.01:
+        - check if the calibrator exists to move in the same directory but with the MS name.
+        - add a check for solar system object which have no fix coordinates but assuming a current name
         
 
 RUN:
@@ -65,7 +73,7 @@ $> casa -c scriptToOrganize.py
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.3.1@2016.08.18"
+__version__="0.4.0@2016.09.01"
 
 
 
@@ -90,6 +98,8 @@ from casa import split
 import sqlite3 as sql
 
 ARCSECTORAD = 4.84813681109536e-06
+
+SOLARSYSTEMOBJ = ["Titan", "Saturn", "Neptune", "Callisto","Mars","Mercury","Venus","Uranus"]
 
 tb = casac.table()
 msmd = casac.msmetadata()
@@ -243,7 +253,7 @@ class dbstore:
         m0 = refdir['m0']['value']
         m1 = refdir['m1']['value']
         
-        toldistcalrad = self.TOLDISTCAL / ARCSECTORAD
+        toldistcalrad = item[4] *  ARCSECTORAD
         
         
         #############      
@@ -252,22 +262,32 @@ class dbstore:
         
         ### search for the id calibrator using the position. If not found add a new calibrator id.
         ###
-        cmd1= "'SELECT d.calid  FROM dataset t WHERE ABS(t.m0 - %f) < %f  AND ABS(t.m0 - %f) < %f ' "%(m0 , toldistcalrad, m1 , toldistcalrad)
+    
+        cmd1= "SELECT calid  FROM dataset  WHERE abs(m0 - %f) < %f  AND abs(m1 - %f) < %f "%(m0 , toldistcalrad, m1 , toldistcalrad)
+ 
+        ## check for solar system objects
+        if calibrator in SOLARSYSTEMOBJ:
+            cmd1= "SELECT calid  FROM dataset  WHERE calibrator = '%s' "%(calibrator)
+
+        print cmd1
         
         c.execute(cmd1)
         rows = c.fetchall()
         
+        
         if len(rows) == 0. :
-            cmd2 = "'SELECT MAX(calid) FROM dataset ' "
+            cmd2 = "SELECT max(calid) FROM dataset "
             c.execute(cmd2)
-            maxId = c.fetchone()
+            maxId = c.fetchone()[0]
+            if maxId is None :
+                    maxId = 0
             idCal = maxId + 1
             print("## Insert new Calibrator in the DB, ID = %d"%(idCal))
         else :
-            idCal = rows[0]
+            idCal = rows[0][0]
             
-        else :
-            
+        print idCal
+                
         
         
         c.execute("INSERT INTO dataset(msfile,calid , calibrator,band, refer, m0, m1 ) VALUES('%s',%d, '%s',%d, '%s', %f, %f)"%(msName, \
@@ -277,7 +297,44 @@ class dbstore:
         conn.commit()
         conn.close()
         return(0)
+    
+    
+    def checkForCalibrator(self,refdir, toleranceDist):
+        "Check if the calibrator exists in the DB and return the current name"
         
+        toldistcalrad = toleranceDist *  ARCSECTORAD
+        
+        m0 = refdir['m0']['value']
+        m1 = refdir['m1']['value']
+
+        #############      
+        conn = sql.connect(self.db)
+        c = conn.cursor()
+        
+        ### search for the id calibrator using the position. If not found add a new calibrator id.
+        ###
+    
+        cmd1= "SELECT calid , calibrator  FROM dataset  WHERE abs(m0 - %f) < %f  AND abs(m1 - %f) < %f "%(m0 , toldistcalrad, m1 , toldistcalrad)
+        print cmd1
+        
+        c.execute(cmd1)
+        rows = c.fetchall()
+        
+        currentName  = ""
+        foundCal = False
+        print rows
+        
+        if len(rows) != 0:
+            foundCal = True
+            currentName = rows[0][1]
+            print("### currentName %s"%(currentName))
+         
+        conn.commit()
+        conn.close()
+            
+        return(foundCal, currentName)
+    
+    
  
 class calStructure:
     """
@@ -295,7 +352,7 @@ class calStructure:
         self.ROOTDIR  = "./"
         self.DBNAME   = "test.db"
         self.MSRM     = False
-        self.TOLDISTCAL = 10.0         /* maximum distance in arcsec to match one calibrator ID (default)
+        self.TOLDISTCAL = 10.0         # maximum distance in arcsec to match one calibrator ID (default)
         self.__readStructureFile()
         
     
@@ -345,6 +402,18 @@ class calStructure:
             calibratorName = calms[1]
             refdir         = calms[3]
             destdir = self.ROOTDIR + calms[1] + '/' + "Band%d"%(band) + '/'
+
+            
+            ## check if it is a new calibrator or not to keep the same name...
+            ## 
+            print("## check if calibrator exists ..")
+            
+            foundCalibrator , currentName = db.checkForCalibrator(refdir, self.TOLDISTCAL)
+            
+            if foundCalibrator:
+                destdir = self.ROOTDIR + currentName + '/' + "Band%d"%(band) + '/'
+
+            
             print("destdir")
             print destdir
             
@@ -364,7 +433,7 @@ class calStructure:
             else:
                 shutil.move(calms[0],msdest)
                 
-                itemDB = [msdest, calibratorName, band, refdir]
+                itemDB = [msdest, calibratorName, band, refdir, self.TOLDISTCAL]
                 db.storeMScalibrator(itemDB)
                 
  
