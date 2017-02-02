@@ -100,6 +100,9 @@ HISTORY:
      
     2015.12.27:
         - adding spw column in dataset table and updating the ingestion.
+        
+    2017.02.02 :
+        - modifying analysisSpw to add filepar for the parameter file (default extractLine.par)
 
 RUN:
 
@@ -108,7 +111,7 @@ RUN:
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.5.5@2015.12.29"
+__version__="0.6.0@2017.02.02"
 
 
 import sys
@@ -450,10 +453,10 @@ class extractSpwField:
 
 class analysisSpw:
     
-    def __init__(self,file):
+    def __init__(self,file, filepar = "extractLine.par"):
         
         self.DataFile = file
-        self.parameterFile = "extractLine.par"
+        self.parameterFile = filepar
         
         self.DIRPLOT = ''
         self.DIRDATA = ''
@@ -937,9 +940,10 @@ class analysisSpw:
 class extractLines:
     "Main class to extract the line"
     
-    def __init__(self, inputMSfile):
+    def __init__(self, inputMSfile, fileLinePar = "extractLine.par"):
 
         self.inputMS = inputMSfile
+        self.linepar = fileLinePar
     
         
         
@@ -978,7 +982,7 @@ class extractLines:
                 spwindow   = fileDataMS[3]
                 
                 
-                aSpw = analysisSpw(fileData)
+                aSpw = analysisSpw(fileData, filepar = self.linepar )
                 reportFileData , linesDetected , maxChannel  = aSpw.run(casa = True)
             
                 if storeondb:
