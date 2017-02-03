@@ -968,7 +968,8 @@ class extractLines:
         
         ## check the parameters to connect if necessary to a DB
         storeondb = False
-        aSpwparam = analysisSpw('dummy')
+        aSpwparam = analysisSpw('dummy', filepar = self.linepar)
+        
         if aSpwparam.DBNAME != '':
             db = dbstore(aSpwparam.DBNAME)
             storeondb = True
