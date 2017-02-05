@@ -23,6 +23,9 @@ Class to anlayze the lines DB
     
 2015.12.10:
     - add astroquery.splatalogue
+    
+2017.02.04:
+    - modify output for the findSpeciesSource
 
 RUN:
  
@@ -30,7 +33,7 @@ RUN:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.6@2015.12.11"
+__version__="0.1.7@2017.02.04"
 
 
 import numpy as np
@@ -243,6 +246,7 @@ class analysisLines:
             freq2 = li[5] * (1. + redshift)
             
             df = freq1 * u.GHz * DV * 1e3 * u.m / u.s /  const.c
+            print("Frequency: %f"%(freq1))
             print df
             
             columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
