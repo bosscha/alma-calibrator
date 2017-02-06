@@ -101,11 +101,12 @@ HISTORY:
     2015.12.27:
         - adding spw column in dataset table and updating the ingestion.
         
+    
     2017.02.02 :
         - modifying analysisSpw to add filepar for the parameter file (default extractLine.par)
+        - Add the field coordinates the dataset table (for easy search later). The extract SPW was accordingly modify
 
 RUN:
-
 """
 
 from os.path import curdir
@@ -139,6 +140,8 @@ import sqlite3 as sql
 tb = casac.table()
 
 
+RAD2DEGREES = 180. / math.pi 
+
 class dbstore:
     
     def __init__(self,dbname):
@@ -161,7 +164,7 @@ class dbstore:
         
         ## Create the tables
         c.execute('''CREATE TABLE dataset
-             (dataid INTEGER PRIMARY KEY , msfile text, filedata text, calibrator text, spw int, lines int)''')
+             (dataid INTEGER PRIMARY KEY , msfile text, filedata text, calibrator text, coordSky1 real, coordSky2 real, spw int, lines int)''')
         
     
         c.execute('''CREATE TABLE lines
@@ -181,7 +184,9 @@ class dbstore:
         c = conn.cursor()
         
         msName     = arg[0]
-        calibrator = arg[1]
+        calibrator = arg[1][0]
+        coord1     = arg[1][1]
+        coord2     = arg[1][2]
         fileData   = arg[2]
         spwindow   = arg[3]
         lines      = arg[4]
@@ -212,7 +217,7 @@ class dbstore:
                 
         #############      
         
-        c.execute("INSERT INTO dataset(msfile,filedata,calibrator,spw,lines) VALUES('%s','%s','%s',%d,%d)"%(msName , fileData, calibrator, spwindow, len(lines)))
+        c.execute("INSERT INTO dataset(msfile,filedata,calibrator, coordSky1, coordSky2,spw,lines) VALUES('%s','%s','%s',%f, %f, %d,%d)"%(msName , fileData, calibrator, coord1, coord2, spwindow, len(lines)))
         
         datasetid = c.lastrowid
         
@@ -295,6 +300,12 @@ class extractSpwField:
 
         tb.open(msName+'/FIELD')
         sourceIds = tb.getcol('SOURCE_ID')
+        
+        ##### new coordinates
+        srccoords = tb.getcol('REFERENCE_DIR')
+
+        ######
+        
         tb.close()
 
 
@@ -303,12 +314,18 @@ class extractSpwField:
         
         if  intentSources[intent]['name'][0] == '':
             return(False, [], [], [])
+
         
         calIds   = intentSources[intent]['sourceid']
         calName  = intentSources[intent]['name']
-        calIds   = sorted(dict.fromkeys(calIds).keys())
-        calName  = sorted(dict.fromkeys(calName).keys())
-
+              
+        print calIds
+        print calName
+         
+            
+        # calIds   = sorted(dict.fromkeys(calIds).keys())
+        # calName  = sorted(dict.fromkeys(calName).keys())
+        
         
         ### spw info
         
@@ -322,11 +339,26 @@ class extractSpwField:
         listSuccess = []
         listSpw     = []
         
+        indexOnCalId = 0
+        
         for calNameJ in calName:
+            
+            ## coordinates in degrees
+            print calNameJ
+            print calIds[indexOnCalId]
+            sourceId = calIds[indexOnCalId]
+            coordSky1 = ( srccoords[0][0][sourceId] % (2 * math.pi) ) * RAD2DEGREES
+            coordSky2 = srccoords[1][0][sourceId]  * RAD2DEGREES
+            print coordSky1
+            print coordSky2
+            
+            indexOnCalId += 1
+                   
             
             found = False
             if calNameJ in listCal:
                 found = True
+
             
             if not found:
                 listCal.append(calNameJ)
@@ -335,6 +367,8 @@ class extractSpwField:
                     # spwChanFreqs = vm.spwInfo[j]['chanFreqs']  
                     # print spwChanFreqs
             
+                    # print("Test coordinates")
+                    
  
                     spwId = "%s"%(spwj)
                 
@@ -353,7 +387,7 @@ class extractSpwField:
                                 highres=False, overwrite=False,showgui=False)
             
                     listFile.append(fileName)
-                    listCalFile.append(calNameJwithoutmultiplename)
+                    listCalFile.append([calNameJwithoutmultiplename, coordSky1, coordSky2] )
                     listSpw.append(spwj)
                     listSuccess.append(successSpw)
                     
