@@ -105,6 +105,9 @@ HISTORY:
     2017.02.02 :
         - modifying analysisSpw to add filepar for the parameter file (default extractLine.par)
         - Add the field coordinates the dataset table (for easy search later). The extract SPW was accordingly modify
+        
+    2017.02.09:
+        - change the method to get the spwIds
 
 RUN:
 """
@@ -112,7 +115,7 @@ RUN:
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.6.0@2017.02.02"
+__version__="0.6.1@2017.02.09"
 
 
 import sys
@@ -329,11 +332,16 @@ class extractSpwField:
         
         ### spw info
         
+        ###  spwInfo = es.getSpwInfo(msName)
+        ###spwIds = sorted(spwInfo.keys())
 
-        spwInfo = es.getSpwInfo(msName)
-        spwIds = sorted(spwInfo.keys())
-
+           
+        tb.open(msName+'/DATA_DESCRIPTION')
+        spwIds = tb.getcol('SPECTRAL_WINDOW_ID').tolist()
+        tb.close()
+        
         print spwIds
+        
         listFile    = []
         listCalFile = []
         listSuccess = []
