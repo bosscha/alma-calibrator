@@ -49,6 +49,9 @@ HISTORY:
     2014.06.07:
         - change the scipy.convolve to the numpy.convolve to be used in CASA
         
+    2017.02.10:
+        - comment the io.fits currently.... !!!!!
+        
 RUN:
 CASA or iPython:
      sys.path.insert(0,'/home/stephane/git/signalanalysis/SignalAnalysis/Wavelet/')
@@ -56,14 +59,14 @@ CASA or iPython:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.2.0@2014.06.17"
+__version__="0.2.1@2017.02.10"
 
 
 
 import numpy as np
 import scipy.signal as signal
 import scipy.ndimage as scimage
-import astropy.io.fits as pf
+## import astropy.io.fits as pf
 
 
 

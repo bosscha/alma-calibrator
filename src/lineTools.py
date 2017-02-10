@@ -99,9 +99,9 @@ class analysisLines:
         
         
         EDGE_TOL          = 10              ## Flag the line if within EDGE_TOL from the edge
-        TELLURIC_TOL      = 2.0e-3          ## tolerance for the lines in different calibrators to be considered telluric (in MHz)
+        TELLURIC_TOL      = 2.0e-3          ## tolerance for the lines in different calibrators to be considered telluric (in GHz)
         TELLURIC_MIN_LINE = 2               ## minimum line with same frequencies to consider a telluric line.
-        DUPLICATE_TOL     = 2.0e-3         ## tolerance in frequency to consider a duplication
+        DUPLICATE_TOL     = 2.0e-3          ## tolerance in frequency to consider a duplication
         
         edgestr      = "EDGE"
         telluricstr  = "TELLURIC"

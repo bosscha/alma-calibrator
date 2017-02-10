@@ -108,6 +108,9 @@ HISTORY:
         
     2017.02.09:
         - change the method to get the spwIds
+        
+    2017.02.10:
+        - comment the sys.path for wavelet to use the local one
 
 RUN:
 """
@@ -115,11 +118,11 @@ RUN:
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.6.1@2017.02.09"
+__version__="0.6.2@2017.02.09"
 
 
 import sys
-sys.path.insert(0,'/home/stephane/git/signalanalysis/SignalAnalysis/Wavelet/')
+#sys.path.insert(0,'/home/stephane/git/signalanalysis/SignalAnalysis/Wavelet/')
 sys.path.insert(0,'/home/stephane/workspace/AIV/science/analysis_scripts/')
 sys.path.insert(0,'/users/sleon/AIV/science/analysis_scripts')
 

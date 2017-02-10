@@ -13,6 +13,13 @@ HISTORY:
         - add the analysis of the line
         - inheritance of class extraction from simulSpectra
         - add absorption
+        
+        
+    2017.02.09:
+        - add the main part to be used standalone
+        
+    2017.02.10:
+        - update the statistics to include the total detected line
 
 RUN:
 
@@ -21,7 +28,7 @@ RUN:
 """
 
 __author__="S. Leon @ ALMA"
-__version__="0.0.2@2015.01.25"
+__version__="0.1.0@2017.02.09"
 
 
 import calibratorLines as cL
@@ -38,10 +45,10 @@ class simulSpectra:
         
         self.nFreq      = 10000
         self.nLines     = 20
-        self.ARange     = [2.,10.]    # absolute but can be in absoprtion
+        self.ARange     = [2.,10.]    # absolute but can be in absorption
         self.muRange    = [500,9500]      # integer
-        self.sigmaRange = [2.0 , 20.0]
-        self.noise      = 5.0
+        self.sigmaRange = [0.1 , 20.0]
+        self.noise      = 1.0
         
         self.freq = np.arange(self.nFreq)
         self.amp  = np.zeros(self.nFreq)
@@ -102,18 +109,19 @@ class simulSpectra:
 ###############################
 class extraction(simulSpectra):
     
-    def __init__(self):
+    def __init__(self,  filepar = 'extractLine.par'):
         
         simulSpectra.__init__(self)
         self.nSample = 10
         self.result  = []
+        self.filepar = filepar
         
     def generateExtraction(self):
         
         
         self.run()
         
-        al = cL.analysisSpw("sample")
+        al = cL.analysisSpw("sample", filepar = self.filepar)
         linesDetected = al.searchLines(self.freq, self.amp)
     
         self.result.append([self.Lines , linesDetected])
@@ -139,6 +147,8 @@ class extraction(simulSpectra):
         trueLineSnr  = np.zeros(nbin) 
         totalLineSnr = np.zeros(nbin)
 
+        LineDetectedTotal = 0
+        FalseLineTotal = 0.0
         
         dsnr   = 0.2
         snrArr = dsnr * np.arange(nbin)
@@ -156,8 +166,10 @@ class extraction(simulSpectra):
                 if found:
                     trueLineSnr[ind]  += 1.
                     totalLineSnr[ind] += 1.
+                    LineDetectedTotal += 1.0
                 else :
                     totalLineSnr[ind] += 1.
+                    FalseLineTotal += 1.0 
                     
         
         for i in range(nbin):
@@ -185,15 +197,23 @@ class extraction(simulSpectra):
                 if found:
                     LineDetectedSnr[ind]  += 1.
                     totalRealLineSnr[ind] += 1.
-                else :
+ 
+                else : 
                     totalRealLineSnr[ind] += 1.
         
         for i in range(nbin):
             if totalRealLineSnr[i] > 0. :
                 LineDetectedSnr[i] = LineDetectedSnr[i] / totalRealLineSnr[i]         
                     
+         
+        totalLine = self.nSample * self.nLines
+                   
+        fractionDetected  = LineDetectedTotal / totalLine
+        fractionFalseLine = FalseLineTotal / totalLine
                     
-        return([snrArr, trueLineSnr], [snrArr, LineDetectedSnr])            
+                    
+        
+        return([snrArr, trueLineSnr], [snrArr, LineDetectedSnr], fractionDetected, fractionFalseLine)            
             
 
     
@@ -205,7 +225,7 @@ class extraction(simulSpectra):
         freq  = (freq1 + freq2) / 2.
         
         found = False
-        TolFreq = 3.      # sigma
+        TolFreq = 0.3      # sigma
         
         for l in lines:
             A = l['A']
@@ -226,7 +246,7 @@ class extraction(simulSpectra):
         sigma  = line['sigma']
         
         found = False
-        TolFreq = 3.   # sigma
+        TolFreq = 0.3   # sigma
         
         for l in linesDetected :          
             freq1 = l[1]
@@ -252,8 +272,17 @@ class extraction(simulSpectra):
         return(stat1)
         
     
+##############################################
+############### Main program #################
+if __name__ == "__main__":
     
-
+    ## run a simulation
+       
+    a =  extraction()
+    stat = a.analysisSample()
+    
+    print("Statistics ...")
+    print stat
         
         
         
