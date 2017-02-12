@@ -143,7 +143,7 @@ class extraction(simulSpectra):
         print("# analyzing the results ...")
         # compute the fraction of true line detected vs. snr
         
-        nbin = 100
+        nbin = 1000
         trueLineSnr  = np.zeros(nbin) 
         totalLineSnr = np.zeros(nbin)
 
@@ -225,7 +225,7 @@ class extraction(simulSpectra):
         freq  = (freq1 + freq2) / 2.
         
         found = False
-        TolFreq = 0.3      # sigma
+        TolFreq = 0.5      # sigma
         
         for l in lines:
             A = l['A']
