@@ -32,13 +32,15 @@ Class to anlayze the lines DB
     - add a finetuning find source if already some hints of velocity are found
 
 
+2017.02.14:
+    - fix minor bug
 RUN:
  
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.2.0@2017.02.06"
+__version__="0.2.1@2017.02.14"
 
 
 import numpy as np
@@ -270,7 +272,7 @@ class analysisLines:
             transitions.pprint(100)
     
     
-    def findSpeciesFineTuningSource(self, sourceName, redshift, DV1, DV2, flag = False):
+    def findSpeciesFineTuningSource(self, sourceName, redshift, DV1, DV2, flag = False, outputline = 50):
         """
         Try to identify the lines for a given source with redshift using the splatalogue DB. 
         If flag = True search only for lines w/o flagging (EDGE, TELURIC, ...)
@@ -283,6 +285,7 @@ class analysisLines:
             print("## Species - No lines found for source %s"%(sourceName))
             return(0)
         
+        resLines = []
         for li in lines:
             freq1 = li[4] * (1. + redshift)
             freq2 = li[5] * (1. + redshift)
@@ -307,8 +310,9 @@ class analysisLines:
             transitions.sort('EU_K')
             
         
-            transitions.pprint(100)      
-        
-        
+            transitions.pprint(outputline)      
+            resLines.append(transitions)
+            
+        return(transitions)
         
         
