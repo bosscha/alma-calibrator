@@ -111,6 +111,9 @@ HISTORY:
         
     2017.02.10:
         - comment the sys.path for wavelet to use the local one
+        
+    2017.02.17:
+        - add an exception in extractSpw
 
 RUN:
 """
@@ -118,7 +121,7 @@ RUN:
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.6.2@2017.02.09"
+__version__="0.7.0@2017.02.17"
 
 
 import sys
@@ -304,19 +307,33 @@ class extractSpwField:
         else:
             dataCol = 'data'
 
-        tb.open(msName+'/FIELD')
-        sourceIds = tb.getcol('SOURCE_ID')
+        ### Extraction information MS
         
-        ##### new coordinates
-        srccoords = tb.getcol('REFERENCE_DIR')
-
-        ######
+        try:
+            tb.open(msName+'/FIELD')
+            sourceIds = tb.getcol('SOURCE_ID')
         
-        tb.close()
+            ##### new coordinates
+            srccoords = tb.getcol('REFERENCE_DIR')
 
-
-        intentSources = es.getIntentsAndSourceNames(msName)
+            ######
         
+            tb.close()
+                    
+            intentSources = es.getIntentsAndSourceNames(msName)
+            
+            tb.open(msName+'/DATA_DESCRIPTION')
+            spwIds = tb.getcol('SPECTRAL_WINDOW_ID').tolist()
+            tb.close()
+            
+        except:
+            print("##")
+            print("## Error (FIELD/SPW) to open : %s"%(msName))
+            print('## \n\n')
+            return(False,[], [],[])        
+
+
+     
         
         if  intentSources[intent]['name'][0] == '':
             return(False, [], [], [])
@@ -328,20 +345,7 @@ class extractSpwField:
         print calIds
         print calName
          
-            
-        # calIds   = sorted(dict.fromkeys(calIds).keys())
-        # calName  = sorted(dict.fromkeys(calName).keys())
-        
-        
-        ### spw info
-        
-        ###  spwInfo = es.getSpwInfo(msName)
-        ###spwIds = sorted(spwInfo.keys())
-
            
-        tb.open(msName+'/DATA_DESCRIPTION')
-        spwIds = tb.getcol('SPECTRAL_WINDOW_ID').tolist()
-        tb.close()
         
         print spwIds
         

@@ -34,13 +34,21 @@ Class to anlayze the lines DB
 
 2017.02.14:
     - fix minor bug
+    
+        
+2017.02.16:
+    - Add method to get information about a DB
+    
+2017.02.17:
+    - add number of lines
+
 RUN:
  
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.2.1@2017.02.14"
+__version__="0.2.3@2017.02.17"
 
 
 import numpy as np
@@ -294,6 +302,7 @@ class analysisLines:
             df2 = freq2 * u.GHz * DV2 * 1e3 * u.m / u.s /  const.c
             
             print("------")
+            print("Source: %s"%(sourceName))
             print("Frequency redshifted: %f"%(li[4]))
             print("Frequency at rest: %f"%(freq1))
             print("Frequency offset:")
@@ -314,5 +323,27 @@ class analysisLines:
             resLines.append(transitions)
             
         return(transitions)
+      
+      
+      
+    def getInfoDB(self, flag = True):
+        """
+        To get infos about the DB
+            - number of sources
+            - number of lines
+        """
+        
+        
+        s = self.listSources()
+        
+        print("## Sources: %d"%(len(s)))
+        totalLines = 0
+        
+        for source in s:
+            lines = self.findSource(source[0], flag)
+            totalLines += len(lines)
+            print("%s : %d lines "%(source[0], len(lines)))
+            
+        print("\n Total Line: %d"%(totalLines))
         
         
