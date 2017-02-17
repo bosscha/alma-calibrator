@@ -362,8 +362,17 @@ class extractSpwField:
             print calNameJ
             print calIds[indexOnCalId]
             sourceId = calIds[indexOnCalId]
-            coordSky1 = ( srccoords[0][0][sourceId] % (2 * math.pi) ) * RAD2DEGREES
-            coordSky2 = srccoords[1][0][sourceId]  * RAD2DEGREES
+            
+            try:
+                coordSky1 = ( srccoords[0][0][sourceId] % (2 * math.pi) ) * RAD2DEGREES
+                coordSky2 = srccoords[1][0][sourceId]  * RAD2DEGREES
+                
+            except:
+                print("## Problem with sky coordinates... set to 0.0")
+                coordSky1 = 0.0
+                coordSky2 = 0.0
+                
+                
             print coordSky1
             print coordSky2
             

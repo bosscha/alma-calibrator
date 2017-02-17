@@ -41,6 +41,7 @@ Class to anlayze the lines DB
     
 2017.02.17:
     - add number of lines
+    - add redshift in output
 
 RUN:
  
@@ -303,6 +304,7 @@ class analysisLines:
             
             print("------")
             print("Source: %s"%(sourceName))
+            print("Redshift: %f"%(redshift))
             print("Frequency redshifted: %f"%(li[4]))
             print("Frequency at rest: %f"%(freq1))
             print("Frequency offset:")
