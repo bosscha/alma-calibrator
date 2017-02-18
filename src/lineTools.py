@@ -42,6 +42,10 @@ Class to anlayze the lines DB
 2017.02.17:
     - add number of lines
     - add redshift in output
+    
+    
+2017.02.18:
+    - add information to findSpeciesSource
 
 RUN:
  
@@ -244,7 +248,7 @@ class analysisLines:
         
         return(0)
         
-    def findSpeciesSource(self, sourceName, redshift, DV, flag = False):
+    def findSpeciesSource(self, sourceName, redshift, DV, flag = False, outputline = 50):
         """
         Try to identify the lines for a given source with redshift using the splatalogue DB. 
         If flag = True search only for lines w/o flagging (EDGE, TELURIC, ...)
@@ -257,6 +261,7 @@ class analysisLines:
             print("## Species - No lines found for source %s"%(sourceName))
             return(0)
         
+        resLines = []
         for li in lines:
             freq1 = li[4] * (1. + redshift)
             freq2 = li[5] * (1. + redshift)
@@ -264,9 +269,11 @@ class analysisLines:
             df = freq1 * u.GHz * DV * 1e3 * u.m / u.s /  const.c
             
             print("------")
+            print("Source: %s"%(sourceName))
+            print("Redshift: %f"%(redshift))
             print("Frequency redshifted: %f"%(li[4]))
             print("Frequency at rest: %f"%(freq1))
-            print df
+            print("Velocity offset: +/- %f km/s"%(DV))
             
             columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
             
@@ -278,8 +285,11 @@ class analysisLines:
             transitions.sort('EU_K')
             
         
-            transitions.pprint(100)
-    
+            transitions.pprint(outputline)
+            resLines.append(transitions)
+            
+        return(transitions)
+      
     
     def findSpeciesFineTuningSource(self, sourceName, redshift, DV1, DV2, flag = False, outputline = 50):
         """
