@@ -46,6 +46,15 @@ Class to anlayze the lines DB
     
 2017.02.18:
     - add information to findSpeciesSource
+    
+    
+2017.02.19:
+    - reshaping the flagging to use the sky position and not only the name
+    
+    
+2017.02.20:
+    - select source with different coordinates
+    - search NED redshift from coordinates
 
 RUN:
  
@@ -53,7 +62,7 @@ RUN:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.2.3@2017.02.17"
+__version__="0.3.0@2017.02.20"
 
 
 import numpy as np
@@ -65,8 +74,12 @@ import math
 from astroquery.splatalogue import Splatalogue as spla
 from astropy import units as u
 from astropy import constants as const
+from astropy import coordinates
+from astroquery.ned import Ned
 
 import sqlite3 as sql
+
+SOLARSYSTEM = ['Mars','Jupiter','Callisto','Saturn','Titan','Pallas','Ceres','Neptune','Uranus']
 
 class analysisLines:
     "class to analyze the lines DB"
@@ -95,18 +108,43 @@ class analysisLines:
     
     
     def listSources(self):
-        "Return the list of sources"
+        "Return the list of sources with different coordinates"
+        
+        TOLPOS = 5e-4
         
         conn = sql.connect(self.dbname)
         c = conn.cursor()
         
-        c.execute('SELECT DISTINCT source FROM lines')
+        c.execute('SELECT DISTINCT calibrator FROM dataset')
         sources = c.fetchall()
+        
+        listDiffSource = []
+        
+        for source in sources:
+            c.execute("SELECT coordSky1, coordSky2 FROM dataset where calibrator = '%s'"%(source))           
+            coord = c.fetchone()
+            
+            cmd = "SELECT DISTINCT calibrator FROM dataset WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f"%(coord[0], TOLPOS, coord[1], TOLPOS)
+            c.execute(cmd)
+            sourceTemp = c.fetchall()
+            
+            found = False
+            for s in listDiffSource:
+                if sourceTemp[0][0] in s:
+                    found = True
+                    
+            
+            if not found:
+                templist =[]
+                for s in sourceTemp:
+                    templist.append(s[0])
+                listDiffSource.append(templist)       
+        
         
         conn.commit()
         conn.close()
         
-        return(sources)       
+        return(listDiffSource)       
         
         
     def flagLines(self,edgeFlag = False, telluricFlag = False, duplicateFlag = False):
@@ -125,6 +163,21 @@ class analysisLines:
         conn = sql.connect(self.dbname)
         c = conn.cursor()
         
+        ## Create a temporary view withthe lines and  sky coordinates
+        ## not yet executed ...
+        
+        cmdview = '''
+                    CREATE temporary VIEW linesky AS
+                    select  lines.lineid, lines.source, lines.sn, lines.freq1, lines.freq2, lines.flag,
+                    dataset.coordSky1 , 
+                    dataset.coordSky2 
+                    from  lines
+                    left join  dataset   on  dataset.dataid  =  lines.dataset_id                      
+                    '''
+                    
+        ##  c.execute(cmdview)
+        print("## View not yet created...")
+        ####
 
         nFlag = 0
         
@@ -336,7 +389,36 @@ class analysisLines:
             
         return(transitions)
       
-      
+    
+    def getCoordSource(self,source):
+        "Get coordinates for a source "
+        
+        conn = sql.connect(self.dbname)
+        c = conn.cursor()
+        
+        c.execute("SELECT coordSky1, coordSky2 FROM dataset where calibrator = '%s'"%(source))           
+        coord = c.fetchone()
+        
+        conn.commit()
+        conn.close()
+        
+        return(coord)
+    
+    
+    def getMS(self,coord1, coord2):
+        "Get MS for a position"
+                      
+        TOLPOS = 5e-4
+        
+        conn = sql.connect(self.dbname)
+        c = conn.cursor()
+        
+        cmd = "SELECT DISTINCT msfile FROM dataset WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f"%(coord1, TOLPOS, coord2, TOLPOS)
+        c.execute(cmd)
+        data = c.fetchall()
+
+        return(data)
+        
       
     def getInfoDB(self, flag = True):
         """
@@ -349,13 +431,53 @@ class analysisLines:
         s = self.listSources()
         
         print("## Sources: %d"%(len(s)))
+        print("##")
         totalLines = 0
         
-        for source in s:
-            lines = self.findSource(source[0], flag)
-            totalLines += len(lines)
-            print("%s : %d lines "%(source[0], len(lines)))
+        for sourceDiff in s:
+            sText =  ""
+            totalLinesOne = 0
+            for source in sourceDiff:
+                lines = self.findSource(source, flag)
+                sText += "%s  "%(source)
+                totalLinesOne += len(lines)
+            print("## %s : %d lines "%(sText, totalLinesOne))
             
+            ## redshift
+            coord = self.getCoordSource(sourceDiff[0])
+            try:
+                redshift = self.findNEDredshift(coord[0],coord[1])
+                print("## Redshift:")
+                print redshift
+                
+                ## Number of MS
+                msfile = self.getMS(coord[0],coord[1])
+                print("##")
+                print("## Number of MS: %d"%(len(msfile)))
+            
+            except:
+                print("## No redshift")
+                
+
+            print("")
+            totalLines += totalLinesOne
         print("\n Total Line: %d"%(totalLines))
         
+        
+    
+    def findNEDredshift(self, coord1, coord2):
+        """
+        Try to find redshift for ccoordinates
+        """
+        
+        RADIUSCONE = 5e-4
+        
+        co = coordinates.SkyCoord(ra=coord1, dec=coord2, unit=(u.deg, u.deg), frame='fk5')
+        result_table = Ned.query_region(co, radius= RADIUSCONE * u.deg, equinox='J2000.0')
+        result_table.sort('Distance (arcmin)')
+        redshift = result_table['Redshift'].quantity
+        
+        return(redshift)
+        
+
         
