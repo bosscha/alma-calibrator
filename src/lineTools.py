@@ -55,6 +55,10 @@ Class to anlayze the lines DB
 2017.02.20:
     - select source with different coordinates
     - search NED redshift from coordinates
+    
+    
+2017.02.21:
+    - adding a method to scan over a list of lines of a source over a list of transition to match several lines at the same time
 
 RUN:
  
@@ -62,7 +66,7 @@ RUN:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.3.0@2017.02.20"
+__version__="0.3.1@2017.02.21"
 
 
 import numpy as np
@@ -76,6 +80,7 @@ from astropy import units as u
 from astropy import constants as const
 from astropy import coordinates
 from astroquery.ned import Ned
+from astropy.cosmology import WMAP9 as cosmo
 
 import sqlite3 as sql
 
@@ -106,6 +111,39 @@ class analysisLines:
         
         return(lines)
     
+    
+    def findLinesCoord(self,coord, flag = True):
+        """
+        return all lines for a given coordinate.
+        flag: use the flag or not
+        """
+        
+        TOLPOS = 5e-4
+        
+        conn = sql.connect(self.dbname)
+        c = conn.cursor()
+        
+        cmdview = '''
+                    CREATE temporary VIEW linesky AS
+                    select  lines.lineid, lines.source, lines.sn, lines.freq1, lines.freq2, lines.A_fit, lines.mu_fit, lines.sigma_fit, lines.flag,
+                    dataset.coordSky1 , 
+                    dataset.coordSky2 
+                    from  lines
+                    left join  dataset   on  dataset.dataid  =  lines.dataset_id                      
+                '''
+                    
+        c.execute(cmdview)
+        
+        cmd = "SELECT lineid, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f AND flag IS NULL"%(coord[0], TOLPOS, coord[1], TOLPOS)
+
+        c.execute(cmd)
+        lines = c.fetchall()
+        
+        conn.commit()
+        conn.close()
+        
+        return(lines)
+        
     
     def listSources(self):
         "Return the list of sources with different coordinates"
@@ -479,5 +517,54 @@ class analysisLines:
         
         return(redshift)
         
+        
+    
+    def scanningLinesSources(self, source, lines, templateLine, maxRedshift, ):
+        """
+        Scan over the lines of a source using the templateLine from redshift 0-dz up to maxRedshift+dz
+        
+        templateLine format : array of [string transition, frequency (GHz)]
+        
+        """
+    
+        DZ        = 0.00001
+        FREQTOL     = 1e-3
+        minRedshift = -0.005
+        NSCAN       = int((maxRedshift-minRedshift) / DZ)
+        NUMMATCHMIN = 3
+         
+        print("## Scanning lines ...")
+        print("## %d scans"%(NSCAN))
+        
+    
+        for i in range(NSCAN):
+            z = minRedshift + i * DZ
+
+            matchline = []
+            for line in lines:
+                diffmin = 1e9
+                transmatch = []
+                
+                for  trans in templateLine:
+                    diffFreq = abs(trans[1] / (1.+z) - line[3])
+                    if diffFreq <  diffmin :
+                        linetemp = trans
+                        diffmin  = diffFreq
+                        transmatch = trans
+                    
+                if diffmin < FREQTOL :
+                        matchline.append(transmatch)
+                
+            nmatch =   len(matchline) 
+            
+            if  nmatch > NUMMATCHMIN :
+                dist = cosmo.comoving_distance(z)
+                print("## %d matches for redshift: %f"%(nmatch, z))
+                print("## Distance : ")
+                print dist
+                print matchline
+                print("")
+                        
+    
 
         
