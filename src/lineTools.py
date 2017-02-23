@@ -60,13 +60,21 @@ Class to anlayze the lines DB
 2017.02.21:
     - adding a method to scan over a list of lines of a source over a list of transition to match several lines at the same time
 
+2017.02.22:
+    - minor updates
+    - adding findLineSource
+    
+2017.02.23:
+    - adding vel diff to scanningLineSources
+    -return result of infoDB
+    
 RUN:
  
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.3.1@2017.02.21"
+__version__="0.3.3@2017.02.23"
 
 
 import numpy as np
@@ -112,6 +120,41 @@ class analysisLines:
         return(lines)
     
     
+    def findLinesSource(self,source, flag = True):
+        """
+        Same as findLinesCoord with only source name
+        """
+        
+        conn = sql.connect(self.dbname)
+        c = conn.cursor()
+        
+        cmdview = '''
+                    CREATE temporary VIEW linesky AS
+                    select  lines.lineid, lines.source, lines.sn, lines.freq1, lines.freq2, lines.A_fit, lines.mu_fit, lines.sigma_fit, lines.flag,
+                    dataset.coordSky1 , 
+                    dataset.coordSky2 
+                    from  lines
+                    left join  dataset   on  dataset.dataid  =  lines.dataset_id                      
+                '''
+                    
+        c.execute(cmdview)
+        
+        if flag :
+            cmd = "SELECT lineid, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE source = '%s' AND flag IS NULL"%(source)
+            
+        else :
+            cmd = "SELECT lineid, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE source = '%s' "%(source)
+
+        c.execute(cmd)
+        lines = c.fetchall()
+        
+        conn.commit()
+        conn.close()
+        
+        return(lines)
+               
+        
+    
     def findLinesCoord(self,coord, flag = True):
         """
         return all lines for a given coordinate.
@@ -134,7 +177,11 @@ class analysisLines:
                     
         c.execute(cmdview)
         
-        cmd = "SELECT lineid, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f AND flag IS NULL"%(coord[0], TOLPOS, coord[1], TOLPOS)
+        if flag :
+            cmd = "SELECT lineid, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f AND flag IS NULL"%(coord[0], TOLPOS, coord[1], TOLPOS)
+        else :
+            cmd = "SELECT lineid, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f"%(coord[0], TOLPOS, coord[1], TOLPOS)
+
 
         c.execute(cmd)
         lines = c.fetchall()
@@ -471,6 +518,7 @@ class analysisLines:
         print("## Sources: %d"%(len(s)))
         print("##")
         totalLines = 0
+        resultList = []
         
         for sourceDiff in s:
             sText =  ""
@@ -492,17 +540,21 @@ class analysisLines:
                 msfile = self.getMS(coord[0],coord[1])
                 print("##")
                 print("## Number of MS: %d"%(len(msfile)))
+                resultList.append([sourceDiff[0], redshift])
             
             except:
                 print("## No redshift")
-                
+                ## put -99 for redshift if unknown
+                resultList.append([sourceDiff[0], -99])
 
             print("")
             totalLines += totalLinesOne
         print("\n Total Line: %d"%(totalLines))
         
-        
-    
+        return(resultList)
+
+
+   
     def findNEDredshift(self, coord1, coord2):
         """
         Try to find redshift for ccoordinates
@@ -519,7 +571,7 @@ class analysisLines:
         
         
     
-    def scanningLinesSources(self, source, lines, templateLine, maxRedshift, ):
+    def scanningLinesSources(self, source, lines, templateLine, maxRedshift, NUMMATCHMIN = 2 ):
         """
         Scan over the lines of a source using the templateLine from redshift 0-dz up to maxRedshift+dz
         
@@ -527,15 +579,18 @@ class analysisLines:
         
         """
     
-        DZ        = 0.00001
-        FREQTOL     = 1e-3
-        minRedshift = -0.005
+        DZ        = 1e-5
+        FREQTOL     = 5e-4      ## in GHz
+        
+        minRedshift = -0.05
+        
         NSCAN       = int((maxRedshift-minRedshift) / DZ)
-        NUMMATCHMIN = 3
+        
          
         print("## Scanning lines ...")
         print("## %d scans"%(NSCAN))
         
+        lineMatchingTotal = []
     
         for i in range(NSCAN):
             z = minRedshift + i * DZ
@@ -546,25 +601,33 @@ class analysisLines:
                 transmatch = []
                 
                 for  trans in templateLine:
-                    diffFreq = abs(trans[1] / (1.+z) - line[3])
+                    diffFreq = abs( (trans[1] / (1.+z)) - line[3])
+                    
                     if diffFreq <  diffmin :
-                        linetemp = trans
                         diffmin  = diffFreq
                         transmatch = trans
                     
                 if diffmin < FREQTOL :
-                        matchline.append(transmatch)
+                        veldiff = const.c * 1e-3 * diffmin * (1. +z)*(1.+z) / line[3]                        
+                        matchline.append([transmatch, veldiff.value,line[1]  ])
+
                 
             nmatch =   len(matchline) 
             
-            if  nmatch > NUMMATCHMIN :
+            if  nmatch >= NUMMATCHMIN :
                 dist = cosmo.comoving_distance(z)
+                vel  = z * const.c
                 print("## %d matches for redshift: %f"%(nmatch, z))
-                print("## Distance : ")
-                print dist
-                print matchline
-                print("")
-                        
-    
+                print("## Velocity (km/s) : %f"%(vel.value / 1000.))
+                print("## Distance (Mpc)  : %f"%(dist.value))
+                print("## Line, vel. diff.  wrt. redshift (km/s), S/N:")
+                for match in matchline:
+                    print match
+                print("## \n")
+                
+                lineMatchingTotal.append([matchline,z])
+                
+        return(lineMatchingTotal)   
+
 
         
