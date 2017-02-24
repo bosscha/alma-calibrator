@@ -66,15 +66,21 @@ Class to anlayze the lines DB
     
 2017.02.23:
     - adding vel diff to scanningLineSources
-    -return result of infoDB
+    - return result of infoDB
+    
+2017.02.24:
+    - add galactic coordinates in infoDB
+    - add a new method for a specific Galactic scanning.
+    - add a class for line plotting.
+    
     
 RUN:
- 
+
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.3.3@2017.02.23"
+__version__="0.4.0@2017.02.24"
 
 
 import numpy as np
@@ -510,6 +516,7 @@ class analysisLines:
         To get infos about the DB
             - number of sources
             - number of lines
+            - galactic coordinate
         """
         
         
@@ -531,10 +538,17 @@ class analysisLines:
             
             ## redshift
             coord = self.getCoordSource(sourceDiff[0])
+            
+            ## Get Galactic coordinates:
+                
+            coordGal = self.getGalacticCoord(coord[0],coord[1])
+            print("## Galactic Coordinates (l,b): (%f , %f) "%(coordGal.galactic.l.value,coordGal.galactic.b.value))
+            
             try:
                 redshift = self.findNEDredshift(coord[0],coord[1])
                 print("## Redshift:")
                 print redshift
+                
                 
                 ## Number of MS
                 msfile = self.getMS(coord[0],coord[1])
@@ -570,8 +584,22 @@ class analysisLines:
         return(redshift)
         
         
+        
+    def getGalacticCoord(self, coord1, coord2):
+        """
+        Transform equatorial coordinantes to Galactic coordinates
+        
+        """
     
-    def scanningLinesSources(self, source, lines, templateLine, maxRedshift, NUMMATCHMIN = 2 ):
+        co = coordinates.SkyCoord(ra=coord1, dec=coord2, unit=(u.deg, u.deg), frame='fk5')
+        
+        cogal = co.galactic
+        
+        return(cogal)
+    
+    
+    
+    def scanningLinesSources(self, source, lines, templateLine, maxRedshift, nummatchmin = 2 ):
         """
         Scan over the lines of a source using the templateLine from redshift 0-dz up to maxRedshift+dz
         
@@ -614,7 +642,7 @@ class analysisLines:
                 
             nmatch =   len(matchline) 
             
-            if  nmatch >= NUMMATCHMIN :
+            if  nmatch >= nummatchmin :
                 dist = cosmo.comoving_distance(z)
                 vel  = z * const.c
                 print("## %d matches for redshift: %f"%(nmatch, z))
@@ -630,4 +658,147 @@ class analysisLines:
         return(lineMatchingTotal)   
 
 
+
+    
+
+class plotLines:
+    "Class to plot the lines"
+    
+    
+    def __init__(self,dbname, dirdata):
+        
+        self.dbname = dbname        
+        self.dirdata = dirdata
+    
+    
+    
+        def extractData(self,dataFile, casa = True):
+            "Extract the data from the dataFile, special case for CASA file"
+        
+   
+            if not casa:
+                f = open(dataFile)
+        
+                nData = 0
+                freqtemp = []
+                amptemp = []
+        
+                for line in f:
+                    data = line.split()
+                    freqtemp.append(float(data[0]))
+                    amptemp.append(float(data[1]))
+                    nData += 1
+            
+                    freq = np.zeros(nData)
+                    amp = np.zeros(nData)
+        
+                for i in range(nData):
+                    freq[i] = freqtemp[i]
+                    amp[i]  = amptemp[i]
+            
+                    f.close()
+            
+            if casa:
+            
+                f = open(dataFile)
+            
+                nData = 0
+                freqtemp = []
+                amptemp = []
+        
+                for line in f:
+                    data = line.split()
+                    if line[0] != "#" :
+                        freqtemp.append(float(data[0]))
+                        amptemp.append(float(data[1]))
+                        nData += 1
+                
+                f.close()
+        
+                if nData == 0:
+                    return([],[])
+            
+                ftemp = np.zeros(nData)
+                atemp = np.zeros(nData)
+                nDat  = np.zeros(nData)
+            
+            ## assumes that the frequency are contiguous
+            ## Note that the frequency resolution is 1MHz with plotms
+            
+                fcurrent = freqtemp[0]
+                idat = 0
+                nSpwData = 0
+            
+                for i in  range(nData):
+                    if freqtemp[i] == fcurrent:
+                        ftemp[idat] = fcurrent
+                        atemp[idat] += amptemp[i]
+                        nDat[idat] += 1
+                    else :
+                        nSpwData += 1
+                        idat += 1
+                        fcurrent = freqtemp[i]
+                        ftemp[idat] = fcurrent
+                        atemp[idat] += amptemp[i]
+                        nDat[idat] += 1
+                
+                freq = np.zeros(nSpwData)
+                amp = np.zeros(nSpwData)
+            
+    
+                # print nSpwData
+        
+                for i in range(nSpwData) :
+                    freq[i] = ftemp[i]
+                    amp[i]  = atemp[i] / nDat[i]  
+            
+            
+            
+            return(freq, amp)
+
+             
+    
+    def getDataSource(self, source , coordCheck = True):
+        """ 
+        Get all the spectra for a gven source with the dataid.
+        If coordCheck is True it uses the coordinates to get the data.
+        """
+        
+        TOLPOS = 5e-4
+        
+        
+        if coordCheck:
+            al = analysisLines(self.dbname)
+            coord = al.getCoordSource(source)
+            
+        
+        ## loop over the data files
+               
+        conn = sql.connect(self.dbname)
+        c = conn.cursor()
+        
+        if not coordCheck:
+            cmd = "SELECT dataid, filedata  FROM dataset where calibrator = '%s'"%(source)
+            c.execute(cmd)          
+            data = coord = c.fetchall()
+         
+        else:   
+            cmd = "SELECT dataid, filedata FROM dataset WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f"%(coord[0], TOLPOS, coord[1], TOLPOS)
+            c.execute(cmd)
+            data = c.fetchall()
+  
+
+        if len(data) == 0 :
+            print("## No data...")
+            return([])
+        
+        
+        dataList = []
+        
+        for filedata in data:
+            print filedata[0]
+            print filedata[1]
+            
+            
+        
         
