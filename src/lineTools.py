@@ -73,6 +73,14 @@ Class to anlayze the lines DB
     - add a new method for a specific Galactic scanning.
     - add a class for line plotting.
     
+
+2017.02.27:
+    - add plotting for one source.
+    
+    
+2017.02.28:
+    - important changes in findLinesSource and findLinesCoord (add dataset_id)
+    - add wavelet filtering for the display
     
 RUN:
 
@@ -80,7 +88,8 @@ RUN:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.4.0@2017.02.24"
+__version__="0.5.0@2017.02.28"
+
 
 
 import numpy as np
@@ -88,6 +97,7 @@ import pylab as pl
 from scipy import signal
 from scipy.optimize import curve_fit
 import math 
+import os
 
 from astroquery.splatalogue import Splatalogue as spla
 from astropy import units as u
@@ -97,6 +107,9 @@ from astroquery.ned import Ned
 from astropy.cosmology import WMAP9 as cosmo
 
 import sqlite3 as sql
+
+import matplotlib.pyplot as plt
+import wavelet as wav
 
 SOLARSYSTEM = ['Mars','Jupiter','Callisto','Saturn','Titan','Pallas','Ceres','Neptune','Uranus']
 
@@ -146,10 +159,10 @@ class analysisLines:
         c.execute(cmdview)
         
         if flag :
-            cmd = "SELECT lineid, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE source = '%s' AND flag IS NULL"%(source)
+            cmd = "SELECT lineid, dataset_id, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE source = '%s' AND flag IS NULL"%(source)
             
         else :
-            cmd = "SELECT lineid, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE source = '%s' "%(source)
+            cmd = "SELECT lineid, dataset_id, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE source = '%s' "%(source)
 
         c.execute(cmd)
         lines = c.fetchall()
@@ -174,7 +187,7 @@ class analysisLines:
         
         cmdview = '''
                     CREATE temporary VIEW linesky AS
-                    select  lines.lineid, lines.source, lines.sn, lines.freq1, lines.freq2, lines.A_fit, lines.mu_fit, lines.sigma_fit, lines.flag,
+                    select  lines.lineid, lines.dataset_id, lines.source, lines.sn, lines.freq1, lines.freq2, lines.A_fit, lines.mu_fit, lines.sigma_fit, lines.flag,
                     dataset.coordSky1 , 
                     dataset.coordSky2 
                     from  lines
@@ -184,9 +197,9 @@ class analysisLines:
         c.execute(cmdview)
         
         if flag :
-            cmd = "SELECT lineid, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f AND flag IS NULL"%(coord[0], TOLPOS, coord[1], TOLPOS)
+            cmd = "SELECT lineid, dataset_id, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f AND flag IS NULL"%(coord[0], TOLPOS, coord[1], TOLPOS)
         else :
-            cmd = "SELECT lineid, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f"%(coord[0], TOLPOS, coord[1], TOLPOS)
+            cmd = "SELECT lineid, dataset_id, sn, A_fit, mu_fit, sigma_fit FROM linesky WHERE ABS(%f - coordSky1) < %f AND ABS(%f - coordSky2) < %f"%(coord[0], TOLPOS, coord[1], TOLPOS)
 
 
         c.execute(cmd)
@@ -478,8 +491,25 @@ class analysisLines:
             transitions.pprint(outputline)      
             resLines.append(transitions)
             
-        return(transitions)
+        return(resLines)
       
+    
+    def findSpeciesFrequencyVelocity(self, freq, vel, dvel):
+        " Find species at an observed frequency and for a given vel, dvel at low redshift ..."
+        
+        freq1 = freq / (1 + 1e3 * (vel - dvel) / const.c.value)
+        freq2 = freq / (1 + 1e3 * (vel + dvel) / const.c.value)
+    
+        transitions = spla.query_lines(freq1*u.GHz,freq2*u.GHz)[columns]
+        transitions.rename_column('Log<sub>10</sub> (A<sub>ij</sub>)','log10(Aij)')
+        transitions.rename_column('E_U (K)','EU_K')
+        transitions.rename_column('Resolved QNs','QNs')
+        transitions.sort('EU_K')
+            
+        
+        transitions.pprint(10)  
+        
+    
     
     def getCoordSource(self,source):
         "Get coordinates for a source "
@@ -624,6 +654,7 @@ class analysisLines:
             z = minRedshift + i * DZ
 
             matchline = []
+            
             for line in lines:
                 diffmin = 1e9
                 transmatch = []
@@ -665,96 +696,97 @@ class plotLines:
     "Class to plot the lines"
     
     
-    def __init__(self,dbname, dirdata):
+    def __init__(self,dbname, dirdata, dirplot):
         
-        self.dbname = dbname        
+        self.dbname  = dbname        
         self.dirdata = dirdata
+        self.dirplot = dirplot
     
     
     
-        def extractData(self,dataFile, casa = True):
-            "Extract the data from the dataFile, special case for CASA file"
+    def extractData(self,dataFile, casa = True):
+        "Extract the data from the dataFile, special case for CASA file"
         
    
-            if not casa:
-                f = open(dataFile)
+        if not casa:
+            f = open(dataFile)
         
-                nData = 0
-                freqtemp = []
-                amptemp = []
+            nData = 0
+            freqtemp = []
+            amptemp = []
         
-                for line in f:
-                    data = line.split()
+            for line in f:
+                data = line.split()
+                freqtemp.append(float(data[0]))
+                amptemp.append(float(data[1]))
+                nData += 1
+            
+                freq = np.zeros(nData)
+                amp = np.zeros(nData)
+        
+            for i in range(nData):
+                freq[i] = freqtemp[i]
+                amp[i]  = amptemp[i]
+            
+                f.close()
+            
+        if casa:
+            
+            f = open(dataFile)
+            
+            nData = 0
+            freqtemp = []
+            amptemp = []
+        
+            for line in f:
+                data = line.split()
+                if line[0] != "#" :
                     freqtemp.append(float(data[0]))
                     amptemp.append(float(data[1]))
                     nData += 1
-            
-                    freq = np.zeros(nData)
-                    amp = np.zeros(nData)
-        
-                for i in range(nData):
-                    freq[i] = freqtemp[i]
-                    amp[i]  = amptemp[i]
-            
-                    f.close()
-            
-            if casa:
-            
-                f = open(dataFile)
-            
-                nData = 0
-                freqtemp = []
-                amptemp = []
-        
-                for line in f:
-                    data = line.split()
-                    if line[0] != "#" :
-                        freqtemp.append(float(data[0]))
-                        amptemp.append(float(data[1]))
-                        nData += 1
                 
-                f.close()
+            f.close()
         
-                if nData == 0:
-                    return([],[])
+            if nData == 0:
+                return([],[])
             
-                ftemp = np.zeros(nData)
-                atemp = np.zeros(nData)
-                nDat  = np.zeros(nData)
+            ftemp = np.zeros(nData)
+            atemp = np.zeros(nData)
+            nDat  = np.zeros(nData)
             
-            ## assumes that the frequency are contiguous
-            ## Note that the frequency resolution is 1MHz with plotms
+        ## assumes that the frequency are contiguous
+        ## Note that the frequency resolution is 1MHz with plotms
             
-                fcurrent = freqtemp[0]
-                idat = 0
-                nSpwData = 0
+            fcurrent = freqtemp[0]
+            idat = 0
+            nSpwData = 0
             
-                for i in  range(nData):
-                    if freqtemp[i] == fcurrent:
-                        ftemp[idat] = fcurrent
-                        atemp[idat] += amptemp[i]
-                        nDat[idat] += 1
-                    else :
-                        nSpwData += 1
-                        idat += 1
-                        fcurrent = freqtemp[i]
-                        ftemp[idat] = fcurrent
-                        atemp[idat] += amptemp[i]
-                        nDat[idat] += 1
+            for i in  range(nData):
+                if freqtemp[i] == fcurrent:
+                    ftemp[idat] = fcurrent
+                    atemp[idat] += amptemp[i]
+                    nDat[idat] += 1
+                else :
+                    nSpwData += 1
+                    idat += 1
+                    fcurrent = freqtemp[i]
+                    ftemp[idat] = fcurrent
+                    atemp[idat] += amptemp[i]
+                    nDat[idat] += 1
                 
-                freq = np.zeros(nSpwData)
-                amp = np.zeros(nSpwData)
+            freq = np.zeros(nSpwData)
+            amp = np.zeros(nSpwData)
             
     
-                # print nSpwData
+            # print nSpwData
         
-                for i in range(nSpwData) :
-                    freq[i] = ftemp[i]
-                    amp[i]  = atemp[i] / nDat[i]  
+            for i in range(nSpwData) :
+                freq[i] = ftemp[i]
+                amp[i]  = atemp[i] / nDat[i]  
             
             
             
-            return(freq, amp)
+        return(freq, amp)
 
              
     
@@ -795,10 +827,132 @@ class plotLines:
         
         dataList = []
         
+        ## change to data directory
+        ##
+        
+        curDir = os.getcwd()
+        os.chdir(self.dirdata)
+        
         for filedata in data:
-            print filedata[0]
-            print filedata[1]
+            # print filedata[0]
+            # print filedata[1]
             
+            try:
+                freq, amp = self.extractData(filedata[1])            
+                dataList.append([source, filedata[0], freq, amp])
+                
+            except:
+                print("## Problem to extract data in %s"%(filedata[1]))
+            
+        # back to the initial directory
+        os.chdir(curDir)
+        
+        print("## Data loaded in memory...")
+        
+        return(dataList)
+    
+    
+    def plotDataSet(self, data, dataid, freqmin, freqmax, ampmin, ampmax):
+        """
+        plot for a single dataid 
+         - data extracted for the source
+         - freqmin, freqmax, ampmin, ampmax : range for the plot
+         
+         
+        """
+        
+        ## only one result !!
+        found = False
+        
+        for d in data:
+            if d[1] == dataid:
+                res = d
+                found = True
+                
+                
+        if found:
+            fig, ax = plt.subplots()
+            
+            ax.plot(res[2],res[3])
+            plt.show()
             
         
+    
+    
+    def   plotLineSource(self, source, data, flag = True, coordCheck = True, wavFiltering = True, wavscale = 4, wavsn = 2.7):
+        """
+        plot the lines for a source with the following inputs:
+            - source : name of the source
+            - data  : data for the source
+            - flag : True select only unflagged lines
+            - coordCheck : True if check the coord instead of the source
+            - wavFiltering : True if perform wavelet filtering
+            
+            
+        """
+        al = analysisLines(self.dbname)
+        
+        
+        ## wavelet parameter.. freq and amp are numpy array
+        if wavFiltering:
+            wt = wav.wt(verbose = False)
+            print("## Wavelet filtering ...")
+        
+        ## Get coord
+        if coordCheck:
+            coord = al.getCoordSource(source)
+            lines = al.findLinesCoord(coord, flag)
+            
+        else:
+            lines = al.findLinesSource(source)
+        
+
+        ## interactive mode on
+        plt.ion()
+        
+        
+        for line in lines:
+            datasetid = line[1]
+            lineid    = line[0]
+            
+            for d in data:
+                if d[1] == datasetid:
+                    print("## Data found (plotLineSource)")
+                    print line
+                    
+                    freq = d[2]
+                    amp  = d[3]
+                    
+                    print("## Dataid : %d"%(datasetid))
+                    print("## Lineid : %d"%(lineid))
+                    ## Filtering with wavelet ...
+                    
+                    if wavFiltering:
+                            noise = np.std(amp)
+                            mean  = np.mean(amp) 
+                            wspw = wt.atrous1d(amp, wavscale)
+                            wspwFilt = wt.filtering1d(wspw, wavsn, waveletNoise = True, spectralNoise = noise)
+                            spwRestore = wt.restore1d(wspwFilt, 0, wavscale)
+                            
+                    else :
+                        spwRestore = amp
+                    
+                    ## plotting 
+                    xmin = line[4] - line[5] * 35
+                    xmax = line[4] + line[5] * 35
+                    
+                    plt.clf()
+                    figfile = "toto.png"
+                    
+                    # plt.title(figfile.split('/')[-1])
+                    plt.xlabel("Frequency (GHz)")
+                    plt.ylabel("Amplitude")
+                    plt.xlim(xmin,xmax)
+                    # plt.ylim([ymin,ymax])
+                    plt.plot(freq, spwRestore)
+                    #fig.savefig(figfile)
+                    
+                    raw_input()
+                    
+                    
         

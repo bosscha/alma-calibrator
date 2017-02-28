@@ -52,6 +52,9 @@ HISTORY:
     2017.02.10:
         - comment the io.fits currently.... !!!!!
         
+    2017.02.28
+        - add verbose option
+        
 RUN:
 CASA or iPython:
      sys.path.insert(0,'/home/stephane/git/signalanalysis/SignalAnalysis/Wavelet/')
@@ -59,7 +62,7 @@ CASA or iPython:
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.2.1@2017.02.10"
+__version__="0.3.0@2017.02.28"
 
 
 
@@ -79,9 +82,9 @@ class wt:
     
     """
     
-    def __init__(self):
+    def __init__(self, verbose = True):
         
-        pass
+        self.verbose = verbose
 
     def atrous(self,arr, lev, kernel1d=b3spline1d, boundary='symm',NaN= False):
         """
@@ -111,8 +114,9 @@ class wt:
         
         __x = kernel1d.reshape(1,-1)
         kernel2d = np.dot(__x.T,__x)
- 
-        print "##WT--A Trous--Plane: %d"%(lev)
+        
+        if self.verbose:
+            print "##WT--A Trous--Plane: %d"%(lev)
         
         approx = signal.convolve2d(image, kernel2d, mode='same', boundary=boundary)  # approximation
         w = image - approx   
@@ -121,7 +125,8 @@ class wt:
             return image
         
         if lev == 1: 
-            print "##WT--A Trous--Plane: 0"
+            if self.verbose:
+                print "##WT--A Trous--Plane: 0"
             return [w, approx]
         else:        
             return [w] + self.atrous(approx,lev-1, self.upscale(kernel1d), boundary)
@@ -152,8 +157,8 @@ class wt:
             image = np.copy(arr)
         
         
- 
-        print "##WT--A Trous--Plane: %d"%(lev)
+        if self.verbose:
+            print "##WT--A Trous--Plane: %d"%(lev)
         
         approx = np.convolve(image, kernel1d, mode='same')  
         
@@ -164,7 +169,8 @@ class wt:
             return image
         
         if lev == 1: 
-            print "##WT--A Trous--Plane: 0"
+            if self.verbose:
+                print "##WT--A Trous--Plane: 0"
             return [w, approx]
         else:        
             return [w] + self.atrous1d(approx,lev-1, self.upscale(kernel1d))
@@ -196,8 +202,9 @@ class wt:
         imageNoise : image STDV (to be  used with waveletNoise)
         """
         
-        print "#WT-- Image Filtering"
-        print "#WT-- Filtering to be checked"
+        if self.verbose:
+            print "#WT-- Image Filtering"
+            print "#WT-- Filtering to be checked"
           
         SIGMA_WAVELET = [0.899677,0.206014,0.0884077,0.0436298,0.0232347,0.0139958,0.00467207]
           
@@ -233,8 +240,9 @@ class wt:
                 if len(indT[0] > 0):
                     planeFiltered[indT[0],indT[1]] = 0.
 
-                print "##WT--Plane %d Sigma = %e"%(nplane, sigma)
-                print "##WT--Pixel filtered : %d"%(len(indT[0]))
+                if self.verbose:
+                    print "##WT--Plane %d Sigma = %e"%(nplane, sigma)
+                    print "##WT--Pixel filtered : %d"%(len(indT[0]))
                  
             wvalueFiltered.append(planeFiltered)
             nplane -= 1
@@ -257,7 +265,8 @@ class wt:
         sigmaPlane:    provide the array of the sigma for each plane
         """
         
-        print "#WT--Spectrum Filtering"
+        if self.verbose:
+            print "#WT--Spectrum Filtering"
           
             
         SIGMA_WAVELET = [0.899677,0.206014,0.0884077,0.0436298,0.0232347,0.0139958,0.00467207]
@@ -301,8 +310,9 @@ class wt:
                 if len(indT[0] > 0):
                     planeFiltered[indT[0]] = 0.
 
-                print "##WT--Plane %d Sigma = %e"%(nplane, sigma)
-                print "##WT--Pixel filtered : %d"%(len(indT[0]))
+                if self.verbose:
+                    print "##WT--Plane %d Sigma = %e"%(nplane, sigma)
+                    print "##WT--Pixel filtered : %d"%(len(indT[0]))
                  
             wvalueFiltered.append(planeFiltered)
             nplane -= 1
@@ -316,7 +326,8 @@ class wt:
           Return an image by summing plane1 to plane2 (if plane1 = plane2 = 0 sum all the planes)
         """      
         
-        print"##WT--Restore-plane: %d to %d"%(plane1,plane2)
+        if self.verbose:
+            print"##WT--Restore-plane: %d to %d"%(plane1,plane2)
         
         if plane1 == 0 and plane2 ==0:
             plane1 = 0
@@ -327,7 +338,8 @@ class wt:
         image[:,:] = 0.
           
         for i in range(plane1,plane2+1):
-            print"##WT--Restore-plane: %d"%(i)
+            if self.verbose:
+                print"##WT--Restore-plane: %d"%(i)
             image += wvalue[i]
         
         return(image)
@@ -339,7 +351,8 @@ class wt:
           Return an array  by summing plane1 to plane2 (if plane1 = plane2 = 0 sum all the planes)
         """      
         
-        print"##WT--Restore-plane: %d to %d"%(plane1,plane2)
+        if self.verbose:
+            print"##WT--Restore-plane: %d to %d"%(plane1,plane2)
         
         if plane1 == 0 and plane2 ==0:
             plane1 = 0
@@ -350,7 +363,8 @@ class wt:
         image[:] = 0.
           
         for i in range(plane1,plane2+1):
-            print"##WT--Restore-plane: %d"%(i)
+            if self.verbose:
+                print"##WT--Restore-plane: %d"%(i)
             image += wvalue[i]
         
         return(image)             
