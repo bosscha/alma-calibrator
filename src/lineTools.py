@@ -149,7 +149,7 @@ class analysisLines:
         
         cmdview = '''
                     CREATE temporary VIEW linesky AS
-                    select  lines.lineid, lines.source, lines.sn, lines.freq1, lines.freq2, lines.A_fit, lines.mu_fit, lines.sigma_fit, lines.flag,
+                    select  lines.lineid, lines.dataset_id, lines.source, lines.sn, lines.freq1, lines.freq2, lines.A_fit, lines.mu_fit, lines.sigma_fit, lines.flag,
                     dataset.coordSky1 , 
                     dataset.coordSky2 
                     from  lines
