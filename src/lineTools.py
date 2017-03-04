@@ -90,13 +90,16 @@ Class to anlayze the lines DB
 2017.03.03:
     - add a scanning method search over a range of velocity on lineid.
     
+2017.03.04:
+    - add coordinates to the infoDB
+    
 RUN:
 
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.5.2@2017.03.03"
+__version__="0.5.3@2017.03.04"
 
 
 
@@ -577,6 +580,7 @@ class analysisLines:
             ## redshift
             coord = self.getCoordSource(sourceDiff[0])
             
+            print("## Coordinates (J2000): %f %f"%(coord[0],coord[1]))
             ## Get Galactic coordinates:
                 
             coordGal = self.getGalacticCoord(coord[0],coord[1])
