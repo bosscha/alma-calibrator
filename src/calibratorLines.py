@@ -114,6 +114,9 @@ HISTORY:
         
     2017.02.17:
         - add an exception in extractSpw
+        
+    2017.03.01:
+        - add FITCONT option to  fit the continuum and compute line/cont. The data are not changed !! only the line extraction..
 
 RUN:
 """
@@ -121,7 +124,7 @@ RUN:
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.7.0@2017.02.17"
+__version__="0.7.1@2017.03.01"
 
 
 import sys
@@ -519,6 +522,9 @@ class analysisSpw:
         self.DIRPLOT = ''
         self.DIRDATA = ''
         self.DBNAME  = ''
+        
+        self.FITCONT = 0
+        
         self.readParameterSearch()
     
     def readParameterSearch(self):
@@ -555,7 +561,13 @@ class analysisSpw:
                     self.DIRDATA = dataSpl[2]
                     
                 if dataSpl[0] == 'DBNAME':
-                    self.DBNAME = dataSpl[2]               
+                    self.DBNAME = dataSpl[2]  
+                    
+                    
+                if dataSpl[0] == 'FITCONT':
+                    self.FITCONT = int(dataSpl[2])
+                                    
+                             
                 
                 
         
@@ -602,7 +614,15 @@ class analysisSpw:
        
         ## filtering with the wavelet
            
-        ##
+        ## if FITCONT > 0 fits the continuum and produces line/cont
+        if self.FITCONT > 0:
+            print("## Fitting the continuum ...")
+            z = np.polyfit(freq, amp, self.FITCONT)
+            p = np.poly1d(z)
+            
+            ampTemp = amp / p(freq)
+            amp = ampTemp
+            
         
         noise = np.std(amp)
         mean  = np.mean(amp)

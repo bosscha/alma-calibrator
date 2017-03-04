@@ -82,13 +82,21 @@ Class to anlayze the lines DB
     - important changes in findLinesSource and findLinesCoord (add dataset_id)
     - add wavelet filtering for the display
     
+    
+2017.03.01:
+    - add fitcont for the line plotting.
+    
+    
+2017.03.03:
+    - add a scanning method search over a range of velocity on lineid.
+    
 RUN:
 
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.5.0@2017.02.28"
+__version__="0.5.2@2017.03.03"
 
 
 
@@ -635,6 +643,8 @@ class analysisLines:
         
         templateLine format : array of [string transition, frequency (GHz)]
         
+        lineid = if len > 0 selec on the lineid only for the scanning
+        
         """
     
         DZ        = 1e-5
@@ -690,7 +700,164 @@ class analysisLines:
 
 
 
+    def scanningSplatVelocitySourceLineid(self, lineid, velmin, velmax, dv, nrao = True, emax = 50.):
+        """
+            Scan over a list of lineid (for a similar source but not checked..) using splatalogue. It scans over velocity range and should 
+            be mainly Galactic.
+            Input:
+                lineid : array of lineid.
+                velmin, velmax: range of velocity
+                dv: velocity step (km/s)
+                nrao: True if only nrao recommended
+                emax: maximum energy upper level
+                
+        """
+        
+        ## Get the lines... 
+        
+        conn = sql.connect(self.dbname)
+        c = conn.cursor()
+        
+        lines =[]
+        
+        for lineidit in lineid:
+            cmd = "SELECT lineid, dataset_id, source, sn, A_fit, mu_fit, sigma_fit FROM lines WHERE lineid = %d"%(lineidit)
+            c.execute(cmd)
+            line = c.fetchall()
+            lines.append(line)
+        
+        conn.commit()
+        conn.close()
+        
+        
+        ### Scan over the velocity range ..
+        print("## Galactic scanning ...")
+        
+        columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
+ 
+        
+        nv = int((velmax -velmin) / dv)       
+        vel = np.arange(nv) * dv + velmin
+        
+        linematches = []
+        
+        for v in vel:
+            lineVel = []
+            lineVel.append(v)
+            
+            print("## Velocity: %5.3f"%(v))
+            nline = 0
+            
+            for l in lines:
+                freq = l[0][5]
+                source = l[0][2]
+                
+                freq1 = freq / (1 + 1e3 * (v + dv /2.) / const.c.value)
+                freq2 = freq / (1 + 1e3 * (v - dv /2.) / const.c.value)
+                               
+                transitions = spla.query_lines(freq1*u.GHz,freq2*u.GHz,only_NRAO_recommended = nrao, energy_max= emax, energy_type='eu_k' )[columns]               
+                transitions.rename_column('Log<sub>10</sub> (A<sub>ij</sub>)','log10(Aij)')
+                transitions.rename_column('E_U (K)','EU_K')
+                transitions.rename_column('Resolved QNs','QNs')
+                transitions.sort('EU_K')
+                
+                
+                # transitions.pprint(5)
+
+                lineVel.append(transitions) 
+                   
+                if len(transitions) > 0:
+                    nline += 1 
     
+            print("### Lines found: %d"%(nline))
+
+ 
+            
+            linematches.append(lineVel)
+                
+        return(linematches)
+        
+
+
+    def scanningSplatRedshiftSourceLineid(self, lineid, zmin, zmax, dz, nrao = True, emax = 50.):
+        """
+            Scan over a list of lineid (for a similar source but not checked..) using splatalogue. It scans over redshift range and should 
+            be mainly Galactic.
+            Input:
+                lineid : array of lineid.
+                zmin, zmax: range of redshift
+                dz: redshift step
+                nrao: True if only nrao recommended
+                emax: maximum energy upper level
+                
+        """
+        
+        ## Get the lines... 
+        
+        conn = sql.connect(self.dbname)
+        c = conn.cursor()
+        
+        lines =[]
+        
+        for lineidit in lineid:
+            cmd = "SELECT lineid, dataset_id, source, sn, A_fit, mu_fit, sigma_fit FROM lines WHERE lineid = %d"%(lineidit)
+            c.execute(cmd)
+            line = c.fetchall()
+            lines.append(line)
+        
+        conn.commit()
+        conn.close()
+        
+        
+        ### Scan over the redshift range ..
+        print("## Redshift scanning ...")
+        
+        columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
+ 
+        nz = int((zmax -zmin) / dz)       
+        redshift = np.arange(nz) * dz + zmin
+        
+        linematches = []
+        
+        for z in redshift:
+            nline = 0
+            lineZ = []
+            lineZ.append(z)
+            
+            print("## Redshift: %5.5f"%(z))
+            
+            for l in lines:
+                freq = l[0][5]
+                source = l[0][2]
+                
+                freq1 = freq * (1. + z - dz / 2.)
+                freq2 = freq * (1. + z +  dz / 2.)
+                
+                #print freq1, freq2
+                transitions = spla.query_lines(freq1*u.GHz,freq2*u.GHz, only_NRAO_recommended = nrao, energy_max= emax, energy_type='eu_k')[columns]               
+                transitions.rename_column('Log<sub>10</sub> (A<sub>ij</sub>)','log10(Aij)')
+                transitions.rename_column('E_U (K)','EU_K')
+                transitions.rename_column('Resolved QNs','QNs')
+                transitions.sort('EU_K')
+                
+                # transitions.pprint(5)
+
+                lineZ.append(transitions) 
+                    
+                
+                if len(transitions) > 0:
+                    nline += 1 
+    
+            print("### Lines found: %d"%(nline))
+
+ 
+            
+            linematches.append(lineZ)
+                
+        return(linematches)   
+         
+############################################################################################################       
+        
 
 class plotLines:
     "Class to plot the lines"
@@ -879,7 +1046,7 @@ class plotLines:
         
     
     
-    def   plotLineSource(self, source, data, flag = True, coordCheck = True, wavFiltering = True, wavscale = 4, wavsn = 2.7):
+    def   plotLineSource(self, source, data, flag = True, coordCheck = True, wavFiltering = True, wavscale = 4, wavsn = 2.7, fitcont = 0):
         """
         plot the lines for a source with the following inputs:
             - source : name of the source
@@ -887,6 +1054,7 @@ class plotLines:
             - flag : True select only unflagged lines
             - coordCheck : True if check the coord instead of the source
             - wavFiltering : True if perform wavelet filtering
+            - if fitcont > 0 a polynom is fitted and line/cont computed
             
             
         """
@@ -922,6 +1090,15 @@ class plotLines:
                     
                     freq = d[2]
                     amp  = d[3]
+                    
+                    ## if fitcont > 0 fits the continuum and produces line/cont
+                    if fitcont > 0:
+                        print("## Fitting the continuum ...")
+                        z = np.polyfit(freq, amp, fitcont)
+                        p = np.poly1d(z)
+            
+                        ampTemp = amp / p(freq)
+                        amp = ampTemp
                     
                     print("## Dataid : %d"%(datasetid))
                     print("## Lineid : %d"%(lineid))

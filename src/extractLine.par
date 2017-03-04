@@ -5,6 +5,7 @@ WAVSN            = 4.0       ## S/N for the filtering
 WAVSCALE         = 6         ## Number of scales for the wavelet
 THRESHOLDLINE    = 3.0       ## Threshold of the line in sigma 
 NUMCHANDETECTMIN = 8         ## Minimum number of channels for a line
+FITCONT			 = 2         ## Fitting continuum and line/cont (if 0 no action otherwise polynom degree FITCONT
 
 SHOWPLOT	     = Y	     ## Y/N - Show plot during the extraction (always saved)
 DIRPLOT          = plotSpec  ## directory where to put the spectra plots
