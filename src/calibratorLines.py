@@ -116,7 +116,10 @@ HISTORY:
         - add an exception in extractSpw
         
     2017.03.01:
-        - add FITCONT option to  fit the continuum and compute line/cont. The data are not changed !! only the line extraction..
+        - add FITCONT option to  fit the continuum and compute line/cont. The data are not changed !! only the line extraction.
+        
+    2017.03.07:
+        - fitting the lines on the filtered spec.
 
 RUN:
 """
@@ -124,7 +127,7 @@ RUN:
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.7.1@2017.03.01"
+__version__="0.7.2@2017.03.07"
 
 
 import sys
@@ -651,8 +654,9 @@ class analysisSpw:
         print("Noise : %f \n"%(noise))
         print("Noise filtered : %f \n"%(noiseFiltered))
         
-        ampZeroed = np.abs(spwRestore - mean)
+        ampZeroed = np.abs(spwRestore - mean)        
         indAboveThreshold = np.where(ampZeroed > self.THRESHOLDLINE * noiseFiltered )
+
     
         ## number of contiguous channel
         ##
@@ -719,7 +723,8 @@ class analysisSpw:
                 contrast = am / mean
                 
                 if self.FITLINE == 'Y':
-                    fit, coeff = self.lineFitting(freq , amp - mean , f1 , f2 , am)
+                    # fit, coeff = self.lineFitting(freq , amp - mean , f1 , f2 , am)
+                    fit, coeff = self.lineFitting(freq , ampMean , f1 , f2 , am)
                     finalLines.append([nC, f1,f2 ,am , sn , line[0], line[1], noise, noiseFiltered, contrast, fit , coeff])
                 else :
                     finalLines.append([nC,f1,f2 ,am , sn , line[0], line[1], noise, noiseFiltered, contrast ])
@@ -797,6 +802,8 @@ class analysisSpw:
                 lines.append([chan1,chan2, ampmax])       
         
         return(lines)
+
+
                     
     def gauss(self, x, *p):
         "Gaussian model for fitting"
@@ -804,6 +811,7 @@ class analysisSpw:
         A, mu, sigma = p
         return A * np.exp(-(x-mu)**2/(2.*sigma**2))
     
+
     
     def lineFitting(self, freq, amp, freq1, freq2, ampmax):
         """

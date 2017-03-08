@@ -93,13 +93,22 @@ Class to anlayze the lines DB
 2017.03.04:
     - add coordinates to the infoDB
     
+    
+2017.03.06:
+    - new class splat to deal directly with the splatalogue.db w/o astroquery (should be faster and no timeout)
+    
+    
+2017.03.07:
+    - query to the local splatalogue DB.
+    - check for the atmospheric lines..
+    
 RUN:
 
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.5.3@2017.03.04"
+__version__="0.6.1@2017.03.07"
 
 
 
@@ -124,12 +133,83 @@ import wavelet as wav
 
 SOLARSYSTEM = ['Mars','Jupiter','Callisto','Saturn','Titan','Pallas','Ceres','Neptune','Uranus']
 
+DEFAULTSPLAT = "/home/stephane/Science/RadioGalaxy/ALMA/absorptions/splatalogue/splatalogue.db"
+
+class splat():
+    "Class to deal with splatalogue.db for faster access"
+    
+    def __init__(self, splatdb =  DEFAULTSPLAT):
+        
+        self.splatdb = splatdb        
+        self.connectSplat()        
+        self.createViewSplat()
+        
+        
+    def connectSplat(self):
+        "Connect  to the splatalogue.db"
+
+        self.conn = sql.connect(self.splatdb)
+        self.cursor = self.conn.cursor()
+        
+
+        
+        
+    def closeSplat(self):
+        "Close the connection to splatalogue.db"
+        
+        self.conn.commit()
+        self.conn.close()
+        
+        
+    def createViewSplat(self):
+        "Create a view for the splatalogue"
+        
+        cmdview = '''
+                CREATE temporary VIEW splatLines AS
+                select  main.ll_id, main.intintensity , main.sijmu2, main.aij, main.upper_state_energy_K, main.species_id, main.orderedfreq, 
+                species.chemical_name, 
+                species.s_name,
+                species.atmos,
+                species.extragalactic
+                from  main
+                left join species   on  species.species_id  =  main.species_id  
+                                  
+                '''
+                    
+        self.cursor.execute(cmdview) 
+    
+    
+    def querySplat(self,freqlow, freqhigh, energy_max = 1e9, atmosCheck = False):
+        """
+        Search for lines with the following filters:
+            freqlow, freqhigh: frequency range in GHz.
+            emax: upper state energy level in K
+            atmosCheck : True, check for  atmospheric lines
+        """
+    
+        f1 = min(freqlow,freqhigh)  * 1e3
+        f2 = max(freqlow,freqhigh)  * 1e3
+        
+        if atmosCheck :
+            cmd = "SELECT s_name, chemical_name, upper_state_energy_K, orderedfreq , species_id FROM splatLines WHERE orderedfreq > %f AND orderedfreq < %f AND upper_state_energy_K <= %f AND atmos = 1"%(f1, f2, energy_max)
+            
+        else:
+            cmd = "SELECT s_name, chemical_name, upper_state_energy_K, orderedfreq , species_id FROM splatLines WHERE orderedfreq > %f AND orderedfreq < %f AND upper_state_energy_K <= %f AND atmos = 0"%(f1, f2, energy_max)
+            
+        self.cursor.execute(cmd)   
+        lines = self.cursor.fetchall()
+        
+        return(lines)
+    
+    
+##############################################################################################       
 class analysisLines:
     "class to analyze the lines DB"
     
     def __init__(self,dbname):
         
         self.dbname = dbname
+        
         
         
     def findSource(self,source, flag = False):
@@ -317,7 +397,11 @@ class analysisLines:
                 
 
         if  telluricFlag:
-            "Check if the same line was in another calibrator"
+            "Check if the same line is in another calibrator"
+            
+            print("## Connect to local splatalogue for telluric lines ...")
+            spl = splat()
+            
             
             c.execute('SELECT lineid, source, freq1, freq2, flag FROM lines')
             lines = c.fetchall()
@@ -325,8 +409,8 @@ class analysisLines:
                 
                 id     = li[0]
                 sou    = li[1]
-                f1     = li[2]
-                f2     = li[3]
+                f1     = min(li[2],li[3])
+                f2     = max(li[2],li[3])
                 flag   = li[4]
                 
                 if flag != "EDGE":
@@ -350,11 +434,22 @@ class analysisLines:
                             f2tell  = item[3]
                             
                             print("#### %s (%f,%f)"%(soutell, f1tell, f2tell))
+                            
+                            
+                        ## check if telluric is tagged in splatalogue
+                        telluric = spl.querySplat(f1, f2, energy_max = 1e9, atmosCheck = True)
+                        if len(telluric) > 0:
+                            print("## TELLURIC - SPLATALOGUE:")
+                            print telluric                               
+                                                             
                         print("\n")
+                        
                         nFlag += 1
                         cmd = "UPDATE lines SET  flag = '%s' WHERE lineid = %d"%(telluricstr, id)
                         c.execute(cmd)
                     
+        spl.closeSplat()
+        
         
         if duplicateFlag:
             "Check for duplicated lines"
@@ -704,7 +799,7 @@ class analysisLines:
 
 
 
-    def scanningSplatVelocitySourceLineid(self, lineid, velmin, velmax, dv, nrao = True, emax = 50.):
+    def scanningSplatVelocitySourceLineid(self, lineid, velmin, velmax, dv, nrao = True, emax = 50., local = True):
         """
             Scan over a list of lineid (for a similar source but not checked..) using splatalogue. It scans over velocity range and should 
             be mainly Galactic.
@@ -714,6 +809,7 @@ class analysisLines:
                 dv: velocity step (km/s)
                 nrao: True if only nrao recommended
                 emax: maximum energy upper level
+                local: use splat class and local DB
                 
         """
         
@@ -737,8 +833,13 @@ class analysisLines:
         ### Scan over the velocity range ..
         print("## Galactic scanning ...")
         
-        columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
- 
+        if local:
+            print("## Connect to local splatalogue ...")
+            spl = splat()
+            
+        else:
+            columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
+  
         
         nv = int((velmax -velmin) / dv)       
         vel = np.arange(nv) * dv + velmin
@@ -756,14 +857,20 @@ class analysisLines:
                 freq = l[0][5]
                 source = l[0][2]
                 
+                
                 freq1 = freq / (1 + 1e3 * (v + dv /2.) / const.c.value)
                 freq2 = freq / (1 + 1e3 * (v - dv /2.) / const.c.value)
-                               
-                transitions = spla.query_lines(freq1*u.GHz,freq2*u.GHz,only_NRAO_recommended = nrao, energy_max= emax, energy_type='eu_k' )[columns]               
-                transitions.rename_column('Log<sub>10</sub> (A<sub>ij</sub>)','log10(Aij)')
-                transitions.rename_column('E_U (K)','EU_K')
-                transitions.rename_column('Resolved QNs','QNs')
-                transitions.sort('EU_K')
+                
+                
+                if local :                    
+                    transitions = spl.querySplat(freq1, freq2, energy_max = emax)
+                    
+                else :         
+                    transitions = spla.query_lines(freq1*u.GHz,freq2*u.GHz,only_NRAO_recommended = nrao, energy_max= emax, energy_type='eu_k' )[columns]               
+                    transitions.rename_column('Log<sub>10</sub> (A<sub>ij</sub>)','log10(Aij)')
+                    transitions.rename_column('E_U (K)','EU_K')
+                    transitions.rename_column('Resolved QNs','QNs')
+                    transitions.sort('EU_K')
                 
                 
                 # transitions.pprint(5)
@@ -778,12 +885,16 @@ class analysisLines:
  
             
             linematches.append(lineVel)
-                
+            
+        if local:
+            spl.closeSplat()
+
+        
         return(linematches)
         
+        
 
-
-    def scanningSplatRedshiftSourceLineid(self, lineid, zmin, zmax, dz, nrao = True, emax = 50.):
+    def scanningSplatRedshiftSourceLineid(self, lineid, zmin, zmax, dz, nrao = True, emax = 50., local = True):
         """
             Scan over a list of lineid (for a similar source but not checked..) using splatalogue. It scans over redshift range and should 
             be mainly Galactic.
@@ -793,6 +904,7 @@ class analysisLines:
                 dz: redshift step
                 nrao: True if only nrao recommended
                 emax: maximum energy upper level
+                local: use splat class and local DB
                 
         """
         
@@ -816,7 +928,13 @@ class analysisLines:
         ### Scan over the redshift range ..
         print("## Redshift scanning ...")
         
-        columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
+        if local:
+            print("## Connect to local splatalogue ...")
+            
+            spl = splat()
+            
+        else:
+            columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
  
         nz = int((zmax -zmin) / dz)       
         redshift = np.arange(nz) * dz + zmin
@@ -838,13 +956,17 @@ class analysisLines:
                 freq2 = freq * (1. + z +  dz / 2.)
                 
                 #print freq1, freq2
-                transitions = spla.query_lines(freq1*u.GHz,freq2*u.GHz, only_NRAO_recommended = nrao, energy_max= emax, energy_type='eu_k')[columns]               
-                transitions.rename_column('Log<sub>10</sub> (A<sub>ij</sub>)','log10(Aij)')
-                transitions.rename_column('E_U (K)','EU_K')
-                transitions.rename_column('Resolved QNs','QNs')
-                transitions.sort('EU_K')
                 
-                # transitions.pprint(5)
+                if local:
+                    transitions = spl.querySplat(freq1, freq2, energy_max = emax)
+                else:
+                    transitions = spla.query_lines(freq1*u.GHz,freq2*u.GHz, only_NRAO_recommended = nrao, energy_max= emax, energy_type='eu_k')[columns]               
+                    transitions.rename_column('Log<sub>10</sub> (A<sub>ij</sub>)','log10(Aij)')
+                    transitions.rename_column('E_U (K)','EU_K')
+                    transitions.rename_column('Resolved QNs','QNs')
+                    transitions.sort('EU_K')
+                
+                    # transitions.pprint(5)
 
                 lineZ.append(transitions) 
                     
@@ -857,6 +979,9 @@ class analysisLines:
  
             
             linematches.append(lineZ)
+            
+        if local:
+            spl.closeSplat()
                 
         return(linematches)   
          
