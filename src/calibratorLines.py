@@ -120,6 +120,9 @@ HISTORY:
         
     2017.03.07:
         - fitting the lines on the filtered spec.
+    
+    2017.03.09:
+        - update of the line extraction changing the plot figure to avoid bad distance in matplotlib
 
 RUN:
 """
@@ -127,7 +130,7 @@ RUN:
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.7.2@2017.03.07"
+__version__="0.7.3@2017.03.09"
 
 
 import sys
@@ -615,9 +618,10 @@ class analysisSpw:
             pl.draw()
         
        
-        ## filtering with the wavelet
+
            
         ## if FITCONT > 0 fits the continuum and produces line/cont
+        
         if self.FITCONT > 0:
             print("## Fitting the continuum ...")
             z = np.polyfit(freq, amp, self.FITCONT)
@@ -635,6 +639,9 @@ class analysisSpw:
         nChanP2 = math.log(nChannels) / math.log(2.0)
         
         
+        ############################# Wavelet Filtering
+        ############
+        
         wt = wav.wt()        
         
         
@@ -648,6 +655,13 @@ class analysisSpw:
             spwRestore = amp
             
             
+        ############################
+        
+            
+        meanFiltered = np.mean(spwRestore)
+        print meanFiltered       
+        mean = meanFiltered
+        
             
         ## new noise
         noiseFiltered = np.std(spwRestore)
@@ -687,7 +701,7 @@ class analysisSpw:
                 ymin = ymaxA - (ymaxA-yminA) *2.5
             
             
-                fig2 = pl.figure(2)
+                # fig2 = pl.figure(2)
                 pl.clf()
                 figfile = self.DataFile+".filt.png"
                 pl.title(figfile.split('/')[-1])
@@ -696,7 +710,7 @@ class analysisSpw:
                 pl.xlim([freq[0],freq[-1]])
                 pl.ylim([ymin,ymax])
                 pl.plot(freq, spwRestore)
-                fig2.savefig(figfile)
+                fig.savefig(figfile)
                 pl.draw()    
             
             os.chdir(curdir)
@@ -739,7 +753,7 @@ class analysisSpw:
                 ymin = ymaxA - (ymaxA-yminA) *2.5
             
                 print "draw line"
-                fig2 = pl.figure(2)
+                # fig2 = pl.figure(2)
                 pl.clf()
                 figfile = self.DataFile+".filt.png"
                 pl.title(figfile.split('/')[-1])
@@ -755,7 +769,7 @@ class analysisSpw:
                     yy = [yline,yline]
                     pl.plot(xx, yy,"r-", linewidth = 2.5)
                 
-                    fig2.savefig(figfile)
+                    fig.savefig(figfile)
                     pl.draw()    
             
             
