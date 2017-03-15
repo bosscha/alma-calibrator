@@ -102,13 +102,20 @@ Class to anlayze the lines DB
     - query to the local splatalogue DB.
     - check for the atmospheric lines..
     
+2017.03.14:
+    - minor update of getInfoDB
+    - add an option to write the lineid selected with the spectra plotting.
+    
+2017.03.15:
+    - update the line plotting method.
+    
 RUN:
 
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.6.1@2017.03.07"
+__version__="0.6.3@2017.03.15"
 
 
 
@@ -656,7 +663,7 @@ class analysisLines:
         """
         
         
-        s = self.listSources()
+        s = sorted(self.listSources())
         
         print("## Sources: %d"%(len(s)))
         print("##")
@@ -724,7 +731,7 @@ class analysisLines:
         
     def getGalacticCoord(self, coord1, coord2):
         """
-        Transform equatorial coordinantes to Galactic coordinates
+        Transform equatorial coordinates to Galactic coordinates
         
         """
     
@@ -1175,7 +1182,7 @@ class plotLines:
         
     
     
-    def   plotLineSource(self, source, data, flag = True, coordCheck = True, wavFiltering = True, wavscale = 4, wavsn = 2.7, fitcont = 0):
+    def   plotLineSource(self, source, data, flag = True, coordCheck = True, wavFiltering = True, wavscale = 4, wavsn = 2.7, fitcont = 0, lineidShow = True, plotWidthFac = 35.):
         """
         plot the lines for a source with the following inputs:
             - source : name of the source
@@ -1184,12 +1191,16 @@ class plotLines:
             - coordCheck : True if check the coord instead of the source
             - wavFiltering : True if perform wavelet filtering
             - if fitcont > 0 a polynom is fitted and line/cont computed
+            - if lineidShow is True will display the array of "s" selected
+            - plotWidthFac : the range of the plot in term of linewidth.
             
             
         """
         al = analysisLines(self.dbname)
         
+        lineidSelected = []
         
+        print("## Source : %s"%(source))
         ## wavelet parameter.. freq and amp are numpy array
         if wavFiltering:
             wt = wav.wt(verbose = False)
@@ -1207,6 +1218,10 @@ class plotLines:
         ## interactive mode on
         plt.ion()
         
+        if lineidShow:
+            print("##")            
+            print("## type ''s'' to select the line.")
+            print("##")
         
         for line in lines:
             datasetid = line[1]
@@ -1244,8 +1259,8 @@ class plotLines:
                         spwRestore = amp
                     
                     ## plotting 
-                    xmin = line[4] - line[5] * 35
-                    xmax = line[4] + line[5] * 35
+                    xmin = line[4] - line[5] * plotWidthFac
+                    xmax = line[4] + line[5] * plotWidthFac
                     
                     plt.clf()
                     figfile = "toto.png"
@@ -1258,7 +1273,16 @@ class plotLines:
                     plt.plot(freq, spwRestore)
                     #fig.savefig(figfile)
                     
-                    raw_input()
+                    c = raw_input()
                     
+                    if c == 's':
+                        lineidSelected.append(lineid)
+                        
+        
+        if lineidShow:
+            print("## Selected lineid =")
+            print lineidSelected
+                  
+        return(lineidSelected)
                     
         
