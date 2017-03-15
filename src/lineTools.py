@@ -1201,6 +1201,7 @@ class plotLines:
         lineidSelected = []
         
         print("## Source : %s"%(source))
+        
         ## wavelet parameter.. freq and amp are numpy array
         if wavFiltering:
             wt = wav.wt(verbose = False)
