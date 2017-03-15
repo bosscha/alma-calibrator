@@ -11,6 +11,9 @@ HISTORY:
 2017.03.14:
     - add function to query from position
     - add function to plot all data even without redshift information (cone only)
+    
+2017.03.15:
+    - put a circle in plot_cone (SL)
 
 BUG:
     + ERROR if 'theta' (opening angle of cone) or the number of data is too large
@@ -167,7 +170,10 @@ class Galenv:
         ax.set_xlabel('RA(deg)')
         ax.set_ylabel('DEC(deg)')
         plt.title(title)
- 
+        circle1= plt.Circle((ra, dec), theta, color='blue', fill = False)
+        
+        ax.add_artist(circle1)
+        
         fig.tight_layout()
 
         if savefig:

@@ -108,6 +108,7 @@ Class to anlayze the lines DB
     
 2017.03.15:
     - update the line plotting method.
+    - add a plotEnv to show environment from NED in the list of sources.
     
 RUN:
 
@@ -132,6 +133,8 @@ from astropy import constants as const
 from astropy import coordinates
 from astroquery.ned import Ned
 from astropy.cosmology import WMAP9 as cosmo
+
+import galenv
 
 import sqlite3 as sql
 
@@ -1285,5 +1288,29 @@ class plotLines:
             print lineidSelected
                   
         return(lineidSelected)
-                    
+    
+    
+    def plotEnvSources(self, theta= 0.1 ,  showFig = True):
+        """
+        Show the environment for the sources in the DB
+        theta: cone angle in degrees
+        """
+        
+        
+        ge = galenv.Galenv()
+        
+        al = analysisLines(self.dbname)
+        
+        s = sorted(al.listSources())
+        
+        for sourceDiff in s:
+            
+            print("##")
+            print("## Source: %s"%(sourceDiff[0]))
+            print("##")
+            
+            coord = al.getCoordSource(sourceDiff[0])
+            co = coordinates.SkyCoord(ra = coord[0], dec = coord[1], unit=(u.deg, u.deg), equinox= "J2000")
+        
+            ge.cone_bypos(co, theta, show = showFig, savefig=False, imgname="plot.png")    
         
