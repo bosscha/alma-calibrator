@@ -110,13 +110,16 @@ Class to anlayze the lines DB
     - update the line plotting method.
     - add a plotEnv to show environment from NED in the list of sources.
     
+2017.03.16:
+    - add standard deviation to the plot of the spectra.
+    
 RUN:
 
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.6.3@2017.03.15"
+__version__="0.6.4@2017.03.16"
 
 
 
@@ -1258,9 +1261,13 @@ class plotLines:
                             wspw = wt.atrous1d(amp, wavscale)
                             wspwFilt = wt.filtering1d(wspw, wavsn, waveletNoise = True, spectralNoise = noise)
                             spwRestore = wt.restore1d(wspwFilt, 0, wavscale)
+                            stdFiltered = np.std(spwRestore)
+                            print("## Standard Deviation filtered: %f"%(stdFiltered))
                             
                     else :
                         spwRestore = amp
+                        stdNoFiltered = np.std(spwRestore)
+                        print("## Standard Deviation : %f"%(stdNoFiltered))
                     
                     ## plotting 
                     xmin = line[4] - line[5] * plotWidthFac
