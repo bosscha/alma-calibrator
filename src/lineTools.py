@@ -113,13 +113,16 @@ Class to anlayze the lines DB
 2017.03.16:
     - add standard deviation to the plot of the spectra.
     
+2017.03.18:
+    - testing eclipse on mac ....
+    
 RUN:
 
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.6.4@2017.03.16"
+__version__="0.6.4@2017.03.18"
 
 
 
