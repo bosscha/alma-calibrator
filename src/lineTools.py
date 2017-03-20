@@ -855,7 +855,7 @@ class analysisLines:
         
         if local:
             print("## Connect to local splatalogue ...")
-            spl = splat()
+            spl = splat(splatdb = self.splatdb)
             
         else:
             columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
@@ -951,7 +951,7 @@ class analysisLines:
         if local:
             print("## Connect to local splatalogue ...")
             
-            spl = splat()
+            spl = splat(splatdb = self.splatdb)
             
         else:
             columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
