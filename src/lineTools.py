@@ -116,13 +116,21 @@ Class to anlayze the lines DB
 2017.03.18:
     - testing eclipse on mac ....
     
+2017.03.18:
+    - testing eclipse on mac ....
+    
+2017.03.20:
+    - adding the option to change the splatdb in analysisLines
+    - updating splat db. some local splat db must be still missing ...
+    
 RUN:
 
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.6.4@2017.03.18"
+__version__="0.6.5@2017.03.20"
+
 
 
 
@@ -222,9 +230,10 @@ class splat():
 class analysisLines:
     "class to analyze the lines DB"
     
-    def __init__(self,dbname):
+    def __init__(self,dbname, splatdb = DEFAULTSPLAT  ):
         
         self.dbname = dbname
+        self.splatdb = splatdb
         
         
         
@@ -416,7 +425,7 @@ class analysisLines:
             "Check if the same line is in another calibrator"
             
             print("## Connect to local splatalogue for telluric lines ...")
-            spl = splat()
+            spl = splat(splatdb = self.splatdb)
             
             
             c.execute('SELECT lineid, source, freq1, freq2, flag FROM lines')
@@ -851,7 +860,7 @@ class analysisLines:
         
         if local:
             print("## Connect to local splatalogue ...")
-            spl = splat()
+            spl = splat(splatdb = self.splatdb)
             
         else:
             columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
@@ -947,7 +956,7 @@ class analysisLines:
         if local:
             print("## Connect to local splatalogue ...")
             
-            spl = splat()
+            spl = splat(splatdb = self.splatdb)
             
         else:
             columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
