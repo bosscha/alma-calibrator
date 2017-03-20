@@ -116,6 +116,9 @@ Class to anlayze the lines DB
 2017.03.18:
     - testing eclipse on mac ....
     
+2017.03.20:
+    - adding the option to change the splatdb in analysisLines
+    
 RUN:
 
 """
@@ -222,9 +225,10 @@ class splat():
 class analysisLines:
     "class to analyze the lines DB"
     
-    def __init__(self,dbname):
+    def __init__(self,dbname, splatdb = DEFAULTSPLAT  ):
         
         self.dbname = dbname
+        self.splatdb = splatdb
         
         
         
