@@ -123,13 +123,16 @@ Class to anlayze the lines DB
     - adding the option to change the splatdb in analysisLines
     - updating splat db. some local splat db must be still missing ...
     
+2017.03.28:
+    - add resolved_QNs in splat lines.
+    
 RUN:
 
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.6.5@2017.03.20"
+__version__="0.6.6@2017.03.28"
 
 
 
@@ -190,7 +193,7 @@ class splat():
         
         cmdview = '''
                 CREATE temporary VIEW splatLines AS
-                select  main.ll_id, main.intintensity , main.sijmu2, main.aij, main.upper_state_energy_K, main.species_id, main.orderedfreq, 
+                select  main.ll_id, main.intintensity , main.sijmu2, main.aij, main.upper_state_energy_K, main.resolved_QNs, main.species_id, main.orderedfreq, 
                 species.chemical_name, 
                 species.s_name,
                 species.atmos,
@@ -215,10 +218,10 @@ class splat():
         f2 = max(freqlow,freqhigh)  * 1e3
         
         if atmosCheck :
-            cmd = "SELECT s_name, chemical_name, upper_state_energy_K, orderedfreq , species_id FROM splatLines WHERE orderedfreq > %f AND orderedfreq < %f AND upper_state_energy_K <= %f AND atmos = 1"%(f1, f2, energy_max)
+            cmd = "SELECT s_name, chemical_name, resolved_QNs, upper_state_energy_K, orderedfreq ,  species_id FROM splatLines WHERE orderedfreq > %f AND orderedfreq < %f AND upper_state_energy_K <= %f AND atmos = 1"%(f1, f2, energy_max)
             
         else:
-            cmd = "SELECT s_name, chemical_name, upper_state_energy_K, orderedfreq , species_id FROM splatLines WHERE orderedfreq > %f AND orderedfreq < %f AND upper_state_energy_K <= %f AND atmos = 0"%(f1, f2, energy_max)
+            cmd = "SELECT s_name, chemical_name, resolved_QNs, upper_state_energy_K, orderedfreq ,  species_id FROM splatLines WHERE orderedfreq > %f AND orderedfreq < %f AND upper_state_energy_K <= %f AND atmos = 0"%(f1, f2, energy_max)
             
         self.cursor.execute(cmd)   
         lines = self.cursor.fetchall()

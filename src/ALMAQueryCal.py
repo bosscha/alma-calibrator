@@ -117,7 +117,6 @@ class queryCal:
             for uids in item[1]:
                 selectSG = False
                 
-                print uids
                 
                 code        = uids['Project code']
                 source      = uids['Source name']
