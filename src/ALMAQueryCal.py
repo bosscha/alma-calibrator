@@ -17,6 +17,10 @@ HISTORY:
     2015.09.23:
         - add maxFreqRes in selectDeepField (mainly for absorption)
         
+        
+    2017.03.28:
+        - fixing a bung 
+        
 """
 
 __author__="S. Leon @ ALMA"
@@ -113,9 +117,11 @@ class queryCal:
             for uids in item[1]:
                 selectSG = False
                 
+                print uids
+                
                 code        = uids['Project code']
                 source      = uids['Source name']
-                band        = uids['Band']
+                band        = int(uids['Band'])
                 integration = uids['Integration']
                 frequency   = uids['Frequency support']
                 obsdate     = uids['Observation date']
@@ -201,8 +207,8 @@ if __name__=="__main__":
     " main program"   
     
     fileCal = "CalSept2015.list"
-    q       = queryCal(fileCal, fluxmin = 0.7)
-    data    = q.queryAlma(q.listCal, public = False)
+    q       = queryCal(fileCal, fluxmin = 3.0)
+    data    = q.queryAlma(q.listCal, public = True)
     report  = q.selectDeepField(data, minTimeBand = {3:500., 6:100., 7:1000.}, maxFreqRes = 1000.0, verbose = False)
     q.writeReport(report, file = fileCal+".report")
      
