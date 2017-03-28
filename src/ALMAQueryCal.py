@@ -28,8 +28,10 @@ HISTORY:
         
 """
 
-__author__="S. Leon @ ALMA"
+__author__="S. Leon @ ALMA, RWW @ ITB"
 __version__="0.2.0@2017.03.28"
+
+
 
 
 from astroquery.alma import Alma
@@ -168,13 +170,10 @@ class queryCal:
             asdm        = uids['Asdm uid']
             freqRes     = uids['Frequency resolution']
             
-            
-            print band
-            
+
             for i in range(nuids):
                 selectSG = False
                 if float(freqRes[i]) < maxFreqRes:
-                    print "yey"
                     selectSG = True
                     totalTime[int(band[i])] += float(integration[i])
 
@@ -214,11 +213,11 @@ class queryCal:
             if selectSource:
                 finalReport.append([nuids, item[0], reportSource])
                 
-        ## sorting according to the number of uids
-        #finalReportSorted = sorted(finalReport, key=lambda data: data[0])
+        # sorting according to the number of uids
+        finalReportSorted = sorted(finalReport, key=lambda data: data[0])
         
-        #return(finalReportSorted)
-        return(finalReport)
+        return(finalReportSorted)
+
         
         
     def writeReport(self, report, file = "deepfieldRG.txt"):
