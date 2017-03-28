@@ -19,12 +19,17 @@ HISTORY:
         
         
     2017.03.28:
-        - fixing a bung 
+        - fixing a bug
+        - adapted to async by RWW
+        - add an option
+        - still a bug with verbose = True ...
+    
+        
         
 """
 
 __author__="S. Leon @ ALMA"
-__version__="0.1.0@2015.09.23"
+__version__="0.2.0@2017.03.28"
 
 
 from astroquery.alma import Alma
@@ -32,12 +37,20 @@ from astropy import coordinates
 from astropy import units as u
 import time
 
+import numpy as np
+import pandas as pd
+from xml.etree import ElementTree as ET
+from bs4 import BeautifulSoup
+
+
 class queryCal:
     
-    def __init__(self,fileCal, fluxmin):
+    def __init__(self,fileCal, fluxmin, readFile = True):
         
-        self.listCal = self.readCal(fileCal, fluxmin)
-        
+        if readFile:
+            self.listCal = self.readCal(fileCal, fluxmin)
+        else:
+            self.listCal = []
 
     def readCal(self,file, fluxmin = 0.2):
         "Read a list of calibrators in CSV format from the Source Catalogue web interface"
@@ -75,9 +88,39 @@ class queryCal:
         for name in listname:
             
             region = coordinates.SkyCoord(name[1], name[2], unit='deg')
-            alma_data = Alma.query_region(region, 0.003*u.deg, science = False, public =  public)
+            alma_data = Alma.query_region_async(region, 0.005*u.deg, science = False, public =  public)
             
-            result.append([name,alma_data])
+            # alma_data is unicode
+            xmldata = BeautifulSoup(alma_data.text, "lxml")
+
+            # print len(xmldata.contents)
+            with open('xmldata.xml', 'w') as ofile: # write in a file, 
+                ofile.write(str(xmldata.contents[1]))
+
+            tree = ET.parse("xmldata.xml") # read the file again. Damn, don't know how to do...
+            root = tree.getroot()
+
+            projects = []
+            for i, proj in enumerate(root[0][0][0][2][36][0]): # many child
+                projects.append([])
+                for data in proj:
+                    if data.text is None:
+                        projects[i].append('None')
+                    else:
+                        projects[i].append(data.text)
+
+            columns=['Project code', 'Source name', 'RA', 'Dec', 'Galactic longitude', 'Galactic latitude', \
+                     'Band', 'Spatial resolution', 'Frequency resolution', 'Array', 'Mosaic', 'Integration', \
+                     'Release date', 'Frequency support', 'Velocity resolution', 'Pol products', \
+                     'Observation date', 'PI name', 'SB name', 'Proposal authors', 'Line sensitivity (10 km/s)', \
+                     'Continuum sensitivity', 'PWV', 'Group ous id', 'Member ous id', 'Asdm uid', 'Project title', \
+                     'Project type', 'Scan intent', 'Field of view', 'Largest angular scale', 'QA2 Status',\
+                     'Pub', 'Science keyword', 'Scientific category', 'ASA_PROJECT_CODE']
+
+            #convert python list to Pandas DataFrame
+            df = pd.DataFrame(projects, columns=columns)
+
+            result.append([name, df])
             
         return(result)
             
@@ -100,7 +143,7 @@ class queryCal:
             alpha2000 = item[0][1]
             delta2000 = item[0][2]
             
-            nuids = len(item[1])
+            
             
             projects = []
  
@@ -112,43 +155,41 @@ class queryCal:
             reportSource += "\n"
             
             
+            uids = item[1]
+            nuids = len(item[1])
+
+            code        = uids['Project code']
+            source      = uids['Source name']
+            band        = uids['Band']
+            integration = uids['Integration']
+            frequency   = uids['Frequency support']
+            obsdate     = uids['Observation date']
+            res         = uids['Spatial resolution']
+            asdm        = uids['Asdm uid']
+            freqRes     = uids['Frequency resolution']
             
-        
-            for uids in item[1]:
+            
+            print band
+            
+            for i in range(nuids):
                 selectSG = False
-                
-                
-                code        = uids['Project code']
-                source      = uids['Source name']
-                band        = int(uids['Band'])
-                integration = uids['Integration']
-                frequency   = uids['Frequency support']
-                obsdate     = uids['Observation date']
-                res         = uids['Spatial resolution']
-                asdm        = uids['Asdm uid']
-                freqRes     = uids['Frequency resolution']
-                
-                if freqRes < maxFreqRes:
+                if float(freqRes[i]) < maxFreqRes:
+                    print "yey"
                     selectSG = True
-                    totalTime[band] += integration
-                
+                    totalTime[int(band[i])] += float(integration[i])
+
                 if verbose and selectSG:
                     reportSource += "## %s  %20s Band:%d obsdate:%s FreqRes:%6.1f Res:%4.2f %s \n"%(code, source, band, obsdate, freqRes, res, asdm)
                 
                 foundProject = False
                 for p in projects:
-                    if p == code:
+                    if p == code[i]:
                         foundProject = True
                     
-
-                    
                 if not foundProject and selectSG:
-                    projects.append(code)
-                    
-                
+                    projects.append(code[i])
 
-            
-                
+
             reportSource += "\n"
             for key in totalTime:
                 if totalTime[key] > 0.:
@@ -171,13 +212,13 @@ class queryCal:
                     selectSource = False
                     
             if selectSource:
-                
                 finalReport.append([nuids, item[0], reportSource])
                 
         ## sorting according to the number of uids
-        finalReportSorted = sorted(finalReport, key=lambda data: data[0])
+        #finalReportSorted = sorted(finalReport, key=lambda data: data[0])
         
-        return(finalReportSorted)
+        #return(finalReportSorted)
+        return(finalReport)
         
         
     def writeReport(self, report, file = "deepfieldRG.txt"):
@@ -187,7 +228,7 @@ class queryCal:
         
         nsource = 0
         for rep in report:
-            nsource += 2
+            nsource += 1
             fout.write(rep[2])
             print(rep[2])
             
