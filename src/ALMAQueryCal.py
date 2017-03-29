@@ -23,6 +23,10 @@ HISTORY:
         - adapted to async by RWW
         - add an option
         - still a bug with verbose = True ...
+
+    2017.03.29
+        - fixing verbose = True
+        - add safety if query is fail (just skip) | if fail, try to change the radius in query
     
         
         
@@ -90,39 +94,41 @@ class queryCal:
         for name in listname:
             
             region = coordinates.SkyCoord(name[1], name[2], unit='deg')
-            alma_data = Alma.query_region_async(region, 0.005*u.deg, science = False, public =  public)
+            alma_data = Alma.query_region_async(region, 0.004*u.deg, science = False, public =  public)
             
-            # alma_data is unicode
+            # alma_data is in unicode
             xmldata = BeautifulSoup(alma_data.text, "lxml")
 
-            # print len(xmldata.contents)
-            with open('xmldata.xml', 'w') as ofile: # write in a file, 
-                ofile.write(str(xmldata.contents[1]))
+            if len(xmldata.contents) < 2:
+                print name, " query FAIL!"
+            else:
+                with open('xmldata.xml', 'w') as ofile: # write in a file, 
+                    ofile.write(str(xmldata.contents[1]))
 
-            tree = ET.parse("xmldata.xml") # read the file again. Damn, don't know how to do...
-            root = tree.getroot()
+                tree = ET.parse("xmldata.xml") # read the file again. Find a better way.
+                root = tree.getroot()
 
-            projects = []
-            for i, proj in enumerate(root[0][0][0][2][36][0]): # many child
-                projects.append([])
-                for data in proj:
-                    if data.text is None:
-                        projects[i].append('None')
-                    else:
-                        projects[i].append(data.text)
+                projects = []
+                for i, proj in enumerate(root[0][0][0][2][36][0]): # many child
+                    projects.append([])
+                    for data in proj:
+                        if data.text is None:
+                            projects[i].append('None')
+                        else:
+                            projects[i].append(data.text)
 
-            columns=['Project code', 'Source name', 'RA', 'Dec', 'Galactic longitude', 'Galactic latitude', \
-                     'Band', 'Spatial resolution', 'Frequency resolution', 'Array', 'Mosaic', 'Integration', \
-                     'Release date', 'Frequency support', 'Velocity resolution', 'Pol products', \
-                     'Observation date', 'PI name', 'SB name', 'Proposal authors', 'Line sensitivity (10 km/s)', \
-                     'Continuum sensitivity', 'PWV', 'Group ous id', 'Member ous id', 'Asdm uid', 'Project title', \
-                     'Project type', 'Scan intent', 'Field of view', 'Largest angular scale', 'QA2 Status',\
-                     'Pub', 'Science keyword', 'Scientific category', 'ASA_PROJECT_CODE']
+                columns=['Project code', 'Source name', 'RA', 'Dec', 'Galactic longitude', 'Galactic latitude', \
+                         'Band', 'Spatial resolution', 'Frequency resolution', 'Array', 'Mosaic', 'Integration', \
+                         'Release date', 'Frequency support', 'Velocity resolution', 'Pol products', \
+                         'Observation date', 'PI name', 'SB name', 'Proposal authors', 'Line sensitivity (10 km/s)', \
+                         'Continuum sensitivity', 'PWV', 'Group ous id', 'Member ous id', 'Asdm uid', 'Project title', \
+                         'Project type', 'Scan intent', 'Field of view', 'Largest angular scale', 'QA2 Status',\
+                         'Pub', 'Science keyword', 'Scientific category', 'ASA_PROJECT_CODE']
 
-            #convert python list to Pandas DataFrame
-            df = pd.DataFrame(projects, columns=columns)
+                #convert python list to Pandas DataFrame
+                df = pd.DataFrame(projects, columns=columns)
 
-            result.append([name, df])
+                result.append([name, df])
             
         return(result)
             
@@ -178,7 +184,7 @@ class queryCal:
                     totalTime[int(band[i])] += float(integration[i])
 
                 if verbose and selectSG:
-                    reportSource += "## %s  %20s Band:%d obsdate:%s FreqRes:%6.1f Res:%4.2f %s \n"%(code, source, band, obsdate, freqRes, res, asdm)
+                    reportSource += "## %s  %20s Band:%s obsdate:%s FreqRes:%s Res:%s %s \n"%(code[i], source[i], band[i], obsdate[i], freqRes[i], res[i], asdm[i])
                 
                 foundProject = False
                 for p in projects:
