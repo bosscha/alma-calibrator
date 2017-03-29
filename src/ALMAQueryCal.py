@@ -27,6 +27,7 @@ HISTORY:
     2017.03.29
         - fixing verbose = True
         - add safety if query is fail (just skip) | if fail, try to change the radius in query
+        - remove the temporary xml-file
     
         
         
@@ -42,7 +43,7 @@ from astroquery.alma import Alma
 from astropy import coordinates
 from astropy import units as u
 import time
-
+import os
 import numpy as np
 import pandas as pd
 from xml.etree import ElementTree as ET
@@ -51,14 +52,45 @@ from bs4 import BeautifulSoup
 
 class queryCal:
     
-    def __init__(self,fileCal, fluxmin, readFile = True):
+    def __init__(self,fileCal, fluxrange, readFile = True):
         
         if readFile:
-            self.listCal = self.readCal(fileCal, fluxmin)
+            self.listCal = self.readCal(fileCal, fluxrange)
         else:
             self.listCal = []
 
-    def readCal(self,file, fluxmin = 0.2):
+
+
+    def readCal(self, ifile, fluxrange = [0.5, 1.0]):
+        "Read a list of calibrators in CSV format from the Source Catalogue web interface"
+
+        listcal = []
+
+        with open(ifile, 'r') as fcal:
+            for line in fcal:
+                if line[0] != "#":
+                    tok       = line.split(",")
+                    band      = tok[0].split(" ")[1]
+                    flux      = float(tok[7])
+                    name      = tok[13].strip().split("|")[0]
+                    alpha2000 = tok[3]
+                    delta2000 = tok[5]
+
+                    if (flux > fluxrange[0] and flux < fluxrange[1]):
+                        found = False
+                        for nameYet in listcal:
+                            if nameYet[0] == name:
+                                found = True
+
+                        if not found:
+                            coord = coordinates.SkyCoord(alpha2000 + delta2000, unit=(u.hourangle, u.deg), equinox='J2000') # converted using astropy
+                            listcal.append([name, coord.ra.value, coord.dec.value, flux])
+
+        return(listcal)
+
+
+
+    def readCalold(self,file, fluxrange = [0.5, 1.0]):
         "Read a list of calibrators in CSV format from the Source Catalogue web interface"
         
         listcal = []
@@ -73,7 +105,7 @@ class queryCal:
                 alpha2000 = float(tok[3])
                 delta2000 = float(tok[5])
                 
-                if flux >= fluxmin:
+                if (flux > fluxrange[0] and flux < fluxrange[1]):
                     found = False
                     for nameYet in listcal:
                         if nameYet[0] == name:
@@ -85,7 +117,8 @@ class queryCal:
             
         return(listcal)
     
-    
+
+
     def queryAlma(self,listname, public = True ):
         "Query the data for the list of ALMA name"
         
@@ -129,6 +162,9 @@ class queryCal:
                 df = pd.DataFrame(projects, columns=columns)
 
                 result.append([name, df])
+
+        if os.path.exists('xmldata.xml'): # remove the temporary xml file
+            os.remove('xmldata.xml')
             
         return(result)
             
@@ -151,17 +187,13 @@ class queryCal:
             alpha2000 = item[0][1]
             delta2000 = item[0][2]
             
-            
-            
             projects = []
- 
             
             totalTime = {3:0., 4:0., 5:0., 6:0., 7:0., 8:0., 9:0., 10:0.}
             
             reportSource  = "#### Source : %s #####\n"%(name)
             reportSource += "#### Coord. 2000: %f  %f \n"%(alpha2000, delta2000)
             reportSource += "\n"
-            
             
             uids = item[1]
             nuids = len(item[1])
@@ -175,8 +207,10 @@ class queryCal:
             res         = uids['Spatial resolution']
             asdm        = uids['Asdm uid']
             freqRes     = uids['Frequency resolution']
+            pol         = uids['Pol products']
             
 
+            # selection
             for i in range(nuids):
                 selectSG = False
                 if float(freqRes[i]) < maxFreqRes:
@@ -184,7 +218,7 @@ class queryCal:
                     totalTime[int(band[i])] += float(integration[i])
 
                 if verbose and selectSG:
-                    reportSource += "## %s  %20s Band:%s obsdate:%s FreqRes:%s Res:%s %s \n"%(code[i], source[i], band[i], obsdate[i], freqRes[i], res[i], asdm[i])
+                    reportSource += "## %s  %20s  Band:%s  obsdate:%s  FreqRes:%s  Res:%s  Pol:%s    asdm:%s\n"%(code[i], source[i], band[i], obsdate[i], freqRes[i], res[i], pol[i], asdm[i])
                 
                 foundProject = False
                 for p in projects:
@@ -193,7 +227,6 @@ class queryCal:
                     
                 if not foundProject and selectSG:
                     projects.append(code[i])
-
 
             reportSource += "\n"
             for key in totalTime:
@@ -205,11 +238,8 @@ class queryCal:
                 reportSource += " %s "%(p)
                 
             reportSource += "\n\n"
-            
             reportSource += "Total uids: %d \n"%(nuids)
-            
             reportSource += "\n"
-            
             
             selectSource = True
             for k in minTimeBand:
@@ -227,7 +257,7 @@ class queryCal:
         
         
     def writeReport(self, report, file = "deepfieldRG.txt"):
-        "output the final repor from selectDeepField"
+        "output the final report from selectDeepField"
         
         fout = open(file,"w")
         
@@ -237,8 +267,8 @@ class queryCal:
             fout.write(rep[2])
             print(rep[2])
             
-        endText = "#################################\n"
-        endText = "### Total Number of Sources : %d \n"%(nsource)
+        endText  = "#################################\n"
+        endText += "### Total Number of Sources : %d \n"%(nsource)
         
         fout.write(endText)
         print(endText)
@@ -251,14 +281,8 @@ class queryCal:
 if __name__=="__main__":
     " main program"   
     
-    fileCal = "CalSept2015.list"
-    q       = queryCal(fileCal, fluxmin = 3.0)
+    fileCal = "callist_20170329.list"
+    q       = queryCal(fileCal, fluxrange = [0.95, 1.0])
     data    = q.queryAlma(q.listCal, public = True)
     report  = q.selectDeepField(data, minTimeBand = {3:500., 6:100., 7:1000.}, maxFreqRes = 1000.0, verbose = False)
     q.writeReport(report, file = fileCal+".report")
-     
-            
-    
-        
-        
-    
