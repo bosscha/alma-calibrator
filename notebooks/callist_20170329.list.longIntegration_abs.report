@@ -1,0 +1,266 @@
+
+
+#### Source : J1427-4206 #####
+#### No : 20 
+#### Coord. 2000: 216.984575  -42.105399 
+#### Flux : 3.210000
+
+## 2011.0.00454.S             J1427-421   Band:6   obsdate:2012-01-11 07:57:16   FreqRes:976.5625   Res:1.6079010720493307   Pol:XX YY    asdm:uid://A002/X36a70f/Xc87  integration:393.12
+## 2011.0.00524.S  J1427-421; B1424-418   Band:7   obsdate:2012-01-12 10:19:46   FreqRes:976.5625   Res:0.89909529674426347   Pol:XX YY    asdm:uid://A002/X36bf6c/X70e  integration:241.92
+## 2011.0.00724.S             J1427-421   Band:9   obsdate:2012-06-05 03:16:17   FreqRes:976.5625   Res:0.25444270312255202   Pol:XX YY    asdm:uid://A002/X41f8d2/X50f  integration:181.44
+## 2011.0.00318.S             J1427-421   Band:7   obsdate:2012-06-01 03:28:34   FreqRes:244.140625   Res:0.47900475866782455   Pol:XX YY    asdm:uid://A002/X41ac1f/X4b0  integration:2509.92
+## 2011.0.00010.S             J1427-421   Band:3   obsdate:2012-04-07 05:25:00   FreqRes:122.0703125   Res:1.4311160338746516   Pol:XX YY    asdm:uid://A002/X3c7a84/X866  integration:483.84
+## 2011.0.00010.S             J1427-421   Band:6   obsdate:2012-01-24 06:05:08   FreqRes:488.28125   Res:1.9406166040045447   Pol:XX YY    asdm:uid://A002/X383b50/Xc45  integration:604.8
+## 2011.0.00010.S             J1427-421   Band:3   obsdate:2012-05-08 03:48:06   FreqRes:122.0703125   Res:1.478586569222587   Pol:XX YY    asdm:uid://A002/X3fce56/X34d  integration:241.92
+## 2011.0.00010.S             J1427-421   Band:3   obsdate:2012-05-08 02:28:11   FreqRes:122.0703125   Res:1.5559968919822911   Pol:XX YY    asdm:uid://A002/X3fce56/X1e1  integration:241.92
+## 2012.1.00635.S             J1427-421   Band:6   obsdate:2014-02-22 08:59:36   FreqRes:976.5625   Res:0.8116391664409679   Pol:XX YY    asdm:uid://A002/X7b13df/Xf8a  integration:241.92
+## 2012.1.00781.S            J1427-4206   Band:7   obsdate:2014-02-25 07:49:54   FreqRes:122.0703125   Res:0.64973541373040999   Pol:XX YY    asdm:uid://A002/X7b492c/Xc32  integration:1209.6
+## 2012.1.00019.S            J1427-4206   Band:6   obsdate:2014-01-01 10:37:50   FreqRes:122.0703125   Res:4.6677143423338654   Pol:XX YY    asdm:uid://A002/X77da97/X1896  integration:1451.52
+## 2012.1.00635.S             J1427-421   Band:6   obsdate:2014-03-21 08:53:07   FreqRes:976.5625   Res:0.63760057278053983   Pol:XX YY    asdm:uid://A002/X7d2ec1/Xbf7  integration:241.92
+## 2012.1.00538.S            J1427-4206   Band:3   obsdate:2014-04-26 04:18:34   FreqRes:976.5625   Res:11.139487086926245   Pol:XX YY    asdm:uid://A002/X7fc9da/Xc10  integration:604.8
+## 2012.1.00566.S            J1427-4206   Band:3   obsdate:2013-12-29 12:06:24   FreqRes:488.28125   Res:1.9256078036952538   Pol:XX YY    asdm:uid://A002/X7776f1/X20b3  integration:574.56
+## 2013.1.00100.S            J1427-4206   Band:9   obsdate:2014-06-09 04:59:48   FreqRes:976.5625   Res:0.21365347618416142   Pol:XX YY    asdm:uid://A002/X83b318/X29d  integration:1814.4
+## 2012.1.00635.S             J1427-421   Band:6   obsdate:2014-05-26 04:09:05   FreqRes:976.5625   Res:0.42949343944329421   Pol:XX YY    asdm:uid://A002/X828760/X60f  integration:241.92
+## 2013.1.00331.S            J1427-4206   Band:7   obsdate:2014-06-14 01:56:02   FreqRes:244.140625   Res:0.32033833081345076   Pol:XX YY    asdm:uid://A002/X84187d/Xc92  integration:604.8
+## 2012.1.00501.S            J1427-4206   Band:7   obsdate:2014-06-14 23:46:47   FreqRes:976.5625   Res:0.31656892655568947   Pol:XX YY    asdm:uid://A002/X84187d/X4075  integration:604.8
+## 2012.1.00225.S            J1427-4206   Band:7   obsdate:2014-07-07 00:50:42   FreqRes:488.28125   Res:0.33440119130138157   Pol:XX YY    asdm:uid://A002/X8602fa/X3b70  integration:635.04
+## 2012.1.00158.S            J1427-4206   Band:7   obsdate:2014-07-27 22:30:38   FreqRes:244.140625   Res:0.27475304311195625   Pol:XX YY    asdm:uid://A002/X87f18c/X114  integration:1784.16
+## 2012.1.00469.S            J1427-4206   Band:6   obsdate:2014-08-17 18:18:23   FreqRes:488.28125   Res:0.28347961685109957   Pol:XX YY    asdm:uid://A002/X899169/X47e  integration:302.4
+## 2013.1.00226.S            J1427-4206   Band:6   obsdate:2014-07-06 21:36:23   FreqRes:122.0703125   Res:0.47646376956705933   Pol:XX YY    asdm:uid://A002/X8602fa/X33b3  integration:604.8
+## 2012.1.00225.S            J1427-4206   Band:9   obsdate:2014-04-14 06:27:14   FreqRes:976.5625   Res:0.19028810168624963   Pol:XX YY    asdm:uid://A002/X7f18fb/X1486  integration:1905.12
+## 2012.1.00225.S             J1427-421   Band:9   obsdate:2014-06-10 03:18:49   FreqRes:976.5625   Res:0.1692254277247866   Pol:XX YY    asdm:uid://A002/X83bead/Xe43  integration:151.2
+## 2012.1.00826.S            J1427-4206   Band:7   obsdate:2014-03-25 09:08:02   FreqRes:122.0703125   Res:3.3751431840155175   Pol:XX YY    asdm:uid://A002/X7d76cc/X19f6  integration:907.2
+## 2013.1.01166.S            J1427-4206   Band:7   obsdate:2014-06-16 05:40:03   FreqRes:976.5625   Res:0.48492257051398241   Pol:XX YY    asdm:uid://A002/X8440e0/X3acb  integration:1632.96
+## 2013.1.00694.S            J1427-4206   Band:7   obsdate:2014-07-08 02:49:12   FreqRes:976.5625   Res:0.46149607170219148   Pol:XX YY    asdm:uid://A002/X864236/X123d  integration:604.8
+## 2013.1.00226.S            J1427-4206   Band:6   obsdate:2014-07-17 01:37:42   FreqRes:122.0703125   Res:0.48128700452258405   Pol:XX YY    asdm:uid://A002/X86e521/X5ed  integration:604.8
+## 2012.1.00178.S            J1427-4206   Band:7   obsdate:2014-04-10 06:38:40   FreqRes:30.517578125   Res:3.3944410177758382   Pol:XX YY    asdm:uid://A002/X7ebc8f/X14de  integration:604.8
+## 2012.1.00178.S            J1427-4206   Band:7   obsdate:2014-03-25 05:12:31   FreqRes:30.517578125   Res:3.3433067700631542   Pol:XX YY    asdm:uid://A002/X7d76cc/X123f  integration:1814.4
+## 2013.1.00518.S            J1427-4206   Band:6   obsdate:2014-05-19 03:19:33   FreqRes:61.03515625   Res:4.1056365305981188   Pol:XX YY    asdm:uid://A002/X822d50/X72c  integration:604.796
+## 2013.1.00803.S             J1427-421   Band:6   obsdate:2014-05-02 07:32:01   FreqRes:976.5625   Res:0.75702624197963575   Pol:XX YY    asdm:uid://A002/X804fed/X1160  integration:151.2
+## 2013.1.00694.S            J1427-4206   Band:7   obsdate:2014-12-24 11:00:31   FreqRes:976.5625   Res:0.88086220542878735   Pol:XX YY    asdm:uid://A002/X97aa1b/X22c5  integration:604.8
+## 2012.1.01011.S            J1427-4206   Band:7   obsdate:2014-04-14 04:57:40   FreqRes:61.03515625   Res:3.0764371978180542   Pol:XX YY    asdm:uid://A002/X7f18fb/Xc69  integration:1209.6
+## 2013.1.00327.S            J1427-4206   Band:6   obsdate:2014-06-07 00:26:30   FreqRes:244.140625   Res:4.5875704374485125   Pol:XX YY    asdm:uid://A002/X837c61/X1ff  integration:1814.4
+## 2013.1.01180.S            J1427-4206   Band:3   obsdate:2015-01-18 09:55:23   FreqRes:292.96875   Res:2.789637867054235   Pol:XX YY    asdm:uid://A002/X99c183/X795a  integration:302.4
+## 2013.1.01180.S             J1427-421   Band:3   obsdate:2015-01-19 08:43:49   FreqRes:292.96875   Res:2.8932236896463488   Pol:XX YY    asdm:uid://A002/X9a03fb/X16a8  integration:151.2
+## 2013.1.01180.S            J1427-4206   Band:3   obsdate:2015-01-19 08:43:49   FreqRes:292.96875   Res:2.9146755165839884   Pol:XX YY    asdm:uid://A002/X9a03fb/X16a8  integration:302.4
+## 2012.1.00781.S            J1427-4206   Band:7   obsdate:2014-04-09 04:34:53   FreqRes:122.0703125   Res:3.3757447175562745   Pol:XX YY    asdm:uid://A002/X7ea111/X683  integration:1814.381
+## 2012.1.00940.S            J1427-4206   Band:6   obsdate:2014-04-13 05:50:50   FreqRes:488.28125   Res:4.3732029203483664   Pol:XX YY    asdm:uid://A002/X7f09aa/X112  integration:665.28
+## 2013.1.00457.S            J1427-4206   Band:6   obsdate:2015-01-04 09:29:39   FreqRes:488.28125   Res:1.1439999199888395   Pol:XX YY    asdm:uid://A002/X9896b4/X6210  integration:302.4
+## 2013.1.01180.S             J1427-421   Band:3   obsdate:2015-01-19 09:36:18   FreqRes:292.96875   Res:2.6698161894781967   Pol:XX YY    asdm:uid://A002/X9a03fb/X1a64  integration:151.2
+## 2013.1.01180.S            J1427-4206   Band:3   obsdate:2015-01-19 09:36:18   FreqRes:292.96875   Res:2.681278240187106   Pol:XX YY    asdm:uid://A002/X9a03fb/X1a64  integration:302.4
+## 2013.1.01180.S            J1427-4206   Band:3   obsdate:2015-01-17 12:53:19   FreqRes:292.96875   Res:2.9312975036820625   Pol:XX YY    asdm:uid://A002/X99c183/X39cd  integration:302.4
+## 2013.1.00803.S            J1427-4206   Band:3   obsdate:2014-06-11 23:07:08   FreqRes:488.28125   Res:11.241817977039183   Pol:XX YY    asdm:uid://A002/X83f101/X165  integration:1209.6
+## 2013.1.00120.S             J1427-421   Band:3   obsdate:2015-01-17 07:50:15   FreqRes:488.28125   Res:3.4620349782332771   Pol:XX YY    asdm:uid://A002/X99c183/X281d  integration:151.2
+## 2013.1.00120.S            J1427-4206   Band:3   obsdate:2015-01-06 07:06:12   FreqRes:488.28125   Res:2.6898259131458073   Pol:XX YY    asdm:uid://A002/X98ed3f/X26e4  integration:1270.08
+## 2013.1.00437.S            J1427-4206   Band:7   obsdate:2014-05-01 00:14:45   FreqRes:244.140625   Res:0.57764619053234467   Pol:XX YY    asdm:uid://A002/X80325b/X57b  integration:1209.6
+## 2013.1.00803.S            J1427-4206   Band:6   obsdate:2014-05-19 05:14:07   FreqRes:976.5625   Res:4.3926125641149714   Pol:XX YY    asdm:uid://A002/X822d50/Xcf8  integration:2419.179
+## 2013.1.00803.S             J1427-421   Band:6   obsdate:2015-01-28 08:59:08   FreqRes:976.5625   Res:5.3281023646641437   Pol:XX YY    asdm:uid://A002/X9a9a13/X1c67  integration:302.4
+## 2013.1.00870.S            J1427-4206   Band:6   obsdate:2014-06-06 03:19:02   FreqRes:30.517578125   Res:4.8500614372176569   Pol:XX YY    asdm:uid://A002/X836a4d/X250  integration:2419.2
+## 2013.1.00803.S            J1427-4206   Band:6   obsdate:2014-05-19 01:54:14   FreqRes:976.5625   Res:4.0854870294406158   Pol:XX YY    asdm:uid://A002/X822d50/X43e  integration:3628.775
+## 2013.1.00879.S            J1427-4206   Band:6   obsdate:2014-04-30 04:01:07   FreqRes:122.0703125   Res:0.50892234600767172   Pol:XX YY    asdm:uid://A002/X8022df/X791  integration:1209.592
+## 2013.1.01312.S             J1427-421   Band:3   obsdate:2015-01-06 10:02:12   FreqRes:976.5625   Res:2.6489088051214842   Pol:XX YY    asdm:uid://A002/X98ed3f/X2f25  integration:151.2
+## 2012.1.00781.S            J1427-4206   Band:7   obsdate:2014-03-20 05:12:07   FreqRes:122.0703125   Res:0.50781324816536511   Pol:XX YY    asdm:uid://A002/X7d194b/X7f5  integration:604.8
+## 2012.1.00781.S            J1427-4206   Band:7   obsdate:2013-06-01 04:30:33   FreqRes:122.0703125   Res:3.9558277440923075   Pol:XX YY    asdm:uid://A002/X652932/X1278  integration:725.76
+## 2013.1.01312.S            J1427-4206   Band:3   obsdate:2014-07-02 23:52:34   FreqRes:976.5625   Res:12.81073797524544   Pol:XX YY    asdm:uid://A002/X85dcf7/X459  integration:4838.4
+## 2013.1.00902.S            J1427-4206   Band:7   obsdate:2015-05-05 01:40:25   FreqRes:244.140625   Res:0.81977041988471111   Pol:XX YY    asdm:uid://A002/X9ff365/Xedb  integration:604.8
+## 2013.1.01364.S             J1427-421   Band:3   obsdate:2015-05-22 23:40:47   FreqRes:244.140625   Res:13.217832137138227   Pol:XX YY    asdm:uid://A002/Xa14be9/X6ac  integration:302.4
+## 2013.1.00244.S            J1427-4206   Band:8   obsdate:2015-05-20 02:37:22   FreqRes:488.28125   Res:0.3342027433709569   Pol:XX YY    asdm:uid://A002/Xa10d09/X1039  integration:1814.4
+## 2013.1.00327.S            J1427-4206   Band:6   obsdate:2015-06-04 00:07:36   FreqRes:244.140625   Res:0.45082646960452233   Pol:XX YY    asdm:uid://A002/Xa2300a/X230  integration:604.8
+## 2012.1.00550.S            J1427-4206   Band:7   obsdate:2014-05-02 06:15:54   FreqRes:488.28125   Res:0.41972119876872849   Pol:XX YY    asdm:uid://A002/X804fed/Xe87  integration:604.8
+## 2013.1.01312.S             J1427-421   Band:3   obsdate:2015-05-15 01:31:35   FreqRes:976.5625   Res:1.4810428942486735   Pol:XX YY    asdm:uid://A002/Xa08aa0/X1168  integration:151.2
+## 2013.1.00234.S            J1427-4206   Band:6   obsdate:2015-05-01 02:34:01   FreqRes:488.28125   Res:0.96238377842631007   Pol:XX YY    asdm:uid://A002/X9f9284/Xe0f  integration:302.4
+## 2012.1.00182.S            J1427-4206   Band:7   obsdate:2015-07-17 21:35:26   FreqRes:976.5625   Res:0.14883206849238528   Pol:XX YY    asdm:uid://A002/Xa5df2c/Xdf  integration:604.8
+## 2013.1.00220.S            J1427-4206   Band:7   obsdate:2015-06-14 04:04:17   FreqRes:244.140625   Res:0.35710067267104023   Pol:XX YY    asdm:uid://A002/Xa342f2/X73b4  integration:604.8
+## 2012.1.00105.S            J1427-4206   Band:7   obsdate:2014-07-25 00:58:24   FreqRes:244.140625   Res:0.28407445288331051   Pol:XX YY    asdm:uid://A002/X879b80/X9bd  integration:1814.4
+## 2013.1.00327.S            J1427-4206   Band:6   obsdate:2015-04-22 04:02:53   FreqRes:244.140625   Res:4.4107297554507197   Pol:XX YY    asdm:uid://A002/X9ec9e7/X15fb  integration:907.2
+## 2013.1.00803.S             J1427-421   Band:3   obsdate:2015-03-09 04:40:40   FreqRes:488.28125   Res:2.58822768027188   Pol:XX YY    asdm:uid://A002/X9bb7a8/Xb57  integration:151.2
+## 2012.1.00631.S             J1427-421   Band:7   obsdate:2015-07-17 22:38:25   FreqRes:244.140625   Res:0.14849282426193236   Pol:XX YY    asdm:uid://A002/Xa5df2c/X2d7  integration:151.2
+## 2013.1.00305.S            J1427-4206   Band:6   obsdate:2015-08-08 00:18:56   FreqRes:122.0703125   Res:0.24524986304477622   Pol:XX YY    asdm:uid://A002/Xa7a216/X28c  integration:302.4
+## 2013.1.01180.S            J1427-4206   Band:3   obsdate:2015-04-02 06:03:47   FreqRes:292.96875   Res:2.4645860633406578   Pol:XX YY    asdm:uid://A002/X9d13e3/X9d2  integration:302.4
+## 2013.1.00670.S            J1427-4206   Band:3   obsdate:2015-07-04 23:06:56   FreqRes:30.517578125   Res:0.45936562269064662   Pol:XX YY    asdm:uid://A002/Xa50ce2/X2af8  integration:907.107
+## 2013.1.00670.S             J1427-421   Band:3   obsdate:2015-07-04 23:06:56   FreqRes:30.517578125   Res:0.4580759224072371   Pol:XX YY    asdm:uid://A002/Xa50ce2/X2af8  integration:604.738
+## 2013.1.00331.S            J1427-4206   Band:7   obsdate:2015-08-18 01:54:54   FreqRes:244.140625   Res:0.2753341901992058   Pol:XX YY    asdm:uid://A002/Xa8666f/X586  integration:604.8
+## 2013.1.01194.S            J1427-4206   Band:3   obsdate:2014-12-07 13:21:35   FreqRes:488.28125   Res:2.2556724345844117   Pol:XX YY    asdm:uid://A002/X960614/X1181  integration:604.8
+## 2013.1.01029.S            J1427-4206   Band:3   obsdate:2015-01-27 09:23:38   FreqRes:244.140625   Res:2.6238233099137309   Pol:XX YY    asdm:uid://A002/X9a8f80/X398  integration:302.4
+## 2012.1.00762.S             J1427-421   Band:3   obsdate:2013-06-15 01:02:57   FreqRes:488.28125   Res:8.2969124277105166   Pol:XX YY    asdm:uid://A002/X679d90/X19d  integration:302.399
+## 2012.1.00762.S            J1427-4206   Band:3   obsdate:2013-01-28 08:21:02   FreqRes:488.28125   Res:8.2969124279094206   Pol:XX YY    asdm:uid://A002/X5ba4da/X407  integration:6047.98
+## 2013.1.01029.S            J1427-4206   Band:3   obsdate:2015-01-18 11:01:00   FreqRes:61.03515625   Res:2.6230807955947295   Pol:XX YY    asdm:uid://A002/X99c183/X7b2e  integration:302.4
+## 2015.1.00483.S            J1427-4206   Band:3   obsdate:2015-12-26 11:22:56   FreqRes:244.140625   Res:2.4513622055483348   Pol:XX YY    asdm:uid://A002/Xae4720/X1354  integration:302.4
+## 2013.1.01029.S            J1427-4206   Band:3   obsdate:2015-01-24 09:36:23   FreqRes:61.03515625   Res:2.6711024198845776   Pol:XX YY    asdm:uid://A002/X9a5759/X28b8  integration:302.4
+## 2013.1.01194.S            J1427-4206   Band:3   obsdate:2014-08-26 22:26:37   FreqRes:488.28125   Res:0.70659235893660377   Pol:XX YY    asdm:uid://A002/X8a3bdd/X80  integration:1814.4
+## 2013.1.01020.S            J1427-4206   Band:6   obsdate:2015-07-21 21:14:01   FreqRes:61.03515625   Res:0.20987280115830653   Pol:XX YY    asdm:uid://A002/Xa657ad/X2a9  integration:725.76
+## 2015.1.00773.S            J1427-4206   Band:6   obsdate:2015-11-01 12:33:59   FreqRes:244.140625   Res:0.033565034820514275   Pol:XX YY    asdm:uid://A002/Xac5575/X7ee8  integration:302.4
+## 2012.1.00019.S            J1427-4206   Band:3   obsdate:2014-04-05 07:21:11   FreqRes:488.28125   Res:1.3140885915509524   Pol:XX YY    asdm:uid://A002/X7e72ba/Xd3c  integration:302.4
+## 2015.1.01593.S            J1427-4206   Band:3   obsdate:2016-01-30 06:54:12   FreqRes:976.5625   Res:3.1228804010258724   Pol:XX YY    asdm:uid://A002/Xaf9ce7/X16d1  integration:302.4
+## 2012.1.00332.S            J1427-4206   Band:7   obsdate:2015-09-01 21:36:14   FreqRes:976.5625   Res:0.10822864191714084   Pol:XX YY    asdm:uid://A002/Xa9798e/X226  integration:1209.6
+## 2015.1.00806.S            J1427-4206   Band:7   obsdate:2015-11-23 10:39:02   FreqRes:488.28125   Res:0.030420225367827826   Pol:XX YY    asdm:uid://A002/Xad0ecf/X1ee8  integration:604.8
+## 2015.1.00528.S            J1427-4206   Band:7   obsdate:2015-12-29 08:46:10   FreqRes:244.140625   Res:1.1320694126622814   Pol:XX YY    asdm:uid://A002/Xae5b1d/X1b91  integration:604.8
+## 2015.1.01353.S            J1427-4206   Band:6   obsdate:2016-03-02 08:55:21   FreqRes:122.0703125   Res:0.78863745362930215   Pol:XX YY    asdm:uid://A002/Xb00171/X32f4  integration:302.4
+
+Time Band 3 :  24283s (6.7h) 
+Time Band 6 :  21652s (6.0h) 
+Time Band 7 :  26732s (7.4h) 
+Time Band 8 :   1814s (0.5h) 
+Time Band 9 :   4052s (1.1h) 
+
+ Project codes: 
+ 2011.0.00454.S  2011.0.00524.S  2011.0.00724.S  2011.0.00318.S  2011.0.00010.S  2012.1.00635.S  2012.1.00781.S  2012.1.00019.S  2012.1.00538.S  2012.1.00566.S  2013.1.00100.S  2013.1.00331.S  2012.1.00501.S  2012.1.00225.S  2012.1.00158.S  2012.1.00469.S  2013.1.00226.S  2012.1.00826.S  2013.1.01166.S  2013.1.00694.S  2012.1.00178.S  2013.1.00518.S  2013.1.00803.S  2012.1.01011.S  2013.1.00327.S  2013.1.01180.S  2012.1.00940.S  2013.1.00457.S  2013.1.00120.S  2013.1.00437.S  2013.1.00870.S  2013.1.00879.S  2013.1.01312.S  2013.1.00902.S  2013.1.01364.S  2013.1.00244.S  2012.1.00550.S  2013.1.00234.S  2012.1.00182.S  2013.1.00220.S  2012.1.00105.S  2012.1.00631.S  2013.1.00305.S  2013.1.00670.S  2013.1.01194.S  2013.1.01029.S  2012.1.00762.S  2015.1.00483.S  2013.1.01020.S  2015.1.00773.S  2015.1.01593.S  2012.1.00332.S  2015.1.00806.S  2015.1.00528.S  2015.1.01353.S 
+
+Total uids: 158 
+Total accepted uids: 55
+
+
+#### Source : J1733-1304 #####
+#### No : 28 
+#### Coord. 2000: 263.261275  -13.080430 
+#### Flux : 2.910000
+
+## 2011.0.00217.S               nrao530   Band:3   obsdate:2012-07-29 02:01:54   FreqRes:976.5625   Res:1.5431935193282549   Pol:XX YY    asdm:uid://A002/X47aefc/X369  integration:1451.52
+## 2011.0.00635.S             J1733-130   Band:9   obsdate:2012-06-06 03:31:41   FreqRes:976.5625   Res:0.20709605419360783   Pol:XX YY    asdm:uid://A002/X4210d0/X4e0  integration:846.72
+## 2011.0.00733.S             J1733-130   Band:6   obsdate:2012-06-18 03:10:30   FreqRes:976.5625   Res:0.60892666492442082   Pol:XX YY    asdm:uid://A002/X435875/X4df  integration:967.175
+## 2011.0.00733.S             J1733-130   Band:6   obsdate:2012-06-17 05:55:58   FreqRes:976.5625   Res:0.71465032451329458   Pol:XX YY    asdm:uid://A002/X433c46/X4d2  integration:241.92
+## 2011.0.00733.S             J1733-130   Band:3   obsdate:2012-08-01 01:30:31   FreqRes:976.5625   Res:1.4091689178229181   Pol:XX YY    asdm:uid://A002/X47ed8e/X311  integration:181.44
+## 2011.0.00733.S             J1733-130   Band:3   obsdate:2012-08-01 00:23:44   FreqRes:976.5625   Res:1.4468070116958982   Pol:XX YY    asdm:uid://A002/X47ed8e/X20b  integration:181.44
+## 2011.0.00046.S             J1733-130   Band:3   obsdate:2012-09-01 01:43:17   FreqRes:976.5625   Res:1.668609001873222   Pol:XX YY    asdm:uid://A002/X4bb4dd/X323  integration:120.96
+## 2011.0.00136.S               nrao530   Band:7   obsdate:2011-11-14 21:46:28   FreqRes:122.0703125   Res:1.4961422480281201   Pol:XX YY    asdm:uid://A002/X31ab3d/X257  integration:665.28
+## 2011.0.00017.S             B1730-130   Band:3   obsdate:2012-06-06 08:20:02   FreqRes:488.28125   Res:2.1685131272735725   Pol:XX    asdm:uid://A002/X4210d0/X815  integration:483.84
+## 2011.0.00017.S             B1730-130   Band:3   obsdate:2012-08-27 01:05:09   FreqRes:488.28125   Res:1.6926861978040364   Pol:XX    asdm:uid://A002/X4b29af/X403  integration:241.92
+## 2011.0.00750.S               NRAO530   Band:6   obsdate:2012-04-08 06:28:14   FreqRes:122.0703125   Res:0.61039561257517527   Pol:XX YY    asdm:uid://A002/X3c9295/X40f  integration:544.32
+## 2012.1.00581.S            J1733-1304   Band:6   obsdate:2014-03-08 09:50:48   FreqRes:976.5625   Res:0.69029991135488433   Pol:XX YY    asdm:uid://A002/X7c30c9/X17b9  integration:544.32
+## 2012.1.00769.S            J1733-1304   Band:6   obsdate:2014-03-22 08:38:37   FreqRes:122.0703125   Res:0.71947462254786776   Pol:XX YY    asdm:uid://A002/X7d3c04/X12ea  integration:423.36
+## 2012.1.00826.S            J1733-1304   Band:7   obsdate:2014-04-12 12:07:45   FreqRes:122.0703125   Res:7.2955956008112075   Pol:XX YY    asdm:uid://A002/X7ef2fb/X498  integration:483.84
+## 2012.1.00635.S             J1733-130   Band:7   obsdate:2014-03-21 08:53:07   FreqRes:976.5625   Res:0.56144906447446874   Pol:XX YY    asdm:uid://A002/X7d2ec1/Xbf7  integration:241.92
+## 2012.1.00932.S             J1733-130   Band:6   obsdate:2013-07-08 05:45:14   FreqRes:488.28125   Res:0.34309053535795786   Pol:XX YY    asdm:uid://A002/X6a533e/X123c  integration:151.2
+## 2012.1.01011.S            J1733-1304   Band:6   obsdate:2014-04-08 11:14:48   FreqRes:976.5625   Res:0.71937039142558101   Pol:XX YY    asdm:uid://A002/X7e9282/Xad3  integration:302.4
+## 2012.1.00826.S            J1733-1304   Band:7   obsdate:2014-03-06 10:46:27   FreqRes:122.0703125   Res:0.44826013546349713   Pol:XX YY    asdm:uid://A002/X7c0875/Xd0a  integration:967.68
+## 2012.1.00368.S            J1733-1304   Band:6   obsdate:2014-04-04 10:33:34   FreqRes:61.03515625   Res:0.7047397714678113   Pol:XX YY    asdm:uid://A002/X7e5af0/X1246  integration:302.4
+## 2012.1.00712.S            J1733-1304   Band:6   obsdate:2014-04-25 05:39:47   FreqRes:244.140625   Res:0.60758411422325953   Pol:XX YY    asdm:uid://A002/X7fb89e/X85d  integration:302.4
+## 2012.1.00056.S            J1733-1304   Band:7   obsdate:2014-05-05 05:06:03   FreqRes:488.28125   Res:0.48940543523065655   Pol:XX YY    asdm:uid://A002/X80c782/Xacf  integration:302.4
+## 2012.1.00196.S            J1733-1304   Band:7   obsdate:2014-03-11 10:32:06   FreqRes:244.140625   Res:0.4285473480199421   Pol:XX YY    asdm:uid://A002/X7c6ce6/X163f  integration:907.2
+## 2012.1.00056.S            J1733-1304   Band:7   obsdate:2014-04-29 06:04:21   FreqRes:976.5625   Res:0.44873615828455704   Pol:XX YY    asdm:uid://A002/X800eb6/Xc52  integration:302.4
+## 2012.1.00564.S            J1733-1304   Band:7   obsdate:2014-05-05 09:10:34   FreqRes:122.0703125   Res:4.6995398837642561   Pol:XX YY    asdm:uid://A002/X80c782/X13f9  integration:604.8
+## 2012.1.00437.S            J1733-1304   Band:6   obsdate:2014-03-20 08:33:10   FreqRes:488.28125   Res:0.74188042462856585   Pol:XX YY    asdm:uid://A002/X7d194b/X12fd  integration:302.4
+## 2012.1.00681.S             J1733-130   Band:7   obsdate:2014-05-21 08:17:09   FreqRes:244.140625   Res:0.54743603459135703   Pol:XX YY    asdm:uid://A002/X8254f0/Xeba  integration:151.2
+## 2012.1.00441.S            J1733-1304   Band:3   obsdate:2014-05-22 07:57:46   FreqRes:488.28125   Res:1.0200751363859955   Pol:XX YY    asdm:uid://A002/X826a79/Xaaa  integration:1209.6
+## 2012.1.00681.S            J1733-1304   Band:7   obsdate:2014-05-21 08:17:09   FreqRes:30.517578125   Res:0.54743603462375268   Pol:XX YY    asdm:uid://A002/X8254f0/Xeba  integration:1330.56
+## 2012.1.00441.S             J1733-130   Band:3   obsdate:2014-06-27 03:48:12   FreqRes:488.28125   Res:1.0209148700900912   Pol:XX YY    asdm:uid://A002/X85438c/X875  integration:453.6
+## 2012.1.00387.S            J1733-1304   Band:6   obsdate:2014-05-04 06:26:23   FreqRes:122.0703125   Res:5.1600196939489704   Pol:XX YY    asdm:uid://A002/X8081ba/X2f08  integration:1209.6
+## 2012.1.00698.S            J1733-1304   Band:7   obsdate:2014-05-21 06:29:18   FreqRes:976.5625   Res:0.29292449226555467   Pol:XX YY    asdm:uid://A002/X8254f0/Xb50  integration:604.8
+## 2012.1.00387.S            J1733-1304   Band:6   obsdate:2014-04-29 08:57:37   FreqRes:122.0703125   Res:0.59990442768347652   Pol:XX YY    asdm:uid://A002/X80199b/Xb2  integration:302.4
+## 2012.1.00769.S            J1733-1304   Band:6   obsdate:2014-04-29 06:22:11   FreqRes:122.0703125   Res:4.6353578904394555   Pol:XX YY    asdm:uid://A002/X800eb6/Xce6  integration:2540.16
+## 2013.1.01268.S            J1733-1304   Band:6   obsdate:2014-07-16 03:39:32   FreqRes:122.0703125   Res:0.39571058851654289   Pol:XX YY    asdm:uid://A002/X86cc63/X954  integration:2116.8
+## 2013.1.01268.S             J1733-130   Band:6   obsdate:2014-07-16 03:39:32   FreqRes:122.0703125   Res:0.39571058853554031   Pol:XX YY    asdm:uid://A002/X86cc63/X954  integration:453.6
+## 2012.1.00119.S             J1733-130   Band:3   obsdate:2014-07-21 03:14:36   FreqRes:976.5625   Res:1.0369020180318205   Pol:XX YY    asdm:uid://A002/X87544a/X1f04  integration:151.2
+## 2012.1.00037.S            J1733-1304   Band:7   obsdate:2014-04-10 08:15:20   FreqRes:976.5625   Res:0.37649170762158224   Pol:XX YY    asdm:uid://A002/X7ebc8f/X17ec  integration:604.8
+## 2013.1.00226.S            J1733-1304   Band:6   obsdate:2014-07-02 03:53:26   FreqRes:244.140625   Res:0.48773416676872428   Pol:XX YY    asdm:uid://A002/X85c183/Xf7d  integration:756
+## 2012.1.00037.S            J1733-1304   Band:7   obsdate:2014-04-26 05:59:57   FreqRes:976.5625   Res:0.38772209847755751   Pol:XX YY    asdm:uid://A002/X7fc9da/Xfb4  integration:604.8
+## 2013.1.00366.S             J1733-130   Band:6   obsdate:2014-06-04 07:10:13   FreqRes:30.517578125   Res:0.62289170451730103   Pol:XX YY    asdm:uid://A002/X835491/X4bb  integration:756
+## 2013.1.00366.S            J1733-1304   Band:6   obsdate:2014-06-04 07:10:13   FreqRes:30.517578125   Res:0.62289170440817765   Pol:XX YY    asdm:uid://A002/X835491/X4bb  integration:2872.8
+## 2013.1.01004.S            J1733-1304   Band:6   obsdate:2014-08-08 02:00:59   FreqRes:30.517578125   Res:5.4794927560464313   Pol:XX YY    asdm:uid://A002/X88fa54/X9aa  integration:1209.6
+## 2013.1.00395.S             J1733-130   Band:7   obsdate:2014-06-15 06:07:17   FreqRes:976.5625   Res:0.3940344034190072   Pol:XX YY    asdm:uid://A002/X8440e0/Xe8  integration:151.2
+## 2013.1.00226.S            J1733-1304   Band:6   obsdate:2014-07-17 02:47:27   FreqRes:122.0703125   Res:0.41257365679266977   Pol:XX YY    asdm:uid://A002/X86e521/Xb25  integration:756
+## 2012.1.00857.S            J1733-1304   Band:7   obsdate:2014-04-28 08:58:41   FreqRes:244.140625   Res:0.40588622305724531   Pol:XX YY    asdm:uid://A002/X7fffd6/Xf0f  integration:604.8
+## 2012.1.00857.S             J1733-130   Band:7   obsdate:2014-04-28 10:18:57   FreqRes:244.140625   Res:0.50808280133762551   Pol:XX YY    asdm:uid://A002/X7fffd6/X1223  integration:151.2
+## 2013.1.00061.S             J1733-130   Band:6   obsdate:2014-08-17 02:45:28   FreqRes:244.140625   Res:0.33150115003295161   Pol:XX YY    asdm:uid://A002/X8970e9/X2303  integration:151.2
+## 2013.1.00061.S            J1733-1304   Band:6   obsdate:2014-08-17 02:45:28   FreqRes:488.28125   Res:0.32781555827299513   Pol:XX YY    asdm:uid://A002/X8970e9/X2303  integration:302.4
+## 2013.1.00266.S             J1733-130   Band:3   obsdate:2014-07-27 03:09:58   FreqRes:122.0703125   Res:0.91073380196074205   Pol:XX YY    asdm:uid://A002/X87c075/X2cd9  integration:151.2
+## 2013.1.00266.S            J1733-1304   Band:3   obsdate:2014-07-27 03:09:58   FreqRes:122.0703125   Res:0.90570139867255328   Pol:XX YY    asdm:uid://A002/X87c075/X2cd9  integration:302.4
+## 2012.1.00368.S            J1733-1304   Band:7   obsdate:2014-03-25 11:16:43   FreqRes:61.03515625   Res:2.9914772803101268   Pol:XX YY    asdm:uid://A002/X7d76cc/X1da8  integration:1814.4
+## 2012.1.00178.S            J1733-1304   Band:7   obsdate:2014-04-09 07:07:12   FreqRes:30.517578125   Res:2.7884961514942304   Pol:XX YY    asdm:uid://A002/X7ea111/X92b  integration:3024
+## 2012.1.00178.S            J1733-1304   Band:7   obsdate:2014-03-26 07:50:19   FreqRes:30.517578125   Res:3.4801745089742973   Pol:XX YY    asdm:uid://A002/X7d80c7/X12ad  integration:1814.4
+## 2013.1.01004.S            J1733-1304   Band:6   obsdate:2014-08-07 00:14:55   FreqRes:30.517578125   Res:5.2546793507529399   Pol:XX YY    asdm:uid://A002/X88e746/X2c7  integration:1209.6
+## 2013.1.00278.S             J1733-130   Band:7   obsdate:2014-06-17 06:08:13   FreqRes:488.28125   Res:3.7538606918293342   Pol:XX YY    asdm:uid://A002/X847097/Xef9  integration:302.4
+## 2012.1.01011.S            J1733-1304   Band:7   obsdate:2014-04-13 09:54:52   FreqRes:61.03515625   Res:3.214698924379225   Pol:XX YY    asdm:uid://A002/X7f09aa/X88e  integration:1209.6
+## 2013.1.00481.S             J1733-130   Band:3   obsdate:2014-06-27 03:12:01   FreqRes:61.03515625   Res:1.0352944101637542   Pol:XX YY    asdm:uid://A002/X85438c/X750  integration:151.2
+## 2013.1.00269.S             J1733-130   Band:3   obsdate:2014-07-03 03:43:30   FreqRes:488.28125   Res:13.15878283895808   Pol:XX    asdm:uid://A002/X85dcf7/Xc7c  integration:604.8
+## 2012.1.00940.S            J1733-1304   Band:6   obsdate:2014-12-29 13:42:16   FreqRes:488.28125   Res:4.4380703210297687   Pol:XX YY    asdm:uid://A002/X9842f5/Xa45  integration:665.28
+## 2013.1.00783.S            J1733-1304   Band:6   obsdate:2014-09-01 02:06:57   FreqRes:61.03515625   Res:0.25325201171907091   Pol:XX YY    asdm:uid://A002/X8a838f/X380  integration:1028.16
+## 2013.1.00783.S             J1733-130   Band:6   obsdate:2014-09-01 02:06:57   FreqRes:61.03515625   Res:0.42410297387442947   Pol:XX YY    asdm:uid://A002/X8a838f/X380  integration:151.2
+## 2012.1.00133.S            J1733-1304   Band:6   obsdate:2014-03-25 07:57:36   FreqRes:976.5625   Res:0.72617046549642128   Pol:XX YY    asdm:uid://A002/X7d76cc/X1698  integration:302.4
+## 2013.1.00726.S            J1733-1304   Band:6   obsdate:2015-04-06 07:55:56   FreqRes:122.0703125   Res:0.99858786837742208   Pol:XX YY    asdm:uid://A002/X9d6f4c/X2756  integration:604.8
+## 2013.1.01035.S            J1733-1304   Band:7   obsdate:2015-04-05 07:47:56   FreqRes:488.28125   Res:4.1018727867315299   Pol:XX YY    asdm:uid://A002/X9d4710/X3428  integration:1209.6
+## 2013.1.00269.S             J1733-130   Band:3   obsdate:2015-04-01 07:05:07   FreqRes:488.28125   Res:2.6395228985503705   Pol:XX    asdm:uid://A002/X9cffbd/Xefe  integration:151.2
+## 2013.1.00269.S            J1733-1304   Band:3   obsdate:2014-12-06 15:40:23   FreqRes:488.28125   Res:2.2373821541864745   Pol:XX    asdm:uid://A002/X95e355/X220a  integration:907.2
+## 2013.1.00783.S            J1733-1304   Band:6   obsdate:2015-04-14 07:43:30   FreqRes:61.03515625   Res:0.99084541876490784   Pol:XX YY    asdm:uid://A002/X9e4650/X2853  integration:514.08
+## 2013.1.00376.S            J1733-1304   Band:3   obsdate:2015-04-24 09:29:05   FreqRes:244.140625   Res:2.6596631707496243   Pol:XX YY    asdm:uid://A002/X9efec8/X2b7e  integration:302.4
+## 2013.1.00376.S             J1733-130   Band:3   obsdate:2015-04-24 05:42:54   FreqRes:61.03515625   Res:2.7849169050330165   Pol:XX YY    asdm:uid://A002/X9efec8/X203a  integration:151.2
+## 2013.1.01200.S            J1733-1304   Band:6   obsdate:2015-06-09 04:33:56   FreqRes:976.5625   Res:0.42892860450875941   Pol:XX YY    asdm:uid://A002/Xa2d681/X157f  integration:604.8
+## 2013.1.00226.S            J1733-1304   Band:6   obsdate:2014-07-16 05:25:20   FreqRes:122.0703125   Res:0.48346388527870782   Pol:XX YY    asdm:uid://A002/X86cc63/Xd3e  integration:756
+## 2013.1.01391.S            J1733-1304   Band:3   obsdate:2015-04-11 10:49:39   FreqRes:488.28125   Res:2.4836769651188084   Pol:XX YY    asdm:uid://A002/X9de499/X40c0  integration:604.8
+## 2013.1.01305.S            J1733-1304   Band:3   obsdate:2014-12-28 17:52:19   FreqRes:30.517578125   Res:2.0808135488794322   Pol:XX YY    asdm:uid://A002/X98124f/X3667  integration:907.2
+## 2013.1.01065.S            J1733-1304   Band:7   obsdate:2015-06-10 04:38:33   FreqRes:488.28125   Res:0.32739666335892514   Pol:XX YY    asdm:uid://A002/Xa2ea64/X18a0  integration:604.8
+## 2012.1.00133.S            J1733-1304   Band:6   obsdate:2014-03-10 10:26:53   FreqRes:976.5625   Res:4.2673227214275657   Pol:XX YY    asdm:uid://A002/X7c5411/X1b12  integration:1814.4
+## 2013.1.00312.S            J1733-1304   Band:3   obsdate:2015-04-25 10:55:18   FreqRes:61.03515625   Res:3.7995559673188017   Pol:XX YY    asdm:uid://A002/X9f15bd/X1e98  integration:120.96
+## 2013.1.00834.S             J1733-130   Band:3   obsdate:2015-04-10 06:21:25   FreqRes:976.5625   Res:3.0299196756118358   Pol:XX YY    asdm:uid://A002/X9dcf39/X256f  integration:151.2
+## 2013.1.00879.S            J1733-1304   Band:6   obsdate:2014-05-02 09:40:00   FreqRes:122.0703125   Res:0.68329629864390162   Pol:XX YY    asdm:uid://A002/X804fed/X1943  integration:302.4
+## 2013.1.00312.S            J1733-1304   Band:3   obsdate:2015-04-25 09:57:07   FreqRes:61.03515625   Res:2.9862297298218254   Pol:XX YY    asdm:uid://A002/X9f15bd/X1b57  integration:453.6
+## 2013.1.00879.S             J1733-130   Band:6   obsdate:2014-05-02 09:40:00   FreqRes:122.0703125   Res:0.68948059927120242   Pol:XX YY    asdm:uid://A002/X804fed/X1943  integration:151.2
+## 2013.1.01365.S             J1733-130   Band:6   obsdate:2014-09-02 02:40:06   FreqRes:244.140625   Res:0.3936443853438874   Pol:XX YY    asdm:uid://A002/X8a951a/X69b  integration:151.2
+## 2013.1.00332.S            J1733-1304   Band:6   obsdate:2014-06-06 05:53:09   FreqRes:976.5625   Res:0.49430819406374665   Pol:XX    asdm:uid://A002/X836a4d/X8a4  integration:5594.4
+## 2013.1.00332.S             J1733-130   Band:6   obsdate:2014-06-07 06:52:13   FreqRes:976.5625   Res:0.64000478249983661   Pol:XX    asdm:uid://A002/X837c61/Xffd  integration:756
+## 2013.1.00957.S            J1733-1304   Band:6   obsdate:2015-05-04 05:38:15   FreqRes:122.0703125   Res:4.917497213438411   Pol:XX YY    asdm:uid://A002/X9fddd8/X2abd  integration:1391.04
+## 2013.1.00332.S            J1733-1304   Band:6   obsdate:2014-06-04 08:37:33   FreqRes:976.5625   Res:0.81758079827083907   Pol:XX    asdm:uid://A002/X835491/X817  integration:3024
+## 2013.1.00812.S            J1733-1304   Band:7   obsdate:2015-05-14 04:29:08   FreqRes:244.140625   Res:0.44320197905994901   Pol:XX YY    asdm:uid://A002/Xa068cb/X1a14  integration:846.72
+## 2013.1.00332.S             J1733-130   Band:6   obsdate:2014-06-04 08:37:33   FreqRes:976.5625   Res:1.1648214742590381   Pol:XX    asdm:uid://A002/X835491/X817  integration:756
+## 2013.1.00812.S            J1733-1304   Band:7   obsdate:2015-05-14 07:05:21   FreqRes:244.140625   Res:0.49116901558923054   Pol:XX YY    asdm:uid://A002/Xa068cb/X2613  integration:846.72
+## 2012.1.00784.S            J1733-1304   Band:6   obsdate:2015-06-25 04:41:10   FreqRes:488.28125   Res:0.31778236292059087   Pol:XX YY    asdm:uid://A002/Xa43a0e/Xd8a  integration:937.44
+## 2012.1.00784.S            J1733-1304   Band:7   obsdate:2015-06-24 06:21:55   FreqRes:488.28125   Res:0.3221501106254242   Pol:XX YY    asdm:uid://A002/Xa42f75/X83e  integration:1844.64
+## 2013.1.00100.S            J1733-1304   Band:4   obsdate:2015-07-06 02:52:54   FreqRes:244.140625   Res:0.3102049347640406   Pol:XX YY    asdm:uid://A002/Xa50ce2/X338a  integration:302.4
+## 2013.1.01391.S            J1733-1304   Band:3   obsdate:2015-04-11 08:42:25   FreqRes:122.0703125   Res:2.6063878713392201   Pol:XX YY    asdm:uid://A002/X9de499/X3601  integration:604.8
+## 2013.1.01391.S             J1733-130   Band:3   obsdate:2015-04-12 06:34:59   FreqRes:122.0703125   Res:2.9121804671820248   Pol:XX YY    asdm:uid://A002/X9e0695/X1d51  integration:151.2
+## 2015.A.00021.S            J1733-1304   Band:6   obsdate:2016-07-18 22:59:50   FreqRes:976.5625   Res:0.30102880840486829   Pol:XX YY    asdm:uid://A002/Xb58d4d/X559  integration:453.6
+## 2013.1.00877.S            J1733-1304   Band:7   obsdate:2015-07-25 01:53:31   FreqRes:976.5625   Res:0.13632696116312404   Pol:XX YY    asdm:uid://A002/Xa6a120/X1415  integration:695.52
+## 2013.1.00937.S            J1733-1304   Band:6   obsdate:2015-05-24 03:56:23   FreqRes:244.140625   Res:0.58895702045907505   Pol:XX YY    asdm:uid://A002/Xa16f89/Xc51  integration:604.8
+## 2013.1.01058.S            J1733-1304   Band:7   obsdate:2014-06-15 07:46:05   FreqRes:976.5625   Res:3.3664073348258565   Pol:XX YY    asdm:uid://A002/X8440e0/X3e00  integration:6048
+## 2013.1.01058.S             J1733-130   Band:7   obsdate:2014-06-28 04:54:37   FreqRes:976.5625   Res:3.6703456921834121   Pol:XX YY    asdm:uid://A002/X855419/X97d  integration:302.4
+## 2013.1.00489.S            J1733-1304   Band:6   obsdate:2015-07-20 05:18:54   FreqRes:976.5625   Res:0.23855861789084545   Pol:XX YY    asdm:uid://A002/Xa5df2c/Xbdd1  integration:604.8
+## 2013.1.00957.S            J1733-1304   Band:6   obsdate:2015-05-24 08:13:10   FreqRes:122.0703125   Res:0.7329454645518404   Pol:XX YY    asdm:uid://A002/Xa16f89/X1b6c  integration:665.28
+## 2013.1.00111.S            J1733-1304   Band:6   obsdate:2015-07-22 00:09:50   FreqRes:976.5625   Res:0.22012272780812572   Pol:XX YY    asdm:uid://A002/Xa657ad/Xd3b  integration:907.2
+## 2013.1.00428.S            J1733-1304   Band:3   obsdate:2015-05-25 05:57:17   FreqRes:122.0703125   Res:1.101696413768517   Pol:XX YY    asdm:uid://A002/Xa18feb/X161b  integration:393.12
+## 2013.1.00428.S              1730-130   Band:3   obsdate:2015-05-25 05:57:17   FreqRes:122.0703125   Res:1.1016951189437443   Pol:XX YY    asdm:uid://A002/Xa18feb/X161b  integration:151.2
+## 2013.1.00308.S            J1733-1304   Band:6   obsdate:2015-08-27 01:18:36   FreqRes:976.5625   Res:0.22370240248188528   Pol:XX YY    asdm:uid://A002/Xa8df68/Xb4b  integration:302.4
+## 2013.1.00615.S            J1733-1304   Band:6   obsdate:2015-08-28 02:34:27   FreqRes:976.5625   Res:0.26807697403997111   Pol:XX YY    asdm:uid://A002/Xa901a7/Xc64  integration:302.4
+## 2012.1.00628.T            J1733-1304   Band:6   obsdate:2014-03-26 08:00:12   FreqRes:244.140625   Res:0.67026860288700951   Pol:XX YY    asdm:uid://A002/X7d80c7/X1324  integration:302.4
+## 2012.1.00628.T            J1733-1304   Band:6   obsdate:2014-03-26 08:39:23   FreqRes:244.140625   Res:0.73518552513309932   Pol:XX YY    asdm:uid://A002/X7d80c7/X14a8  integration:604.8
+## 2013.1.01037.S            J1733-1304   Band:6   obsdate:2015-08-14 02:22:13   FreqRes:976.5625   Res:0.22187236121175938   Pol:XX YY    asdm:uid://A002/Xa80456/X1024  integration:302.4
+## 2013.1.00291.S            J1733-1304   Band:6   obsdate:2015-07-24 00:02:03   FreqRes:488.28125   Res:0.23032527567423353   Pol:XX YY    asdm:uid://A002/Xa68906/X9e4  integration:302.4
+## 2013.1.00428.S            J1733-1304   Band:3   obsdate:2015-09-05 23:03:59   FreqRes:122.0703125   Res:0.51976707532260991   Pol:XX YY    asdm:uid://A002/Xa9cdf5/X10c  integration:60.48
+## 2013.1.00428.S              1730-130   Band:3   obsdate:2015-09-05 23:03:59   FreqRes:122.0703125   Res:0.51976667196171045   Pol:XX YY    asdm:uid://A002/Xa9cdf5/X10c  integration:96.768
+## 2012.1.01011.S            J1733-1304   Band:7   obsdate:2014-04-08 10:02:55   FreqRes:61.03515625   Res:0.30401516110139981   Pol:XX YY    asdm:uid://A002/X7e9282/X83f  integration:907.2
+## 2012.1.01011.S             J1733-130   Band:7   obsdate:2014-04-13 10:43:00   FreqRes:976.5625   Res:0.41374812891704793   Pol:XX YY    asdm:uid://A002/X7f09aa/Xaa3  integration:151.2
+## 2013.1.00663.S             J1733-130   Band:7   obsdate:2014-05-19 08:28:11   FreqRes:122.0703125   Res:0.36548601586636936   Pol:XX YY    asdm:uid://A002/X822d50/X140b  integration:151.2
+## 2012.1.00080.S            J1733-1304   Band:3   obsdate:2013-06-15 04:35:45   FreqRes:488.28125   Res:9.4666326363310702   Pol:XX YY    asdm:uid://A002/X679d90/Xcfc  integration:2419.2
+## 2012.1.00080.S             J1733-130   Band:3   obsdate:2013-06-15 04:35:45   FreqRes:488.28125   Res:9.5280266489456782   Pol:XX YY    asdm:uid://A002/X679d90/Xcfc  integration:1512
+## 2013.1.00940.S            J1733-1304   Band:3   obsdate:2015-08-06 03:39:23   FreqRes:488.28125   Res:0.62659892216504565   Pol:XX YY    asdm:uid://A002/Xa77ec0/Xaa4  integration:302.4
+## 2013.1.00940.S            J1733-1304   Band:3   obsdate:2015-08-06 03:04:47   FreqRes:61.03515625   Res:0.61777312222178127   Pol:XX YY    asdm:uid://A002/Xa77ec0/X96d  integration:302.4
+## 2013.1.00600.S            J1733-1304   Band:6   obsdate:2015-08-29 22:19:48   FreqRes:488.28125   Res:0.21847221634033115   Pol:XX YY    asdm:uid://A002/Xa916fc/X517c  integration:302.4
+## 2013.1.01242.S            J1733-1304   Band:3   obsdate:2015-08-06 00:59:26   FreqRes:244.140625   Res:0.50410605586063306   Pol:XX YY    asdm:uid://A002/Xa77ec0/X26e  integration:302.4
+## 2013.1.00489.S            J1733-1304   Band:6   obsdate:2015-07-23 02:22:46   FreqRes:488.28125   Res:0.15349006253470396   Pol:XX YY    asdm:uid://A002/Xa66f35/X123c  integration:816.48
+## 2013.1.00601.S            J1733-1304   Band:6   obsdate:2015-08-05 04:14:16   FreqRes:30.517578125   Res:0.21476513410190815   Pol:XX YY    asdm:uid://A002/Xa76868/X14f5  integration:1753.92
+## 2013.1.01391.S            J1733-1304   Band:3   obsdate:2015-04-12 10:53:43   FreqRes:122.0703125   Res:2.9016598508232385   Pol:XX YY    asdm:uid://A002/X9e0695/X32ff  integration:302.4
+## 2013.1.01194.S             J1733-130   Band:3   obsdate:2015-04-25 05:56:07   FreqRes:122.0703125   Res:2.5061291873509317   Pol:XX YY    asdm:uid://A002/X9f15bd/Xb75  integration:151.2
+## 2013.1.01242.S            J1733-1304   Band:6   obsdate:2015-08-29 00:11:53   FreqRes:976.5625   Res:0.2356242959613464   Pol:XX YY    asdm:uid://A002/Xa916fc/Xcb3  integration:302.4
+## 2013.1.00940.S            J1733-1304   Band:4   obsdate:2015-08-08 22:39:25   FreqRes:488.28125   Res:0.33936223765775947   Pol:XX YY    asdm:uid://A002/Xa7b91c/X5dd  integration:302.4
+## 2013.1.01194.S            J1733-1304   Band:3   obsdate:2014-12-07 16:24:09   FreqRes:122.0703125   Res:0.47627973195759549   Pol:XX YY    asdm:uid://A002/X960614/X1643  integration:1058.4
+## 2013.1.01194.S            J1733-1304   Band:3   obsdate:2014-07-23 01:04:39   FreqRes:122.0703125   Res:0.6233331664936147   Pol:XX YY    asdm:uid://A002/X877e41/X452  integration:967.68
+## 2013.1.01194.S             B1730-130   Band:3   obsdate:2014-07-23 01:04:39   FreqRes:488.28125   Res:0.62333283429653374   Pol:XX YY    asdm:uid://A002/X877e41/X452  integration:2903.04
+## 2012.1.00707.S             J1733-130   Band:9   obsdate:2013-07-06 05:29:15   FreqRes:976.5625   Res:0.11539362061858184   Pol:XX YY    asdm:uid://A002/X6a1245/Xc7b  integration:151.2
+## 2013.1.01391.S            J1733-1304   Band:3   obsdate:2015-04-10 07:31:48   FreqRes:122.0703125   Res:2.6254182883558905   Pol:XX YY    asdm:uid://A002/X9dcf39/X28ff  integration:302.4
+## 2015.1.01289.S            J1733-1304   Band:3   obsdate:2016-01-09 12:56:39   FreqRes:292.96875   Res:2.6452402585801709   Pol:XX YY    asdm:uid://A002/Xaebbcb/X1ce4  integration:151.2
+## 2013.1.00458.S            J1733-1304   Band:9   obsdate:2015-08-13 01:28:03   FreqRes:122.0703125   Res:0.08357708357281371   Pol:XX YY    asdm:uid://A002/Xa7f13b/X575  integration:846.72
+## 2015.1.01289.S            J1733-1304   Band:3   obsdate:2016-01-19 12:11:46   FreqRes:292.96875   Res:2.7498484613127103   Pol:XX YY    asdm:uid://A002/Xaf05a3/X30bd  integration:151.2
+## 2015.1.01289.S            J1733-1304   Band:3   obsdate:2016-01-21 12:37:53   FreqRes:292.96875   Res:2.5160655049975653   Pol:XX YY    asdm:uid://A002/Xaf2188/X174a  integration:151.2
+
+Time Band 3 :  21870s (6.1h) 
+Time Band 4 :    605s (0.2h) 
+Time Band 6 :  46751s (13.0h) 
+Time Band 7 :  30452s (8.5h) 
+Time Band 9 :   1845s (0.5h) 
+
+ Project codes: 
+ 2011.0.00217.S  2011.0.00635.S  2011.0.00733.S  2011.0.00046.S  2011.0.00136.S  2011.0.00017.S  2011.0.00750.S  2012.1.00581.S  2012.1.00769.S  2012.1.00826.S  2012.1.00635.S  2012.1.00932.S  2012.1.01011.S  2012.1.00368.S  2012.1.00712.S  2012.1.00056.S  2012.1.00196.S  2012.1.00564.S  2012.1.00437.S  2012.1.00681.S  2012.1.00441.S  2012.1.00387.S  2012.1.00698.S  2013.1.01268.S  2012.1.00119.S  2012.1.00037.S  2013.1.00226.S  2013.1.00366.S  2013.1.01004.S  2013.1.00395.S  2012.1.00857.S  2013.1.00061.S  2013.1.00266.S  2012.1.00178.S  2013.1.00278.S  2013.1.00481.S  2013.1.00269.S  2012.1.00940.S  2013.1.00783.S  2012.1.00133.S  2013.1.00726.S  2013.1.01035.S  2013.1.00376.S  2013.1.01200.S  2013.1.01391.S  2013.1.01305.S  2013.1.01065.S  2013.1.00312.S  2013.1.00834.S  2013.1.00879.S  2013.1.01365.S  2013.1.00332.S  2013.1.00957.S  2013.1.00812.S  2012.1.00784.S  2013.1.00100.S  2015.A.00021.S  2013.1.00877.S  2013.1.00937.S  2013.1.01058.S  2013.1.00489.S  2013.1.00111.S  2013.1.00428.S  2013.1.00308.S  2013.1.00615.S  2012.1.00628.T  2013.1.01037.S  2013.1.00291.S  2013.1.00663.S  2012.1.00080.S  2013.1.00940.S  2013.1.00600.S  2013.1.01242.S  2013.1.00601.S  2013.1.01194.S  2012.1.00707.S  2015.1.01289.S  2013.1.00458.S 
+
+Total uids: 218 
+Total accepted uids: 78
+#################################
+### Total Number of Sources : 2 
