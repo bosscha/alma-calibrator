@@ -1,0 +1,177 @@
+
+Long integration with rather small flux
+----------------------------------------
+
+PKS J0334-4008 
+53.556892  -40.140388
+Flux: 0.9
+Redshift: 1.445
+
+Time Band 3 :  40612s (11.3h) 
+Time Band 4 :   9768s (2.7h) 
+Time Band 6 :  40334s (11.2h) 
+Time Band 7 :  20019s (5.6h) 
+Time Band 8 :   1300s (0.4h) 
+Time Band 9 :   5867s (1.6h) 
+
+Class:
+Flat-Spectrum Radio Source
+BL Lac
+
+Env (1Mpc, 1000 km/s): single
+Cone (30") : 3
+
+Total uids: 270 
+Total accepted projects: 113
+Projects with FreqRes < 1000: 45
+Polarization: No
+
+
+
+
+
+
+
+
+PKS J0423-0120
+65.815838  -1.342518 
+Flux: 0.93
+Redshift: 0.916087
+
+Time Band 3 :  30240s (8.4h) 
+Time Band 4 :   1572s (0.4h) 
+Time Band 6 :  41356s (11.5h) 
+Time Band 7 :  37860s (10.5h) 
+Time Band 8 :    454s (0.1h) 
+Time Band 9 :   4504s (1.3h) 
+
+Class:
+QSO, complete SED
+https://www.bu.edu/blazars/VLBA_GLAST/0420.html
+
+Env (1Mpc, 1000 km/s): single
+Cone (30"): many
+
+Total uids: 241
+Total accepted projects: 119
+Projects with FreqRes < 1000: 74
+Polarization: 4 projects, 1.4h in B7
+
+
+Project:
+2013.1.01172.S
+        ## 2013.1.01172.S             J0423-013   Band:6   obsdate:2014-06-30 11:49:53   FreqRes:1953.125   Res:0.54012823132627386   Pol:XX YY    asdm:uid://A002/X856bb8/X7a84  integration:151.2
+        ## 2013.1.01172.S            J0423-0120   Band:6   obsdate:2014-06-30 11:49:53   FreqRes:1953.125   Res:0.5401282313769763   Pol:XX YY    asdm:uid://A002/X856bb8/X7a84  integration:483.84
+        ## 2013.1.01172.S            J0423-0120   Band:6   obsdate:2014-12-08 02:46:38   FreqRes:1953.125   Res:1.039187311358583   Pol:XX YY    asdm:uid://A002/X960614/X3325  integration:362.88
+
+        ## 2013.1.01172.S             J0423-013   Band:3   obsdate:2014-08-30 12:32:42   FreqRes:1953.125   Res:0.7363947240804456   Pol:XX YY    asdm:uid://A002/X8a5fcf/X125f  integration:151.2
+        ## 2013.1.01172.S            J0423-0120   Band:3   obsdate:2014-07-23 12:04:45   FreqRes:1953.125   Res:0.73639472388161109   Pol:XX YY    asdm:uid://A002/X877e41/X187c  integration:362.88 (semipass)
+        ## 2013.1.01172.S            J0423-0120   Band:3   obsdate:2014-07-01 11:39:29   FreqRes:1953.125   Res:0.6174393063396425   Pol:XX YY    asdm:uid://A002/X85b7b2/Xd3a  integration:1179.36
+        ## 2013.1.01172.S             J0423-013   Band:3   obsdate:2015-03-08 00:14:10   FreqRes:1953.125   Res:0.61743930622856547   Pol:XX YY    asdm:uid://A002/X9baf64/X44e  integration:151.2 (semipass)
+
+
+2013.1.00662.S
+        ## 2013.1.00662.S             J0423-013   Band:3   obsdate:2015-01-15 01:15:03   FreqRes:61.03515625   Res:2.6391526864526935   Pol:XX YY    asdm:uid://A002/X9998b8/X11eb  integration:907.2
+        ## 2013.1.00662.S            J0423-0120   Band:3   obsdate:2015-01-15 01:15:03   FreqRes:61.03515625   Res:2.6422418003076165   Pol:XX YY    asdm:uid://A002/X9998b8/X11eb  integration:1512
+        ## 2013.1.00662.S            J0423-0120   Band:3   obsdate:2015-01-19 02:43:13   FreqRes:61.03515625   Res:2.7390919042777604   Pol:XX YY    asdm:uid://A002/X9a03fb/X2ca  integration:1209.6
+        ## 2013.1.00662.S             J0423-013   Band:3   obsdate:2015-01-19 02:43:13   FreqRes:61.03515625   Res:2.7448637020620503   Pol:XX YY    asdm:uid://A002/X9a03fb/X2ca  integration:907.2
+        ## 2013.1.00662.S            J0423-0120   Band:3   obsdate:2014-11-19 05:05:32   FreqRes:61.03515625   Res:8.8846877462182441   Pol:XX YY    asdm:uid://A002/X946a23/X9de  integration:604.799 (SEMIPASS)
+        ## 2013.1.00662.S             J0423-013   Band:3   obsdate:2014-12-06 06:15:56   FreqRes:31250.0   Res:15.654548984346205   Pol:XX YY    asdm:uid://A002/X95e355/Xee7  integration:302.4 
+
+
+warning in:
+/mnt/sciops/data/rwibowo/J0423-0120/2013.1.00662.S/2013.1.00662.S/science_goal.uid___A001_X145_Xc2/group.uid___A001_X145_Xc3/member.uid___A001_X145_Xc6/
+
+Step  14 Bandpass calibration
+1 of 20 solutions flagged due to SNR < 3 in spw=2 (chan=1289) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=2 (chan=1194) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=2 (chan=908) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=2 (chan=907) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=2 (chan=774) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=2 (chan=455) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=2 (chan=352) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=2 (chan=91) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1879) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1772) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1759) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1653) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1634) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1529) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1474) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1448) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1287) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1286) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=1144) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=929) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=893) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=694) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=577) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=490) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=448) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=336) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=263) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=121) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=111) at 2015/08/18/09:26:24.9
+1 of 20 solutions flagged due to SNR < 3 in spw=3 (chan=95) at 2015/08/18/09:26:24.9
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=123)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=122)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=121)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=120)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=119)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=118)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=117)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=116)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=6)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=5)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=4)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=3)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=2)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=1)
+ Insufficient unflagged antennas to proceed with this solve.
+   (time=2015/08/18/09:26:24.9 field=0 spw=4 chan=0)
+Step  15 Save flags before gain cal
+Step  16 Gain calibration
+
+
+
+2013.1.00103.S
+## 2013.1.00103.S            J0423-0120   Band:3   obsdate:2015-01-21 21:50:54   FreqRes:976.5625   Res:2.6010951100744766   Pol:XX YY    asdm:uid://A002/X9a24bb/X49f  integration:725.76
+
+error in:
+/mnt/sciops/data/rwibowo/J0423-0120/2013.1.00103.S/2013.1.00103.S/science_goal.uid___A001_X147_X24d/group.uid___A001_X147_X24e/member.uid___A001_X147_X24f
+
+RuntimeError: Table uid___A002_X9a24bb_Xa3d.ms.tsys does not exist
+
+error in:
+/mnt/sciops/data/rwibowo/J0423-0120/2013.1.00103.S/2013.1.00103.S/science_goal.uid___A001_X147_X255/group.uid___A001_X147_X256/member.uid___A001_X147_X257
+
+RuntimeError: MSMetaData::getObservatoryPosition:  out of range exception.
+https://safe.nrao.edu/wiki/pub/HPC/HPCTroubleshootingRequests/JAOPOST_Lustre_RCA_report_2.1.pdf
+
+2012.1.00268.S
+
+2012.1.01099.S
+
+2013.1.00532.S
+
+2012.1.00219.S
+
+
+
+
+
+
