@@ -123,7 +123,7 @@ class queryCal:
             xmldata = BeautifulSoup(alma_data.text, "lxml")
 
             if len(xmldata.contents) < 2:
-                print obj[0], " query FAIL! [Empty response]"
+                print "WARNING: ", obj[0], " query FAIL! [Empty response]"
                 res = 0
             else:
                 with open('xmldata.xml', 'w') as ofile: # write in a file, 
@@ -145,7 +145,7 @@ class queryCal:
                 df = pd.DataFrame(projects, columns=columns)
 
                 if len(df) == 0: # empty data
-                    print obj[0], "query success, but no data!"
+                    print "WARNING: ", obj[0], " query success, but no data!"
                     res = 0
                 else:
                     # change the type of some columns
@@ -170,7 +170,7 @@ class queryCal:
             return res
 
         except:
-            print obj[0], " query FAIL! [No response from server]"
+            print "WARNING: ", obj[0], " query FAIL! [No response from server]"
             return 0
 
 
@@ -329,7 +329,7 @@ class queryCal:
             subquery = "SELECT * FROM [{0}] WHERE (Array LIKE '%{1}%') AND (Frequency_resolution < {2})".format(tab, array, maxFreqRes)
 
             if selectPol:
-                subquery += " AND (Pol_products='XX XY YX YY')"
+                subquery += " AND (Pol_products LIKE '%XY%')"
 
             if excludeCycle0:
                 subquery += " AND (Project_code NOT LIKE '2011.%')"
@@ -338,15 +338,26 @@ class queryCal:
             # total integration time is calculated after selection for other criterias
             totalTime = {3:0., 4:0., 5:0., 6:0., 7:0., 8:0., 9:0., 10:0.}
             for key in totalTime:
-                sqlcmd = "SELECT SUM(Integration) FROM ({0}) WHERE Band='{1}'".format(subquery, key)
+                sqlcmd = "SELECT SUM(Integration) FROM ({0}) WHERE Band LIKE '%{1}%'".format(subquery, key)
                 cursor.execute(sqlcmd)
                 totalTime[key] = cursor.fetchone()[0]
 
+            for key in totalTime: # remove None
+                if totalTime[key] == None:
+                    totalTime[key] = 0.0
+
             # last selection is integration time
             selectSource = True
+            sum_time = 0
             for key in minTimeBand:
                 if totalTime[key] < minTimeBand[key]:
                     selectSource = False
+
+                sum_time += totalTime[key]
+
+            if sum_time == 0.0:
+                selectSource = False
+
 
             if selectSource:
                 if not silent:
@@ -371,7 +382,7 @@ class queryCal:
                         sqlcmd  = "SELECT Project_code, Source_name, RA, Dec, "
                         sqlcmd += "Band, Integration, Observation_date, Spatial_resolution, "
                         sqlcmd += "Asdm_uid, Frequency_resolution, Array, Pol_products " + subquery[8:]
-                        sqlcmd += " AND Band='{0}'".format(band)
+                        sqlcmd += " AND Band LIKE '%{0}%'".format(band)
                         sqlcmd += " ORDER BY Integration DESC;" 
                         # Select some columns from criteria
                         # Sort it base on integration time 
