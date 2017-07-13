@@ -62,6 +62,10 @@ HISTORY:
     2016.09.01:
         - check if the calibrator exists to move in the same directory but with the MS name.
         - add a check for solar system object which have no fix coordinates but assuming a current name
+
+    2017.07.13
+        - remove casac definition
+        - change checking the band using SPW0,  chan_freq = msmd.chanfreqs(0) -> I found a case where an MS only has 1 spw
         
 
 RUN:
@@ -92,7 +96,7 @@ import pylab as pl
 # import math 
 # import wavelet as wav
 import analysisUtils as aU
-from casa import casac
+#from casa import casac
 from casa import split
 
 import sqlite3 as sql
@@ -101,8 +105,8 @@ ARCSECTORAD = 4.84813681109536e-06
 
 SOLARSYSTEMOBJ = ["Titan", "Saturn", "Neptune", "Callisto","Mars","Mercury","Venus","Uranus"]
 
-tb = casac.table()
-msmd = casac.msmetadata()
+#tb = casac.table()
+#msmd = casac.msmetadata()
 
 class calibrator:
     
@@ -131,7 +135,7 @@ class calibrator:
         ## Band
         
         msmd.open(msName)
-        chan_freq = msmd.chanfreqs(1) 
+        chan_freq = msmd.chanfreqs(0) 
             
         band =  aU.freqToBand(chan_freq[0])
                 

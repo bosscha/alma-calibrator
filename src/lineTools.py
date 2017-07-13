@@ -160,7 +160,7 @@ import wavelet as wav
 
 SOLARSYSTEM = ['Mars','Jupiter','Callisto','Saturn','Titan','Pallas','Ceres','Neptune','Uranus']
 
-DEFAULTSPLAT = "/home/stephane/Science/RadioGalaxy/ALMA/absorptions/splatalogue/splatalogue.db"
+DEFAULTSPLAT = "/home/ridlo/casa-release-4.6.0-el6/data/ephemerides/splatalogue.db"
 
 class splat():
     "Class to deal with splatalogue.db for faster access"

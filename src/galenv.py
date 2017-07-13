@@ -15,10 +15,6 @@ HISTORY:
 2017.03.15:
     - put a circle in plot_cone (SL)
 
-
-TO DO:
-
-
 BUG:
     + ERROR if 'theta' (opening angle of cone) or the number of data is too large
         error message: Exception: Query failed: HTTPConnectionPool(host='ned.ipac.caltech.edu', port=80): Read timed out.
@@ -51,23 +47,35 @@ class Galenv:
     def __init__(self):
         self.CosmoModel = Planck15
         self.C = c.value/1000.0 # c in km/s
-        self.cone = 0.0
+        self.cone = 0.0 # initilize an object to save the query result
         self.conedv = 0.0
 
-    
+
+    def queryobject_byname(self, objname):
+        obj_table = Ned.query_object(objname)
+        
+        z = obj_table[0]['Redshift']
+        v0 = obj_table[0]['Velocity']
+        ra = obj_table[0]['RA(deg)']
+        dec = obj_table[0]['DEC(deg)']
+
+        return z, v0, ra, dec
+
+
     def theta_from_tangen_dist_and_dist(self, tangen_dist, dist):
         '''Calculate angle from tangential distance and angular distance'''
-        theta = np.degrees(float(tangen_dist)/dist) # Flat Universe
+        # Flat Universe, make it general (?)
+        theta = np.degrees(float(tangen_dist)/dist) 
         return theta
 
-    
+
     def calc_dA_theta(self, z, tangen_dist):
         '''Return angular diameter distance and angle (given tangential distance)'''
         angular_diameter_dist = self.CosmoModel.angular_diameter_distance(z)
         theta = self.theta_from_tangen_dist_and_dist(tangen_dist, angular_diameter_dist.value)
         return angular_diameter_dist.value, theta
-    
 
+    
     def z_from_vel(self, v):
         '''Relativistic doppler effect, return z (redshift)'''
         return np.sqrt((1.0 + v/self.C)/(1.0 - v/self.C)) - 1.0
@@ -77,10 +85,11 @@ class Galenv:
         '''Return all objects in a cone with an opening angle as input'''
         # coord in astropy.coordinates
         result = Ned.query_region(coord, radius=theta*u.deg, equinox=coord.equinox) 
-        if withz: # only objects which has redshift information
+        
+        if withz: # select objects which has redshift information
             res = result[~result['Redshift'].mask] # return False if data is masked (no redshift)
         else:
-            res = result # return all objects
+            res = result # all objects
 
         self.cone = res
         return res
@@ -89,9 +98,10 @@ class Galenv:
     def searchobject_in_cone_dv(self, coord, theta, v0, dv, withz=True):
         '''Return all objects within cone and in range of Delta v from the center object/coord (v0)'''
         res = self.searchobject_in_cone(coord, theta, withz=withz)
+        
         vmax, vmin = v0+dv, v0-dv
-        cut1 = res[res['Velocity'] > vmin]
-        cut2 = cut1[cut1['Velocity'] < vmax]
+        cut1 = res[res['Velocity'] >= vmin]
+        cut2 = cut1[cut1['Velocity'] <= vmax]
 
         self.conedv = cut2
         return cut2
@@ -99,38 +109,40 @@ class Galenv:
 
     def plot_env(self, coord, theta, res, v0, dv=5000, xSize=7.5, ySize=6, title='', show=True, savefig=False, imgname="plot.png"):
         '''Plot environment (cone + dv)'''
-
+        
         ra = coord.ra.value
         dec = coord.dec.value
 
         fig = plt.figure(figsize=(xSize, ySize))        
         gs = gridspec.GridSpec(1, 2, width_ratios=[4, 1])
         
+        # FIRST PLOT (RA DEC)
         ax = plt.subplot(gs[0])
         ax.axis('equal')
-        limangle = 1.15*theta
+        
+        limangle = 1.15*theta # bug (?)
         ax.set_xlim((ra-limangle, ra+limangle))
         ax.set_ylim((dec-limangle, dec+limangle))
         
         # it is wrong if I draw a circle around (ra, dec) with radius theta
         # due to small circle in celestial sphere for DEC
-
-        #circle = plt.Circle((ra, dec), theta, fc='none', ec='black')
-        #ax.add_artist(circle)
+        circle = plt.Circle((ra, dec), theta, fc='none', ec='black')
+        ax.add_artist(circle)
         ax.plot(res['RA(deg)'], res['DEC(deg)'], 'b.')
         plt.gca().invert_xaxis() # RA from E to W
         ax.set_xlabel('RA(deg)')
         ax.set_ylabel('DEC(deg)')
         plt.title(title)
         
-        ###
         
+        # SECOND PLOT (RA VEL)
         ax2 = plt.subplot(gs[1])
+        
         ax2.plot(res['RA(deg)'], res['Velocity'] - v0, 'b.')
         ax2.set_ylim((-dv, dv))
         ax2.set_xlim((ra-limangle, ra+limangle))
         ax2.yaxis.tick_right()
-        plt.gca().invert_xaxis() 
+        plt.gca().invert_xaxis() # RA from E to W
         ax2.set_xlabel('RA(deg)')
         ax2.set_ylabel('Relative velocity')
 
@@ -146,6 +158,7 @@ class Galenv:
 
 
     def plot_cone(self, coord, theta, res, xSize=7.5, ySize=6, title='', show=True, savefig=False, imgname="plot.png"):
+        '''Only cone'''
         ra = coord.ra.value
         dec = coord.dec.value
 
@@ -154,7 +167,7 @@ class Galenv:
         
         ax = plt.subplot(gs[0])
         ax.axis('equal')
-        limangle = 1.15*theta
+        limangle = 1.5*theta
         ax.set_xlim((ra-limangle, ra+limangle))
         ax.set_ylim((dec-limangle, dec+limangle))
         
@@ -184,26 +197,12 @@ class Galenv:
 
 
     def conedv_byname(self, objname, tangen_dist, dv, show=False, savefig=False, imgname="plot.png"):
-        '''
-        Return all object in cone + dv and plot these object
-        INPUT: object name accepted by NED
-        RETURN: list of object and plot
-        '''
-
         print "Query from name: ", objname
-        
-        obj_table = Ned.query_object(objname)
-        
-        z = obj_table[0]['Redshift']
-        v0 = obj_table[0]['Velocity']
-        ra = obj_table[0]['RA(deg)']
-        dec = obj_table[0]['DEC(deg)']
-
+        z, v0, ra, dec = self.queryobject_byname(objname)
         coord = coordinates.SkyCoord(ra=ra, dec=dec, unit=(u.deg, u.deg))
-
         print "RA, Dec (deg)  : ", ra, dec
-        print "Redshift       : ", z
-        print "Velocity       : ", v0
+        print "Redshift : ", z
+        print "Velocity : ", v0
 
         
         if isinstance(z, np.float64) or isinstance(v0, np.float64): # if there is v or z in NED
@@ -234,13 +233,14 @@ class Galenv:
 
         print "Searching objects in cone section... \ntheta = "+str(theta)+" deg; v = ["+str(v0-dv)+", "+str(v0+dv)+"]" 
         res = self.searchobject_in_cone_dv(coord, theta, v0, dv)
-        print "Number of objects in cone that has data of velocity v +- dv: ", len(res)
+        #print "Number of objects : ", len(res)
 
         self.plot_env(coord, theta, res, v0, dv, title=str(tangen_dist)+" Mpc, "+str(dv)+" km/s, " 
                 + "\n$H_0$ = " + str(self.CosmoModel.H0)
                 + ", $\Omega_{m}$ = " + str(self.CosmoModel.Om0)[:5]
                 + ", $\Omega_{\Lambda} = $"+ str(self.CosmoModel.Ode0)[:5], show=show, savefig=savefig, imgname=imgname)
 
+        return res
 
     def conedv_byposvel(self, coord, v0, tangen_dist, dv, show=False, savefig=False, imgname="plot.png"):
         # position in in astropy.coordinates
@@ -271,28 +271,29 @@ class Galenv:
             + ", $\Omega_{m}$ = " + str(self.CosmoModel.Om0)[:5]
             + ", $\Omega_{\Lambda} = $"+ str(self.CosmoModel.Ode0)[:5], show=show, savefig=savefig, imgname=imgname)
 
+        return res
 
-    def cone_byname(self, objname, theta, show=False, savefig=False, imgname="plot.png"):
+    def cone_byname(self, objname, theta, show=True, savefig=False, imgname="plot.png"):
+        '''Plot all objects in cone even without redshift information'''
         print "Query from name: ", objname
         z, v0, ra, dec = self.queryobject_byname(objname)
         coord = coordinates.SkyCoord(ra=ra, dec=dec, unit=(u.deg, u.deg))
         print "RA, Dec (deg)  : ", ra, dec
-
         print "Searching objects in cone (only).. \ntheta = "+str(theta)+" deg"
         res = self.searchobject_in_cone(coord, theta, withz=False)
-
         self.plot_cone(coord, theta, res, show=show, savefig=savefig, imgname=imgname)
 
+        return res
 
-    def cone_bypos(self, coord, theta, show=False, savefig=False, imgname="plot.png"):
-        print "Query from position ", coord
-
+    def cone_bypos(self, coord, theta, show=True, savefig=False, imgname="plot.png"):
+        '''Plot all objects in cone even without redshift information'''
+        # coord in astropy.coordinates
+        print "Query from position: ", coord
         print "Searching objects in cone (only).. \ntheta = "+str(theta)+" deg"
         res = self.searchobject_in_cone(coord, theta, withz=False)
-
         self.plot_cone(coord, theta, res, show=show, savefig=savefig, imgname=imgname)
 
-
+        return res
 
 
 if __name__ == '__main__':
