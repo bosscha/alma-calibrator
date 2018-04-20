@@ -197,7 +197,7 @@ def get_npolarizations(msName):
 
 def estimate_sensitivity(msName):
     # find integration time
-    time_os = au.timeOnSource(msName)
+    time_os = aU.timeOnSource(msName)
     print("-------------------------------------------------")
     int_time = time_os[0]['minutes_on_source'] # always in field 0 (from split)
     print "Integration time = ", int_time, " min"
