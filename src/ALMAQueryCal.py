@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/home/ridlo/anaconda2/bin/python
 
 """
 Script to query the ALMA archive with filter to select the list of Calibrators to be analyzed
@@ -38,6 +38,14 @@ HISTORY:
 
     2017.04.09
         - selectdeepfield from sql file 
+
+    2018-02.10
+        - start to re-code again, data structure changed by ALMA
+
+    2018-03.30
+        - fix several bugs
+
+
         
         
 """
@@ -61,6 +69,8 @@ from bs4 import BeautifulSoup
 import sqlite3 as sql
 
 
+
+
 columns=['Project_code', 'Source_name', 'RA', 'Dec', 'Galactic_longitude', 'Galactic_latitude', \
          'Band', 'Spatial_resolution', 'Frequency_resolution', 'Array', 'Mosaic', 'Integration', \
          'Release_date', 'Frequency_support', 'Velocity_resolution', 'Pol_products', \
@@ -69,6 +79,9 @@ columns=['Project_code', 'Source_name', 'RA', 'Dec', 'Galactic_longitude', 'Gala
          'Project_type', 'Scan_intent', 'Field_of_view', 'Largest_angular_scale', 'QA2_Status',\
          'Pub', 'Science_keyword', 'Scientific_category', 'ASA_PROJECT_CODE']
 
+
+with open('ALMACAL_object.dat') as f:
+    almacal_list = f.read().splitlines()
 
 
 class queryCal:
@@ -358,6 +371,8 @@ class queryCal:
             if sum_time == 0.0:
                 selectSource = False
 
+            # if tab in almacal_list:
+            #     selectSource = False
 
             if selectSource:
                 if not silent:
@@ -365,7 +380,11 @@ class queryCal:
                 
                 nsource += 1
 
-                reportSource  = "\n######## Source name: {0} ########\n".format(tab)
+                if tab in almacal_list:
+                    reportSource = "\n######## Source name: {0} (In ALMACAL) ########\n".format(tab)
+                else:
+                    reportSource  = "\n######## Source name: {0} ########\n".format(tab)
+
                 reportSource += "\n"
                 for key in totalTime:
                     if totalTime[key] > 0.:
