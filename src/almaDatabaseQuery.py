@@ -1,4 +1,3 @@
-#!/home/ridlo/anaconda2/bin/python
 
 """
 Script to query the ALMA archive with filter to select the list of Calibrators to be analyzed
@@ -46,6 +45,9 @@ HISTORY:
         - fix some bugs
         - rename the class and functions accoding to PEP8 Python style guide
 
+    2018-04-23
+        - add redshift in the report
+
 
         
         
@@ -64,12 +66,15 @@ import pandas as pd
 
 import sys 
 
-reload(sys) #! for Unicode conversion problem
-sys.setdefaultencoding('utf8')
+#reload(sys) #! for Unicode conversion problem
+#sys.setdefaultencoding('utf8')
 
-import sqlite3 as sql
+import sqlite3 as sql # to save the database
+
+from astroquery.ned import Ned # to get redshift
 
 
+# To check the objects in ALMACAL project
 with open('ALMACAL_object.dat') as f:
     almacal_list = f.read().splitlines()
     
@@ -165,6 +170,7 @@ class databaseQuery:
                                  excludeCycle0=True, \
                                  selectPol=False, \
                                  minTimeBand = {3:1e9,6:1e9,7:1e9}, \
+                                 nonALMACAL=False,
                                  verbose = True, silent=True):
         """
         From the sql database we can select some calibrators based on:
@@ -187,6 +193,7 @@ class databaseQuery:
 
         nsource = 0 # number of selected source
         finalReport = []
+        resume = []
 
         for tab in tables: 
             # table name is the name of source
@@ -224,8 +231,9 @@ class databaseQuery:
             if sum_time == 0.0:
                 selectSource = False
 
-            # if tab in almacal_list:
-            #     selectSource = False
+            if nonALMACAL:
+                if tab in almacal_list:
+                    selectSource = False
             
             if selectSource:
                 if not silent:
@@ -238,7 +246,8 @@ class databaseQuery:
                 else:
                     reportSource  = "\n######## Source name: {0} ########\n".format(tab)
 
-                reportSource += "\n"
+
+                reportSource += "\n\n"
                 for key in totalTime:
                     if totalTime[key] > 0.:
                         reportSource += "Time Band %d : %6.0fs (%3.1fh) \n"%(key, totalTime[key], totalTime[key] / 3600.)
@@ -296,7 +305,48 @@ class databaseQuery:
                             if not foundProject:
                                 totalprojects.append(p)
 
+                # Additional notes
+                reportSource += "\n\nAdditional Notes:"
 
+                #! Nested try-except
+                # try to find the object using name, if not found try using region query!
+                try:
+                    obj_table = Ned.query_object("PKS " + tab)
+                    name = obj_table[0]['Object Name']
+                    z = obj_table[0]['Redshift']
+                    v0 = obj_table[0]['Velocity']
+                    ra = obj_table[0]['RA(deg)']
+                    dec = obj_table[0]['DEC(deg)']
+                    if isinstance(obj_table[i]['Redshift'], np.ma.MaskedArray):
+                        z = None
+                        reportSource += "\n\nNo redshift data found in NED! " + "\nName = " + str(name) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
+                    else:
+                        reportSource += "\nName = " + str(name) + "\nz = " + str(z) + "\nvelocity = " + str(v0) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
+
+                except Exception, e1:
+                    try:
+                        co = coordinates.SkyCoord(ra=uid[2], dec=uid[3], unit=(u.deg, u.deg))
+                        obj_table = Ned.query_region(co, radius=0.005*u.deg)
+
+                        yohoho = False
+                        for i,_obj in enumerate(obj_table):
+                            name = obj_table[i]['Object Name']
+                            ra = obj_table[i]['RA(deg)']
+                            dec = obj_table[i]['DEC(deg)']
+                            if not isinstance(obj_table[i]['Redshift'], np.ma.MaskedArray):
+                                z = obj_table[i]['Redshift']
+                                v0 = obj_table[i]['Velocity']
+                                reportSource += "\n\nName = " + str(name) + "\nz = " + str(z) + "\nvelocity = " + str(v0) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
+                                yohoho = True
+                                break
+
+                        if not yohoho:
+                            reportSource += "\n\nNo redshift data found in NED! " + "\nName = " + str(name) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
+                            z = None # for resume[]
+
+                    except Exception, e2:
+                        reportSource += "\n\nNo data found in NED!\n" + str(e)
+                        name = None; z = None  # for resume[]
 
                 total_number_of_projects = len(totalprojects)
                 endText  = "\n\n###\nTotal accepted uid for this object = {0}".format(total_number_of_uids)
@@ -305,6 +355,7 @@ class databaseQuery:
                 reportSource += endText
 
                 finalReport.append([total_number_of_projects, tab, reportSource])
+                resume.append([tab, uid[2], uid[3], name, ra, dec, z, total_number_of_projects])
 
             else:
                 if not silent:
@@ -318,7 +369,7 @@ class databaseQuery:
         # sorting according to the number of uids
         finalReportSorted = sorted(finalReport, key=lambda data: data[0])
         
-        return(finalReportSorted)
+        return(finalReportSorted, resume)
 
 
 
@@ -345,5 +396,5 @@ class databaseQuery:
 
 
 if __name__=="__main__":
-    file_listcal = "callist_20170329.list"
+    file_listcal = "alma_sourcecat_searchresults_20180419.csv"
 
