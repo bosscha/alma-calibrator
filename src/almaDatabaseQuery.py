@@ -75,6 +75,7 @@ from astroquery.ned import Ned # to get redshift
 
 
 # To check the objects in ALMACAL project
+# Hard coded
 with open('ALMACAL_object.dat') as f:
     almacal_list = f.read().splitlines()
     
@@ -262,7 +263,7 @@ class databaseQuery:
 
                         sqlcmd  = "SELECT `Project code`, `Source name`, RA, Dec, "
                         sqlcmd += "Band, Integration, `Observation date`, `Spatial resolution`, "
-                        sqlcmd += "`Asdm uid`, `Frequency resolution`, Array, `Pol products` " + subquery[8:]
+                        sqlcmd += "`Asdm uid`, `Frequency resolution`, Array, `Pol products`, `Galactic longitude`, `Galactic latitude` " + subquery[8:]
                         sqlcmd += " AND Band LIKE '%{0}%'".format(band)
                         sqlcmd += " ORDER BY Integration DESC;" 
                         # Select some columns from criteria
@@ -355,7 +356,7 @@ class databaseQuery:
                 reportSource += endText
 
                 finalReport.append([total_number_of_projects, tab, reportSource])
-                resume.append([tab, uid[2], uid[3], name, ra, dec, z, total_number_of_projects])
+                resume.append([tab, uid[2], uid[3], name, ra, dec, z, total_number_of_projects, total_number_of_uids, uid[12], uid[13]])
 
             else:
                 if not silent:
