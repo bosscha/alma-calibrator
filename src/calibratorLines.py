@@ -123,6 +123,10 @@ HISTORY:
     
     2017.03.09:
         - update of the line extraction changing the plot figure to avoid bad distance in matplotlib
+        
+    
+    2018.05.03:
+        - update to CASA 5.0 and newer. Backward compatibility is not tested
 
 RUN:
 """
@@ -130,13 +134,14 @@ RUN:
 from os.path import curdir
 
 __author__="S. Leon @ ALMA"
-__version__="0.7.3@2017.03.09"
+__version__="0.7.4@2018.05.03"
 
 
 import sys
 #sys.path.insert(0,'/home/stephane/git/signalanalysis/SignalAnalysis/Wavelet/')
 sys.path.insert(0,'/home/stephane/workspace/AIV/science/analysis_scripts/')
 sys.path.insert(0,'/users/sleon/AIV/science/analysis_scripts')
+sys.path.insert(0,'./')
 
 import os
 import os.path
@@ -150,7 +155,9 @@ import math
 import wavelet as wav
 
 import analysisUtils as aU
-from casa import casac
+
+from taskinit import *
+# from casa import casac
 from casa import plotms
 
 import sqlite3 as sql
