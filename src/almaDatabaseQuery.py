@@ -98,22 +98,30 @@ class databaseQuery:
                 if line[0] != "#":
                     tok       = line.split(",")
                     band      = tok[0].split(" ")[1]
-                    name      = tok[13].strip().split("|")[0]
+                    alias     = tok[13].strip().split("|")
+                    name      = alias[0]
                     alpha2000 = tok[3]
                     delta2000 = tok[5]
-                    flux      = float(tok[7]) # flux in a particular Band
+                    flux      = float(tok[7]) # flux density in a particular Band
+                    freq      = float(tok[9])
+                    obsdate   = tok[2]
+
 
                     if (flux >= fluxrange[0] and flux <= fluxrange[1]):
                         found = False
-                        for nameYet in listcal:
+                        for i, cal in enumerate(listcal):
                             # to remove the duplicate
-                            if nameYet[0] == name:
+                            if cal[0] == name:
                                 found = True
+                                cal[4].append(flux)
+                                cal[5].append(band)
+                                cal[6].append(freq)
+                                cal[7].append(obsdate)
 
                         if not found:
                             coord = coordinates.SkyCoord(alpha2000 + delta2000, unit=(u.hourangle, u.deg), equinox='J2000') 
                             # convert using astropy
-                            listcal.append([name, coord.ra.value, coord.dec.value, flux, band])
+                            listcal.append([name, coord.ra.value, coord.dec.value, alias, [flux], [band], [freq], [obsdate]])
 
         return(listcal)
     
@@ -171,7 +179,8 @@ class databaseQuery:
                                  excludeCycle0=True, \
                                  selectPol=False, \
                                  minTimeBand = {3:1e9,6:1e9,7:1e9}, \
-                                 nonALMACAL=False,
+                                 nonALMACAL=False, \
+                                 onlyALMACAL=False, \
                                  verbose = True, silent=True):
         """
         From the sql database we can select some calibrators based on:
@@ -234,6 +243,12 @@ class databaseQuery:
 
             if nonALMACAL:
                 if tab in almacal_list:
+                    selectSource = False
+
+            if onlyALMACAL:
+                if (selectSource == True) and (tab in almacal_list):
+                    selectSource = True
+                else:
                     selectSource = False
             
             if selectSource:
