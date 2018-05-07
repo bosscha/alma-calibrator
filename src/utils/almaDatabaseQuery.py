@@ -371,7 +371,11 @@ class databaseQuery:
                 reportSource += endText
 
                 finalReport.append([total_number_of_projects, tab, reportSource])
-                resume.append([tab, uid[2], uid[3], name, ra, dec, z, total_number_of_projects, total_number_of_uids, uid[12], uid[13]])
+                # resume python-list consist of:
+                # 0,1,2,3,4,5,6: Name, RA, Dec, Name_NED, RA_NED, Dec_NED, z_NED
+                # 7,8,9,10: Total number of project, total number of UIDS, Gal_lon, Gal_lat
+                # 11,12,13: Total time in Band 3, 6, 7  
+                resume.append([tab, uid[2], uid[3], name, ra, dec, z, total_number_of_projects, total_number_of_uids, uid[12], uid[13], totalTime[3], totalTime[6], totalTime[7]])
 
             else:
                 if not silent:
