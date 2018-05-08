@@ -47,7 +47,10 @@ HISTORY:
 
     2018-04-23
         - add redshift in the report
+        - add resume (python-list) to do analysis
 
+    2018-05-07
+        - add function to make a report for some objects (input: list of name)
 
         
         
@@ -385,6 +388,183 @@ class databaseQuery:
 
         connection.close()
         print "Number of accepted source: ", nsource
+
+        # sorting according to the number of uids
+        finalReportSorted = sorted(finalReport, key=lambda data: data[0])
+        
+        return(finalReportSorted, resume)
+
+
+
+    def make_report_from_sqldb(self, dbname, list_of_obj, \
+                                 maxFreqRes = 1000.0, \
+                                 array='12m', \
+                                 excludeCycle0=True, \
+                                 selectPol=False, \
+                                 verbose = True, silent=True):
+        """
+        return report for a list of object
+        """
+        connection = sql.connect(dbname)
+        connection.text_factory = str # return str, not unicode
+        cursor = connection.cursor()
+
+        # make a list of calibrator from table name.
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        tablefetch = cursor.fetchall()
+        tables = [table[0] for table in tablefetch] # remove tuple
+
+        nsource = 0 # number of selected source
+        finalReport = []
+        resume = []
+
+        for tab in list_of_obj: 
+            # table name is the name of source
+            # subquery = '['+tab+']'
+            subquery = "SELECT * FROM [{0}] WHERE (Array LIKE '%{1}%') AND ([Frequency resolution] < {2})".format(tab, array, maxFreqRes)
+
+            if selectPol:
+                subquery += " AND (`Pol products` LIKE '%XY%')"
+
+            if excludeCycle0:
+                subquery += " AND (`Project code` NOT LIKE '2011.%')"
+            
+            
+            # and here we execute the query
+            # total integration time is calculated after selection for other criterias
+            totalTime = {3:0., 4:0., 5:0., 6:0., 7:0., 8:0., 9:0., 10:0.}
+            for key in totalTime:
+                sqlcmd = "SELECT SUM(Integration) FROM ({0}) WHERE Band LIKE '%{1}%'".format(subquery, key)
+                cursor.execute(sqlcmd)
+                totalTime[key] = cursor.fetchone()[0]
+
+            for key in totalTime: # remove None
+                if totalTime[key] == None:
+                    totalTime[key] = 0.0
+
+
+                
+            nsource += 1
+
+            reportSource  = "\n######## Source name: {0} ########\n".format(tab)
+
+            reportSource += "\n\n"
+            for key in totalTime:
+                if totalTime[key] > 0.:
+                    reportSource += "Time Band %d : %6.0fs (%3.1fh) \n"%(key, totalTime[key], totalTime[key] / 3600.)
+
+            reportSource += "\nList of obs:"
+            
+            total_number_of_uids = 0
+            totalprojects = [] # all project for this source
+            for band in totalTime:
+                if totalTime[band] > 0.: # report per Band
+                    reportSource += "\n\n### Band: {0} ###".format(band)
+
+                    sqlcmd  = "SELECT `Project code`, `Source name`, RA, Dec, "
+                    sqlcmd += "Band, Integration, `Observation date`, `Spatial resolution`, "
+                    sqlcmd += "`Asdm uid`, `Frequency resolution`, Array, `Pol products`, `Galactic longitude`, `Galactic latitude` " + subquery[8:]
+                    sqlcmd += " AND Band LIKE '%{0}%'".format(band)
+                    sqlcmd += " ORDER BY Integration DESC;" 
+                    # Select some columns from criteria
+                    # Sort it base on integration time 
+                    # in each band
+                    
+                    cursor.execute(sqlcmd)
+                    fetch = cursor.fetchall()
+
+                    projects = [] # project for this Band
+                    for uid in fetch:
+                        foundProject = False
+                        for p in projects:
+                            if p == uid[0]:
+                                foundProject = True
+
+                        if not foundProject:
+                            projects.append(uid[0])
+
+                        if verbose:
+                            reportSource += "\n{0} {1} ra:{2} dec:{3} Band:{4} Int:{5} Obsdate:{6} SpatRes:{7} ASDM:{8} FreqRes:{9} Array:{10} Pol:{11}".format(uid[0], uid[1], str(uid[2])[:9], str(uid[3])[:9], \
+                                uid[4], uid[5], uid[6][:9], str(uid[7])[:5], uid[8], str(uid[9])[:7], uid[10], uid[11])
+
+                    number_of_uid = len(fetch)
+                    total_number_of_uids += number_of_uid
+
+                    reportSource += "\n\nTotal accepted uid for Band {0} = {1}".format(band, number_of_uid)
+                    reportSource += "\n\nProject codes for Band %d: \n"%(band)
+
+                    for p in projects:
+                        reportSource += "%s "%(p)
+
+                        # Calculate total number of projects
+                        # one project may (likely) have several uids in different band
+                        foundProject = False
+                        for q in totalprojects:
+                            if p == q:
+                                foundProject = True
+
+                        if not foundProject:
+                            totalprojects.append(p)
+
+            # Additional notes
+            reportSource += "\n\nAdditional Notes:"
+
+            #! Nested try-except
+            # try to find the object using name, if not found try using region query!
+            try:
+                obj_table = Ned.query_object("PKS " + tab)
+                name = obj_table[0]['Object Name']
+                z = obj_table[0]['Redshift']
+                v0 = obj_table[0]['Velocity']
+                ra = obj_table[0]['RA(deg)']
+                dec = obj_table[0]['DEC(deg)']
+                if isinstance(obj_table[i]['Redshift'], np.ma.MaskedArray):
+                    z = None
+                    reportSource += "\n\nNo redshift data found in NED! " + "\nName = " + str(name) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
+                else:
+                    reportSource += "\nName = " + str(name) + "\nz = " + str(z) + "\nvelocity = " + str(v0) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
+
+            except Exception, e1:
+                try:
+                    co = coordinates.SkyCoord(ra=uid[2], dec=uid[3], unit=(u.deg, u.deg))
+                    obj_table = Ned.query_region(co, radius=0.005*u.deg)
+
+                    yohoho = False
+                    for i,_obj in enumerate(obj_table):
+                        name = obj_table[i]['Object Name']
+                        ra = obj_table[i]['RA(deg)']
+                        dec = obj_table[i]['DEC(deg)']
+                        if not isinstance(obj_table[i]['Redshift'], np.ma.MaskedArray):
+                            z = obj_table[i]['Redshift']
+                            v0 = obj_table[i]['Velocity']
+                            reportSource += "\n\nName = " + str(name) + "\nz = " + str(z) + "\nvelocity = " + str(v0) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
+                            yohoho = True
+                            break
+
+                    if not yohoho:
+                        reportSource += "\n\nNo redshift data found in NED! " + "\nName = " + str(name) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
+                        z = None # for resume[]
+
+                except Exception, e2:
+                    reportSource += "\n\nNo data found in NED!\n" + str(e)
+                    name = None; z = None  # for resume[]
+
+            total_number_of_projects = len(totalprojects)
+            endText  = "\n\n###\nTotal accepted uid for this object = {0}".format(total_number_of_uids)
+            endText += "\nTotal accepted project for this object = {0}\n".format(total_number_of_projects)
+            endText += "###############################################\n\n\n\n\n\n\n"
+            reportSource += endText
+
+            finalReport.append([total_number_of_projects, tab, reportSource])
+            # resume python-list consist of:
+            # 0,1,2,3,4,5,6: Name, RA, Dec, Name_NED, RA_NED, Dec_NED, z_NED
+            # 7,8,9,10: Total number of project, total number of UIDS, Gal_lon, Gal_lat
+            # 11,12,13: Total time in Band 3, 6, 7  
+            resume.append([tab, uid[2], uid[3], name, ra, dec, z, total_number_of_projects, total_number_of_uids, uid[12], uid[13], totalTime[3], totalTime[6], totalTime[7]])
+
+
+        connection.close()
+        print "Number of source: ", nsource
 
         # sorting according to the number of uids
         finalReportSorted = sorted(finalReport, key=lambda data: data[0])
