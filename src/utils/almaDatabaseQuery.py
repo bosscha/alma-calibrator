@@ -52,6 +52,9 @@ HISTORY:
     2018-05-07
         - add function to make a report for some objects (input: list of name)
 
+    2018-05-18
+        - change print function so that it is compatible with Python 3
+
         
         
 """
@@ -256,7 +259,7 @@ class databaseQuery:
             
             if selectSource:
                 if not silent:
-                    print 'Accepted', tab, totalTime
+                    print('Accepted', tab, totalTime)
                 
                 nsource += 1
 
@@ -382,12 +385,12 @@ class databaseQuery:
 
             else:
                 if not silent:
-                    print 'Not accepted', tab, totalTime
+                    print('Not accepted', tab, totalTime)
                 pass
 
 
         connection.close()
-        print "Number of accepted source: ", nsource
+        print("Number of accepted source: ", nsource)
 
         # sorting according to the number of uids
         finalReportSorted = sorted(finalReport, key=lambda data: data[0])
@@ -564,7 +567,7 @@ class databaseQuery:
 
 
         connection.close()
-        print "Number of source: ", nsource
+        print("Number of source: ", nsource)
 
         # sorting according to the number of uids
         finalReportSorted = sorted(finalReport, key=lambda data: data[0])
