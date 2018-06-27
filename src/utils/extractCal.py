@@ -2,7 +2,7 @@
 # generate list of .ms.split.cal
 # check if it is all 12m array, is fo split using calibratorTools.py
 # Run:
-#   casa -c extractCal.py
+#   casa -c extractCal.py PROJECTNAME
 
 
 import os
@@ -26,29 +26,29 @@ def generateMSlist(location):
     No_mssplitcal = [] # single dish
     array7 = []
 
-    print dirsDepth
-    print "---------------------------"
+    print(dirsDepth)
+    print("---------------------------")
 
     for dirs in dirsDepth:
         os.chdir(dirs) # enter Member dir
         if os.path.exists("calibrated"):
             os.chdir("calibrated")
             newloc = os.getcwd()
-            print "Search *ms.split.cal in directory: ", os.getcwd()
-            print "-------------------"
+            print("Search *ms.split.cal in directory: ", os.getcwd())
+            print("-------------------")
             MSlist = []
             for ifile in glob.glob("*.ms.split.cal"):
                 print(ifile)
                 MSlist.append(newloc+"/"+ifile)
                 AllMSlist.append(newloc+"/"+ifile)
 
-            print "-------------------"
+            print("-------------------")
             
             if len(MSlist) == 0:
                 No_mssplitcal.append(newloc)
             else:
                 for ifile in MSlist:
-                    print "Checking MS: ", ifile
+                    print("Checking MS: ", ifile)
                     # check if contain 7m array
                     arr7 = False
                     tb.open(ifile + "/ANTENNA")
@@ -63,7 +63,7 @@ def generateMSlist(location):
                         array7.append(ifile)
 
         else:
-            print "No /calibrated directory in this member: ", os.getcwd()
+            print("No /calibrated directory in this member: ", os.getcwd())
             No_calibrated.append(os.getcwd())
 
         os.chdir(location)
@@ -88,25 +88,28 @@ def runextract(structFile, MSlist):
 
 def printlist(arr):
     for i in arr:
-        print i
+        print(i)
+
 
 if __name__ == '__main__':
-    dirname = "/mnt/sciops/data/rwibowo/projects/2012.1.00837.S"
+    dirhome = os.getcwd()
+    dirname = dirhome + "/" + sys.argv[3]
+
     MSlist_tobe_splitted, AllMSlist, No_calibrated, No_mssplitcal, array7 = generateMSlist(dirname)
     runextract("structureFile.par", MSlist_tobe_splitted)
 
     # For logging
-    print "Calibrated dir not Found: ", len(No_calibrated)
+    print("Calibrated dir not Found: ", len(No_calibrated))
     printlist(No_calibrated)
 
-    print "All MS: ", len(AllMSlist)
+    print("All MS: ", len(AllMSlist))
     printlist(AllMSlist)
     
-    print "Splitted: ", len(MSlist_tobe_splitted)
+    print("Splitted: ", len(MSlist_tobe_splitted))
     printlist(MSlist_tobe_splitted)
 
-    print "Contain 7m-array: ", len(array7)
+    print("Contain 7m-array: ", len(array7))
     printlist(array7)
 
-    print "No *.ms.split.cal: ", len(No_mssplitcal)
+    print("No *.ms.split.cal: ", len(No_mssplitcal))
     printlist(No_mssplitcal)

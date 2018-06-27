@@ -15,6 +15,10 @@ HISTORY:
 2017.03.15:
     - put a circle in plot_cone (SL)
 
+2018.06.19:
+    - change print function so it is compatible with Python 3
+
+
 BUG:
     + ERROR if 'theta' (opening angle of cone) or the number of data is too large
         error message: Exception: Query failed: HTTPConnectionPool(host='ned.ipac.caltech.edu', port=80): Read timed out.
@@ -70,7 +74,10 @@ class Galenv:
 
 
     def calc_dA_theta(self, z, tangen_dist):
-        '''Return angular diameter distance and angle (given tangential distance)'''
+        '''Return angular diameter distance and angle (given tangential distance)
+        angular diameter dist in Mpc
+        tangen_dist in Mpc
+        '''
         angular_diameter_dist = self.CosmoModel.angular_diameter_distance(z)
         theta = self.theta_from_tangen_dist_and_dist(tangen_dist, angular_diameter_dist.value)
         return angular_diameter_dist.value, theta
@@ -81,10 +88,13 @@ class Galenv:
         return np.sqrt((1.0 + v/self.C)/(1.0 - v/self.C)) - 1.0
 
 
-    def searchobject_in_cone(self, coord, theta, withz=True):
-        '''Return all objects in a cone with an opening angle as input'''
+    def searchobject_in_cone(self, coord, theta, withz=False):
+        '''Return all objects in a cone with an opening angle as input
+        withz -> only select object with redshift information
+
+        '''
         # coord in astropy.coordinates
-        result = Ned.query_region(coord, radius=theta*u.deg, equinox=coord.equinox) 
+        result = Ned.query_region(coord, radius=theta*u.deg)#, equinox=coord.equinox) 
         
         if withz: # select objects which has redshift information
             res = result[~result['Redshift'].mask] # return False if data is masked (no redshift)
@@ -158,7 +168,11 @@ class Galenv:
 
 
     def plot_cone(self, coord, theta, res, xSize=7.5, ySize=6, title='', show=True, savefig=False, imgname="plot.png"):
-        '''Only cone'''
+        '''Only cone
+        coord = astropy coordinates
+        theta = Cone angle
+        res = result catalog
+        '''
         ra = coord.ra.value
         dec = coord.dec.value
 
@@ -197,43 +211,43 @@ class Galenv:
 
 
     def conedv_byname(self, objname, tangen_dist, dv, show=False, savefig=False, imgname="plot.png"):
-        print "Query from name: ", objname
+        print("Query from name: ", objname)
         z, v0, ra, dec = self.queryobject_byname(objname)
         coord = coordinates.SkyCoord(ra=ra, dec=dec, unit=(u.deg, u.deg))
-        print "RA, Dec (deg)  : ", ra, dec
-        print "Redshift : ", z
-        print "Velocity : ", v0
+        print("RA, Dec (deg)  : ", ra, dec)
+        print("Redshift : ", z)
+        print("Velocity : ", v0)
 
         
         if isinstance(z, np.float64) or isinstance(v0, np.float64): # if there is v or z in NED
             dA, theta = self.calc_dA_theta(z, tangen_dist)
-            print "Angular-diameter distance : ", dA, " Mpc"
-            print "Angular radius for "+str(tangen_dist)+" Mpc seen from distance "+str(dA)+" Mpc : ", theta, " deg"
+            print("Angular-diameter distance : ", dA, " Mpc")
+            print("Angular radius for "+str(tangen_dist)+" Mpc seen from distance "+str(dA)+" Mpc : ", theta, " deg")
         else:
-            print objname + " does not currently have any redshift measurements in NED."
-            print "Please provide your desired radial velocity or define a Metric Distance for the search center."
+            print(objname + " does not currently have any redshift measurements in NED.")
+            print("Please provide your desired radial velocity or define a Metric Distance for the search center.")
             
             v0 = input("Radial velocity? ")
             
             if v0 < 3000.0:
-                print "For nearby objects (below 3000 km/s), you must supply a Metric Distance to the center of search."
+                print("For nearby objects (below 3000 km/s), you must supply a Metric Distance to the center of search.")
                 dist = input("Metric distance? ")
-                print "User Defined Metric Distance: ", dist, " Mpc"
+                print("User Defined Metric Distance: ", dist, " Mpc")
 
             else:
                 z = self.z_from_vel(v0)
-                print "Calculated z = ", z
+                print("Calculated z = ", z)
                 dist, theta = self.calc_dA_theta(z, tangen_dist)
-                print "Angular-diameter distance : ", dist, " Mpc"
+                print("Angular-diameter distance : ", dist, " Mpc")
 
             
             theta = self.theta_from_tangen_dist_and_dist(tangen_dist, dist)
-            print "Angular radius for "+str(tangen_dist)+" Mpc seen from distance "+str(dist)+" Mpc : ", theta, " deg"
+            print("Angular radius for "+str(tangen_dist)+" Mpc seen from distance "+str(dist)+" Mpc : ", theta, " deg")
 
 
-        print "Searching objects in cone section... \ntheta = "+str(theta)+" deg; v = ["+str(v0-dv)+", "+str(v0+dv)+"]" 
+        print("Searching objects in cone section... \ntheta = "+str(theta)+" deg; v = ["+str(v0-dv)+", "+str(v0+dv)+"]")
         res = self.searchobject_in_cone_dv(coord, theta, v0, dv)
-        #print "Number of objects : ", len(res)
+        #print("Number of objects : ", len(res))
 
         self.plot_env(coord, theta, res, v0, dv, title=str(tangen_dist)+" Mpc, "+str(dv)+" km/s, " 
                 + "\n$H_0$ = " + str(self.CosmoModel.H0)
@@ -244,27 +258,27 @@ class Galenv:
 
     def conedv_byposvel(self, coord, v0, tangen_dist, dv, show=False, savefig=False, imgname="plot.png"):
         # position in in astropy.coordinates
-        print "Query from position: ", coord
-        print "Radial velocity : ", v0
+        print("Query from position: ", coord)
+        print("Radial velocity : ", v0)
 
         if v0 < 3000.0 :
-            print "For nearby objects (below 3000 km/s), you must supply a Metric Distance to the center of search."
+            print("For nearby objects (below 3000 km/s), you must supply a Metric Distance to the center of search.")
             dist = input("Metric distance? ")
-            print "User Defined Metric Distance: ", dist, " Mpc"
+            print("User Defined Metric Distance: ", dist, " Mpc")
             theta = self.theta_from_tangen_dist_and_dist(tangen_dist, dist)
-            print "Angular radius for "+str(tangen_dist)+" Mpc seen from distance "+str(dist)+" Mpc : ", theta, " deg"
+            print("Angular radius for "+str(tangen_dist)+" Mpc seen from distance "+str(dist)+" Mpc : ", theta, " deg")
         else:
             z = self.z_from_vel(v0)
-            print "Calculated z = ", z
+            print("Calculated z = ", z)
             dA, theta = self.calc_dA_theta(z, tangen_dist)
-            print "Angular-diameter distance : ", dA, " Mpc"
-            print "Angular radius for "+str(tangen_dist)+" Mpc seen from distance "+str(dA)+" Mpc : ", theta, " deg"
+            print("Angular-diameter distance : ", dA, " Mpc")
+            print("Angular radius for "+str(tangen_dist)+" Mpc seen from distance "+str(dA)+" Mpc : ", theta, " deg")
 
 
 
-        print "Searching objects in cone section...\ntheta = "+str(theta)+" deg; v = ["+str(v0-dv)+", "+str(v0+dv)+"]" 
+        print("Searching objects in cone section...\ntheta = "+str(theta)+" deg; v = ["+str(v0-dv)+", "+str(v0+dv)+"]") 
         res = self.searchobject_in_cone_dv(coord, theta, v0, dv)
-        #print "Number of objects : ", len(res)
+        #print("Number of objects : ", len(res))
 
         self.plot_env(coord, theta, res, v0, dv, title=str(tangen_dist)+" Mpc, "+str(dv)+" km/s, " 
             + "\n$H_0$ = " + str(self.CosmoModel.H0)
@@ -275,11 +289,11 @@ class Galenv:
 
     def cone_byname(self, objname, theta, show=True, savefig=False, imgname="plot.png"):
         '''Plot all objects in cone even without redshift information'''
-        print "Query from name: ", objname
+        print("Query from name: ", objname)
         z, v0, ra, dec = self.queryobject_byname(objname)
         coord = coordinates.SkyCoord(ra=ra, dec=dec, unit=(u.deg, u.deg))
-        print "RA, Dec (deg)  : ", ra, dec
-        print "Searching objects in cone (only).. \ntheta = "+str(theta)+" deg"
+        print("RA, Dec (deg)  : ", ra, dec)
+        print("Searching objects in cone (only).. \ntheta = "+str(theta)+" deg")
         res = self.searchobject_in_cone(coord, theta, withz=False)
         self.plot_cone(coord, theta, res, show=show, savefig=savefig, imgname=imgname)
 
@@ -288,8 +302,8 @@ class Galenv:
     def cone_bypos(self, coord, theta, show=True, savefig=False, imgname="plot.png"):
         '''Plot all objects in cone even without redshift information'''
         # coord in astropy.coordinates
-        print "Query from position: ", coord
-        print "Searching objects in cone (only).. \ntheta = "+str(theta)+" deg"
+        print("Query from position: ", coord)
+        print("Searching objects in cone (only).. \ntheta = "+str(theta)+" deg")
         res = self.searchobject_in_cone(coord, theta, withz=False)
         self.plot_cone(coord, theta, res, show=show, savefig=savefig, imgname=imgname)
 
@@ -326,7 +340,7 @@ if __name__ == '__main__':
         elif option == '-savefig':
             savefig=True; imgname = sys.argv[1]; del sys.argv[1]
         else:
-            print sys.argv[0], ': invalid option', option
+            print(sys.argv[0], ': invalid option', option)
             sys.exit(1)
 
     ge.conedv_byname(objname, tangential_dist, dv, show=show, savefig=savefig, imgname=imgname)

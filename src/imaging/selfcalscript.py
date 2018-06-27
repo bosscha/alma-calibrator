@@ -4,6 +4,10 @@ import os
 import sys
 import glob
 import numpy as np
+import math
+import random
+import matplotlib.pyplot as plt
+
 
 sys.path.append('$DATADIR/analysis_scripts') #my directory of analysis_script # analysisUtils
 import analysisUtils as aU
@@ -52,6 +56,8 @@ sensitivities = {3: 0.20,
 
 # in SI
 # k = 1.380658e-23
+ARCSECTORAD = 4.84813681109536e-06
+
 
 class selfCal:
     """A class to do selfcal semi-automatic"""
@@ -106,6 +112,8 @@ class selfCal:
 
                     if var == 'PHASECENTER': 
                         phasecenter = value
+                        if phasecenter == "0":
+                            phasecenter = ""
 
                     if var == 'THRESHOLD': 
                         threshold = value.split()
@@ -289,6 +297,14 @@ class selfCal:
         return spwedge
 
 
+    def get_phasecenter(self, msName, field):
+        mymsmd = aU.createCasaTool(msmdtool)
+        mymsmd.open(msName)
+        phasecent = mymsmd.phasecenter(int(field))
+        return phasecent
+
+
+
     def get_npolarizations(self, msName):
         tb.open(msName)
         nPolarizations = np.shape(tb.getcell("DATA",0))[0]
@@ -394,8 +410,144 @@ class selfCal:
     def findrms_fromresidual(self, imgname):
         residualimg = imgname + ".residual"
         xstat = imstat(residualimg)
-        print("RMS from residual-image " + residualimg+ " (using imstat): ", xstat['rms'][0])
+        print("RMS from residual-image " + residualimg + " (using imstat): ", xstat['rms'][0])
         return xstat['rms'][0]
+
+
+
+    def find_image_parameter(self, casa_image):
+        """find resolution, primary beam, freq, and center from CASA Image"""
+        res = imhead(imagename=casa_image,mode="summary",hdkey="",hdvalue="",verbose=True)
+        
+        beam = res['restoringbeam']['major']['value'] # major axis
+        print("Synthesized Beam: %f (arcsec)" % (beam))
+
+        center = [res['refval'][0], res['refval'][1]] # RA Dec in radians
+        print("Center (in rad): ", center)
+        
+        freq = res['refval'][3] # reference freq
+        freq = freq/1e9 # in GHz
+        primary_beam = aU.primaryBeamArcsec(frequency=freq, diameter=12.0, taper=10.0, obscuration=0.75, verbose=False, showEquation=True, use2007formula=True, fwhmfactor=None) # return primary beam in arcsec  
+        print("Estimated primary beam size: %f (arcsec)" % (primary_beam))
+
+        return center, beam, primary_beam
+
+
+    def calculate_rms_continuum(self, casa_image, n_sample, center_image, rmini, rmaxi, Rmin, Rmax):
+        """Calculate RMS"""
+        random.seed(1234)
+
+        rms_array = []
+        allrms = []
+
+        # sampling
+        for i in range(n_sample):
+            # random radius of region
+            r_region = random.uniform(Rmin, Rmax)
+
+            rmin = rmini + r_region
+            rmax = rmaxi - r_region
+
+            u = random.random() # 0 <= u < 1
+            v = random.random()
+            # to get uniform distribution in Polar coord
+            theta = 2*math.pi*u
+            r = math.sqrt((rmax**2 - rmin**2)*v + rmin**2) # (ring)
+            # in arcsec
+
+            # change it back to cartesian
+            r_rad = r*ARCSECTORAD
+            dx = r_rad*math.cos(theta)
+            dy = r_rad*math.sin(theta)
+            x1 = center_image[0] + dx
+            y1 = center_image[1] + dy
+            x2 = center_image[0] - dx # symmetry
+            y2 = center_image[1] - dy
+            # print("Position: ", x1, y1, x2, y2, r, theta, r_region)
+
+
+            regionrms1 = "circle[[" + str(x1) + "rad, " + str(y1) + "rad], " + str(r_region) + "arcsec" + "]"
+            regionrms2 = "circle[[" + str(x2) + "rad, " + str(y2) + "rad], " + str(r_region) + "arcsec" + "]"
+
+            stats1 = imstat(imagename=casa_image,axes=-1,region=regionrms1,box="",chans="",stokes="I",listit=True,verbose=True, 
+                mask="",stretch=False,logfile='',append=True,algorithm="classic",fence=-1,center="mean",lside=True,zscore=-1,
+                maxiter=-1,clmethod="auto")
+
+            stats2 = imstat(imagename=casa_image,axes=-1,region=regionrms2,box="",chans="",stokes="I",listit=True,verbose=True, 
+                mask="",stretch=False,logfile='',append=True,algorithm="classic",fence=-1,center="mean",lside=True,zscore=-1,
+                maxiter=-1,clmethod="auto")
+
+            # print("RMS: ", stats1['rms'][0], stats2['rms'][0])
+
+            rms_pair = (stats1['rms'][0] + stats2['rms'][0])/2.
+            allrms.append(rms_pair)
+            rms_array.append([x1, y1, x2, y2, r, theta, r_region, stats1['rms'][0], stats2['rms'][0], rms_pair]) # numpy array
+            
+
+
+        # clipping
+        allrms = np.array(allrms)
+        stdrms = np.std(allrms)
+        clip = 3*stdrms
+        medianrms =np.median(allrms)
+
+        __selectedrms = allrms[allrms < medianrms+clip]
+        selectedrms = __selectedrms[__selectedrms > medianrms-clip]
+
+        rms = np.median(selectedrms)
+
+        return rms, rms_array
+
+
+    def plot_dist(self, rms_accepted, rms_array):
+        arr = np.array(rms_array)
+        r = arr[:,4]
+        theta = arr[:,5]
+        r_region =arr[:,6]
+        rms = arr[:,9]
+
+        plt.subplot(311)
+        plt.plot(r, rms, 'r.')
+        plt.axhline(y=rms_accepted, color='k', linestyle='-', linewidth=2)
+        plt.xlabel("Radius from center")
+        plt.ylabel("RMS")
+
+        plt.subplot(312)
+        plt.plot(theta%math.pi, rms, 'b.')
+        plt.axhline(y=rms_accepted, color='k', linestyle='-', linewidth=2)
+        plt.xlabel("Theta from center (folded)")
+        plt.ylabel("RMS")
+
+        plt.subplot(313)
+        plt.plot(r_region, rms, 'm.')
+        plt.axhline(y=rms_accepted, color='k', linestyle='-', linewidth=2)
+        plt.xlabel("Radius of sample")
+        plt.ylabel("RMS")
+
+        plt.show()
+
+
+
+    def calcrms(self, casa_image, n_sample=100, plot=True):
+        center, beam, primary_beam = self.find_image_parameter(casa_image)
+
+        # size of region
+        Rmin = max(primary_beam/12.0, 1.5*beam) # Dmin = max(PB/6, 3*beam)
+        Rmax = primary_beam/6.0 # Dmax = PB/3
+
+        # position of region
+        rmin = 1.5*beam
+        rmax = 0.75*primary_beam
+
+        print("Calculate RMS from CASA image: "+casa_image)
+        rms, rms_array = self.calculate_rms_continuum(casa_image, n_sample, center, rmin, rmax, Rmin, Rmax)
+
+        # to check
+        if plot:
+            self.plot_dist(rms, rms_array)
+
+        return rms, rms_array
+
 
 
     def selfcal_cycle(self, msName, cycle, field, niter, threshold, cell, imsize, phasecenter, interactive, pbcor, solint, solnorm, refant, calmode):
@@ -434,10 +586,10 @@ class selfCal:
             flatnoise=True,allowchunk=False)
 
         # print 15 last line in clean log
-        self.print_last15lines_fromlastlog()
+        # self.print_last15lines_fromlastlog()
 
         # print rms from residual image, imstat
-        self.findrms_fromresidual(imgname)
+        # self.findrms_fromresidual(imgname)
 
         #gaincal
         caltab = msName+".G"+str(cycle)
@@ -547,10 +699,15 @@ class selfCal:
                 flatnoise=True,allowchunk=False)
 
             # print 15 last line in clean log
-            self.print_last15lines_fromlastlog()
+            # self.print_last15lines_fromlastlog()
             
             # print rms from residual image, imstat
-            self.findrms_fromresidual(imgname)
+            # self.findrms_fromresidual(imgname)
+            
+            print("Calculating RMS...")
+            rms, rms_array = self.calcrms(imgname+'.image', plot=False)
+            print(imgname+'.image')
+            print(rms)
 
             print("END OF SELFCAL.\n")
 
@@ -566,7 +723,7 @@ class selfCal:
         cell, imsize = self.estimate_cell_and_imsize(msName, field)
         sensitivity = self.estimate_sensitivity(msName)
         if threshold == '': threshold = raw_input("Enter your threshold [0.0mJy]: ")
-        if phasecenter == '': phasecenter = raw_input("Enter your phasecenter if you want ['']: ")
+        if phasecenter == '': phasecenter = raw_input("Enter your phasecenter if you want [default = '']: ")
 
 
         print("Begin cleaning task...")
@@ -583,11 +740,12 @@ class selfCal:
         print("End cleaning task.")
 
         # print 15 last line in clean log
-        self.print_last15lines_fromlastlog()
-
-        # print rms from residual image, imstat
-        self.findrms_fromresidual(imagename)
-
+        # self.print_last15lines_fromlastlog()
+        
+        print("Calculating RMS...")
+        rms, rms_array = self.calcrms(imagename+'.image')
+        print(imagename+'.image')
+        print(rms)
 
 
     def cal_subtractuvmodel(self):
@@ -654,13 +812,16 @@ class selfCal:
 
 
 if __name__ == '__main__':
-    selfc = selfCal("selfcal.par")
-    
+    #selfc = selfCal("selfcal.par")
+    parsfile = raw_input("Parameter file (e.g. selfcal.par): ")
+    selfc = selfCal(parsfile)
+
     print("Plese choose option below:")
-    print("1. Do self-calibration only")
-    print("2. Do subtract uv model only")
-    print("3. Do self-calibration and then subtract uv model")
-    print("4. Cancel, exit.")
+    print("1. Only self-calibration")
+    print("2. Only subtract uv model")
+    print("3. Self-calibration and then subtract uv model")
+    print("4. Only to calculate cellsize and imsize")
+    print("5. Cancel, exit.")
     ans = raw_input("Selected option: ")
     if ans.lower()[0] == '1':
         selfc.cal_selfcal()
@@ -669,5 +830,7 @@ if __name__ == '__main__':
     elif ans.lower()[0] == '3':
         selfc.cal_selfcal()
         selfc.cal_subtractuvmodel()
+    elif ans.lower()[0] == '4':
+        selfc.estimate_cell_and_imsize(selfc.msName[0], selfc.field)
     else:
         print("Exit")
