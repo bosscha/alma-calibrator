@@ -145,7 +145,8 @@ def calc(casa_image, n_sample=100, plot=True):
 
 
 if __name__ == '__main__':
-    casa_imagefile = "/mnt/sciops/data/rwibowo/projects/J1139-1350/Band3/uid___A002_Xbb5cfb_X2236.ms.split.cal-CALIBRATE_PHASE-J1139-1350.ms.cont4.image"
+    # casa_imagefile = "/mnt/sciops/data/rwibowo/projects/J1139-1350/Band3/uid___A002_Xbb5cfb_X2236.ms.split.cal-CALIBRATE_PHASE-J1139-1350.ms.cont4.image"
+    casa_imagefile = raw_input("CASA Image: ")
     rms, rms_array = calc(casa_imagefile)
     print(rms)
 

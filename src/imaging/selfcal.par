@@ -1,15 +1,16 @@
 ## Input for SELFCAL
 ## v0.2 @ 2017.05.03
 ## selfcal cycle + last cleaning parameters
-## threshold is in multiple of estimated sensitivity
+## THRESHOLD here is in multiple of "estimated sensitivity"
+## PHASECENTER = 0 -> using first FIELD (CASA Default, phasecenter="")
 
 ## SELFCAL
 ##################### clean #########
-MSNAME      = uid___A002_X9646fb_Xccd.ms.split.cal.clb.field_0.J0423-0120.ms uid___A002_X9646fb_Xccd.ms.split.cal.clb.field_1.J0423-0120.ms uid___A002_X97db9c_X159b.ms.split.cal.clb.field_0.J0423-0120.ms
+MSNAME      = uid___A002_X9646fb_Xccd.ms.split.cal.clb.field_0.J0423-0120.ms 
 FIELD       = 0
 INTERACTIVE = F F T T
 PHASECENTER = J2000 04:23:15.800730 -01.20.33.06550
-THRESHOLD   = 40 20 4 0
+THRESHOLD   = 40 20 0 0
 NITER       = 500 500 1000 1000
 PBCOR       = F F F F
 ##################### gaincal #########

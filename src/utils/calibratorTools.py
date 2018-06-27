@@ -65,8 +65,11 @@ HISTORY:
 
     2017.07.13
         - remove casac definition
-        - change checking the band using SPW0,  chan_freq = msmd.chanfreqs(0) -> I found a case where an MS only has 1 spw
-        
+        - change checking the band using SPW 0,  chan_freq = msmd.chanfreqs(0) -> previously (check on SPW 1), I found a case where an MS only has 1 spw
+
+    2018.06.20
+        - queation for splitting SCIENCE TARGET or not -> sometimes, calibrators become SCIENCE TARGET
+        - change print function so it is compatible with python 3.
 
 RUN:
 
@@ -82,8 +85,9 @@ __version__="0.4.0@2016.09.01"
 
 
 import sys
-sys.path.insert(0,'/home/stephane/git/signalanalysis/SignalAnalysis/Wavelet/')
-sys.path.insert(0,'/home/stephane/workspace/AIV/science/analysis_scripts/')
+#sys.path.insert(0,'/home/stephane/git/signalanalysis/SignalAnalysis/Wavelet/')
+#sys.path.insert(0,'/home/stephane/workspace/AIV/science/analysis_scripts/')
+sys.path.append('$DATADIR/analysis_scripts')
 
 import os
 import os.path
@@ -97,6 +101,7 @@ import pylab as pl
 # import wavelet as wav
 import analysisUtils as aU
 #from casa import casac
+from taskinit import *
 from casa import split
 
 import sqlite3 as sql
@@ -112,7 +117,7 @@ class calibrator:
     
     def __init__(self):
         
-            self.listIntent = ["CALIBRATE_BANDPASS","CALIBRATE_FLUX","CALIBRATE_AMPLI","CALIBRATE_PHASE"]
+            self.listIntent = ["CALIBRATE_BANDPASS","CALIBRATE_FLUX","CALIBRATE_AMPLI","CALIBRATE_PHASE","OBSERVE_TARGET"]
             
             
     def splitCalibrator(self, msName):
@@ -122,11 +127,10 @@ class calibrator:
         
         es = aU.stuffForScienceDataReduction()
         
-        try :
+        try:
             tb.open(msName)
             dataColNames = tb.colnames()
             tb.close()
-            
         except:
             print("###")
             print("### Error to open MS : %s \n"%(msName))
@@ -155,34 +159,60 @@ class calibrator:
         intentSources = es.getIntentsAndSourceNames(msName)
         
         for intentkey in self.listIntent:
-                   
-            calIds   = intentSources[intentkey]['sourceid']
-            calName  = intentSources[intentkey]['name']
-            # calIds   = sorted(dict.fromkeys(calIds).keys())
-            # calName  = sorted(dict.fromkeys(calName).keys())
-            
-            # print calName
-            # print calIds
-            
-            iterCalid = iter(calIds)
+            if intentkey != "OBSERVE_TARGET":       
+                calIds   = intentSources[intentkey]['sourceid']
+                calName  = intentSources[intentkey]['name']
+                # calIds   = sorted(dict.fromkeys(calIds).keys())
+                # calName  = sorted(dict.fromkeys(calName).keys())
+                
+                # print calName
+                # print calIds
+                
+                iterCalid = iter(calIds)
 
-            for name  in calName:
-                
-                sourceid =  iterCalid.next()
-                
-                if name != '':
-                    found = False
-                else :
-                    found = True                        ## avoid empty name
-                for checkname in calNameList:
-                    if checkname['name'] == name :
-                        found = True
-                
-                if not found :
-                    calNameList.append({'name' : name, 'intent': intentkey, 'sourceId': sourceid})
+                for name  in calName:
+                    
+                    sourceid =  iterCalid.next()
+                    
+                    if name != '':
+                        found = False
+                    else :
+                        found = True                        ## avoid empty name
+                    for checkname in calNameList:
+                        if checkname['name'] == name :
+                            found = True
+                    
+                    if not found :
+                        calNameList.append({'name' : name, 'intent': intentkey, 'sourceId': sourceid})
+            else:
+                calIds   = intentSources[intentkey]['sourceid']
+                calName  = intentSources[intentkey]['name']
+                print(msName)
+                print("OBSERVE_TARGET: ", calName)
+                ans = raw_input("Do you want to split this SCIENCE TARGET? (maybe it is a calibrator) [y/[n]] : ")
+                if ans.lower()[0] == 'y':
+                    iterCalid = iter(calIds)
+
+                    for name  in calName:
+                        
+                        sourceid =  iterCalid.next()
+                        
+                        if name != '':
+                            found = False
+                        else :
+                            found = True                        ## avoid empty name
+                        for checkname in calNameList:
+                            if checkname['name'] == name :
+                                found = True
+                        
+                        if not found :
+                            calNameList.append({'name' : name, 'intent': intentkey, 'sourceId': sourceid})
+                else:
+                    print("Not splitting the TARGET.")
+
                     
         
-        print calNameList
+        print(calNameList)
         
         for cal in calNameList:
                            
@@ -198,7 +228,7 @@ class calibrator:
                       timebin="0s",timerange="",scan="",intent="",array="",uvrange="",correlation="",observation="",combine="",
                       keepflags=True,keepmms=False)
             
-            print success
+            print(success)
             
             if success :
                    refdir = msmd.refdir(cal['sourceId'])
@@ -273,7 +303,7 @@ class dbstore:
         if calibrator in SOLARSYSTEMOBJ:
             cmd1= "SELECT calid  FROM dataset  WHERE calibrator = '%s' "%(calibrator)
 
-        print cmd1
+        print(cmd1)
         
         c.execute(cmd1)
         rows = c.fetchall()
@@ -290,7 +320,7 @@ class dbstore:
         else :
             idCal = rows[0][0]
             
-        print idCal
+        print(idCal)
                 
         
         
@@ -319,14 +349,14 @@ class dbstore:
         ###
     
         cmd1= "SELECT calid , calibrator  FROM dataset  WHERE abs(m0 - %f) < %f  AND abs(m1 - %f) < %f "%(m0 , toldistcalrad, m1 , toldistcalrad)
-        print cmd1
+        print(cmd1)
         
         c.execute(cmd1)
         rows = c.fetchall()
         
         currentName  = ""
         foundCal = False
-        print rows
+        print(rows)
         
         if len(rows) != 0:
             foundCal = True
@@ -400,7 +430,7 @@ class calStructure:
         
         for calms in listCalMS:
             
-            print calms
+            print(calms)
             
             band           = calms[2][0]
             calibratorName = calms[1]
@@ -419,15 +449,15 @@ class calStructure:
 
             
             print("destdir")
-            print destdir
+            print(destdir)
             
             if not os.path.exists(destdir):
                 print("### Create a new directory %s"%(destdir))
                 os.makedirs(destdir)
                 
             msdest = destdir + calms[0].split('/')[-1]
-            print"msdest"
-            print msdest
+            print("msdest")
+            print(msdest)
             
             if os.path.exists(msdest):
                 print("### %s exists already. We skip it."%(msdest))

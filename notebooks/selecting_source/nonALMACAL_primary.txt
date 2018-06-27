@@ -1,13 +1,2332 @@
+primary = ['J0541-0211', 'J1733-3722', 'J1610-3958', 'J1743-0350', 'J2253+1608', 
+           'J1851+0035', 'J0541-0541', 'J0601-7036', 'J1130-1449', 'J1305-4928', 
+           'J0336+3218', 'J0006-0623', 'J1717-3342', 'J1833-210B', 'J0237+2848', 
+           'J0750+1231', 'J1751+0939', 'J0948+0022', 'J1107-4449', 'J1256-0547', 
+           'J1830+0619', 'J1225+1253']
 
-['J0541-0211' 'J1733-3722' 'J1610-3958' 'J1743-0350' 'J2253+1608'
- 'J1851+0035' 'J0541-0541' 'J0601-7036' 'J1130-1449' 'J1305-4928'
- 'J0336+3218' 'J0006-0623' 'J1717-3342' 'J1833-210B' 'J0237+2848'
- 'J0750+1231' 'J1751+0939' 'J0948+0022' 'J1107-4449' 'J1256-0547']
- 
- +
 
-J1830+0619
-J1225+1253
+interesting_non_primary = ['J2035+1056', 'J0811-4929', 'J0040-3243', 'J2056-5820', 'J1315-5334', 
+'J0340-2119', 'J2158-1501', 'J1038+0512', 'J0531-4827', 'J1007-0207', 
+'J2040-5735', 'J0956+2515', 'J1332+0200', 'J0303-6211', 'J0930+0034', 
+'J1603-4904', 'J2207-5346', 'J0830+2410', 'J1208-7809', 'J0914+0245', 
+'J1319-0049', 'J1232-0224', 'J0516-6207', 'J1351-2912', 'J1103-3251', 
+'J1126-3828', 'J2230-4416', 'J1150-0023', 'J1222+0413', 'J0425-5331', 
+'J1147-6753', 'J1047-6217', 'J2359-3133', 'J1331+3030', 'J0431+2037', 
+'J0431+1731', 'J1410+0203',  'J0501-0159']
+
+
+
+
+
+
+
+
+######## Source name: J1410+0203 ########
+
+
+Time Band 3 :   2419s (0.7h) 
+Time Band 6 :    575s (0.2h) 
+Time Band 7 :   1784s (0.5h) 
+Time Band 8 :    484s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00405.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[3] Int:846.72 Obsdate:2016-03-1 SpatRes:1.651 ASDM:uid://A002/Xb07033/X845 FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.00405.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[3] Int:816.48 Obsdate:2016-03-1 SpatRes:1.696 ASDM:uid://A002/Xb09eed/X2d49 FreqRes:976.562 Array:12m Pol:XX YY
+2012.1.01080.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[3] Int:332.64 Obsdate:2014-03-0 SpatRes:1.669 ASDM:uid://A002/X7c3a52/X13a7 FreqRes:7812.5 Array:12m Pol:XX YY
+2016.1.01400.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[3] Int:181.44 Obsdate:2016-11-1 SpatRes:0.832 ASDM:uid://A002/Xba6edb/X4199 FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.00320.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[3] Int:151.2 Obsdate:2016-04-0 SpatRes:1.864 ASDM:uid://A002/Xb18ac0/X20ab FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.01340.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[3] Int:90.72 Obsdate:2016-12-2 SpatRes:1.685 ASDM:uid://A002/Xbc19b1/X402a FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 6
+
+Project codes for Band 3: 
+2015.1.00405.S 2012.1.01080.S 2016.1.01400.S 2015.1.00320.S 2016.1.01340.S 
+
+### Band: 6 ###
+2016.1.00282.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[6] Int:181.44 Obsdate:2016-11-0 SpatRes:0.329 ASDM:uid://A002/Xba4d35/Xe927 FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.01090.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[6] Int:151.2 Obsdate:2016-09-1 SpatRes:0.184 ASDM:uid://A002/Xb83979/X38d9 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00315.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[6] Int:60.48 Obsdate:2016-04-0 SpatRes:0.834 ASDM:uid://A002/Xb148a2/X330d FreqRes:1953.12 Array:12m Pol:XX YY
+2015.1.00315.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[6] Int:60.48 Obsdate:2016-04-0 SpatRes:0.846 ASDM:uid://A002/Xb1586e/X1e11 FreqRes:1953.12 Array:12m Pol:XX YY
+2015.1.00315.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[6] Int:60.48 Obsdate:2016-04-0 SpatRes:0.812 ASDM:uid://A002/Xb12f3b/Xa95b FreqRes:1953.12 Array:12m Pol:XX YY
+2016.1.00994.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[6] Int:60.48 Obsdate:2016-12-2 SpatRes:0.662 ASDM:uid://A002/Xbc377c/X10f FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 6
+
+Project codes for Band 6: 
+2016.1.00282.S 2015.1.01090.S 2015.1.00315.S 2016.1.00994.S 
+
+### Band: 7 ###
+2016.1.01400.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[7] Int:272.16 Obsdate:2017-01-2 SpatRes:0.802 ASDM:uid://A002/Xbd203b/X2115 FreqRes:1953.12 Array:12m Pol:XX YY
+2015.1.00131.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[7] Int:241.92 Obsdate:2016-03-1 SpatRes:0.523 ASDM:uid://A002/Xb078cd/X1830 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00315.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[7] Int:241.92 Obsdate:2016-05-0 SpatRes:0.675 ASDM:uid://A002/Xb25e1a/X13de6 FreqRes:1953.12 Array:12m Pol:XX YY
+2015.1.00315.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[7] Int:241.92 Obsdate:2016-05-0 SpatRes:0.443 ASDM:uid://A002/Xb25e1a/X12cf4 FreqRes:1953.12 Array:12m Pol:XX YY
+2016.1.01400.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[7] Int:211.68 Obsdate:2016-12-1 SpatRes:0.513 ASDM:uid://A002/Xbbadbe/X442a FreqRes:1953.12 Array:12m Pol:XX YY
+2015.1.00315.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[7] Int:151.2 Obsdate:2016-06-1 SpatRes:0.319 ASDM:uid://A002/Xb4655b/X30ab FreqRes:1953.12 Array:12m Pol:XX YY
+2015.1.00754.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[7] Int:120.96 Obsdate:2016-08-1 SpatRes:0.188 ASDM:uid://A002/Xb6d0c2/X2ae FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.01515.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[7] Int:120.96 Obsdate:2016-11-1 SpatRes:0.344 ASDM:uid://A002/Xbab09c/X42b8 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00654.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[7] Int:120.96 Obsdate:2017-01-2 SpatRes:1.158 ASDM:uid://A002/Xbd203b/X2692 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00994.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[7] Int:60.48 Obsdate:2017-04-1 SpatRes:0.643 ASDM:uid://A002/Xbf2b10/X1563 FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 10
+
+Project codes for Band 7: 
+2016.1.01400.S 2015.1.00131.S 2015.1.00315.S 2015.1.00754.S 2016.1.01515.S 2016.1.00654.S 2016.1.00994.S 
+
+### Band: 8 ###
+2016.1.00284.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[8] Int:241.92 Obsdate:2017-03-2 SpatRes:0.926 ASDM:uid://A002/Xbe2ed7/X9526 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00284.S J1410+0203 ra:212.51939 dec:2.0519201 Band:[8] Int:241.92 Obsdate:2017-03-2 SpatRes:0.790 ASDM:uid://A002/Xbe2ed7/X8bf9 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 2
+
+Project codes for Band 8: 
+2016.1.00284.S 
+
+Additional Notes:
+Name = [HB89] 1407+022
+z = 1.253
+velocity = 375640.0
+ra  = 212.5194
+dec = 2.05192
+
+###
+Total accepted uid for this object = 24
+Total accepted project for this object = 14
+###############################################
+
+
+######## Source name: J0431+1731 ########
+
+
+Time Band 3 :    998s (0.3h) 
+Time Band 4 :    121s (0.0h) 
+Time Band 6 :    181s (0.1h) 
+Time Band 7 :   1633s (0.5h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.00115.S J0431+1731 ra:67.989080 dec:17.526604 Band:[3] Int:846.72 Obsdate:2016-10-1 SpatRes:0.443 ASDM:uid://A002/Xb945f7/X2f40 FreqRes:62500.0 Array:12m Pol:XX XY YX YY
+2016.1.01245.S J0431+1731 ra:67.989080 dec:17.526604 Band:[3] Int:90.72 Obsdate:2017-01-0 SpatRes:2.874 ASDM:uid://A002/Xbca4b7/X3489 FreqRes:244.140 Array:12m Pol:XX YY
+2016.1.01042.S J0431+1731 ra:67.989080 dec:17.526604 Band:[3] Int:60.48 Obsdate:2016-11-0 SpatRes:0.767 ASDM:uid://A002/Xba2b1d/X233c FreqRes:1953.12 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 3
+
+Project codes for Band 3: 
+2016.1.00115.S 2016.1.01245.S 2016.1.01042.S 
+
+### Band: 4 ###
+2016.1.01505.S J0431+1731 ra:67.989080 dec:17.526604 Band:[4] Int:90.72 Obsdate:2016-10-2 SpatRes:0.421 ASDM:uid://A002/Xb9b1b9/X128c FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00296.S J0431+1731 ra:67.989080 dec:17.526604 Band:[4] Int:30.24 Obsdate:2016-07-2 SpatRes:0.523 ASDM:uid://A002/Xb5e334/X4cb7 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 2
+
+Project codes for Band 4: 
+2016.1.01505.S 2015.1.00296.S 
+
+### Band: 6 ###
+2015.1.00296.S J0431+1731 ra:67.989080 dec:17.526604 Band:[6] Int:60.48 Obsdate:2016-06-2 SpatRes:0.600 ASDM:uid://A002/Xb499c3/X93d0 FreqRes:488.281 Array:12m Pol:XX YY
+2016.1.01488.S J0431+1731 ra:67.989080 dec:17.526604 Band:[6] Int:60.48 Obsdate:2016-10-0 SpatRes:0.175 ASDM:uid://A002/Xb91513/X30f3 FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.00690.S J0431+1731 ra:67.989080 dec:17.526604 Band:[6] Int:60.48 Obsdate:2015-12-2 SpatRes:1.513 ASDM:uid://A002/Xae4720/X53fd FreqRes:61.0351 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2015.1.00296.S 2016.1.01488.S 2015.1.00690.S 
+
+### Band: 7 ###
+2016.1.01505.S J0431+1731 ra:67.989080 dec:17.526604 Band:[7] Int:725.76 Obsdate:2016-10-1 SpatRes:0.145 ASDM:uid://A002/Xb95160/Xc35c FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.00308.S J0431+1731 ra:67.989080 dec:17.526604 Band:[7] Int:241.92 Obsdate:2016-07-1 SpatRes:0.305 ASDM:uid://A002/Xb56bbd/X171a FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.00224.S J0431+1731 ra:67.989080 dec:17.526604 Band:[7] Int:241.92 Obsdate:2016-09-2 SpatRes:0.133 ASDM:uid://A002/Xb88fca/Xc0eb FreqRes:122.070 Array:12m Pol:XX YY
+2015.1.00888.S J0431+1731 ra:67.989080 dec:17.526604 Band:[7] Int:181.44 Obsdate:2016-08-1 SpatRes:0.197 ASDM:uid://A002/Xb66ea7/Xc2d2 FreqRes:488.281 Array:12m Pol:XX YY
+2015.1.00678.S J0431+1731 ra:67.989080 dec:17.526604 Band:[7] Int:151.2 Obsdate:2016-08-3 SpatRes:0.189 ASDM:uid://A002/Xb76b01/X4543 FreqRes:244.140 Array:12m Pol:XX YY
+2013.1.00355.S J0431+1731 ra:67.989080 dec:17.526604 Band:[7] Int:90.72 Obsdate:2015-09-2 SpatRes:0.131 ASDM:uid://A002/Xaa96da/X6bf FreqRes:62500.0 Array:12m Pol:XX XY YX YY
+
+Total accepted uid for Band 7 = 6
+
+Project codes for Band 7: 
+2016.1.01505.S 2015.1.00308.S 2015.1.00224.S 2015.1.00888.S 2015.1.00678.S 2013.1.00355.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = LQAC 067+017 002
+ra  = 67.98908
+dec = 17.5266
+
+###
+Total accepted uid for this object = 14
+Total accepted project for this object = 12
+
+
+######## Source name: J0431+2037 ########
+
+
+Time Band 3 :    635s (0.2h) 
+Time Band 4 :     60s (0.0h) 
+Time Band 6 :   1161s (0.3h) 
+Time Band 7 :   1210s (0.3h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00551.S J0431+2037 ra:67.765672 dec:20.626184 Band:[3] Int:241.92 Obsdate:2016-03-0 SpatRes:2.718 ASDM:uid://A002/Xb00ce7/X2e03 FreqRes:122.070 Array:12m Pol:XX YY
+2015.1.00261.S J0431+2037 ra:67.765672 dec:20.626184 Band:[3] Int:211.68 Obsdate:2016-04-0 SpatRes:2.754 ASDM:uid://A002/Xb17f5f/X19b6 FreqRes:61.0351 Array:12m Pol:XX YY
+2013.1.00647.S J0431+2037 ra:67.765672 dec:20.626184 Band:[3] Int:181.44 Obsdate:2014-08-1 SpatRes:0.769 ASDM:uid://A002/X8952b5/X410 FreqRes:61.0351 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 3
+
+Project codes for Band 3: 
+2015.1.00551.S 2015.1.00261.S 2013.1.00647.S 
+
+### Band: 4 ###
+2015.1.00296.S J0431+2037 ra:67.765672 dec:20.626184 Band:[4] Int:60.48 Obsdate:2016-07-2 SpatRes:0.549 ASDM:uid://A002/Xb5e334/X4cb7 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 1
+
+Project codes for Band 4: 
+2015.1.00296.S 
+
+### Band: 6 ###
+2015.1.01268.S J0431+2037 ra:67.765672 dec:20.626184 Band:[6] Int:616.896 Obsdate:2015-10-2 SpatRes:0.029 ASDM:uid://A002/Xabf8b9/X1330 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00551.S J0431+2037 ra:67.765672 dec:20.626184 Band:[6] Int:181.44 Obsdate:2016-03-2 SpatRes:0.960 ASDM:uid://A002/Xb0be8b/X70eb FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.01207.S J0431+2037 ra:67.765672 dec:20.626184 Band:[6] Int:120.96 Obsdate:2016-08-0 SpatRes:0.370 ASDM:uid://A002/Xb618c7/X8e12 FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.01207.S J0431+2037 ra:67.765672 dec:20.626184 Band:[6] Int:120.96 Obsdate:2016-08-2 SpatRes:0.279 ASDM:uid://A002/Xb74a0f/X166a FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.01488.S J0431+2037 ra:67.765672 dec:20.626184 Band:[6] Int:120.96 Obsdate:2016-10-0 SpatRes:0.183 ASDM:uid://A002/Xb91513/X30f3 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 5
+
+Project codes for Band 6: 
+2015.1.01268.S 2015.1.00551.S 2015.1.01207.S 2016.1.01488.S 
+
+### Band: 7 ###
+2015.1.00888.S J0431+2037 ra:67.765672 dec:20.626184 Band:[7] Int:362.88 Obsdate:2016-08-1 SpatRes:0.208 ASDM:uid://A002/Xb66ea7/Xc2d2 FreqRes:488.281 Array:12m Pol:XX YY
+2015.1.00678.S J0431+2037 ra:67.765672 dec:20.626184 Band:[7] Int:332.64 Obsdate:2016-08-3 SpatRes:0.199 ASDM:uid://A002/Xb76b01/X4543 FreqRes:244.140 Array:12m Pol:XX YY
+2016.1.01505.S J0431+2037 ra:67.765672 dec:20.626184 Band:[7] Int:272.16 Obsdate:2016-10-1 SpatRes:0.152 ASDM:uid://A002/Xb95160/Xc35c FreqRes:244.140 Array:12m Pol:XX YY
+2012.1.00853.S J0431+2037 ra:67.765666 dec:20.626186 Band:[7] Int:151.2 Obsdate:2013-02-1 SpatRes:0.633 ASDM:uid://A002/X5caed2/X9e FreqRes:31250.0 Array:12m Pol:XX YY
+2013.1.00198.S J0431+2037 ra:67.765672 dec:20.626184 Band:[7] Int:90.72 Obsdate:2015-06-1 SpatRes:0.407 ASDM:uid://A002/Xa342f2/X96ca FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 5
+
+Project codes for Band 7: 
+2015.1.00888.S 2015.1.00678.S 2016.1.01505.S 2012.1.00853.S 2013.1.00198.S 
+
+Additional Notes:
+Name = PKS 0428+20
+z = 0.219
+velocity = 65655.0
+ra  = 67.76567
+dec = 20.62618
+
+###
+Total accepted uid for this object = 14
+Total accepted project for this object = 12
+###############################################
+
+
+
+######## Source name: J1331+3030 ########
+
+
+Time Band 3 :   1179s (0.3h) 
+Time Band 6 :   1814s (0.5h) 
+Time Band 7 :   2026s (0.6h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.00922.S J1331+3030 ra:202.78453 dec:30.509155 Band:[3] Int:1088.64 Obsdate:2016-10-2 SpatRes:0.880 ASDM:uid://A002/Xb9dfa4/X566e FreqRes:62500.0 Array:12m Pol:XX XY YX YY
+2016.1.01340.S J1331+3030 ra:202.78453 dec:30.509155 Band:[3] Int:90.72 Obsdate:2016-12-2 SpatRes:2.654 ASDM:uid://A002/Xbbfdf3/X37cd FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2016.1.00922.S 2016.1.01340.S 
+
+### Band: 6 ###
+2012.1.00719.S J1331+3030 ra:202.78453 dec:30.509155 Band:[6] Int:635.04 Obsdate:2014-01-0 SpatRes:1.131 ASDM:uid://A002/X77da97/X1591 FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.00235.S J1331+3030 ra:202.78453 dec:30.509155 Band:[6] Int:241.92 Obsdate:2016-03-0 SpatRes:1.180 ASDM:uid://A002/Xb046c2/Xdc2 FreqRes:488.281 Array:12m Pol:XX YY
+2016.1.00282.S J1331+3030 ra:202.78453 dec:30.509155 Band:[6] Int:211.68 Obsdate:2016-11-0 SpatRes:0.549 ASDM:uid://A002/Xba4d35/Xe049 FreqRes:15625.0 Array:12m Pol:XX YY
+2013.1.00164.S J1331+3030 ra:202.78453 dec:30.509155 Band:[6] Int:181.44 Obsdate:2015-09-2 SpatRes:0.240 ASDM:uid://A002/Xaad35a/X4345 FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.00623.S J1331+3030 ra:202.78453 dec:30.509155 Band:[6] Int:181.44 Obsdate:2016-06-1 SpatRes:0.775 ASDM:uid://A002/Xb4264b/Xd55 FreqRes:976.562 Array:12m Pol:XX YY
+2013.1.01010.S J1331+3030 ra:202.78453 dec:30.509155 Band:[6] Int:151.2 Obsdate:2014-06-0 SpatRes:0.663 ASDM:uid://A002/X837c61/X2f9 FreqRes:15625.0 Array:12m Pol:XX YY
+2013.1.00164.S J1331+3030 ra:202.78453 dec:30.509155 Band:[6] Int:151.2 Obsdate:2015-06-1 SpatRes:0.630 ASDM:uid://A002/Xa2ea64/Xd50 FreqRes:15625.0 Array:12m Pol:XX YY
+2012.1.01020.S J1331+3030 ra:202.78453 dec:30.509155 Band:[6] Int:60.479 Obsdate:2014-03-0 SpatRes:0.376 ASDM:uid://A002/X7c18c1/X1222 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 8
+
+Project codes for Band 6: 
+2012.1.00719.S 2015.1.00235.S 2016.1.00282.S 2013.1.00164.S 2015.1.00623.S 2013.1.01010.S 2012.1.01020.S 
+
+### Band: 7 ###
+2012.A.00028.S J1331+3030 ra:202.78453 dec:30.509155 Band:[7] Int:997.92 Obsdate:2014-01-1 SpatRes:0.891 ASDM:uid://A002/X78cd19/X1b06 FreqRes:31250.0 Array:12m7m Pol:XX YY
+2015.1.00235.S J1331+3030 ra:202.78453 dec:30.509155 Band:[7] Int:362.88 Obsdate:2016-01-2 SpatRes:1.008 ASDM:uid://A002/Xaf4574/X4a3c FreqRes:488.281 Array:12m Pol:XX YY
+2012.1.01020.S J1331+3030 ra:202.78453 dec:30.509155 Band:[7] Int:362.872 Obsdate:2014-02-2 SpatRes:0.685 ASDM:uid://A002/X7b13df/X10ff FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00285.S J1331+3030 ra:202.78453 dec:30.509155 Band:[7] Int:151.2 Obsdate:2016-11-1 SpatRes:0.521 ASDM:uid://A002/Xbabd27/X4c8f FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00285.S J1331+3030 ra:202.78453 dec:30.509155 Band:[7] Int:151.2 Obsdate:2016-11-1 SpatRes:0.531 ASDM:uid://A002/Xbabd27/X50e8 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 5
+
+Project codes for Band 7: 
+2012.A.00028.S 2015.1.00235.S 2012.1.01020.S 2016.1.00285.S 
+
+Additional Notes:
+
+Name = RCS 05000901977
+z = 0.3338
+velocity = 100071.0
+ra  = 202.78173
+dec = 30.50961
+
+###
+Total accepted uid for this object = 15
+Total accepted project for this object = 11
+###############################################
+
+######## Source name: J2359-3133 ########
+
+
+Time Band 3 :    212s (0.1h) 
+Time Band 6 :   1391s (0.4h) 
+Time Band 7 :   1693s (0.5h) 
+
+List of obs:
+
+### Band: 3 ###
+2013.1.00273.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[3] Int:211.68 Obsdate:2014-12-3 SpatRes:2.383 ASDM:uid://A002/X985fa5/X2d0 FreqRes:7812.5 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 1
+
+Project codes for Band 3: 
+2013.1.00273.S 
+
+### Band: 6 ###
+2013.1.00999.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[6] Int:544.32 Obsdate:2014-12-2 SpatRes:0.893 ASDM:uid://A002/X97c221/Xc45 FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.00399.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[6] Int:302.4 Obsdate:2016-09-0 SpatRes:0.158 ASDM:uid://A002/Xb7a3f8/X563f FreqRes:7812.5 Array:12m Pol:XX YY
+2013.1.01119.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[6] Int:241.92 Obsdate:2015-01-0 SpatRes:0.576 ASDM:uid://A002/X9896b4/X8132 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00807.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[6] Int:211.68 Obsdate:2016-07-0 SpatRes:0.395 ASDM:uid://A002/Xb52d1b/X2d4c FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.01572.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[6] Int:90.72 Obsdate:2016-06-0 SpatRes:0.489 ASDM:uid://A002/Xb3d48f/X2300 FreqRes:1953.12 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 5
+
+Project codes for Band 6: 
+2013.1.00999.S 2015.1.00399.S 2013.1.01119.S 2015.1.00807.S 2015.1.01572.S 
+
+### Band: 7 ###
+2016.1.00139.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[7] Int:695.52 Obsdate:2016-10-3 SpatRes:0.168 ASDM:uid://A002/Xba035e/X15b1 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00594.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[7] Int:483.84 Obsdate:2016-07-3 SpatRes:0.168 ASDM:uid://A002/Xb60be4/X1130 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00330.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[7] Int:211.68 Obsdate:2016-09-1 SpatRes:0.094 ASDM:uid://A002/Xb7f042/X1d55 FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.00330.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[7] Int:181.44 Obsdate:2016-09-1 SpatRes:0.107 ASDM:uid://A002/Xb7f042/X1f68 FreqRes:3906.25 Array:12m Pol:XX YY
+2013.1.00001.S J2359-3133 ra:359.89788 dec:-31.56217 Band:[7] Int:120.96 Obsdate:2015-07-1 SpatRes:0.136 ASDM:uid://A002/Xa5b30a/X160d FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 5
+
+Project codes for Band 7: 
+2016.1.00139.S 2015.1.00594.S 2015.1.00330.S 2013.1.00001.S 
+
+Additional Notes:
+
+Name = [HB89] 2357-318
+z = 0.99
+velocity = 296795.0
+ra  = 359.89788
+dec = -31.56217
+
+###
+Total accepted uid for this object = 11
+Total accepted project for this object = 10
+###############################################
+
+
+######## Source name: J1047-6217 ########
+
+
+Time Band 3 :    514s (0.1h) 
+Time Band 6 :   3435s (1.0h) 
+Time Band 7 :    696s (0.2h) 
+Time Band 8 :     60s (0.0h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.01609.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[3] Int:423.36 Obsdate:2016-12-2 SpatRes:2.273 ASDM:uid://A002/Xbc19b1/X1db2 FreqRes:122.070 Array:12m Pol:XX YY
+2013.1.00661.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[3] Int:90.72 Obsdate:2015-03-0 SpatRes:2.604 ASDM:uid://A002/X9baf64/X5dc FreqRes:976.562 Array:12m7m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2016.1.01609.S 2013.1.00661.S 
+
+### Band: 6 ###
+2015.1.00357.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[6] Int:725.76 Obsdate:2015-12-1 SpatRes:0.053 ASDM:uid://A002/Xadabcb/X1565 FreqRes:61.0351 Array:12m Pol:XX YY
+2015.1.00357.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[6] Int:725.76 Obsdate:2015-12-1 SpatRes:0.063 ASDM:uid://A002/Xadabcb/X1102 FreqRes:61.0351 Array:12m Pol:XX YY
+2015.1.00656.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[6] Int:514.08 Obsdate:2015-12-1 SpatRes:0.058 ASDM:uid://A002/Xae1358/X149b FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.00357.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[6] Int:362.88 Obsdate:2016-01-0 SpatRes:1.432 ASDM:uid://A002/Xae75f3/X1211 FreqRes:61.0351 Array:12m Pol:XX YY
+2015.1.00357.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[6] Int:362.88 Obsdate:2016-01-0 SpatRes:1.354 ASDM:uid://A002/Xae75f3/X14d2 FreqRes:61.0351 Array:12m Pol:XX YY
+2015.1.00357.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[6] Int:362.88 Obsdate:2015-12-2 SpatRes:1.411 ASDM:uid://A002/Xae4720/X62b1 FreqRes:61.0351 Array:12m Pol:XX YY
+2015.1.01433.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[6] Int:120.96 Obsdate:2016-03-2 SpatRes:0.853 ASDM:uid://A002/Xb0be8b/X898d FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.01323.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[6] Int:108.864 Obsdate:2015-10-2 SpatRes:0.032 ASDM:uid://A002/Xac15f2/X235a FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.00191.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[6] Int:90.72 Obsdate:2016-12-0 SpatRes:0.683 ASDM:uid://A002/Xbb85b6/X87fe FreqRes:488.281 Array:12m Pol:XX YY
+2013.1.00661.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[6] Int:60.48 Obsdate:2015-01-2 SpatRes:1.244 ASDM:uid://A002/X9aa6ef/X99e FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 10
+
+Project codes for Band 6: 
+2015.1.00357.S 2015.1.00656.S 2015.1.01433.S 2015.1.01323.S 2016.1.00191.S 2013.1.00661.S 
+
+### Band: 7 ###
+2016.1.00692.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[7] Int:604.8 Obsdate:2016-11-0 SpatRes:0.209 ASDM:uid://A002/Xba0af7/X292f FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00585.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[7] Int:90.72 Obsdate:2016-10-2 SpatRes:0.171 ASDM:uid://A002/Xb9c01c/X4406 FreqRes:488.281 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2016.1.00692.S 2016.1.00585.S 
+
+### Band: 8 ###
+2015.1.01137.S J1047-6217 ra:161.92896 dec:-62.28739 Band:[8] Int:60.48 Obsdate:2016-09-2 SpatRes:0.079 ASDM:uid://A002/Xb88fca/Xd878 FreqRes:488.281 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2015.1.01137.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = 2MASS J10474446-6217233
+ra  = 161.93528
+dec = -62.28983
+
+###
+Total accepted uid for this object = 15
+Total accepted project for this object = 10
+###############################################
+
+
+######## Source name: J1147-6753 ########
+
+
+Time Band 3 :   2177s (0.6h) 
+Time Band 6 :    544s (0.2h) 
+Time Band 7 :   1070s (0.3h) 
+Time Band 9 :    423s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00908.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[3] Int:967.68 Obsdate:2016-01-1 SpatRes:3.062 ASDM:uid://A002/Xaec9ef/X13a9 FreqRes:61.0351 Array:12m Pol:XX YY
+2012.1.00031.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[3] Int:453.6 Obsdate:2013-03-1 SpatRes:1.843 ASDM:uid://A002/X5e2e02/X12a FreqRes:61.0351 Array:12m Pol:XX YY
+2016.1.00714.S J1147-6753-1277 ra:176.88916 dec:-67.89493 Band:[3] Int:453.6 Obsdate:2016-12-2 SpatRes:2.467 ASDM:uid://A002/Xbc22e9/X145c FreqRes:61.0351 Array:12m Pol:XX YY
+2012.1.00139.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[3] Int:151.2 Obsdate:2013-03-1 SpatRes:1.953 ASDM:uid://A002/X5e2e02/X191 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00714.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[3] Int:151.2 Obsdate:2016-12-2 SpatRes:2.467 ASDM:uid://A002/Xbc22e9/X145c FreqRes:61.0351 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 5
+
+Project codes for Band 3: 
+2015.1.00908.S 2012.1.00031.S 2016.1.00714.S 2012.1.00139.S 
+
+### Band: 6 ###
+2015.1.01371.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[6] Int:211.68 Obsdate:2016-06-1 SpatRes:0.688 ASDM:uid://A002/Xb44b49/X6d3b FreqRes:488.281 Array:12m Pol:XX YY
+2015.1.01243.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[6] Int:181.44 Obsdate:2016-03-2 SpatRes:0.950 ASDM:uid://A002/Xb0be8b/X2356 FreqRes:244.140 Array:12m Pol:XX YY
+2012.1.00139.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[6] Int:151.2 Obsdate:2013-02-1 SpatRes:0.795 ASDM:uid://A002/X5caed2/X776 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2015.1.01371.S 2015.1.01243.S 2012.1.00139.S 
+
+### Band: 7 ###
+2015.1.00806.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[7] Int:798.336 Obsdate:2015-11-2 SpatRes:0.025 ASDM:uid://A002/Xad0ecf/X1ee8 FreqRes:244.140 Array:12m Pol:XX YY
+2012.1.00377.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[7] Int:151.2 Obsdate:2013-03-1 SpatRes:0.579 ASDM:uid://A002/X5e7b34/X3ed FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.00391.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[7] Int:120.96 Obsdate:2016-11-1 SpatRes:0.432 ASDM:uid://A002/Xbaca56/X3d27 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 3
+
+Project codes for Band 7: 
+2015.1.00806.S 2012.1.00377.S 2016.1.00391.S 
+
+### Band: 9 ###
+2012.1.00479.S J1147-6753 ra:176.88916 dec:-67.89493 Band:[9] Int:423.36 Obsdate:2015-07-2 SpatRes:0.123 ASDM:uid://A002/Xa6c1df/X4e58 FreqRes:1953.12 Array:12m Pol:XX YY
+
+Total accepted uid for Band 9 = 1
+
+Project codes for Band 9: 
+2012.1.00479.S 
+
+Additional Notes:
+Name = PKS 1145-676
+z = 0.21
+velocity = 62956.0
+ra  = 176.88923
+dec = -67.89493
+
+###
+Total accepted uid for this object = 12
+Total accepted project for this object = 10
+###############################################
+
+
+
+
+
+######## Source name: J0425-5331 ########
+
+
+Time Band 3 :   1663s (0.5h) 
+Time Band 6 :    877s (0.2h) 
+Time Band 7 :    968s (0.3h) 
+Time Band 8 :   1935s (0.5h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.01592.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:816.48 Obsdate:2016-10-2 SpatRes:0.604 ASDM:uid://A002/Xb9b1b9/X1cb6 FreqRes:244.140 Array:12m Pol:XX YY
+2016.1.00613.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:120.96 Obsdate:2017-01-0 SpatRes:2.165 ASDM:uid://A002/Xbc8613/X5ec FreqRes:7812.5 Array:12m Pol:XX YY
+2016.1.00613.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:120.96 Obsdate:2017-01-0 SpatRes:2.404 ASDM:uid://A002/Xbca4b7/X2f7c FreqRes:7812.5 Array:12m Pol:XX YY
+2016.1.00613.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:120.96 Obsdate:2017-01-0 SpatRes:2.784 ASDM:uid://A002/Xbca4b7/X621 FreqRes:7812.5 Array:12m Pol:XX YY
+2016.1.00613.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:90.72 Obsdate:2017-01-0 SpatRes:2.560 ASDM:uid://A002/Xbca4b7/X4dc FreqRes:7812.5 Array:12m Pol:XX YY
+2016.1.00613.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:90.72 Obsdate:2017-01-0 SpatRes:2.401 ASDM:uid://A002/Xbc8613/X482 FreqRes:7812.5 Array:12m Pol:XX YY
+2016.1.00672.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:60.48 Obsdate:2017-01-2 SpatRes:2.880 ASDM:uid://A002/Xbd203b/X538 FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00672.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:60.48 Obsdate:2017-03-1 SpatRes:3.189 ASDM:uid://A002/Xbdcd3c/X37c0 FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00672.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:60.48 Obsdate:2017-03-0 SpatRes:3.515 ASDM:uid://A002/Xbda295/X3bb3 FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00672.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:60.48 Obsdate:2017-03-1 SpatRes:4.106 ASDM:uid://A002/Xbdcd3c/X39c8 FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00672.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[3] Int:60.48 Obsdate:2017-03-1 SpatRes:3.685 ASDM:uid://A002/Xbdcd3c/X383b FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 11
+
+Project codes for Band 3: 
+2016.1.01592.S 2016.1.00613.S 2016.1.00672.S 
+
+### Band: 6 ###
+2015.1.00442.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[6] Int:665.28 Obsdate:2016-05-0 SpatRes:0.642 ASDM:uid://A002/Xb25e1a/Xfe84 FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.00419.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[6] Int:90.72 Obsdate:2016-09-2 SpatRes:0.159 ASDM:uid://A002/Xb8c0d3/Xa43 FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.00419.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[6] Int:60.48 Obsdate:2016-06-1 SpatRes:0.517 ASDM:uid://A002/Xb4264b/X47af FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.00654.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[6] Int:60.48 Obsdate:2016-12-1 SpatRes:0.805 ASDM:uid://A002/Xbbe66a/X1323 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 4
+
+Project codes for Band 6: 
+2015.1.00442.S 2015.1.00419.S 2016.1.00654.S 
+
+### Band: 7 ###
+2016.1.01313.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[7] Int:725.76 Obsdate:2016-10-0 SpatRes:0.114 ASDM:uid://A002/Xb8fee5/X26d3 FreqRes:31250.0 Array:12m Pol:XX YY
+2013.1.00001.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[7] Int:151.2 Obsdate:2015-08-3 SpatRes:0.161 ASDM:uid://A002/Xa95c04/X1e3e FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00296.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[7] Int:90.72 Obsdate:2016-11-2 SpatRes:0.347 ASDM:uid://A002/Xbb0685/X1016 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 3
+
+Project codes for Band 7: 
+2016.1.01313.S 2013.1.00001.S 2016.1.00296.S 
+
+### Band: 8 ###
+2016.1.01313.S J0425-5331 ra:66.267805 dec:-53.53284 Band:[8] Int:1935.36 Obsdate:2016-10-2 SpatRes:0.134 ASDM:uid://A002/Xb9c01c/X2b50 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2016.1.01313.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = WISE J042504.26-533158.3
+ra  = 66.26783
+dec = -53.53297
+
+###
+Total accepted uid for this object = 19
+Total accepted project for this object = 9
+###############################################
+
+
+######## Source name: J1222+0413 ########
+
+
+Time Band 3 :    363s (0.1h) 
+Time Band 4 :    242s (0.1h) 
+Time Band 6 :    877s (0.2h) 
+Time Band 7 :    363s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00389.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[3] Int:120.96 Obsdate:2016-01-1 SpatRes:2.277 ASDM:uid://A002/Xaecf7b/X4421 FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.00820.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[3] Int:120.96 Obsdate:2016-01-0 SpatRes:3.194 ASDM:uid://A002/Xae75f3/X49b8 FreqRes:488.281 Array:12m Pol:XX YY
+2016.1.00226.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[3] Int:120.96 Obsdate:2017-01-0 SpatRes:2.367 ASDM:uid://A002/Xbc7c73/X139b FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 3
+
+Project codes for Band 3: 
+2015.1.00389.S 2015.1.00820.S 2016.1.00226.S 
+
+### Band: 4 ###
+2016.1.01072.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[4] Int:241.92 Obsdate:2017-03-1 SpatRes:2.149 ASDM:uid://A002/Xbdb592/X43c2 FreqRes:1953.12 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 1
+
+Project codes for Band 4: 
+2016.1.01072.S 
+
+### Band: 6 ###
+2016.1.00544.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[6] Int:302.4 Obsdate:2016-11-0 SpatRes:0.279 ASDM:uid://A002/Xba2b1d/X4a86 FreqRes:7812.5 Array:12m Pol:XX YY
+2015.1.00956.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[6] Int:272.16 Obsdate:2016-02-0 SpatRes:1.237 ASDM:uid://A002/Xafb2c8/X20f FreqRes:488.281 Array:12m Pol:XX YY
+2016.1.00226.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[6] Int:120.96 Obsdate:2017-03-1 SpatRes:1.407 ASDM:uid://A002/Xbe18f4/X518 FreqRes:7812.5 Array:12m Pol:XX YY
+2015.1.01115.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[6] Int:90.72 Obsdate:2016-01-3 SpatRes:1.201 ASDM:uid://A002/Xaf9ce7/X3f91 FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.01115.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[6] Int:90.72 Obsdate:2016-01-2 SpatRes:0.993 ASDM:uid://A002/Xaf6995/X124f FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 5
+
+Project codes for Band 6: 
+2016.1.00544.S 2015.1.00956.S 2016.1.00226.S 2015.1.01115.S 
+
+### Band: 7 ###
+2016.1.00226.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[7] Int:181.44 Obsdate:2017-03-2 SpatRes:1.325 ASDM:uid://A002/Xbe2ed7/X815c FreqRes:7812.5 Array:12m Pol:XX YY
+2016.1.00226.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[7] Int:151.2 Obsdate:2017-03-1 SpatRes:1.397 ASDM:uid://A002/Xbe18f4/Xb0f FreqRes:7812.5 Array:12m Pol:XX YY
+2015.1.00102.S J1222+0413 ra:185.59395 dec:4.2210489 Band:[7] Int:30.24 Obsdate:2016-08-2 SpatRes:0.207 ASDM:uid://A002/Xb70397/X480b FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 3
+
+Project codes for Band 7: 
+2016.1.00226.S 2015.1.00102.S 
+
+Additional Notes:
+
+Name = [HB89] 1219+044
+z = 0.966
+velocity = 289600.0
+ra  = 185.59396
+dec = 4.22105
+
+###
+Total accepted uid for this object = 12
+Total accepted project for this object = 8
+###############################################
+
+
+
+
+######## Source name: J1150-0023 ########
+
+
+Time Band 3 :    514s (0.1h) 
+Time Band 6 :    333s (0.1h) 
+Time Band 7 :    605s (0.2h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.01012.S J1150-0023 ra:177.68279 dec:-0.398390 Band:[3] Int:423.36 Obsdate:2016-08-0 SpatRes:0.576 ASDM:uid://A002/Xb66ea7/X6be9 FreqRes:7812.5 Array:12m Pol:XX YY
+2015.1.01147.S J1150-0023 ra:177.68279 dec:-0.398390 Band:[3] Int:90.72 Obsdate:2016-08-3 SpatRes:0.445 ASDM:uid://A002/Xb75b1a/X4948 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2015.1.01012.S 2015.1.01147.S 
+
+### Band: 6 ###
+2015.1.01042.S J1150-0023 ra:177.68279 dec:-0.398390 Band:[6] Int:151.2 Obsdate:2016-05-2 SpatRes:0.560 ASDM:uid://A002/Xb372db/Xacb FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.01115.S J1150-0023 ra:177.68279 dec:-0.398390 Band:[6] Int:90.72 Obsdate:2016-01-3 SpatRes:0.997 ASDM:uid://A002/Xaf9ce7/X1930 FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.00477.S J1150-0023 ra:177.68279 dec:-0.398390 Band:[6] Int:90.72 Obsdate:2016-05-0 SpatRes:0.615 ASDM:uid://A002/Xb28642/X9613 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2015.1.01042.S 2015.1.01115.S 2015.1.00477.S 
+
+### Band: 7 ###
+2016.1.01515.S J1150-0023 ra:177.68279 dec:-0.398390 Band:[7] Int:362.88 Obsdate:2016-11-1 SpatRes:0.298 ASDM:uid://A002/Xbaa732/X51d9 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00131.S J1150-0023 ra:177.68279 dec:-0.398390 Band:[7] Int:241.92 Obsdate:2016-03-1 SpatRes:0.584 ASDM:uid://A002/Xb078cd/X1506 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2016.1.01515.S 2015.1.00131.S 
+
+Additional Notes:
+Name = LBQS 1148-0007
+z = 1.980057
+velocity = 593606.0
+ra  = 177.68279
+dec = -0.39839
+
+###
+Total accepted uid for this object = 7
+Total accepted project for this object = 7
+###############################################
+
+######## Source name: J2230-4416 ########
+
+
+Time Band 3 :    302s (0.1h) 
+Time Band 6 :   1542s (0.4h) 
+Time Band 7 :    816s (0.2h) 
+Time Band 8 :   2117s (0.6h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.00672.S J2230-4416 ra:337.73517 dec:-44.27496 Band:[3] Int:60.48 Obsdate:2017-03-1 SpatRes:2.965 ASDM:uid://A002/Xbdcd3c/X5514 FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00672.S J2230-4416 ra:337.73517 dec:-44.27496 Band:[3] Int:60.48 Obsdate:2017-03-1 SpatRes:3.874 ASDM:uid://A002/Xbde844/X2b02 FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00672.S J2230-4416 ra:337.73517 dec:-44.27496 Band:[3] Int:60.48 Obsdate:2017-03-1 SpatRes:3.655 ASDM:uid://A002/Xbde844/X2db8 FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00672.S J2230-4416 ra:337.73517 dec:-44.27496 Band:[3] Int:60.48 Obsdate:2017-03-1 SpatRes:3.454 ASDM:uid://A002/Xbde844/X2fa9 FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00672.S J2230-4416 ra:337.73517 dec:-44.27496 Band:[3] Int:60.48 Obsdate:2017-03-1 SpatRes:3.499 ASDM:uid://A002/Xbde844/X291c FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 5
+
+Project codes for Band 3: 
+2016.1.00672.S 
+
+### Band: 6 ###
+2015.1.01425.S J2230-4416 ra:337.73517 dec:-44.27496 Band:[6] Int:1058.4 Obsdate:2016-01-1 SpatRes:0.676 ASDM:uid://A002/Xaef195/X4c94 FreqRes:15625.0 Array:12m Pol:XX YY
+2013.1.01119.S J2230-4416 ra:337.73517 dec:-44.27497 Band:[6] Int:302.4 Obsdate:2015-04-0 SpatRes:0.511 ASDM:uid://A002/X9d4710/X4734 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00807.S J2230-4416 ra:337.73517 dec:-44.27496 Band:[6] Int:181.44 Obsdate:2016-04-0 SpatRes:0.641 ASDM:uid://A002/Xb18ac0/X4e4f FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2015.1.01425.S 2013.1.01119.S 2015.1.00807.S 
+
+### Band: 7 ###
+2016.1.00643.S J2230-4416 ra:337.73517 dec:-44.27496 Band:[7] Int:544.32 Obsdate:2016-10-0 SpatRes:0.126 ASDM:uid://A002/Xb8e115/X24b9 FreqRes:15625.0 Array:12m Pol:XX YY
+2012.1.00524.S J2230-4416 ra:337.73517 dec:-44.27497 Band:[7] Int:272.16 Obsdate:2015-04-0 SpatRes:0.734 ASDM:uid://A002/X9db5ce/X3544 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2016.1.00643.S 2012.1.00524.S 
+
+### Band: 8 ###
+2013.1.01052.S J2230-4416 ra:337.73517 dec:-44.27497 Band:[8] Int:2116.8 Obsdate:2015-05-0 SpatRes:0.215 ASDM:uid://A002/X9fa4e2/X3d16 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2013.1.01052.S 
+
+Additional Notes:
+
+Name = [HB89] 2227-445
+z = 1.326
+velocity = 397525.0
+ra  = 337.735
+dec = -44.275
+
+###
+Total accepted uid for this object = 11
+Total accepted project for this object = 7
+###############################################
+
+
+######## Source name: J1126-3828 ########
+
+
+Time Band 3 :    514s (0.1h) 
+Time Band 6 :    272s (0.1h) 
+Time Band 7 :    145s (0.0h) 
+Time Band 9 :    242s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.00592.S J1126-3828 ra:171.68388 dec:-38.47890 Band:[3] Int:151.2 Obsdate:2016-10-0 SpatRes:0.428 ASDM:uid://A002/Xb8e961/X3165 FreqRes:61.0351 Array:12m Pol:XX YY
+2016.1.00592.S J1126-3828 ra:171.68388 dec:-38.47890 Band:[3] Int:120.96 Obsdate:2016-10-0 SpatRes:0.395 ASDM:uid://A002/Xb8e961/X360c FreqRes:61.0351 Array:12m Pol:XX YY
+2015.1.00591.S J1126-3828 ra:171.68388 dec:-38.47890 Band:[3] Int:90.72 Obsdate:2016-07-2 SpatRes:0.583 ASDM:uid://A002/Xb5bd46/X5dc8 FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.00591.S J1126-3828 ra:171.68388 dec:-38.47890 Band:[3] Int:90.72 Obsdate:2015-12-2 SpatRes:2.394 ASDM:uid://A002/Xae4720/X1000 FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.00856.S J1126-3828 ra:171.68388 dec:-38.47890 Band:[3] Int:60.48 Obsdate:2016-03-2 SpatRes:1.781 ASDM:uid://A002/Xb09eed/X830b FreqRes:122.070 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 5
+
+Project codes for Band 3: 
+2016.1.00592.S 2015.1.00591.S 2015.1.00856.S 
+
+### Band: 6 ###
+2015.1.01572.S J1126-3828 ra:171.68388 dec:-38.47890 Band:[6] Int:151.2 Obsdate:2016-06-0 SpatRes:0.491 ASDM:uid://A002/Xb3e648/Xb33 FreqRes:1953.12 Array:12m Pol:XX YY
+2015.1.00878.S J1126-3828 ra:171.68388 dec:-38.47890 Band:[6] Int:120.96 Obsdate:2016-07-2 SpatRes:0.333 ASDM:uid://A002/Xb5aa7c/X1d57 FreqRes:7812.5 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 2
+
+Project codes for Band 6: 
+2015.1.01572.S 2015.1.00878.S 
+
+### Band: 7 ###
+2015.1.00555.S J1126-3828 ra:171.68387 dec:-38.4789 Band:[7] Int:145.152 Obsdate:2015-11-2 SpatRes:0.023 ASDM:uid://A002/Xacffa8/X179d FreqRes:7812.5 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 1
+
+Project codes for Band 7: 
+2015.1.00555.S 
+
+### Band: 9 ###
+2016.1.00263.S J1126-3828 ra:171.68388 dec:-38.47890 Band:[9] Int:241.92 Obsdate:2016-11-2 SpatRes:0.155 ASDM:uid://A002/Xbb154b/X4d18 FreqRes:1953.12 Array:12m Pol:XX YY
+
+Total accepted uid for Band 9 = 1
+
+Project codes for Band 9: 
+2016.1.00263.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = XMMSL1 J112644.8-382853
+ra  = 171.68667
+dec = -38.48139
+
+###
+Total accepted uid for this object = 9
+Total accepted project for this object = 7
+###############################################
+
+
+
+######## Source name: J1103-3251 ########
+
+
+Time Band 3 :    151s (0.0h) 
+Time Band 4 :   1851s (0.5h) 
+Time Band 6 :    871s (0.2h) 
+Time Band 7 :   3060s (0.9h) 
+Time Band 8 :    121s (0.0h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.00592.S J1103-3251 ra:165.88136 dec:-32.85463 Band:[3] Int:90.72 Obsdate:2016-12-0 SpatRes:1.229 ASDM:uid://A002/Xbb85b6/X2a0a FreqRes:61.0351 Array:12m Pol:XX YY
+2016.1.00592.S J1103-3251 ra:165.88136 dec:-32.85463 Band:[3] Int:60.48 Obsdate:2016-12-0 SpatRes:1.117 ASDM:uid://A002/Xbb5cfb/X1f01 FreqRes:61.0351 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2016.1.00592.S 
+
+### Band: 4 ###
+2015.A.00005.S J1103-3251 ra:165.88136 dec:-32.85463 Band:[4] Int:943.488 Obsdate:2015-12-0 SpatRes:0.071 ASDM:uid://A002/Xad5116/X72d FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00845.S J1103-3251 ra:165.88136 dec:-32.85463 Band:[4] Int:483.84 Obsdate:2016-04-2 SpatRes:0.803 ASDM:uid://A002/Xb24884/X804c FreqRes:488.281 Array:12m Pol:XX YY
+2015.1.00845.S J1103-3251 ra:165.88136 dec:-32.85463 Band:[4] Int:423.36 Obsdate:2016-06-0 SpatRes:0.944 ASDM:uid://A002/Xb3cc45/X2ed FreqRes:488.281 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 3
+
+Project codes for Band 4: 
+2015.A.00005.S 2015.1.00845.S 
+
+### Band: 6 ###
+2015.A.00005.S J1103-3251 ra:165.88136 dec:-32.85463 Band:[6] Int:870.912 Obsdate:2015-12-0 SpatRes:0.045 ASDM:uid://A002/Xad47ae/X846 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 1
+
+Project codes for Band 6: 
+2015.A.00005.S 
+
+### Band: 7 ###
+2015.1.00686.S J1103-3251 ra:165.88136 dec:-32.85463 Band:[7] Int:2848.608 Obsdate:2015-11-2 SpatRes:0.018 ASDM:uid://A002/Xacffa8/Xf7d FreqRes:488.281 Array:12m Pol:XX YY
+2015.1.00308.S J1103-3251 ra:165.88136 dec:-32.85463 Band:[7] Int:211.68 Obsdate:2016-03-0 SpatRes:0.489 ASDM:uid://A002/Xb046c2/X606 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2015.1.00686.S 2015.1.00308.S 
+
+### Band: 8 ###
+2015.1.01597.S J1103-3251 ra:165.88136 dec:-32.85463 Band:[8] Int:120.96 Obsdate:2016-09-1 SpatRes:0.073 ASDM:uid://A002/Xb80c59/X5013 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2015.1.01597.S 
+
+Additional Notes:
+Name = [HB89] 1101-325
+z = 0.355503
+velocity = 106577.0
+ra  = 165.88136
+dec = -32.85464
+
+###
+Total accepted uid for this object = 9
+Total accepted project for this object = 6
+###############################################
+
+
+######## Source name: J1351-2912 ########
+
+
+Time Band 3 :   1512s (0.4h) 
+Time Band 4 :     60s (0.0h) 
+Time Band 6 :   1391s (0.4h) 
+Time Band 7 :   3266s (0.9h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00645.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[3] Int:725.76 Obsdate:2016-01-0 SpatRes:2.056 ASDM:uid://A002/Xaebbcb/X18d6 FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.00645.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[3] Int:725.76 Obsdate:2016-01-1 SpatRes:1.464 ASDM:uid://A002/Xaebbcb/X465d FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.01140.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[3] Int:60.48 Obsdate:2016-10-0 SpatRes:0.357 ASDM:uid://A002/Xb8e961/X4499 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 3
+
+Project codes for Band 3: 
+2015.1.00645.S 2016.1.01140.S 
+
+### Band: 4 ###
+2016.1.01140.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[4] Int:60.48 Obsdate:2016-10-0 SpatRes:0.210 ASDM:uid://A002/Xb8e961/X47e5 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 1
+
+Project codes for Band 4: 
+2016.1.01140.S 
+
+### Band: 6 ###
+2016.1.00386.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[6] Int:544.32 Obsdate:2016-12-2 SpatRes:0.635 ASDM:uid://A002/Xbc0724/X2bd6 FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.00386.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[6] Int:362.88 Obsdate:2016-12-1 SpatRes:0.626 ASDM:uid://A002/Xbb9cd7/Xb57a FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.00164.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[6] Int:241.92 Obsdate:2017-03-1 SpatRes:1.427 ASDM:uid://A002/Xbe025c/Xc38 FreqRes:3906.25 Array:12m Pol:XX YY
+2016.1.00164.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[6] Int:241.92 Obsdate:2017-03-1 SpatRes:1.305 ASDM:uid://A002/Xbdcd3c/X13fb FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 4
+
+Project codes for Band 6: 
+2016.1.00386.S 2016.1.00164.S 
+
+### Band: 7 ###
+2015.1.01446.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[7] Int:2812.32 Obsdate:2015-11-3 SpatRes:0.025 ASDM:uid://A002/Xad3217/X4385 FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.01593.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[7] Int:151.2 Obsdate:2016-01-2 SpatRes:0.636 ASDM:uid://A002/Xaf985b/Xc8a FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.01593.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[7] Int:151.2 Obsdate:2016-01-2 SpatRes:0.627 ASDM:uid://A002/Xaf985b/X9b3 FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.00164.S J1351-2912 ra:207.94516 dec:-29.20490 Band:[7] Int:151.2 Obsdate:2017-03-2 SpatRes:1.204 ASDM:uid://A002/Xbe43ba/X1ac0 FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 4
+
+Project codes for Band 7: 
+2015.1.01446.S 2015.1.01593.S 2016.1.00164.S 
+
+Additional Notes:
+Name = PKS 1348-289
+z = 1.034
+velocity = 309985.0
+ra  = 207.94516
+dec = -29.2049
+
+###
+Total accepted uid for this object = 12
+Total accepted project for this object = 6
+###############################################
+
+
+######## Source name: J0516-6207 ########
+
+
+Time Band 3 :    798s (0.2h) 
+Time Band 6 :    665s (0.2h) 
+Time Band 7 :    151s (0.0h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.01195.S J0516-6207 ra:79.187192 dec:-62.11816 Band:[3] Int:483.84 Obsdate:2016-01-1 SpatRes:2.960 ASDM:uid://A002/Xaecf7b/Xb62 FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.01522.S J051644-620706 ra:79.187 dec:-62.11836 Band:[3] Int:314.496 Obsdate:2016-08-2 SpatRes:0.651 ASDM:uid://A002/Xb7189f/Xa9cb FreqRes:62500.0 Array:12m Pol:XX XY YX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2015.1.01195.S 2015.1.01522.S 
+
+### Band: 6 ###
+2015.1.00204.S J0516-6207 ra:79.187192 dec:-62.11816 Band:[6] Int:544.32 Obsdate:2016-03-2 SpatRes:0.751 ASDM:uid://A002/Xb0be8b/X76c FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00372.S J0516-6207 ra:79.187192 dec:-62.11816 Band:[6] Int:60.48 Obsdate:2016-10-1 SpatRes:0.206 ASDM:uid://A002/Xb9356a/X4909 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00372.S J0516-6207 ra:79.187192 dec:-62.11816 Band:[6] Int:60.48 Obsdate:2016-11-2 SpatRes:0.554 ASDM:uid://A002/Xbb2021/X704a FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2015.1.00204.S 2016.1.00372.S 
+
+### Band: 7 ###
+2016.1.00296.S J0516-6207 ra:79.187192 dec:-62.11816 Band:[7] Int:90.72 Obsdate:2016-11-2 SpatRes:0.390 ASDM:uid://A002/Xbaedce/Xa3fb FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.00404.S J0516-6207 ra:79.187192 dec:-62.11816 Band:[7] Int:60.48 Obsdate:2016-11-0 SpatRes:0.267 ASDM:uid://A002/Xba4d35/Xc6e0 FreqRes:7812.5 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2016.1.00296.S 2015.1.00404.S 
+
+Additional Notes:
+
+Name = PKS 0516-621
+z = 1.3
+velocity = 389730.0
+ra  = 79.18719
+dec = -62.11816
+
+###
+Total accepted uid for this object = 7
+Total accepted project for this object = 6
+###############################################
+
+
+######## Source name: J1232-0224 ########
+
+
+Time Band 3 :    490s (0.1h) 
+Time Band 6 :    494s (0.1h) 
+Time Band 7 :    484s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00932.S 4C_-02.55 ra:188.00006 dec:-2.401331 Band:[3] Int:241.92 Obsdate:2016-09-2 SpatRes:0.378 ASDM:uid://A002/Xb87877/X4255 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00820.S J1232-0224 ra:188.00006 dec:-2.401331 Band:[3] Int:181.44 Obsdate:2016-01-0 SpatRes:2.490 ASDM:uid://A002/Xae75f3/X440a FreqRes:488.281 Array:12m Pol:XX YY
+2016.1.01481.S 4C_-02.55 ra:188.00005 dec:-2.401334 Band:[3] Int:66.528 Obsdate:2016-11-1 SpatRes:0.981 ASDM:uid://A002/Xba839d/X57ac FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 3
+
+Project codes for Band 3: 
+2015.1.00932.S 2015.1.00820.S 2016.1.01481.S 
+
+### Band: 6 ###
+2015.1.00932.S 4C_-02.55 ra:188.00006 dec:-2.401331 Band:[6] Int:181.44 Obsdate:2016-03-2 SpatRes:0.886 ASDM:uid://A002/Xb0ebd1/Xb6cc FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.01481.S 4C_-02.55 ra:188.00005 dec:-2.401334 Band:[6] Int:131.04 Obsdate:2016-12-0 SpatRes:0.514 ASDM:uid://A002/Xbb5cfb/X202d FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00691.S J1232-0224 ra:188.00006 dec:-2.401331 Band:[6] Int:60.48 Obsdate:2016-10-1 SpatRes:0.189 ASDM:uid://A002/Xb95160/X5a40 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00872.S J1232-0224 ra:188.00006 dec:-2.401331 Band:[6] Int:60.48 Obsdate:2016-07-2 SpatRes:0.284 ASDM:uid://A002/Xb602ab/Xe9c FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00691.S J1232-0224 ra:188.00006 dec:-2.401331 Band:[6] Int:60.48 Obsdate:2016-10-1 SpatRes:0.199 ASDM:uid://A002/Xb97224/X1529 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 5
+
+Project codes for Band 6: 
+2015.1.00932.S 2016.1.01481.S 2016.1.00691.S 2015.1.00872.S 
+
+### Band: 7 ###
+2015.1.00042.S J1232-0224 ra:188.00006 dec:-2.401331 Band:[7] Int:241.92 Obsdate:2016-03-2 SpatRes:0.397 ASDM:uid://A002/Xb0ebd1/X72a3 FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00691.S J1232-0224 ra:188.00006 dec:-2.401331 Band:[7] Int:60.48 Obsdate:2016-10-2 SpatRes:0.204 ASDM:uid://A002/Xb9c01c/X4a84 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00691.S J1232-0224 ra:188.00006 dec:-2.401331 Band:[7] Int:60.48 Obsdate:2016-10-2 SpatRes:0.224 ASDM:uid://A002/Xb9cc97/X80ec FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00691.S J1232-0224 ra:188.00006 dec:-2.401331 Band:[7] Int:60.48 Obsdate:2016-10-2 SpatRes:0.185 ASDM:uid://A002/Xb9c01c/X4c55 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00691.S J1232-0224 ra:188.00006 dec:-2.401331 Band:[7] Int:60.48 Obsdate:2016-11-0 SpatRes:0.180 ASDM:uid://A002/Xba0af7/X44b0 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 5
+
+Project codes for Band 7: 
+2015.1.00042.S 2016.1.00691.S 
+
+Additional Notes:
+
+Name = [HB89] 1229-021:[BB91] 2
+z = 0.199
+velocity = 59659.0
+ra  = 187.99879
+dec = -2.39921
+
+###
+Total accepted uid for this object = 13
+Total accepted project for this object = 6
+###############################################
+
+
+
+
+
+
+
+
+######## Source name: J1319-0049 ########
+
+
+Time Band 3 :    816s (0.2h) 
+Time Band 4 :    363s (0.1h) 
+Time Band 6 :   2964s (0.8h) 
+Time Band 7 :    544s (0.2h) 
+Time Band 8 :    242s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.00831.S J1319-0049 ra:199.91152 dec:-0.827761 Band:[3] Int:635.04 Obsdate:2017-01-0 SpatRes:2.567 ASDM:uid://A002/Xbca4b7/X15cf FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00831.S J1319-0049 ra:199.91152 dec:-0.827761 Band:[3] Int:120.96 Obsdate:2017-01-0 SpatRes:2.355 ASDM:uid://A002/Xbc9c9e/X1c7a FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.01191.S J1319-0049 ra:199.91152 dec:-0.827761 Band:[3] Int:60.48 Obsdate:2016-07-2 SpatRes:0.743 ASDM:uid://A002/Xb5bd46/X5a0e FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 3
+
+Project codes for Band 3: 
+2016.1.00831.S 2015.1.01191.S 
+
+### Band: 4 ###
+2016.1.00831.S J1319-0049 ra:199.91152 dec:-0.827761 Band:[4] Int:211.68 Obsdate:2017-01-2 SpatRes:1.885 ASDM:uid://A002/Xbd203b/X1a7d FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00831.S J1319-0049 ra:199.91152 dec:-0.827761 Band:[4] Int:151.2 Obsdate:2017-01-2 SpatRes:1.786 ASDM:uid://A002/Xbcef34/X23bd FreqRes:488.281 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 2
+
+Project codes for Band 4: 
+2016.1.00831.S 
+
+### Band: 6 ###
+2015.1.01406.S J1319-0049 ra:199.91152 dec:-0.827761 Band:[6] Int:2721.6 Obsdate:2016-08-0 SpatRes:0.239 ASDM:uid://A002/Xb62a5b/X61f FreqRes:3906.25 Array:12m Pol:XX YY
+2016.1.00831.S J1319-0049 ra:199.91152 dec:-0.827761 Band:[6] Int:151.2 Obsdate:2017-03-1 SpatRes:1.437 ASDM:uid://A002/Xbe025c/X460 FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.01115.S J1319-0049 ra:199.91152 dec:-0.827761 Band:[6] Int:90.72 Obsdate:2016-01-2 SpatRes:0.889 ASDM:uid://A002/Xaf6995/X12be FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2015.1.01406.S 2016.1.00831.S 2015.1.01115.S 
+
+### Band: 7 ###
+2013.1.01153.S J1319-0049 ra:199.91152 dec:-0.827761 Band:[7] Int:544.32 Obsdate:2015-06-0 SpatRes:0.503 ASDM:uid://A002/Xa24618/X11ff FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 1
+
+Project codes for Band 7: 
+2013.1.01153.S 
+
+### Band: 8 ###
+2016.1.00954.S J1319-0049 ra:199.91152 dec:-0.827761 Band:[8] Int:241.92 Obsdate:2016-11-2 SpatRes:0.266 ASDM:uid://A002/Xbb00cd/Xbe0 FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2016.1.00954.S 
+
+Additional Notes:
+
+Name = LBQS 1317-0033
+z = 0.890996
+velocity = 267114.0
+ra  = 199.91153
+dec = -0.82776
+
+###
+Total accepted uid for this object = 10
+Total accepted project for this object = 6
+###############################################
+
+
+
+######## Source name: J0914+0245 ########
+
+
+Time Band 3 :    847s (0.2h) 
+Time Band 6 :    200s (0.1h) 
+Time Band 7 :   1966s (0.5h) 
+Time Band 8 :    181s (0.1h) 
+Time Band 9 :    121s (0.0h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00405.S J0914+0245 ra:138.65797 dec:2.7664573 Band:[3] Int:846.72 Obsdate:2016-03-0 SpatRes:1.646 ASDM:uid://A002/Xb020f7/X1520 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 1
+
+Project codes for Band 3: 
+2015.1.00405.S 
+
+### Band: 6 ###
+2015.1.00415.S J0914+0245 ra:138.65797 dec:2.7664574 Band:[6] Int:199.584 Obsdate:2015-11-0 SpatRes:0.021 ASDM:uid://A002/Xac5575/X7878 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 1
+
+Project codes for Band 6: 
+2015.1.00415.S 
+
+### Band: 7 ###
+2013.1.01153.S J0914+0245 ra:138.65797 dec:2.7664573 Band:[7] Int:725.76 Obsdate:2015-06-0 SpatRes:0.422 ASDM:uid://A002/Xa2d681/X7de FreqRes:31250.0 Array:12m Pol:XX YY
+2012.1.00973.S J0914+0245 ra:138.65797 dec:2.7664573 Band:[7] Int:635.04 Obsdate:2014-02-2 SpatRes:0.677 ASDM:uid://A002/X7afbb0/X3e5 FreqRes:976.562 Array:12m Pol:XX YY
+2013.1.01153.S J0914+0245 ra:138.65797 dec:2.7664573 Band:[7] Int:604.8 Obsdate:2015-06-1 SpatRes:0.537 ASDM:uid://A002/Xa342f2/X5cd5 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 3
+
+Project codes for Band 7: 
+2013.1.01153.S 2012.1.00973.S 
+
+### Band: 8 ###
+2016.1.01093.S J0914+0245 ra:138.65797 dec:2.7664573 Band:[8] Int:181.44 Obsdate:2016-11-1 SpatRes:0.239 ASDM:uid://A002/Xba9cdb/X4917 FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2016.1.01093.S 
+
+### Band: 9 ###
+2015.1.01362.S J0914+0245 ra:138.65797 dec:2.7664573 Band:[9] Int:120.96 Obsdate:2016-11-1 SpatRes:0.164 ASDM:uid://A002/Xbab09c/X2c2d FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 9 = 1
+
+Project codes for Band 9: 
+2015.1.01362.S 
+
+Additional Notes:
+Name = PKS 0912+029
+z = 0.426677
+velocity = 127915.0
+ra  = 138.65797
+dec = 2.76646
+
+###
+Total accepted uid for this object = 7
+Total accepted project for this object = 6
+###############################################
+
+
+
+######## Source name: J1208-7809 ########
+
+
+Time Band 3 :   3320s (0.9h) 
+Time Band 6 :    726s (0.2h) 
+Time Band 7 :    544s (0.2h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00979.S J1208-7809 ra:182.07647 dec:-78.16350 Band:[3] Int:2685.308 Obsdate:2015-10-1 SpatRes:0.091 ASDM:uid://A002/Xabde62/X1cc FreqRes:15625.0 Array:12m Pol:XX YY
+2013.1.01177.S J1208-7809 ra:182.07647 dec:-78.16350 Band:[3] Int:635.04 Obsdate:2015-05-2 SpatRes:2.179 ASDM:uid://A002/Xa14be9/X376 FreqRes:30.5175 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2015.1.00979.S 2013.1.01177.S 
+
+### Band: 6 ###
+2013.1.01113.S J1208-7809 ra:182.07647 dec:-78.16350 Band:[6] Int:483.84 Obsdate:2015-06-0 SpatRes:0.745 ASDM:uid://A002/Xa25bbf/X5e54 FreqRes:122.070 Array:12m Pol:XX YY
+2013.1.01113.S J1208-7809 ra:182.07647 dec:-78.16350 Band:[6] Int:181.44 Obsdate:2015-06-0 SpatRes:0.719 ASDM:uid://A002/Xa25bbf/X59df FreqRes:31250.0 Array:12m Pol:XX YY
+2013.1.00592.S J1208-7809 ra:182.07647 dec:-78.16350 Band:[6] Int:60.48 Obsdate:2015-08-2 SpatRes:0.454 ASDM:uid://A002/Xa8ce43/X138 FreqRes:61.0351 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2013.1.01113.S 2013.1.00592.S 
+
+### Band: 7 ###
+2015.1.00528.S J1208-7809 ra:182.07647 dec:-78.16350 Band:[7] Int:362.88 Obsdate:2016-06-1 SpatRes:0.525 ASDM:uid://A002/Xb4655b/X2c84 FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.00528.S J1208-7809 ra:182.07647 dec:-78.16350 Band:[7] Int:181.44 Obsdate:2015-12-2 SpatRes:1.329 ASDM:uid://A002/Xae5b1d/X1b91 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2015.1.00528.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = PKS 1205-778
+ra  = 182.07583
+dec = -78.16336
+
+###
+Total accepted uid for this object = 7
+Total accepted project for this object = 5
+###############################################
+
+
+
+######## Source name: J0830+2410 ########
+
+
+Time Band 3 :    351s (0.1h) 
+Time Band 4 :   4234s (1.2h) 
+Time Band 6 :    847s (0.2h) 
+Time Band 7 :    726s (0.2h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00932.S QSO_B0827+243 ra:127.71702 dec:24.183283 Band:[3] Int:272.16 Obsdate:2016-09-2 SpatRes:0.475 ASDM:uid://A002/Xb8c0d3/X20f3 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.01481.S QSO_B0827+243 ra:127.71702 dec:24.183283 Band:[3] Int:78.624 Obsdate:2016-10-3 SpatRes:0.872 ASDM:uid://A002/Xb9fa0c/X3418 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2015.1.00932.S 2016.1.01481.S 
+
+### Band: 4 ###
+2015.1.01034.S QSO_B0827+2421 ra:127.71702 dec:24.183283 Band:[4] Int:4233.6 Obsdate:2015-12-1 SpatRes:0.112 ASDM:uid://A002/Xade68e/X1a96 FreqRes:7812.5 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 1
+
+Project codes for Band 4: 
+2015.1.01034.S 
+
+### Band: 6 ###
+2015.1.00932.S QSO_B0827+243 ra:127.71702 dec:24.183283 Band:[6] Int:423.36 Obsdate:2016-09-3 SpatRes:0.223 ASDM:uid://A002/Xb8da40/X24fd FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00932.S QSO_B0827+243 ra:127.71702 dec:24.183283 Band:[6] Int:211.68 Obsdate:2016-05-0 SpatRes:0.798 ASDM:uid://A002/Xb28642/Xb87 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00804.S J0830+2410 ra:127.71702 dec:24.183283 Band:[6] Int:211.68 Obsdate:2015-12-1 SpatRes:0.066 ASDM:uid://A002/Xaddcfa/X64c FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2015.1.00932.S 2015.1.00804.S 
+
+### Band: 7 ###
+2016.1.00569.S J0830+2410 ra:127.71702 dec:24.183283 Band:[7] Int:725.76 Obsdate:2016-12-1 SpatRes:0.638 ASDM:uid://A002/Xbbcb1f/X70d6 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 1
+
+Project codes for Band 7: 
+2016.1.00569.S 
+
+Additional Notes:
+
+Name = [SKS2002] 0827+243 NED01
+z = 1.015
+velocity = 304289.0
+ra  = 127.71388
+dec = 24.18406
+
+###
+Total accepted uid for this object = 7
+Total accepted project for this object = 5
+###############################################
+
+
+######## Source name: J2207-5346 ########
+
+
+Time Band 3 :    211s (0.1h) 
+Time Band 4 :    121s (0.0h) 
+Time Band 6 :    212s (0.1h) 
+Time Band 7 :    363s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2012.1.00844.S J2207-5346 ra:331.93222 dec:-53.77606 Band:[3] Int:120.0 Obsdate:2014-12-2 SpatRes:2.680 ASDM:uid://A002/X97db9c/X179 FreqRes:7812.5 Array:12m Pol:XX YY
+2016.1.01340.S J2207-5346 ra:331.93222 dec:-53.77606 Band:[3] Int:90.72 Obsdate:2016-12-0 SpatRes:1.412 ASDM:uid://A002/Xbb7114/X89cd FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2012.1.00844.S 2016.1.01340.S 
+
+### Band: 4 ###
+2016.1.01340.S J2207-5346 ra:331.93222 dec:-53.77606 Band:[4] Int:120.96 Obsdate:2017-03-1 SpatRes:2.416 ASDM:uid://A002/Xbde844/X68fd FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 1
+
+Project codes for Band 4: 
+2016.1.01340.S 
+
+### Band: 6 ###
+2015.1.00939.S J2207-5346 ra:331.93222 dec:-53.77606 Band:[6] Int:120.96 Obsdate:2016-05-1 SpatRes:0.610 ASDM:uid://A002/Xb2f730/X1004d FreqRes:3906.25 Array:12m Pol:XX YY
+2016.1.00654.S J2207-5346 ra:331.93222 dec:-53.77606 Band:[6] Int:90.72 Obsdate:2017-04-1 SpatRes:0.780 ASDM:uid://A002/Xbf032d/Xc18b FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 2
+
+Project codes for Band 6: 
+2015.1.00939.S 2016.1.00654.S 
+
+### Band: 7 ###
+2016.1.01499.S J2207-5346 ra:331.93222 dec:-53.77606 Band:[7] Int:362.88 Obsdate:2016-10-2 SpatRes:0.201 ASDM:uid://A002/Xb9f161/X1604 FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 1
+
+Project codes for Band 7: 
+2016.1.01499.S 
+
+Additional Notes:
+Name = [HB89] 2204-540
+z = 1.206
+velocity = 361550.0
+ra  = 331.93222
+dec = -53.77606
+
+###
+Total accepted uid for this object = 6
+Total accepted project for this object = 5
+###############################################
+
+
+
+######## Source name: J1603-4904 ########
+
+
+Time Band 3 :    454s (0.1h) 
+Time Band 6 :    454s (0.1h) 
+Time Band 7 :    121s (0.0h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.00645.S J1603-4904 ra:240.96118 dec:-49.06819 Band:[3] Int:241.92 Obsdate:2016-12-0 SpatRes:1.451 ASDM:uid://A002/Xbb7114/Xcfbc FreqRes:61.0351 Array:12m Pol:XX YY
+2016.1.00645.S J1603-4904 ra:240.96118 dec:-49.06819 Band:[3] Int:211.68 Obsdate:2017-01-0 SpatRes:1.919 ASDM:uid://A002/Xbc68a1/Xff6 FreqRes:122.070 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2016.1.00645.S 
+
+### Band: 6 ###
+2015.1.01539.S J1603-4904 ra:240.96118 dec:-49.06819 Band:[6] Int:241.92 Obsdate:2016-01-3 SpatRes:1.198 ASDM:uid://A002/Xaf9ce7/X47a5 FreqRes:61.0351 Array:12m Pol:XX YY
+2015.1.01312.S J1603-4904 ra:240.96118 dec:-49.06819 Band:[6] Int:151.2 Obsdate:2016-03-0 SpatRes:0.751 ASDM:uid://A002/Xb03fa0/X24d7 FreqRes:1953.12 Array:12m Pol:XX YY
+2016.1.01036.S J1603-4904 ra:240.96118 dec:-49.06819 Band:[6] Int:60.48 Obsdate:2016-11-0 SpatRes:0.319 ASDM:uid://A002/Xba2b1d/X4e40 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2015.1.01539.S 2015.1.01312.S 2016.1.01036.S 
+
+### Band: 7 ###
+2015.1.00449.S J1603-4904 ra:240.96118 dec:-49.06819 Band:[7] Int:120.96 Obsdate:2016-07-3 SpatRes:0.250 ASDM:uid://A002/Xb60be4/X877 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 1
+
+Project codes for Band 7: 
+2015.1.00449.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = 2MASS J16035151-4904042
+ra  = 240.96466
+dec = -49.06784
+
+###
+Total accepted uid for this object = 6
+Total accepted project for this object = 5
+###############################################
+
+
+######## Source name: J0930+0034 ########
+
+
+Time Band 3 :    393s (0.1h) 
+Time Band 6 :    508s (0.1h) 
+Time Band 7 :   1318s (0.4h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.00948.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[3] Int:241.92 Obsdate:2017-01-1 SpatRes:2.182 ASDM:uid://A002/Xbcb16f/X232e FreqRes:1953.12 Array:12m Pol:XX YY
+2016.1.00948.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[3] Int:90.72 Obsdate:2017-01-1 SpatRes:2.176 ASDM:uid://A002/Xbcb16f/X4818 FreqRes:1953.12 Array:12m Pol:XX YY
+2016.1.00948.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[3] Int:60.48 Obsdate:2017-01-1 SpatRes:2.325 ASDM:uid://A002/Xbcb16f/X20af FreqRes:1953.12 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 3
+
+Project codes for Band 3: 
+2016.1.00948.S 
+
+### Band: 6 ###
+2015.1.00695.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[6] Int:181.44 Obsdate:2015-11-1 SpatRes:0.024 ASDM:uid://A002/Xacca73/X3308 FreqRes:7812.5 Array:12m Pol:XX YY
+2015.1.00695.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[6] Int:108.864 Obsdate:2015-11-1 SpatRes:0.021 ASDM:uid://A002/Xacdf75/X186e FreqRes:7812.5 Array:12m Pol:XX YY
+2015.1.00695.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[6] Int:108.864 Obsdate:2015-11-1 SpatRes:0.021 ASDM:uid://A002/Xacc268/Xeb3 FreqRes:7812.5 Array:12m Pol:XX YY
+2015.1.00695.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[6] Int:108.864 Obsdate:2015-11-0 SpatRes:0.022 ASDM:uid://A002/Xac97ce/X8e4 FreqRes:7812.5 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 4
+
+Project codes for Band 6: 
+2015.1.00695.S 
+
+### Band: 7 ###
+2015.1.00607.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[7] Int:544.32 Obsdate:2015-11-1 SpatRes:0.018 ASDM:uid://A002/Xacbbd0/Xef4 FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.01345.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[7] Int:435.456 Obsdate:2015-11-0 SpatRes:0.015 ASDM:uid://A002/Xac97ce/X4eb FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.01345.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[7] Int:217.728 Obsdate:2015-11-0 SpatRes:0.015 ASDM:uid://A002/Xac9223/X483 FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.00754.S J0930+0034 ra:142.71772 dec:0.5830392 Band:[7] Int:120.96 Obsdate:2016-08-1 SpatRes:0.171 ASDM:uid://A002/Xb68dbd/X41b7 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 4
+
+Project codes for Band 7: 
+2015.1.00607.S 2015.1.01345.S 2015.1.00754.S 
+
+Additional Notes:
+Name = [HB89] 0928+008
+z = 1.768559
+velocity = 530201.0
+ra  = 142.71772
+dec = 0.58304
+
+###
+Total accepted uid for this object = 11
+Total accepted project for this object = 5
+###############################################
+
+
+######## Source name: J0303-6211 ########
+
+
+Time Band 3 :    272s (0.1h) 
+Time Band 4 :    151s (0.0h) 
+Time Band 6 :    484s (0.1h) 
+Time Band 7 :    937s (0.3h) 
+Time Band 8 :   1693s (0.5h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00869.S J0303-6211 ra:45.960963 dec:-62.19043 Band:[3] Int:120.96 Obsdate:2016-09-0 SpatRes:0.583 ASDM:uid://A002/Xb7960a/X5e1 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00236.T J0303-6211 ra:45.960963 dec:-62.19043 Band:[3] Int:90.72 Obsdate:2016-11-0 SpatRes:0.873 ASDM:uid://A002/Xba26cb/X527 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00504.S J0303-6211 ra:45.960963 dec:-62.19043 Band:[3] Int:60.48 Obsdate:2016-01-0 SpatRes:3.494 ASDM:uid://A002/Xae75f3/X648 FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 3
+
+Project codes for Band 3: 
+2015.1.00869.S 2016.1.00236.T 2015.1.00504.S 
+
+### Band: 4 ###
+2015.1.00869.S J0303-6211 ra:45.960963 dec:-62.19043 Band:[4] Int:151.2 Obsdate:2016-07-2 SpatRes:0.517 ASDM:uid://A002/Xb5e334/X48f3 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 1
+
+Project codes for Band 4: 
+2015.1.00869.S 
+
+### Band: 6 ###
+2015.1.00869.S J0303-6211 ra:45.960963 dec:-62.19043 Band:[6] Int:181.44 Obsdate:2016-06-0 SpatRes:0.566 ASDM:uid://A002/Xb402ff/X4377 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.01293.S J0303-6211 ra:45.960963 dec:-62.19043 Band:[6] Int:181.44 Obsdate:2016-11-0 SpatRes:0.319 ASDM:uid://A002/Xba1cd8/X6e7 FreqRes:15625.0 Array:12m Pol:XX YY
+2016.1.00236.T J0303-6211 ra:45.960963 dec:-62.19043 Band:[6] Int:120.96 Obsdate:2016-11-1 SpatRes:0.735 ASDM:uid://A002/Xbaca56/X30d9 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2015.1.00869.S 2016.1.01293.S 2016.1.00236.T 
+
+### Band: 7 ###
+2015.1.00869.S J0303-6211 ra:45.960963 dec:-62.19043 Band:[7] Int:423.36 Obsdate:2016-06-1 SpatRes:0.364 ASDM:uid://A002/Xb4655b/X1570 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.01499.S J0303-6211 ra:45.960963 dec:-62.19043 Band:[7] Int:362.88 Obsdate:2016-10-3 SpatRes:0.241 ASDM:uid://A002/Xb9fa0c/X164c FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.00504.S J0303-6211 ra:45.960963 dec:-62.19043 Band:[7] Int:90.72 Obsdate:2016-06-0 SpatRes:0.431 ASDM:uid://A002/Xb3e648/X4647 FreqRes:31250.0 Array:12m Pol:XX YY
+2016.1.00236.T J0303-6211 ra:45.960963 dec:-62.19043 Band:[7] Int:60.48 Obsdate:2016-12-1 SpatRes:0.699 ASDM:uid://A002/Xbbcb1f/X5ffd FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 4
+
+Project codes for Band 7: 
+2015.1.00869.S 2016.1.01499.S 2015.1.00504.S 2016.1.00236.T 
+
+### Band: 8 ###
+2016.1.01293.S J0303-6211 ra:45.960963 dec:-62.19043 Band:[8] Int:1693.44 Obsdate:2016-11-1 SpatRes:0.288 ASDM:uid://A002/Xbaa732/X1d93 FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2016.1.01293.S 
+
+Additional Notes:
+Name = PKS 0302-623
+z = 1.351
+velocity = 405020.0
+ra  = 45.96096
+dec = -62.19043
+
+###
+Total accepted uid for this object = 12
+Total accepted project for this object = 5
+###############################################
+
+
+######## Source name: J1332+0200 ########
+
+
+Time Band 3 :    302s (0.1h) 
+Time Band 6 :    181s (0.1h) 
+Time Band 7 :    605s (0.2h) 
+Time Band 8 :    242s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00804.S J1332+0200 ra:203.22196 dec:2.0126942 Band:[3] Int:211.68 Obsdate:2016-04-0 SpatRes:2.029 ASDM:uid://A002/Xb162a6/Xe05 FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.00804.S J1332+0200 ra:203.22196 dec:2.0126942 Band:[3] Int:90.72 Obsdate:2016-04-0 SpatRes:1.808 ASDM:uid://A002/Xb162a6/Xf9c FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2015.1.00804.S 
+
+### Band: 6 ###
+2015.1.00187.S J1332+0200 ra:203.22196 dec:2.0126942 Band:[6] Int:90.72 Obsdate:2016-03-2 SpatRes:0.706 ASDM:uid://A002/Xb09eed/X103c8 FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.00804.S J1332+0200 ra:203.22196 dec:2.0126942 Band:[6] Int:90.72 Obsdate:2016-06-2 SpatRes:0.938 ASDM:uid://A002/Xb499c3/X138d FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 2
+
+Project codes for Band 6: 
+2015.1.00187.S 2015.1.00804.S 
+
+### Band: 7 ###
+2016.1.01515.S J1332+0200 ra:203.22196 dec:2.0126942 Band:[7] Int:423.36 Obsdate:2016-11-1 SpatRes:0.323 ASDM:uid://A002/Xbab09c/X453e FreqRes:31250.0 Array:12m Pol:XX YY
+2013.1.01153.S J1332+0200 ra:203.22196 dec:2.0126942 Band:[7] Int:181.44 Obsdate:2015-06-0 SpatRes:0.345 ASDM:uid://A002/Xa24618/Xf9f FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2016.1.01515.S 2013.1.01153.S 
+
+### Band: 8 ###
+2015.1.01191.S J1332+0200 ra:203.22195 dec:2.0126941 Band:[8] Int:241.92 Obsdate:2016-03-2 SpatRes:0.374 ASDM:uid://A002/Xb0e56c/X905 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2015.1.01191.S 
+
+Additional Notes:
+Name = 3C 287.1
+z = 0.215567
+velocity = 64625.0
+ra  = 203.22196
+dec = 2.01269
+
+###
+Total accepted uid for this object = 7
+Total accepted project for this object = 5
+###############################################
+
+
+
+
+######## Source name: J0956+2515 ########
+
+
+Time Band 3 :    786s (0.2h) 
+Time Band 6 :    544s (0.2h) 
+Time Band 7 :    514s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2013.1.00096.S J0956+2515 ra:149.20781 dec:25.254458 Band:[3] Int:483.84 Obsdate:2014-12-0 SpatRes:2.648 ASDM:uid://A002/X95e355/X13fd FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.00856.S J0956+2515 ra:149.20782 dec:25.254346 Band:[3] Int:302.4 Obsdate:2016-03-1 SpatRes:2.515 ASDM:uid://A002/Xb08ef9/X602d FreqRes:122.070 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2013.1.00096.S 2015.1.00856.S 
+
+### Band: 6 ###
+2013.1.01061.S J0956+2515 ra:149.20781 dec:25.254458 Band:[6] Int:241.92 Obsdate:2014-06-2 SpatRes:0.573 ASDM:uid://A002/X856bb8/X3be FreqRes:488.281 Array:12m Pol:XX YY
+2015.1.00846.S J0956+2515 ra:149.20781 dec:25.254458 Band:[6] Int:151.2 Obsdate:2015-12-1 SpatRes:0.064 ASDM:uid://A002/Xadabcb/X24cd FreqRes:15625.0 Array:12m Pol:XX YY
+2013.1.01061.S J0956+2515 ra:149.20781 dec:25.254458 Band:[6] Int:90.72 Obsdate:2014-06-2 SpatRes:0.584 ASDM:uid://A002/X856bb8/X4e2d FreqRes:488.281 Array:12m Pol:XX YY
+2015.1.00846.S J0956+2515 ra:149.20781 dec:25.254458 Band:[6] Int:60.48 Obsdate:2016-01-0 SpatRes:1.693 ASDM:uid://A002/Xae6c13/X2852 FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 4
+
+Project codes for Band 6: 
+2013.1.01061.S 2015.1.00846.S 
+
+### Band: 7 ###
+2013.1.01061.S J0956+2515 ra:149.20781 dec:25.254458 Band:[7] Int:211.68 Obsdate:2014-06-2 SpatRes:0.481 ASDM:uid://A002/X856bb8/X44c7 FreqRes:488.281 Array:12m Pol:XX YY
+2013.1.01061.S J0956+2515 ra:149.20781 dec:25.254458 Band:[7] Int:211.68 Obsdate:2014-06-2 SpatRes:0.422 ASDM:uid://A002/X856bb8/X4a50 FreqRes:488.281 Array:12m Pol:XX YY
+2013.1.01061.S J0956+2515 ra:149.20781 dec:25.254458 Band:[7] Int:90.72 Obsdate:2014-06-2 SpatRes:0.476 ASDM:uid://A002/X856bb8/Xd8 FreqRes:488.281 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 3
+
+Project codes for Band 7: 
+2013.1.01061.S 
+
+Additional Notes:
+
+Name = FBQS J095649.8+251515
+z = 0.707208
+velocity = 212016.0
+ra  = 149.20781
+dec = 25.25446
+
+###
+Total accepted uid for this object = 9
+Total accepted project for this object = 4
+###############################################
+
+
+######## Source name: J2040-5735 ########
+
+
+Time Band 3 :    302s (0.1h) 
+Time Band 6 :    423s (0.1h) 
+Time Band 7 :    181s (0.1h) 
+Time Band 8 :    242s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00504.S J2040-5735 ra:310.00459 dec:-57.58601 Band:[3] Int:60.48 Obsdate:2016-01-0 SpatRes:3.146 ASDM:uid://A002/Xaea19c/X1bb9 FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.00504.S J2040-5735 ra:310.00459 dec:-57.58601 Band:[3] Int:60.48 Obsdate:2016-01-0 SpatRes:2.910 ASDM:uid://A002/Xae926d/X19d FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.00504.S J2040-5735 ra:310.00459 dec:-57.58601 Band:[3] Int:60.48 Obsdate:2016-01-0 SpatRes:3.313 ASDM:uid://A002/Xae75f3/X311e FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.00504.S J2040-5735 ra:310.00459 dec:-57.58601 Band:[3] Int:60.48 Obsdate:2016-01-0 SpatRes:2.154 ASDM:uid://A002/Xaea19c/X18cf FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.00504.S J2040-5735 ra:310.00459 dec:-57.58601 Band:[3] Int:60.48 Obsdate:2016-01-0 SpatRes:3.247 ASDM:uid://A002/Xae926d/X2a9 FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 5
+
+Project codes for Band 3: 
+2015.1.00504.S 
+
+### Band: 6 ###
+2016.1.01279.S J2040-5735 ra:310.00459 dec:-57.58601 Band:[6] Int:423.36 Obsdate:2016-11-1 SpatRes:0.432 ASDM:uid://A002/Xba6edb/X58a0 FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 1
+
+Project codes for Band 6: 
+2016.1.01279.S 
+
+### Band: 7 ###
+2015.1.00467.S J2040-5735 ra:310.00459 dec:-57.58601 Band:[7] Int:120.96 Obsdate:2016-03-2 SpatRes:0.526 ASDM:uid://A002/Xb0be8b/X5695 FreqRes:7812.5 Array:12m Pol:XX YY
+2015.1.00504.S J2040-5735 ra:310.00459 dec:-57.58601 Band:[7] Int:60.48 Obsdate:2016-08-2 SpatRes:0.219 ASDM:uid://A002/Xb70397/X75a3 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2015.1.00467.S 2015.1.00504.S 
+
+### Band: 8 ###
+2015.1.00420.S J2040-5735 ra:310.00459 dec:-57.58601 Band:[8] Int:241.92 Obsdate:2016-05-1 SpatRes:0.316 ASDM:uid://A002/Xb32033/X76ae FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2015.1.00420.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = PKS 2036-577
+ra  = 310.00467
+dec = -57.58594
+
+###
+Total accepted uid for this object = 9
+Total accepted project for this object = 4
+###############################################
+
+
+######## Source name: J1007-0207 ########
+
+
+Time Band 3 :    363s (0.1h) 
+Time Band 4 :    302s (0.1h) 
+Time Band 6 :    363s (0.1h) 
+Time Band 7 :    181s (0.1h) 
+Time Band 8 :    363s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00253.S J1007-0207 ra:151.76812 dec:-2.119699 Band:[3] Int:362.88 Obsdate:2016-05-2 SpatRes:1.230 ASDM:uid://A002/Xb3ad79/Xe55 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 1
+
+Project codes for Band 3: 
+2015.1.00253.S 
+
+### Band: 4 ###
+2015.1.00253.S J1007-0207 ra:151.76812 dec:-2.119699 Band:[4] Int:302.4 Obsdate:2016-03-1 SpatRes:1.205 ASDM:uid://A002/Xb09eed/X1df8 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 1
+
+Project codes for Band 4: 
+2015.1.00253.S 
+
+### Band: 6 ###
+2012.1.00619.S J1007-0207 ra:151.76812 dec:-2.119699 Band:[6] Int:362.88 Obsdate:2013-11-0 SpatRes:0.382 ASDM:uid://A002/X71a45c/X1d24 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 1
+
+Project codes for Band 6: 
+2012.1.00619.S 
+
+### Band: 7 ###
+2012.1.00973.S J1007-0207 ra:151.76812 dec:-2.119699 Band:[7] Int:181.44 Obsdate:2013-12-1 SpatRes:0.772 ASDM:uid://A002/X75ab74/Xf8d FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 1
+
+Project codes for Band 7: 
+2012.1.00973.S 
+
+### Band: 8 ###
+2016.1.00954.S J1007-0207 ra:151.76812 dec:-2.119699 Band:[8] Int:362.88 Obsdate:2016-11-1 SpatRes:0.247 ASDM:uid://A002/Xba9cdb/X4ee4 FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2016.1.00954.S 
+
+Additional Notes:
+
+Name = [HB89] 1004-018
+z = 1.2154
+velocity = 364368.0
+ra  = 151.76812
+dec = -2.1197
+
+###
+Total accepted uid for this object = 5
+Total accepted project for this object = 4
+###############################################
+
+
+
+######## Source name: J0531-4827 ########
+
+
+Time Band 3 :    363s (0.1h) 
+Time Band 6 :    454s (0.1h) 
+Time Band 7 :    363s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2016.1.00065.S J0531-4827 ra:82.994229 dec:-48.45999 Band:[3] Int:362.88 Obsdate:2017-01-0 SpatRes:2.352 ASDM:uid://A002/Xbc9c9e/X14ee FreqRes:15625.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 1
+
+Project codes for Band 3: 
+2016.1.00065.S 
+
+### Band: 6 ###
+2015.1.01578.S J0531-4827 ra:82.994229 dec:-48.45999 Band:[6] Int:241.92 Obsdate:2016-06-2 SpatRes:1.035 ASDM:uid://A002/Xb499c3/Xb108 FreqRes:15625.0 Array:12m Pol:XX YY
+2015.1.01578.S J0531-4827 ra:82.994229 dec:-48.45999 Band:[6] Int:181.44 Obsdate:2016-06-2 SpatRes:0.814 ASDM:uid://A002/Xb499c3/Xadd0 FreqRes:15625.0 Array:12m Pol:XX YY
+2013.1.01342.S 3FGL_J0532.0-4827 ra:82.993458 dec:-48.46033 Band:[6] Int:30.24 Obsdate:2015-01-1 SpatRes:1.137 ASDM:uid://A002/X99b0a8/Xf88 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 3
+
+Project codes for Band 6: 
+2015.1.01578.S 2013.1.01342.S 
+
+### Band: 7 ###
+2016.1.01374.S J0531-4827 ra:82.994229 dec:-48.45999 Band:[7] Int:181.44 Obsdate:2016-10-2 SpatRes:0.131 ASDM:uid://A002/Xb99699/X661 FreqRes:7812.5 Array:12m Pol:XX YY
+2016.1.01374.S J0531-4827 ra:82.994229 dec:-48.45999 Band:[7] Int:181.44 Obsdate:2016-10-2 SpatRes:0.159 ASDM:uid://A002/Xb9c01c/X3502 FreqRes:7812.5 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2016.1.01374.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = WISE J053158.61-482735.9
+ra  = 82.99421
+dec = -48.45997
+
+###
+Total accepted uid for this object = 6
+Total accepted project for this object = 4
+###############################################
+
+######## Source name: J1038+0512 ########
+
+
+Time Band 3 :    181s (0.1h) 
+Time Band 4 :    302s (0.1h) 
+Time Band 6 :     91s (0.0h) 
+Time Band 7 :    544s (0.2h) 
+Time Band 8 :    109s (0.0h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.01518.S J1038+0512 ra:159.69491 dec:5.2080797 Band:[3] Int:181.44 Obsdate:2015-10-1 SpatRes:0.055 ASDM:uid://A002/Xabd867/X2277 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 1
+
+Project codes for Band 3: 
+2015.1.01518.S 
+
+### Band: 4 ###
+2015.1.00199.S J1038+0512 ra:159.69491 dec:5.2080797 Band:[4] Int:302.4 Obsdate:2016-07-1 SpatRes:0.661 ASDM:uid://A002/Xb55f4e/X38bf FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 1
+
+Project codes for Band 4: 
+2015.1.00199.S 
+
+### Band: 6 ###
+2015.1.01115.S J1038+0512 ra:159.69491 dec:5.2080797 Band:[6] Int:90.72 Obsdate:2016-01-2 SpatRes:0.994 ASDM:uid://A002/Xaf985b/X4e6 FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 1
+
+Project codes for Band 6: 
+2015.1.01115.S 
+
+### Band: 7 ###
+2016.1.01515.S J1038+0512 ra:159.69491 dec:5.2080797 Band:[7] Int:423.36 Obsdate:2016-11-0 SpatRes:0.256 ASDM:uid://A002/Xba4d35/Xd492 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00199.S J1038+0512 ra:159.69491 dec:5.2080797 Band:[7] Int:120.96 Obsdate:2016-06-2 SpatRes:0.452 ASDM:uid://A002/Xb499c3/Xba59 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2016.1.01515.S 2015.1.00199.S 
+
+### Band: 8 ###
+2015.1.01518.S J1038+0512 ra:159.69491 dec:5.2080797 Band:[8] Int:108.864 Obsdate:2016-03-3 SpatRes:0.468 ASDM:uid://A002/Xb10f33/Xa627 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2015.1.01518.S 
+
+Additional Notes:
+
+Name = PKS 1036+054
+z = 0.473
+velocity = 141802.0
+ra  = 159.69492
+dec = 5.20808
+
+###
+Total accepted uid for this object = 6
+Total accepted project for this object = 4
+###############################################
+
+
+######## Source name: J2158-1501 ########
+
+
+Time Band 3 :    302s (0.1h) 
+Time Band 6 :    212s (0.1h) 
+Time Band 7 :    605s (0.2h) 
+Time Band 9 :   2177s (0.6h) 
+
+List of obs:
+
+### Band: 3 ###
+2013.1.00428.S J2158-1501 ra:329.52617 dec:-15.01925 Band:[3] Int:302.4 Obsdate:2015-09-0 SpatRes:0.527 ASDM:uid://A002/Xa9a44e/X1225 FreqRes:122.070 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 1
+
+Project codes for Band 3: 
+2013.1.00428.S 
+
+### Band: 6 ###
+2013.1.01213.S J2158-1501 ra:329.52617 dec:-15.01925 Band:[6] Int:211.68 Obsdate:2015-09-2 SpatRes:0.148 ASDM:uid://A002/Xaa8932/X2ac2 FreqRes:7812.5 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 1
+
+Project codes for Band 6: 
+2013.1.01213.S 
+
+### Band: 7 ###
+2012.1.00584.T J2158-1501 ra:329.52617 dec:-15.01925 Band:[7] Int:302.4 Obsdate:2015-08-1 SpatRes:0.148 ASDM:uid://A002/Xa7f9e3/X210 FreqRes:31250.0 Array:12m Pol:XX YY
+2012.1.00584.T J2158-1501 ra:329.52617 dec:-15.01925 Band:[7] Int:302.4 Obsdate:2015-08-2 SpatRes:0.157 ASDM:uid://A002/Xa916fc/X12e0 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2012.1.00584.T 
+
+### Band: 9 ###
+2013.1.00526.S J2158-1501 ra:329.52617 dec:-15.01925 Band:[9] Int:2177.28 Obsdate:2015-05-0 SpatRes:0.073 ASDM:uid://A002/X9fa4e2/X3084 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 9 = 1
+
+Project codes for Band 9: 
+2013.1.00526.S 
+
+Additional Notes:
+Name = [HB89] 2155-152
+z = 0.672
+velocity = 201461.0
+ra  = 329.52617
+dec = -15.01926
+
+###
+Total accepted uid for this object = 5
+Total accepted project for this object = 4
+###############################################
+
+
+
+
+######## Source name: J0340-2119 ########
+
+
+Time Band 3 :    302s (0.1h) 
+Time Band 6 :    242s (0.1h) 
+Time Band 7 :    484s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00989.S J0340-2119 ra:55.148366 dec:-21.32532 Band:[3] Int:211.68 Obsdate:2016-05-0 SpatRes:1.508 ASDM:uid://A002/Xb28642/X7fd8 FreqRes:7812.5 Array:12m Pol:XX YY
+2013.1.01167.S J0340-2119 ra:55.148366 dec:-21.32532 Band:[3] Int:90.72 Obsdate:2015-08-0 SpatRes:0.473 ASDM:uid://A002/Xa789ca/X259 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2015.1.00989.S 2013.1.01167.S 
+
+### Band: 6 ###
+2013.1.01167.S J0340-2119 ra:55.148366 dec:-21.32532 Band:[6] Int:181.44 Obsdate:2015-08-1 SpatRes:0.207 ASDM:uid://A002/Xa7dc73/X2319 FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.00839.S J0340-2119 ra:55.148366 dec:-21.32532 Band:[6] Int:60.48 Obsdate:2016-11-2 SpatRes:0.549 ASDM:uid://A002/Xbb30f0/X1d33 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 2
+
+Project codes for Band 6: 
+2013.1.01167.S 2016.1.00839.S 
+
+### Band: 7 ###
+2012.1.00900.S J0340-2119 ra:55.148366 dec:-21.32532 Band:[7] Int:483.84 Obsdate:2014-08-1 SpatRes:0.197 ASDM:uid://A002/X8917e8/X516 FreqRes:1953.12 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 1
+
+Project codes for Band 7: 
+2012.1.00900.S 
+
+Additional Notes:
+Name = PKS 0338-214
+z = 0.223
+velocity = 66854.0
+ra  = 55.14837
+dec = -21.32533
+
+###
+Total accepted uid for this object = 5
+Total accepted project for this object = 4
+###############################################
+
+
+######## Source name: J1315-5334 ########
+
+
+Time Band 3 :    363s (0.1h) 
+Time Band 6 :    302s (0.1h) 
+Time Band 7 :    121s (0.0h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00287.S J1315-5334 ra:198.76742 dec:-53.57663 Band:[3] Int:272.16 Obsdate:2016-09-0 SpatRes:0.420 ASDM:uid://A002/Xb7d0ee/X516a FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.00287.S J1315-5334 ra:198.76742 dec:-53.57663 Band:[3] Int:90.72 Obsdate:2016-08-2 SpatRes:0.471 ASDM:uid://A002/Xb74a0f/X2b72 FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2015.1.00287.S 
+
+### Band: 6 ###
+2013.1.00099.S J1315-5334 ra:198.76742 dec:-53.57663 Band:[6] Int:151.2 Obsdate:2014-12-2 SpatRes:1.156 ASDM:uid://A002/X98124f/X2127 FreqRes:7812.5 Array:12m Pol:XX YY
+2015.1.00287.S J1315-5334 ra:198.76742 dec:-53.57663 Band:[6] Int:151.2 Obsdate:2016-09-0 SpatRes:0.194 ASDM:uid://A002/Xb7d0ee/Xcc9d FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 2
+
+Project codes for Band 6: 
+2013.1.00099.S 2015.1.00287.S 
+
+### Band: 7 ###
+2015.1.00102.S J1315-5334 ra:198.76742 dec:-53.57663 Band:[7] Int:60.48 Obsdate:2016-06-0 SpatRes:0.121 ASDM:uid://A002/Xb402ff/X142d FreqRes:7812.5 Array:12m Pol:XX YY
+2015.1.00102.S J1315-5334 ra:198.76742 dec:-53.57663 Band:[7] Int:60.48 Obsdate:2016-06-0 SpatRes:0.117 ASDM:uid://A002/Xb402ff/X16c3 FreqRes:7812.5 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 2
+
+Project codes for Band 7: 
+2015.1.00102.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = 2MASS J13150491-5334510
+ra  = 198.77048
+dec = -53.58084
+
+###
+Total accepted uid for this object = 6
+Total accepted project for this object = 3
+###############################################
+
+
+
+
+
+
+
+######## Source name: J2056-5820 ########
+
+
+Time Band 3 :   1512s (0.4h) 
+Time Band 6 :    937s (0.3h) 
+Time Band 7 :    242s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.00467.S J2056-5820 ra:314.12735 dec:-58.33542 Band:[3] Int:483.84 Obsdate:2016-07-2 SpatRes:0.674 ASDM:uid://A002/Xb5e334/X301b FreqRes:1953.12 Array:12m Pol:XX YY
+2015.1.01247.S J2056-5820 ra:314.12735 dec:-58.33542 Band:[3] Int:423.36 Obsdate:2016-01-0 SpatRes:3.145 ASDM:uid://A002/Xaebbcb/X29e3 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.00420.S J2056-5820 ra:314.12735 dec:-58.33542 Band:[3] Int:241.92 Obsdate:2016-08-1 SpatRes:0.657 ASDM:uid://A002/Xb6a8c1/Xa7bd FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.00420.S J2056-5820 ra:314.12735 dec:-58.33542 Band:[3] Int:211.68 Obsdate:2016-09-0 SpatRes:0.573 ASDM:uid://A002/Xb7a3f8/X9915 FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.00420.S J2056-5820 ra:314.12735 dec:-58.33542 Band:[3] Int:151.2 Obsdate:2016-04-1 SpatRes:1.678 ASDM:uid://A002/Xb1e6b5/X4a00 FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 5
+
+Project codes for Band 3: 
+2015.1.00467.S 2015.1.01247.S 2015.1.00420.S 
+
+### Band: 6 ###
+2015.1.00467.S J2056-5820 ra:314.12735 dec:-58.33542 Band:[6] Int:937.44 Obsdate:2016-05-1 SpatRes:0.625 ASDM:uid://A002/Xb33b61/X2aa4 FreqRes:3906.25 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 1
+
+Project codes for Band 6: 
+2015.1.00467.S 
+
+### Band: 7 ###
+2015.1.00420.S J2056-5820 ra:314.12735 dec:-58.33542 Band:[7] Int:241.92 Obsdate:2016-04-1 SpatRes:0.520 ASDM:uid://A002/Xb1cc39/X3edc FreqRes:7812.5 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 1
+
+Project codes for Band 7: 
+2015.1.00420.S 
+
+Additional Notes:
+
+Name = 1WGA J2056.4-5819
+z = 1.139
+velocity = 341464.0
+ra  = 314.12125
+dec = -58.33306
+
+###
+Total accepted uid for this object = 7
+Total accepted project for this object = 3
+###############################################
+
+
+
+######## Source name: J0040-3243 ########
+
+
+Time Band 3 :    423s (0.1h) 
+Time Band 6 :    363s (0.1h) 
+Time Band 7 :    363s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2013.1.00350.S J0040-3243 ra:10.073086 dec:-32.72439 Band:[3] Int:272.16 Obsdate:2015-08-0 SpatRes:0.485 ASDM:uid://A002/Xa78e41/X13d5 FreqRes:976.562 Array:12m Pol:XX YY
+2015.1.00586.S J0040-3243 ra:10.073086 dec:-32.72439 Band:[3] Int:151.2 Obsdate:2016-05-0 SpatRes:1.322 ASDM:uid://A002/Xb2b000/X23bf FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 2
+
+Project codes for Band 3: 
+2013.1.00350.S 2015.1.00586.S 
+
+### Band: 6 ###
+2013.1.00350.S J0040-3243 ra:10.073086 dec:-32.72439 Band:[6] Int:272.16 Obsdate:2015-09-2 SpatRes:0.163 ASDM:uid://A002/Xaad35a/X102a FreqRes:976.562 Array:12m Pol:XX YY
+2013.1.00350.S J0040-3243 ra:10.073086 dec:-32.72439 Band:[6] Int:90.72 Obsdate:2015-09-2 SpatRes:0.148 ASDM:uid://A002/Xaad35a/X154f FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 2
+
+Project codes for Band 6: 
+2013.1.00350.S 
+
+### Band: 7 ###
+2016.1.00139.S J0040-3243 ra:10.073086 dec:-32.72439 Band:[7] Int:362.88 Obsdate:2016-10-3 SpatRes:0.169 ASDM:uid://A002/Xba035e/X15b1 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 1
+
+Project codes for Band 7: 
+2016.1.00139.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = LQAC 010-032 003
+ra  = 10.07309
+dec = -32.7244
+
+###
+Total accepted uid for this object = 5
+Total accepted project for this object = 3
+###############################################
+
+
+
+######## Source name: J0811-4929 ########
+
+
+Time Band 3 :     60s (0.0h) 
+Time Band 4 :     91s (0.0h) 
+Time Band 6 :    998s (0.3h) 
+Time Band 7 :    726s (0.2h) 
+Time Band 8 :    726s (0.2h) 
+Time Band 9 :    363s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.01104.S J0811-4929 ra:122.78668 dec:-49.49541 Band:[3] Int:60.48 Obsdate:2016-07-2 SpatRes:0.708 ASDM:uid://A002/Xb5bd46/X55ee FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 1
+
+Project codes for Band 3: 
+2015.1.01104.S 
+
+### Band: 4 ###
+2015.1.01104.S J0811-4929 ra:122.78668 dec:-49.49541 Band:[4] Int:90.72 Obsdate:2016-07-1 SpatRes:0.709 ASDM:uid://A002/Xb55f4e/X36b4 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 4 = 1
+
+Project codes for Band 4: 
+2015.1.01104.S 
+
+### Band: 6 ###
+2015.1.01068.S J0811-4929 ra:122.78668 dec:-49.49541 Band:[6] Int:816.48 Obsdate:2016-06-2 SpatRes:0.487 ASDM:uid://A002/Xb499c3/X10a8e FreqRes:122.070 Array:12m Pol:XX YY
+2015.1.01104.S J0811-4929 ra:122.78668 dec:-49.49541 Band:[6] Int:181.44 Obsdate:2016-04-1 SpatRes:0.789 ASDM:uid://A002/Xb1e6b5/X1b44 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 2
+
+Project codes for Band 6: 
+2015.1.01068.S 2015.1.01104.S 
+
+### Band: 7 ###
+2015.1.01104.S J0811-4929 ra:122.78668 dec:-49.49541 Band:[7] Int:725.76 Obsdate:2016-03-1 SpatRes:0.590 ASDM:uid://A002/Xb05734/X632 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 1
+
+Project codes for Band 7: 
+2015.1.01104.S 
+
+### Band: 8 ###
+2015.1.00662.S J0811-4929 ra:122.78668 dec:-49.49541 Band:[8] Int:483.84 Obsdate:2016-07-0 SpatRes:0.167 ASDM:uid://A002/Xb52d1b/X403 FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.00662.S J0811-4929 ra:122.78668 dec:-49.49541 Band:[8] Int:241.92 Obsdate:2016-07-1 SpatRes:0.203 ASDM:uid://A002/Xb57286/X1130 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 2
+
+Project codes for Band 8: 
+2015.1.00662.S 
+
+### Band: 9 ###
+2015.1.00662.S J0811-4929 ra:122.78668 dec:-49.49541 Band:[9] Int:181.44 Obsdate:2016-11-1 SpatRes:0.168 ASDM:uid://A002/Xbabd27/X41de FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.00662.S J0811-4929 ra:122.78668 dec:-49.49541 Band:[9] Int:181.44 Obsdate:2016-11-2 SpatRes:0.211 ASDM:uid://A002/Xbb0685/X4f03 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 9 = 2
+
+Project codes for Band 9: 
+2015.1.00662.S 
+
+Additional Notes:
+
+No redshift data found in NED! 
+Name = PKS 0809-492
+ra  = 122.78668
+dec = -49.49542
+
+###
+Total accepted uid for this object = 9
+Total accepted project for this object = 3
+###############################################
+
+
+
+
+
+
+######## Source name: J2035+1056 ########
+
+
+Time Band 3 :    363s (0.1h) 
+Time Band 6 :    242s (0.1h) 
+Time Band 7 :    726s (0.2h) 
+
+List of obs:
+
+### Band: 3 ###
+2015.1.01558.T J2035+1056 ra:308.84305 dec:10.935218 Band:[3] Int:90.72 Obsdate:2016-06-2 SpatRes:1.197 ASDM:uid://A002/Xb4f03d/X4b4 FreqRes:3906.25 Array:12m Pol:XX YY
+2015.1.01558.T J2035+1056 ra:308.84305 dec:10.935218 Band:[3] Int:90.72 Obsdate:2016-07-1 SpatRes:1.178 ASDM:uid://A002/Xb53e10/X340 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.01558.T J2035+1056 ra:308.84305 dec:10.935218 Band:[3] Int:90.72 Obsdate:2016-07-2 SpatRes:0.803 ASDM:uid://A002/Xb5aa7c/X4999 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.01558.T J2035+1056 ra:308.84305 dec:10.935218 Band:[3] Int:90.72 Obsdate:2016-07-2 SpatRes:0.978 ASDM:uid://A002/Xb60831/X486 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 3 = 4
+
+Project codes for Band 3: 
+2015.1.01558.T 
+
+### Band: 6 ###
+2015.1.01188.S J2035+1056 ra:308.84305 dec:10.935218 Band:[6] Int:241.92 Obsdate:2016-06-0 SpatRes:0.524 ASDM:uid://A002/Xb3e112/X1b95 FreqRes:244.140 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 1
+
+Project codes for Band 6: 
+2015.1.01188.S 
+
+### Band: 7 ###
+2015.1.01558.T J2035+1056 ra:308.84305 dec:10.935218 Band:[7] Int:181.44 Obsdate:2016-07-0 SpatRes:0.386 ASDM:uid://A002/Xb4f580/X52f1 FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.01558.T J2035+1056 ra:308.84305 dec:10.935218 Band:[7] Int:181.44 Obsdate:2016-07-1 SpatRes:0.347 ASDM:uid://A002/Xb56bbd/X1ba FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.01558.T J2035+1056 ra:308.84305 dec:10.935218 Band:[7] Int:181.44 Obsdate:2016-07-2 SpatRes:0.227 ASDM:uid://A002/Xb5aa7c/X4a6c FreqRes:31250.0 Array:12m Pol:XX YY
+2015.1.01558.T J2035+1056 ra:308.84305 dec:10.935218 Band:[7] Int:181.44 Obsdate:2016-07-2 SpatRes:0.247 ASDM:uid://A002/Xb60831/X17 FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 4
+
+Project codes for Band 7: 
+2015.1.01558.T 
+
+Additional Notes:
+
+Name = [HB89] 2032+107
+z = 0.601
+velocity = 180175.0
+ra  = 308.84306
+dec = 10.93522
+
+###
+Total accepted uid for this object = 9
+Total accepted project for this object = 2
+###############################################
+
+
+
+
+
+
+
+######## Source name: J0501-0159 ########
+
+
+Time Band 3 :   3357s (0.9h) 
+Time Band 6 :   1512s (0.4h) 
+Time Band 7 :   1089s (0.3h) 
+Time Band 8 :    423s (0.1h) 
+
+List of obs:
+
+### Band: 3 ###
+2012.1.00219.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[3] Int:937.44 Obsdate:2014-05-0 SpatRes:1.348 ASDM:uid://A002/X8081ba/X1cab FreqRes:976.562 Array:12m Pol:XX YY
+2012.1.01099.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[3] Int:604.8 Obsdate:2014-03-2 SpatRes:8.757 ASDM:uid://A002/X7d76cc/X2c2 FreqRes:31250.0 Array:12m7m Pol:XX YY
+2013.1.00662.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[3] Int:604.8 Obsdate:2015-01-1 SpatRes:3.016 ASDM:uid://A002/X9a03fb/X404 FreqRes:61.0351 Array:12m Pol:XX YY
+2013.1.00991.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[3] Int:302.4 Obsdate:2014-12-0 SpatRes:2.290 ASDM:uid://A002/X95c8aa/X114d FreqRes:3906.25 Array:12m Pol:XX YY
+2013.1.01114.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[3] Int:302.4 Obsdate:2014-11-3 SpatRes:2.223 ASDM:uid://A002/X956e10/X138f FreqRes:30.5175 Array:12m Pol:XX YY
+2013.1.00662.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[3] Int:302.4 Obsdate:2015-01-2 SpatRes:2.880 ASDM:uid://A002/X9a3e71/X1839 FreqRes:61.0351 Array:12m Pol:XX YY
+2013.1.01172.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[3] Int:302.4 Obsdate:2015-03-0 SpatRes:2.359 ASDM:uid://A002/X9baf64/X44e FreqRes:1953.12 Array:12m7m Pol:XX YY
+
+Total accepted uid for Band 3 = 7
+
+Project codes for Band 3: 
+2012.1.00219.S 2012.1.01099.S 2013.1.00662.S 2013.1.00991.S 2013.1.01114.S 2013.1.01172.S 
+
+### Band: 6 ###
+2013.1.01241.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[6] Int:635.04 Obsdate:2014-12-1 SpatRes:0.957 ASDM:uid://A002/X9646fb/Xccd FreqRes:1953.12 Array:12m Pol:XX YY
+2013.1.00553.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[6] Int:302.4 Obsdate:2014-12-2 SpatRes:1.209 ASDM:uid://A002/X98124f/X59d2 FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.00376.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[6] Int:272.16 Obsdate:2016-10-2 SpatRes:0.266 ASDM:uid://A002/Xb9dfa4/Xa3b1 FreqRes:244.140 Array:12m Pol:XX YY
+2015.1.00192.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[6] Int:151.2 Obsdate:2016-08-1 SpatRes:0.239 ASDM:uid://A002/Xb6a8c1/Xc3e8 FreqRes:122.070 Array:12m Pol:XX YY
+2015.1.00187.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[6] Int:90.72 Obsdate:2016-03-3 SpatRes:0.862 ASDM:uid://A002/Xb12f3b/X825a FreqRes:976.562 Array:12m Pol:XX YY
+2016.1.00683.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[6] Int:60.48 Obsdate:2016-11-2 SpatRes:0.466 ASDM:uid://A002/Xbb30f0/X1ae5 FreqRes:1953.12 Array:12m Pol:XX YY
+
+Total accepted uid for Band 6 = 6
+
+Project codes for Band 6: 
+2013.1.01241.S 2013.1.00553.S 2016.1.00376.S 2015.1.00192.S 2015.1.00187.S 2016.1.00683.S 
+
+### Band: 7 ###
+2013.1.00989.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[7] Int:302.4 Obsdate:2014-12-1 SpatRes:0.850 ASDM:uid://A002/X969646/X1aa8 FreqRes:31250.0 Array:12m Pol:XX YY
+2013.1.00231.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[7] Int:302.4 Obsdate:2015-01-3 SpatRes:0.953 ASDM:uid://A002/X9ab617/Xad3 FreqRes:62500.0 Array:12m Pol:XX XY YX YY
+2013.1.00231.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[7] Int:302.4 Obsdate:2015-03-0 SpatRes:0.881 ASDM:uid://A002/X9bb7a8/X3cb FreqRes:62500.0 Array:12m Pol:XX XY YX YY
+2015.1.01558.T J0501-0159 ra:75.303374 dec:-1.987293 Band:[7] Int:181.44 Obsdate:2015-11-0 SpatRes:0.016 ASDM:uid://A002/Xac5575/Xaa3a FreqRes:31250.0 Array:12m Pol:XX YY
+
+Total accepted uid for Band 7 = 4
+
+Project codes for Band 7: 
+2013.1.00989.S 2013.1.00231.S 2015.1.01558.T 
+
+### Band: 8 ###
+2013.1.00048.S J0501-0159 ra:75.303374 dec:-1.987293 Band:[8] Int:423.36 Obsdate:2015-09-2 SpatRes:0.080 ASDM:uid://A002/Xaa96da/X42 FreqRes:976.562 Array:12m Pol:XX YY
+
+Total accepted uid for Band 8 = 1
+
+Project codes for Band 8: 
+2013.1.00048.S 
+
+Additional Notes:
+
+Name = [HB89] 0458-020 ABS06
+z = 1.999
+velocity = 599285.0
+ra  = 75.3031
+dec = -1.98746
+
+###
+Total accepted uid for this object = 18
+Total accepted project for this object = 16
+###############################################
+
+
 
 
 
