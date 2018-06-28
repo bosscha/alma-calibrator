@@ -126,13 +126,22 @@ Class to anlayze the lines DB
 2017.03.28:
     - add resolved_QNs in splat lines.
     
+2017.05.25:
+    - add an emission/absorption boolean to search for lines
+    
+2017.05.26:
+    - bug fixing.
+    
+2017.05.29:
+    - completion for redshift/velocity  scanning
+    
 RUN:
 
 """
 
 
 __author__="S. Leon @ ALMA"
-__version__="0.6.6@2017.03.28"
+__version__="0.6.9@2017.05.29"
 
 
 
@@ -160,7 +169,7 @@ import wavelet as wav
 
 SOLARSYSTEM = ['Mars','Jupiter','Callisto','Saturn','Titan','Pallas','Ceres','Neptune','Uranus']
 
-DEFAULTSPLAT = "/home/ridlo/casa-release-4.6.0-el6/data/ephemerides/splatalogue.db"
+DEFAULTSPLAT = "/home/stephane/Science/RadioGalaxy/ALMA/absorptions/splatalogue/splatalogue.db"
 
 class splat():
     "Class to deal with splatalogue.db for faster access"
@@ -827,7 +836,7 @@ class analysisLines:
 
 
 
-    def scanningSplatVelocitySourceLineid(self, lineid, velmin, velmax, dv, nrao = True, emax = 50., local = True):
+    def scanningSplatVelocitySourceLineid(self, lineid, velmin, velmax, dv, nrao = True, emax = 50., local = True, absorption = True, emission = True):
         """
             Scan over a list of lineid (for a similar source but not checked..) using splatalogue. It scans over velocity range and should 
             be mainly Galactic.
@@ -849,13 +858,24 @@ class analysisLines:
         lines =[]
         
         for lineidit in lineid:
-            cmd = "SELECT lineid, dataset_id, source, sn, A_fit, mu_fit, sigma_fit FROM lines WHERE lineid = %d"%(lineidit)
+            if emission and absorption:
+                cmd = "SELECT lineid, dataset_id, source, sn, A_fit, mu_fit, sigma_fit FROM lines WHERE lineid = %d"%(lineidit)
+            if not absorption and emission:
+                cmd = "SELECT lineid, dataset_id, source, sn, A_fit, mu_fit, sigma_fit FROM lines WHERE lineid = %d AND A_fit > 0."%(lineidit)
+            if not emission and absorption:
+                cmd = "SELECT lineid, dataset_id, source, sn, A_fit, mu_fit, sigma_fit FROM lines WHERE lineid = %d AND A_fit < 0."%(lineidit)
+            
             c.execute(cmd)
             line = c.fetchall()
-            lines.append(line)
+            
+            if len(line) > 0:
+                lines.append(line)
         
         conn.commit()
         conn.close()
+        
+        
+        print("## Number of lines: %d"%(len(lines)))
         
         
         ### Scan over the velocity range ..
@@ -876,9 +896,11 @@ class analysisLines:
         
         for v in vel:
             lineVel = []
-            lineVel.append(v)
+            lineVel.append(v)            
             
-            print("## Velocity: %5.3f"%(v))
+            completion = 100. * (v-velmin) / (velmax - velmin)
+            print("## Velocity: %5.5f   (%3.1f%% done)"%(v, completion))
+            
             nline = 0
             
             for l in lines:
@@ -922,7 +944,7 @@ class analysisLines:
         
         
 
-    def scanningSplatRedshiftSourceLineid(self, lineid, zmin, zmax, dz, nrao = True, emax = 50., local = True):
+    def scanningSplatRedshiftSourceLineid(self, lineid, zmin, zmax, dz, nrao = True, emax = 50., local = True,  absorption = True, emission = True):
         """
             Scan over a list of lineid (for a similar source but not checked..) using splatalogue. It scans over redshift range and should 
             be mainly Galactic.
@@ -936,6 +958,7 @@ class analysisLines:
                 
         """
         
+        
         ## Get the lines... 
         
         conn = sql.connect(self.dbname)
@@ -944,10 +967,21 @@ class analysisLines:
         lines =[]
         
         for lineidit in lineid:
-            cmd = "SELECT lineid, dataset_id, source, sn, A_fit, mu_fit, sigma_fit FROM lines WHERE lineid = %d"%(lineidit)
+            if emission and absorption:
+                cmd = "SELECT lineid, dataset_id, source, sn, A_fit, mu_fit, sigma_fit FROM lines WHERE lineid = %d"%(lineidit)
+            if not absorption and emission:
+                cmd = "SELECT lineid, dataset_id, source, sn, A_fit, mu_fit, sigma_fit FROM lines WHERE lineid = %d AND A_fit > 0."%(lineidit)
+            if not emission and absorption:
+                cmd = "SELECT lineid, dataset_id, source, sn, A_fit, mu_fit, sigma_fit FROM lines WHERE lineid = %d AND A_fit < 0."%(lineidit)
+            
             c.execute(cmd)
             line = c.fetchall()
-            lines.append(line)
+            
+            
+            if len(line) > 0:
+                lines.append(line)
+            
+        print("## Number of lines: %d"%(len(lines)))
         
         conn.commit()
         conn.close()
@@ -974,7 +1008,8 @@ class analysisLines:
             lineZ = []
             lineZ.append(z)
             
-            print("## Redshift: %5.5f"%(z))
+            completion = 100. * (z - zmin) / (zmax - zmin)
+            print("## Redshift: %5.5f   (%3.1f%% done)"%(z, completion))
             
             for l in lines:
                 freq = l[0][5]
