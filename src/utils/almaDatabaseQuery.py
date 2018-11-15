@@ -345,7 +345,7 @@ class databaseQuery:
                     else:
                         reportSource += "\nName = " + str(name) + "\nz = " + str(z) + "\nvelocity = " + str(v0) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
 
-                except Exception, e1:
+                except:
                     try:
                         co = coordinates.SkyCoord(ra=uid[2], dec=uid[3], unit=(u.deg, u.deg))
                         obj_table = Ned.query_region(co, radius=0.005*u.deg)
@@ -366,7 +366,7 @@ class databaseQuery:
                             reportSource += "\n\nNo redshift data found in NED! " + "\nName = " + str(name) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
                             z = None # for resume[]
 
-                    except Exception, e2:
+                    except:
                         reportSource += "\n\nNo data found in NED!\n" + str(e)
                         name = None; z = None  # for resume[]
 
@@ -527,7 +527,7 @@ class databaseQuery:
                 else:
                     reportSource += "\nName = " + str(name) + "\nz = " + str(z) + "\nvelocity = " + str(v0) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
 
-            except Exception, e1:
+            except:
                 try:
                     co = coordinates.SkyCoord(ra=uid[2], dec=uid[3], unit=(u.deg, u.deg))
                     obj_table = Ned.query_region(co, radius=0.005*u.deg)
@@ -548,7 +548,7 @@ class databaseQuery:
                         reportSource += "\n\nNo redshift data found in NED! " + "\nName = " + str(name) + "\nra  = " + str(ra) + "\ndec = " + str(dec)
                         z = None # for resume[]
 
-                except Exception, e2:
+                except:
                     reportSource += "\n\nNo data found in NED!\n" + str(e)
                     name = None; z = None  # for resume[]
 
