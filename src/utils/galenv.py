@@ -56,6 +56,11 @@ class Galenv:
 
 
     def queryobject_byname(self, objname):
+        """Query object by NAME from NED
+        
+        Not always return the data if the exact name are not listed in NED
+        It is better to use Coordinate!
+        """
         obj_table = Ned.query_object(objname)
         
         z = obj_table[0]['Redshift']

@@ -117,7 +117,7 @@ class calibrator:
     
     def __init__(self):
         
-            self.listIntent = ["CALIBRATE_BANDPASS","CALIBRATE_FLUX","CALIBRATE_AMPLI","CALIBRATE_PHASE","OBSERVE_TARGET"]
+            self.listIntent = ["CALIBRATE_BANDPASS","CALIBRATE_FLUX","CALIBRATE_AMPLI","CALIBRATE_PHASE","OBSERVE_TARGET", "OBSERVE_CHECK"]
             
             
     def splitCalibrator(self, msName):
@@ -157,6 +157,8 @@ class calibrator:
         calNameList = []
         
         intentSources = es.getIntentsAndSourceNames(msName)
+
+        print(intentSources)
         
         for intentkey in self.listIntent:
             if intentkey != "OBSERVE_TARGET":       
@@ -189,7 +191,7 @@ class calibrator:
                 calName  = intentSources[intentkey]['name']
                 print(msName)
                 print("OBSERVE_TARGET: ", calName)
-                ans = raw_input("Do you want to split this SCIENCE TARGET? (maybe it is a calibrator) [y/[n]] : ")
+                ans = raw_input("Do you want to split this SCIENCE TARGET? (maybe it is a calibrator) [y/n] : ")
                 if ans.lower()[0] == 'y':
                     iterCalid = iter(calIds)
 
