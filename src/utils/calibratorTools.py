@@ -117,7 +117,7 @@ class calibrator:
     
     def __init__(self):
         
-            self.listIntent = ["CALIBRATE_BANDPASS","CALIBRATE_FLUX","CALIBRATE_AMPLI","CALIBRATE_PHASE","OBSERVE_TARGET", "CALIBRATE_WVR"]
+            self.listIntent = ["CALIBRATE_BANDPASS","CALIBRATE_FLUX","CALIBRATE_AMPLI","CALIBRATE_PHASE","OBSERVE_TARGET", "OBSERVE_CHECK"]
             
             
     def splitCalibrator(self, msName):
@@ -157,6 +157,8 @@ class calibrator:
         calNameList = []
         
         intentSources = es.getIntentsAndSourceNames(msName)
+
+        print(intentSources)
         
         for intentkey in self.listIntent:
             if intentkey != "OBSERVE_TARGET":       
