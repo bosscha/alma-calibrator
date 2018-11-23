@@ -135,6 +135,9 @@ Class to anlayze the lines DB
 2017.05.29:
     - completion for redshift/velocity  scanning
     
+2018.11.23:
+    -adding SQL function to query lines
+    
 RUN:
 
 """
@@ -247,6 +250,18 @@ class analysisLines:
         self.dbname = dbname
         self.splatdb = splatdb
         
+      
+    def query(self,cmd):
+        "Query for the line.db"
+        
+        conn = sql.connect(self.dbname)
+        c = conn.cursor()        
+        c.execute(cmd)
+          
+        res = c.fetchall()
+        
+        conn.commit()
+        conn.close()        
         
         
     def findSource(self,source, flag = False):
@@ -684,7 +699,7 @@ class analysisLines:
         return(data)
         
       
-    def getInfoDB(self, flag = True):
+    def getInfoDB(self, flag = True , verbose = True):
         """
         To get infos about the DB
             - number of sources
@@ -707,7 +722,7 @@ class analysisLines:
                 lines = self.findSource(source, flag)
                 sText += "%s  "%(source)
                 totalLinesOne += len(lines)
-            print("## %s : %d lines "%(sText, totalLinesOne))
+            if verbose : print("## %s : %d lines "%(sText, totalLinesOne))
             
             ## redshift
             coord = self.getCoordSource(sourceDiff[0])
@@ -716,28 +731,31 @@ class analysisLines:
             ## Get Galactic coordinates:
                 
             coordGal = self.getGalacticCoord(coord[0],coord[1])
-            print("## Galactic Coordinates (l,b): (%f , %f) "%(coordGal.galactic.l.value,coordGal.galactic.b.value))
+            if verbose : print("## Galactic Coordinates (l,b): (%f , %f) "%(coordGal.galactic.l.value,coordGal.galactic.b.value))
             
             try:
                 redshift = self.findNEDredshift(coord[0],coord[1])
-                print("## Redshift:")
-                print redshift
+                if verbose:
+                    print("## Redshift:")
+                    print redshift
                 
                 
                 ## Number of MS
                 msfile = self.getMS(coord[0],coord[1])
-                print("##")
-                print("## Number of MS: %d"%(len(msfile)))
+                
+                if verbose:
+                    print("##")
+                    print("## Number of MS: %d"%(len(msfile)))
                 resultList.append([sourceDiff[0], redshift])
             
             except:
-                print("## No redshift")
+                if verbose : print("## No redshift")
                 ## put -99 for redshift if unknown
                 resultList.append([sourceDiff[0], -99])
 
-            print("")
+            if verbose : print("")
             totalLines += totalLinesOne
-        print("\n Total Line: %d"%(totalLines))
+        if verbose : print("\n Total Line: %d"%(totalLines))
         
         return(resultList)
 
