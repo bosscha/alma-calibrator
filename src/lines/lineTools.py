@@ -147,7 +147,8 @@ __author__="S. Leon @ ALMA"
 __version__="0.6.9@2017.05.29"
 
 
-
+import sys
+sys.path.append("../../src/utils")
 
 import numpy as np
 import pylab as pl
@@ -727,7 +728,7 @@ class analysisLines:
             ## redshift
             coord = self.getCoordSource(sourceDiff[0])
             
-            print("## Coordinates (J2000): %f %f"%(coord[0],coord[1]))
+            if verbose : print("## Coordinates (J2000): %f %f"%(coord[0],coord[1]))
             ## Get Galactic coordinates:
                 
             coordGal = self.getGalacticCoord(coord[0],coord[1])
