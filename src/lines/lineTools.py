@@ -262,7 +262,9 @@ class analysisLines:
         res = c.fetchall()
         
         conn.commit()
-        conn.close()        
+        conn.close()   
+        
+        return(res)     
         
         
     def findSource(self,source, flag = False):
