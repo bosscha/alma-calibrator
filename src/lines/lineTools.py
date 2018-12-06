@@ -612,7 +612,7 @@ class analysisLines:
     def findSpeciesFineTuningSource(self, sourceName, redshift, DV1, DV2, flag = False, outputline = 50):
         """
         Try to identify the lines for a given source with redshift using the splatalogue DB. 
-        If flag = True search only for lines w/o flagging (EDGE, TELURIC, ...)
+        If flag = True search only for lines w/o flagging (EDGE, TELLURIC, ...)
         DV1,Dv2 :  range in velocity
         """  
         
@@ -627,8 +627,8 @@ class analysisLines:
             freq1 = li[4] * (1. + redshift)
             freq2 = li[5] * (1. + redshift)
             
-            df1 = freq1 * u.GHz * DV1 * 1e3 * u.m / u.s /  const.c
-            df2 = freq2 * u.GHz * DV2 * 1e3 * u.m / u.s /  const.c
+            df2 = -freq1 * u.GHz * DV1 * 1e3 * u.m / u.s /  const.c
+            df1 = -freq2 * u.GHz * DV2 * 1e3 * u.m / u.s /  const.c
             
             print("------")
             print("Source: %s"%(sourceName))
@@ -637,12 +637,18 @@ class analysisLines:
             print("Frequency at rest: %f"%(freq1))
             print("Frequency offset:")
             print df1, df2
+             
             
-            
-            columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
-            
+            # columns = ('Species','Chemical Name','Resolved QNs','Freq-GHz','Meas Freq-GHz','Log<sub>10</sub> (A<sub>ij</sub>)','E_U (K)','Linelist')
+            # ['Species', 'Chemical Name', 'Freq-GHz(rest frame,redshifted)', 
+            # 'Freq Err(rest frame,redshifted)', 'Meas Freq-GHz(rest frame,redshifted)', 
+            # 'Meas Freq Err(rest frame,redshifted)', 'Resolved QNs', 'CDMS/JPL Intensity', 
+            # 'S<sub>ij</sub>&#956;<sup>2</sup> (D<sup>2</sup>)', 'S<sub>ij</sub>', 
+            # 'Log<sub>10</sub> (A<sub>ij</sub>)', 'Lovas/AST Intensity', 'E_L (cm^-1)', 
+            # 'E_L (K)', 'E_U (cm^-1)', 'E_U (K)', 'Linelist']
+            columns =['Species', 'Chemical Name', 'Freq-GHz(rest frame,redshifted)','Resolved QNs', 'CDMS/JPL Intensity','Log<sub>10</sub> (A<sub>ij</sub>)', 'Lovas/AST Intensity','E_U (K)']
+
             transitions = spla.query_lines(freq1*u.GHz+df1,freq2*u.GHz+df2)[columns]
-            
             transitions.rename_column('Log<sub>10</sub> (A<sub>ij</sub>)','log10(Aij)')
             transitions.rename_column('E_U (K)','EU_K')
             transitions.rename_column('Resolved QNs','QNs')
